@@ -1,0 +1,35 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+ul,
+ol,
+li {
+	list-style: none;
+}
+a {
+	outline: 0;
+	color: inherit;
+	font-family: inherit;
+	font-weight: inherit;
+	text-decoration: none;
+}
+.wrap {
+	width: 100%;
+	height: 100vh;
+	overflow-y: auto;
+	color: var(--baseColor);
+	font-size: var(--bodySize);
+	font-family: var(--baseFont);
+	background-color: var(--bgColor);
+	transition: color 1s, background-color 1s;
+	&::-webkit-scrollbar {
+		width: 8px;
+		background-color: transparent;
+	}
+	&::-webkit-scrollbar-thumb {
+		border-radius: 4px;
+		background-color: var(--pointColor);
+	}
+}

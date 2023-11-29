@@ -7,11 +7,14 @@ import Contact from './components/sub/contact/Contact';
 import Department from './components/sub/department/Department';
 import Gallery from './components/sub/gallery/Gallery';
 import Youtube from './components/sub/youtube/Youtube';
+import './globalStyles/Variables.scss';
+import './globalStyles/Reset.scss';
+
 import { Route } from 'react-router-dom';
 
 export default function App() {
 	return (
-		<>
+		<div className='wrap'>
 			<Header />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
@@ -21,6 +24,6 @@ export default function App() {
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
 			<Footer />
-		</>
+		</div>
 	);
 }

@@ -1,8 +1,16 @@
 .Header {
 	.top {
+		display: flex;
+		justify-content: space-between;
 		border-bottom: 1px solid var(--pointColor);
+		position: relative;
 		h1 {
 			font-family: var(--pointFont);
+		}
+		.dropBox {
+			position: absolute;
+			right: 5px;
+			top: 10px;
 		}
 	}
 }

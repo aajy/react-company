@@ -2,15 +2,9 @@ import { useState } from 'react';
 import './Header.scss';
 
 export default function Header() {
-	const [Global, setGlobal] = useState('GLOBAL IN');
+	const [Global, setGlobal] = useState('');
 	const [IsGlobalDropBoxOpen, setIsGlobalDropBoxOpen] = useState(false);
-	const globalList = [
-		'GLOBAL IN',
-		'Africa',
-		'Asia Pacific',
-		'Europe',
-		'Latin America',
-	];
+	const globalList = ['Africa', 'Asia Pacific', 'Europe', 'Latin America'];
 	const handleBlurGlobalContainer = () => {
 		setTimeout(() => {
 			setIsGlobalDropBoxOpen(!IsGlobalDropBoxOpen);
@@ -33,7 +27,9 @@ export default function Header() {
 						onBlur={(e) => handleBlurGlobalContainer(e)}
 					>
 						<label onClick={() => handleGlobalOpen()}>
-							<button className='dropdown-button'>{Global}</button>
+							<button className='dropdown-button'>
+								{Global ? Global : 'GLOBAL IN'}
+							</button>
 						</label>
 						{IsGlobalDropBoxOpen && (
 							<div

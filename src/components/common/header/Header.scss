@@ -1,3 +1,8 @@
 .Header {
-	border: 1px solid var(--pointColor);
+	.top {
+		border-bottom: 1px solid var(--pointColor);
+		h1 {
+			font-family: var(--pointFont);
+		}
+	}
 }

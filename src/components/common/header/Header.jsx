@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Header.scss';
+import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Header() {
 	const [Global, setGlobal] = useState('');
@@ -7,7 +8,7 @@ export default function Header() {
 	const globalList = ['Africa', 'Asia Pacific', 'Europe', 'Latin America'];
 	const handleBlurGlobalContainer = () => {
 		setTimeout(() => {
-			setIsGlobalDropBoxOpen(!IsGlobalDropBoxOpen);
+			setIsGlobalDropBoxOpen(false);
 		}, 200);
 	};
 	const handleGlobalOpen = () => {
@@ -18,9 +19,11 @@ export default function Header() {
 		setGlobal(newGlobal);
 	};
 	return (
-		<div className='Header'>
+		<header>
 			<div className='top'>
-				<h1>Abbvie</h1>
+				<h1>
+					<Link to='/'>Abbvie</Link>
+				</h1>
 				<div className='dropBox'>
 					<div
 						className='container'
@@ -52,20 +55,40 @@ export default function Header() {
 				</div>
 			</div>
 			<div className='bottom'>
-				<ul>
+				<ul className='scrollMenu'>
 					<li>INVESTORS</li>
 					<li>NEWSCENTER</li>
 					<li>PATIENT ASSISTANCE</li>
 				</ul>
-				<ul>
-					<li>Department</li>
-					<li>Youtube</li>
-					<li>Gallery</li>
-					<li>Community</li>
-					<li>Contact</li>
-					<li>search</li>
+				<ul className='menu'>
+					<li>
+						<NavLink to='/department' activeClassName={'on'}>
+							Department
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to='/youtube' activeClassName={'on'}>
+							Youtube
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to='/gallery' activeClassName={'on'}>
+							Gallery
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to='/community' activeClassName={'on'}>
+							Community
+						</NavLink>
+					</li>
+					<li>
+						<NavLink to='/contact' activeClassName={'on'}>
+							Contact
+						</NavLink>
+					</li>
+					<button>search</button>
 				</ul>
 			</div>
-		</div>
+		</header>
 	);
 }

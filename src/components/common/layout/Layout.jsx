@@ -11,8 +11,8 @@ export default function Layout({ title, children }) {
 	}, []);
 	return (
 		<main className={`Layout ${title}`} ref={refFrame}>
-			<h1>{title}</h1>
-			{children}
+			<h1>{title.toUpperCase()}</h1>
+			<div className='wrap'>{children}</div>
 		</main>
 	);
 }

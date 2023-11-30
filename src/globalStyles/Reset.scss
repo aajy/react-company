@@ -22,6 +22,7 @@ a {
 	color: var(--baseColor);
 	font-size: var(--bodySize);
 	font-family: var(--baseFont);
+	font-weight: var(--baseWeight);
 	background-color: var(--bgColor);
 	transition: color 1s, background-color 1s;
 	&::-webkit-scrollbar {
@@ -31,5 +32,8 @@ a {
 	&::-webkit-scrollbar-thumb {
 		border-radius: 4px;
 		background-color: var(--pointColor);
+	}
+	button {
+		font-family: var(--baseFont);
 	}
 }

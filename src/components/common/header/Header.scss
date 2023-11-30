@@ -3,6 +3,7 @@
 	padding: 20px 0;
 	margin: 0 auto;
 	background-color: var(--bgColor);
+	font-family: var(--baseTitFont);
 	.top {
 		display: flex;
 		justify-content: space-between;
@@ -13,6 +14,7 @@
 		h1 {
 			color: var(--logoColor);
 			font-family: var(--pointFont);
+			font-weight: 400;
 		}
 		.dropBox {
 			position: absolute;

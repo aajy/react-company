@@ -1,8 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Syncopate&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Noto+Sans+KR:wght@200;300;400;500;600&family=Syncopate:wght@400;700&display=swap');
 
 :root {
-	--baseFont: 'Nanum Myeongjo', 'arial', '돋움';
+	--baseTitFont: 'Montserrat', sans-serif, 'arial', '돋움';
+	--baseFont: 'Noto Sans KR', sans-serif, 'arial', '돋움';
 	--pointFont: 'Syncopate', 'arial';
+	--baseTitWeight: 400;
+	--baseWeight: 300;
 	--logoColor: #111;
 	--baseColor: #222;
 	--baseColor2: #666;

@@ -22,7 +22,7 @@ export default function Header() {
 		setGlobal(newGlobal);
 	};
 	return (
-		<header>
+		<header className='Header'>
 			<div className='top'>
 				<h1>
 					<Link to='/'>Abbvie</Link>

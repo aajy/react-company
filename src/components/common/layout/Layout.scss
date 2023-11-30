@@ -1,0 +1,8 @@
+.Layout {
+	opacity: 0;
+	transition: 0.5s;
+	&.on {
+		opacity: 1;
+		transition: 0.3s;
+	}
+}

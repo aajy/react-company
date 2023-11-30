@@ -11,10 +11,12 @@ import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 
 import { Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useMedia } from './hooks/useMedia';
 
 export default function App() {
 	return (
-		<div className='wrap'>
+		<div className={`wrap ${useMedia()}`}>
 			<Header />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />

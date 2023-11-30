@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
+import { LuSearch } from 'react-icons/lu';
 
 export default function Header() {
 	const [Global, setGlobal] = useState('');
 	const [IsGlobalDropBoxOpen, setIsGlobalDropBoxOpen] = useState(false);
+	const [ToggleMenu, setToggleMenu] = useState(false);
+
 	const globalList = ['Africa', 'Asia Pacific', 'Europe', 'Latin America'];
 	const handleBlurGlobalContainer = () => {
 		setTimeout(() => {
@@ -86,8 +89,16 @@ export default function Header() {
 							Contact
 						</NavLink>
 					</li>
-					<button>search</button>
+					<button>
+						<LuSearch />
+					</button>
 				</ul>
+				<button
+					className='menuToggle'
+					onClick={() => setToggleMenu(!ToggleMenu)}
+				>
+					menu
+				</button>
 			</div>
 		</header>
 	);

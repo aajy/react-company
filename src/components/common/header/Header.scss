@@ -25,15 +25,14 @@ header {
 			flex: 1;
 			display: flex;
 			gap: 1%;
-			font-size: 0.9rem;
 			li {
+				font-size: 0.9rem;
 				padding: 5px;
 			}
 		}
 		ul.menu {
 			display: flex;
 			justify-content: space-between;
-			font-size: 0.9rem;
 			gap: 10px;
 
 			li a {
@@ -43,9 +42,41 @@ header {
 				line-height: 20px;
 				border: 1px solid #999;
 				border-radius: 20px;
+				font-size: 0.9rem;
+
 				&.on {
 					color: var(--pointColor);
 				}
+			}
+			> button {
+				width: 20px;
+				height: 20px;
+				border-radius: 10px;
+				border: 1px solid #666;
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				background-color: transparent;
+				font-size: 0.9rem;
+				color: #666;
+			}
+		}
+		.menuToggle {
+			display: none;
+		}
+	}
+}
+
+.tablet,
+.mobile {
+	header {
+		width: 80vw;
+		.bottom {
+			ul.menu {
+				display: none;
+			}
+			.menuToggle {
+				display: block;
 			}
 		}
 	}

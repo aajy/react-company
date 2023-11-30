@@ -5,8 +5,12 @@
 	opacity: 0;
 	transition: 0.5s;
 	h1 {
+		width: 100%;
 		font-weight: normal;
 		font-size: 4rem;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: flex-start;
 		margin-bottom: 30px;
 	}
 	.wrap {

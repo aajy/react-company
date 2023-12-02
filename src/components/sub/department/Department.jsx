@@ -31,49 +31,49 @@ export default function Department() {
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 						<li>
 							<div>
 								<span>span</span>
 								text
 							</div>
-							<span></span>
+							<span>span</span>
 						</li>
 					</ul>
 				</div>

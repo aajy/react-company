@@ -33,10 +33,10 @@ export default function Footer() {
 			<div className='right'>
 				<h3>Contacts</h3>
 				<ul>
-					<li>1</li>
-					<li>2</li>
-					<li>3</li>
-					<li>4</li>
+					<li>UK: +12 003 345 6789</li>
+					<li>react-portfolio-eosin-sigma.vercel.app</li>
+					<li>aajy.000@gmail.com</li>
+					<li>Seoul Korea</li>
 				</ul>
 				<ul>
 					<li>icon</li>

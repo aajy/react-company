@@ -3,7 +3,7 @@ import './Footer.scss';
 export default function Footer() {
 	return (
 		<footer className='Footer'>
-			<div>
+			<div className='left'>
 				<div>
 					<h3>Website map</h3>
 					<ul>
@@ -15,11 +15,13 @@ export default function Footer() {
 				</div>
 				<div>
 					<h3>Newsletter our</h3>
-					<input type='text' />
-					<button>GO</button>
+					<div>
+						<input type='text' />
+						<button>GO</button>
+					</div>
 				</div>
 			</div>
-			<div>
+			<div className='center'>
 				<p>
 					Database powerful AI expert
 					<br />
@@ -28,7 +30,7 @@ export default function Footer() {
 				<h3>LOGO</h3>
 				<p>Level up your cases with tons of data</p>
 			</div>
-			<div>
+			<div className='right'>
 				<h3>Contacts</h3>
 				<ul>
 					<li>1</li>

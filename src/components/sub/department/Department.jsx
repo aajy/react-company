@@ -78,7 +78,26 @@ export default function Department() {
 					</ul>
 				</div>
 			</article>
-			<article className='department-bottom'></article>
+			<article className='department-bottom'>
+				<h2>TEAM</h2>
+				<ul>
+					<li>
+						<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+						<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+					<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+				</ul>
+			</article>
 		</Layout>
 	);
 }

@@ -1,10 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
+import { RiArrowRightUpLine,RiArrowLeftUpLine  } from "react-icons/ri";
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const [TopData, setTopData] = useState([]);
+	const [ClientData, setClientData] = useState([]);
 	const [MemberData, setMemberData] = useState([]);
 	const [SupportData, setSupportData] = useState([]);
 
@@ -12,9 +14,9 @@ export default function Department() {
 		try {
 			const data = await fetch(`${path.current}/DB/department.json`)
 			const json = await data.json();
-			console.log('json: ', json);
 
 			setTopData(json.departmentTop);
+			setClientData(json.departmentClients);
 			setMemberData(json.departmentMember);
 			setSupportData(json.departmentSupport);
 		} catch (err) {
@@ -28,76 +30,66 @@ export default function Department() {
 		<Layout title={'Department-introduction'} className={'Department'}>
 			<article className='department-top'>
 				<ul>
-					<li>img1</li>
-					<li>img2</li>
-					<li>
-						<h3>SAGE</h3>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?</p>
-						<button>More</button>
-					</li>
+					{TopData.map((data,idx)=>{
+						if (idx<3) {
+							if(idx===2){
+								return (
+									<li key={data.name + data.idx}>
+										<div>
+											<h3>{data.name}</h3>
+											<p>{data.text}</p>
+										</div>
+										<span><RiArrowLeftUpLine/>here</span>
+									</li>
+								)
+							} else {
+								return (
+									<li key={data.name + data.idx}>
+										<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+									</li>
+								)
+							}
+						}
+					})}
 				</ul>
-				<ul>
-					<li>img1</li>
-					<li>img2</li>
-					<li>
-						<h3>SAGE</h3>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?</p>
-						<button>More</button>
-					</li>
+				<ul style={{flexDirection:'row-reverse'}}>
+					{TopData.map((data,idx)=>{
+						if (idx > 2){
+							if(idx===5){
+							return (
+								<li key={data.name + idx}>
+									<div>
+										<h3>{data.name}</h3>
+										<p>{data.text}</p>
+									</div>
+									<span>here<RiArrowRightUpLine/></span>
+								</li>
+							)
+						} else {
+							return (
+								<li key={data.name + idx}>
+									<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+								</li>
+							)
+						}
+					}
+					})}
 				</ul>
 				<div>
 					<h3>CLIENTS</h3>
 					<ul>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-						<li>
-							<div>
-								<span>span</span>
-								text
-							</div>
-							<span>span</span>
-						</li>
-					</ul>
+						{ClientData.map((data,idx)=>{
+							return (
+							<li key={data + idx}>
+								<div>
+									<span>where</span>
+									{data}
+								</div>
+								<span>official</span>
+							</li>
+							)
+						})}
+						</ul>
 				</div>
 			</article>
 			<article className='department-bottom'>
@@ -106,50 +98,27 @@ export default function Department() {
 					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad amet quas voluptate ea vero minima atque asperiores sapiente tempore iusto?</p>
 				</div>
 				<ul>
-					<li>
-						<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-						<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-					<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-					<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
+					{MemberData.map((data,idx)=>{
+						return (
+							<li key={data.name + idx}>
+								<p>{data.name}</p>
+								<span>{data.position}</span>
+								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+							</li>
+						)
+					})}
 				</ul>
-
 				<h3>Supported by</h3>
 				<ul>
-					<li>
-						<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-						<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-					<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
-					<li>
-					<p>name</p>
-						<span>role</span>
-						<img src="" alt="" />
-					</li>
+					{SupportData.map((data,idx)=>{
+						return (
+							<li key={data.name + idx}>
+								<p>{data.name}</p>
+								<span>{data.position}</span>
+								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+							</li>
+						)
+					})}
 				</ul>
 			</article>
 		</Layout>

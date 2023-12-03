@@ -30,6 +30,7 @@
 			font-family: var(--pointFont);
 			font-weight: 400;
       font-size: 5rem;
+      margin-bottom: 30px;
       }
       .closeMenu {
         margin-top: 10px;
@@ -65,15 +66,29 @@
         }
       }
       .topBottom{
-        .themeBox {
-          width: 140px;
-          min-width: 60px;
+        display: flex;
+        >div {
           height: 36px;
           border: 1px solid rgba(var(--baseColor-code), 0.6);
           border-radius: 18px;
+          &:nth-child(1) {
+            width: 140px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding:0px 20px;
+            margin-right: 20px;
+            svg {
+              margin-bottom: -5px;
+              transform: scale(130%);
+            }
+          }
+        }
+        .themeBox {
+          width: 140px;
+          min-width: 60px;
           cursor: pointer;
           position: relative;
-          transform: scale(0.8);
       
           .ball {
             position: absolute;
@@ -85,7 +100,7 @@
             text-align: center;
             border-radius: 15px;
             background-color: rgba(var(--baseColor-code));
-            transition: 0.7s;
+            transition: 1s;
             color: var(--bgColor);
           }
           &.dark {

@@ -1,8 +1,9 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Menu.scss';
 import { useEffect } from 'react';
-import { AnimatePresence, motion } from 'framer-motion';
-import { RiArrowRightDownLine } from "react-icons/ri";
+import { motion } from 'framer-motion';
+import { RiArrowRightDownLine,RiArrowRightUpLine  } from "react-icons/ri";
+import { menuTextArr } from './MenuText';
 
 export default function Menu({setDark, isDark,setToggleMenu}) {
   const closeMenu = () => {
@@ -39,43 +40,37 @@ export default function Menu({setDark, isDark,setToggleMenu}) {
                   className={`themeBox ${isDark && 'dark'}`}
                   onClick={() => setDark(!isDark)}
                 >
-                  <div className='ball'>{isDark ? 'DARK' : 'LIGHT'}</div>
+                  <div className='ball'>
+                    {isDark ? 'DARK' : 'LIGHT'}
+                  </div>
                 </div>
               </div>
             </div>
             <div className="bottom">
               <ul>
-                <li>
-                  <NavLink to='/department' activeClassName={'on'}>
-                    Department
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='/youtube' activeClassName={'on'}>
-                    Youtube
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='/gallery' activeClassName={'on'}>
-                    Gallery
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='/community' activeClassName={'on'}>
-                    Community
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='/members' activeClassName={'on'}>
-                    Members
-                  </NavLink>
-                </li>
-                <li>
-                  <NavLink to='/contact' activeClassName={'on'}>
-                    Contact
-                  </NavLink>
-                </li>
+                {menuTextArr.map((menu,index)=>{
+                  return (
+                  <li key={menu.num+index}>
+                    <NavLink to={menu.link} activeClassName={'on'}>
+                      <span>{menu.num}</span>
+                      <div>
+                        <span>{menu.menu}</span>
+                        <p>{menu.description}</p>
+                      </div>
+                      <span><RiArrowRightUpLine /></span>
+                    </NavLink>
+                  </li>
+                  )
+                })}
               </ul>
+              {/* TODO :: menu footer
+              <div className='bottomBottom'>
+                <p>
+                  <span>small logo</span>2023 halo lab
+                  <br />
+                  All rights reserved
+                </p>
+              </div> */}
             </div>
           </div>
         </motion.div>

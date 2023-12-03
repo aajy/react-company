@@ -21,6 +21,42 @@
 			position: absolute;
 			right: 5px;
 			top: 10px;
+			.container {
+				width: 130px;
+				.dropdown-button {
+					>button{
+						display: block;
+						display: flex;
+						justify-content: space-between;
+						padding:3px;
+						width: 100%;
+						border:none;
+						background-color: transparent;
+						font-family: var(--baseTitFont);
+						cursor: pointer;
+						svg {
+							margin-left: 10px;
+							transform: scale(130%);
+							color:rgba(var(--baseColor-code), 0.6);
+						}
+					}
+				}
+				.dropdown-container{
+					background-color: var(--bgColor);
+					text-align: right;
+					.dropdown-content {
+						li {
+							width: 100%;
+							padding:8px 13px;
+							transition: 0.3s;
+							&:hover {
+								background-color: var(--baseColor2);
+								color:var(--bgColor);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 	.bottom {

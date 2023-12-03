@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Footer.scss';
 import { FaFacebookF,FaBehance,FaLinkedinIn, FaInstagram, FaDribbble } from "react-icons/fa";
-import { RiArrowRightUpLine  } from "react-icons/ri";
+import { RiArrowRightUpLine,   } from "react-icons/ri";
 import { useRef } from 'react';
 
 export default function Footer() {

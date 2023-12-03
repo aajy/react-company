@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
-import { LuSearch } from 'react-icons/lu';
+import { LuSearch, LuChevronDown,LuChevronUp  } from 'react-icons/lu';
 
 export default function Header({setToggleMenu, ToggleMenu }) {
 	const [Global, setGlobal] = useState('');
@@ -16,9 +16,11 @@ export default function Header({setToggleMenu, ToggleMenu }) {
 	const handleGlobalOpen = () => {
 		setIsGlobalDropBoxOpen(!IsGlobalDropBoxOpen);
 	};
-	const handleGlobal = (e, el) => {
+	const handleGlobal = (e,el) => {
+		e.preventDefault();
 		const newGlobal = el;
 		setGlobal(newGlobal);
+		setIsGlobalDropBoxOpen(false);
 	};
 	return (
 		<header className='Header'>
@@ -31,9 +33,10 @@ export default function Header({setToggleMenu, ToggleMenu }) {
 						className='container'
 						onBlur={(e) => handleBlurGlobalContainer(e)}
 					>
-						<label onClick={() => handleGlobalOpen()}>
-							<button className='dropdown-button'>
-								{Global ? Global : 'GLOBAL IN'}
+						<label className='dropdown-button'>
+							<button onClick={() => handleGlobalOpen()}>
+								{Global ? Global  : `GLOBAL IN`}
+								{IsGlobalDropBoxOpen? <LuChevronUp />:<LuChevronDown />}
 							</button>
 						</label>
 						{IsGlobalDropBoxOpen && (
@@ -46,7 +49,7 @@ export default function Header({setToggleMenu, ToggleMenu }) {
 							>
 								<ul className='dropdown-content'>
 									{globalList.map((el, idx) => (
-										<li key={idx} onClick={(e) => handleGlobal(e, el)}>
+										<li key={idx} onClick={(e) => handleGlobal(e,el)}>
 											{el}
 										</li>
 									))}

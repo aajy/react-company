@@ -79,7 +79,10 @@ export default function Department() {
 				</div>
 			</article>
 			<article className='department-bottom'>
-				<h2>TEAM</h2>
+				<div>
+					<h2>TEAM</h2>
+					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad amet quas voluptate ea vero minima atque asperiores sapiente tempore iusto?</p>
+				</div>
 				<ul>
 					<li>
 						<p>name</p>
@@ -88,6 +91,35 @@ export default function Department() {
 					</li>
 					<li>
 						<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+					<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+					<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+				</ul>
+
+				<h3>Supported by</h3>
+				<ul>
+					<li>
+						<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+						<p>name</p>
+						<span>role</span>
+						<img src="" alt="" />
+					</li>
+					<li>
+					<p>name</p>
 						<span>role</span>
 						<img src="" alt="" />
 					</li>

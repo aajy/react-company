@@ -8,15 +8,15 @@ export default function Layout({ title, className, children }) {
 	const refFrame = useRef(null);
 
 	useEffect(() => {
-		splitText(splitTxt.current, title.toUpperCase());
+		splitText(splitTxt.current, title ? title.toUpperCase() : className.toUpperCase());
 		setTimeout(() => {
 			refFrame.current.classList.add('on');
 		}, 300);
 	}, []);
 	return (
 		<main className={`Layout ${className}`} ref={refFrame}>
-			<h1 ref={splitTxt}>{title}</h1>
-			<div className='wrap'>{children}</div>
+			<h1 ref={splitTxt}>{title  || className}</h1>
+			<div className='layoutWrap'>{children}</div>
 		</main>
 	);
 }

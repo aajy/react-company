@@ -1,23 +1,53 @@
+import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Footer.scss';
+import { FaFacebookF,FaBehance,FaLinkedinIn, FaInstagram, FaDribbble } from "react-icons/fa";
+import { RiArrowRightUpLine  } from "react-icons/ri";
+import { useRef } from 'react';
 
 export default function Footer() {
+	const emailAddress = useRef(null);
+	const handleEmail = (e) => {
+		e.preventDefault();
+		console.log('Newsletter 신청하는 이메일 주소',emailAddress.current.value);
+	}
 	return (
 		<footer className='Footer'>
 			<div className='left'>
 				<div>
 					<h3>Website map</h3>
-					<ul>
-						<li>Products</li>
-						<li>Resources</li>
-						<li>Support</li>
-						<li>Company</li>
+					<ul className='menu'>
+						<li>
+							<NavLink to='/department'>
+								Department
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/youtube'>
+								Youtube
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/gallery'>
+								Gallery
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/community'>
+								Community
+							</NavLink>
+						</li>
+						<li>
+							<NavLink to='/contact'>
+								Contact
+							</NavLink>
+						</li>
 					</ul>
 				</div>
 				<div>
 					<h3>Newsletter our</h3>
 					<div>
-						<input type='text' />
-						<button>GO</button>
+						<input type='text' ref={emailAddress}/>
+						<button onClick={(e)=>handleEmail(e)}><RiArrowRightUpLine/></button>
 					</div>
 				</div>
 			</div>
@@ -27,7 +57,7 @@ export default function Footer() {
 					<br />
 					on processing marketing data
 				</p>
-				<h3>LOGO</h3>
+				<h3>Abbvie</h3>
 				<p>Level up your cases with tons of data</p>
 			</div>
 			<div className='right'>
@@ -39,16 +69,17 @@ export default function Footer() {
 					<li>Seoul Korea</li>
 				</ul>
 				<ul>
-					<li>icon</li>
-					<li>icon</li>
-					<li>icon</li>
-					<li>icon</li>
-					<li>icon</li>
+					<li><FaFacebookF /></li>
+					<li><FaBehance /></li>
+					<li><FaLinkedinIn /></li>
+					<li><FaInstagram /></li>
+					<li><FaDribbble /></li>
 				</ul>
 				<p>
-					<span>small logo</span>2023 halo lab
+					<span>Abb</span>
+					<span>2023 halo lab
 					<br />
-					All rights reserved
+					&#169; All rights reserved</span>
 				</p>
 			</div>
 		</footer>

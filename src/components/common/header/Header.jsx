@@ -60,7 +60,7 @@ export default function Header({setToggleMenu, ToggleMenu }) {
 				<ul className='scrollMenu'>
 					<li>INVESTORS</li>
 					<li>NEWSCENTER</li>
-					<li>PATIENT ASSISTANCE</li>
+					<li>ASSISTANCE</li>
 				</ul>
 				<ul className='menu'>
 					<li>

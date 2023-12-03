@@ -27,3 +27,22 @@
 		transition: 0.3s;
 	}
 }
+.tablet,.mobile {
+	.Layout {
+		width: 90vw;
+		margin: 30px auto;
+		h1 {
+			font-size: 3rem;
+		}
+	}
+}
+.mobile {
+	.Layout {
+		h1 {
+			font-size: 2rem;
+		}
+		.layoutWrap {
+			padding:0;
+		}
+	}
+}

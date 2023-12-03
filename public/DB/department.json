@@ -11,7 +11,7 @@
       "pic": "member2.jpg"
     },
     {
-      "name": "Emily",
+      "name": "Alberto Maestro",
       "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?"
     },
     {
@@ -25,7 +25,7 @@
       "pic": "member4.jpg"
     },
     {
-      "name": "David",
+      "name": "Paola Vilatels",
       "text": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?"
     }
   ],
@@ -34,45 +34,45 @@
   ],
   "departmentMember": [
     {
-      "name": "Emily",
+      "name": "Stephanie Crespin",
       "position": "UI Designer",
       "pic": "member5.jpg"
     },
     {
-      "name": "Julia",
-      "position": "Vice President",
+      "name": "Philippe Benedetti",
+      "position": "Chief Designer",
       "pic": "member6.jpg"
     },
     {
-      "name": "David",
-      "position": "President",
+      "name": "Felix Winckler ",
+      "position": "Creation Partner",
       "pic": "member7.jpg"
     },
     {
-      "name": "David",
-      "position": "President",
+      "name": "Esther Howard ",
+      "position": "Web Developer",
       "pic": "member8.jpg"
     }
   ],
   "departmentSupport": [
     {
-      "name": "Emily",
-      "position": "UI Designer",
+      "name": "Emily Joy",
+      "position": "CEO BALANCIAGA",
       "pic": "member9.jpg"
     },
     {
-      "name": "Emily",
-      "position": "UI Designer",
+      "name": "Jack Ostrwski",
+      "position": "CEO REGAIN",
       "pic": "member10.jpg"
     },
     {
-      "name": "Emily",
-      "position": "UI Designer",
+      "name": "Vanessa Cheung",
+      "position": "FOUNDER THE NILLS",
       "pic": "member11.jpg"
     },
     {
-      "name": "Emily",
-      "position": "UI Designer",
+      "name": "Cedric Charbit",
+      "position": "CEO ATHLETE",
       "pic": "member12.jpg"
     }
   ]

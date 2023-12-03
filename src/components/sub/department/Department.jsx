@@ -101,8 +101,10 @@ export default function Department() {
 					{MemberData.map((data,idx)=>{
 						return (
 							<li key={data.name + idx}>
-								<p>{data.name}</p>
-								<span>{data.position}</span>
+								<div>
+									<p>{data.name}</p>
+									<span>{data.position}</span>
+								</div>
 								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 							</li>
 						)
@@ -113,8 +115,10 @@ export default function Department() {
 					{SupportData.map((data,idx)=>{
 						return (
 							<li key={data.name + idx}>
-								<p>{data.name}</p>
-								<span>{data.position}</span>
+								<div>
+									<p>{data.name}</p>
+									<span>{data.position}</span>
+								</div>
 								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 							</li>
 						)

@@ -1,15 +1,24 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Menu.scss';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine,RiArrowRightUpLine  } from "react-icons/ri";
-import { menuTextArr } from './MenuText';
 
 export default function Menu({setDark, isDark,setToggleMenu}) {
+  const path = useRef(process.env.PUBLIC_URL);
+  const [MenuData, setMenuData] = useState([]);
   const closeMenu = () => {
 		window.innerWidth >= 1000 && setToggleMenu(false);
 	};
+  const fetchMenu = () => {
+		fetch(`${path.current}/DB/menuText.json`)
+			.then((data) => data.json())
+			.then((json) => {
+				setMenuData(json.menuTextArr);
+			});
+	};
   useEffect(() => {
+    fetchMenu();
 		window.addEventListener('resize', closeMenu);
 		return () => window.removeEventListener('resize', closeMenu);
 	}, []);
@@ -48,7 +57,7 @@ export default function Menu({setDark, isDark,setToggleMenu}) {
             </div>
             <div className="bottom">
               <ul>
-                {menuTextArr.map((menu,index)=>{
+                {MenuData.map((menu,index)=>{
                   return (
                   <li key={menu.num+index}>
                     <NavLink to={menu.link} activeClassName={'on'}>

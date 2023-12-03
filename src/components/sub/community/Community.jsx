@@ -1,5 +1,6 @@
+import Layout from '../../common/layout/Layout';
 import './Community.scss';
 
 export default function Community() {
-	return <div className='Community'>Community</div>;
+	return <Layout className={'Community'}></Layout>;
 }

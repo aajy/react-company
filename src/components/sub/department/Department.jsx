@@ -1,7 +1,29 @@
+import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
 
 export default function Department() {
+	const path = useRef(process.env.PUBLIC_URL);
+	const [TopData, setTopData] = useState([]);
+	const [MemberData, setMemberData] = useState([]);
+	const [SupportData, setSupportData] = useState([]);
+
+	const fetchData = async () => {
+		try {
+			const data = await fetch(`${path.current}/DB/department.json`)
+			const json = await data.json();
+			console.log('json: ', json);
+
+			setTopData(json.departmentTop);
+			setMemberData(json.departmentMember);
+			setSupportData(json.departmentSupport);
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	useEffect(() => {
+    fetchData();
+	}, []);
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>
 			<article className='department-top'>

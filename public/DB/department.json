@@ -1,0 +1,68 @@
+{
+  "departmentTop": [
+    {
+      "name": "David",
+      "position": "President",
+      "pic": "member1.jpg"
+    },
+    {
+      "name": "Julia",
+      "position": "Vice President",
+      "pic": "member2.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member3.jpg"
+    },
+    {
+      "name": "Michael",
+      "position": "Front-end Developer",
+      "pic": "member4.jpg"
+    }
+  ],
+  "departmentMember": [
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member5.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member6.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member7.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member8.jpg"
+    }
+  ],
+  "departmentSupport": [
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member9.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member10.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member11.jpg"
+    },
+    {
+      "name": "Emily",
+      "position": "UI Designer",
+      "pic": "member12.jpg"
+    }
+  ]
+}

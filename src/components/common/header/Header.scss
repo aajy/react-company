@@ -4,6 +4,7 @@
 	margin: 0 auto;
 	background-color: var(--bgColor);
 	font-family: var(--baseTitFont);
+	transition: 1s;
 	.top {
 		display: flex;
 		justify-content: space-between;

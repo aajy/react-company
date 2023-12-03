@@ -10,12 +10,14 @@ export default function Menu({setDark, isDark,setToggleMenu}) {
   const closeMenu = () => {
 		window.innerWidth >= 1000 && setToggleMenu(false);
 	};
-  const fetchMenu = () => {
-		fetch(`${path.current}/DB/menuText.json`)
-			.then((data) => data.json())
-			.then((json) => {
-				setMenuData(json.menuTextArr);
-			});
+  const fetchMenu = async () => {
+    try {
+			const data = await fetch(`${path.current}/DB/menuText.json`)
+			const json = await data.json();
+			setMenuData(json.menuTextArr);
+		} catch (err) {
+			console.log(err);
+		}
 	};
   useEffect(() => {
     fetchMenu();

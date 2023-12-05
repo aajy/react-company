@@ -70,8 +70,8 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 								{MenuData.map((menu, index) => {
 									return (
 										<li key={menu.num + index}>
+											<span>{menu.num}</span>
 											<NavLink to={menu.link} activeClassName={'on'}>
-												<span>{menu.num}</span>
 												<div>
 													<span>{menu.menu}</span>
 													<p>{menu.description}</p>

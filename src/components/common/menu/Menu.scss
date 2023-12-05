@@ -23,7 +23,7 @@
 		top: 0;
 	}
 	.menuBox {
-		width: 70%;
+		width: 50%;
 		height: 100vh;
 		overflow: hidden;
 		position: relative;
@@ -51,17 +51,16 @@
 				margin-bottom: 30px;
 			}
 			.closeMenu {
-				margin-top: 10px;
 				width: 24px;
 				height: 24px;
 				border: 1px solid rgba(var(--baseColor-code), 0.5);
 				background-color: transparent;
-				border-radius: 12px;
+				border-radius: 4px;
 				display: block;
 				cursor: pointer;
 				position: absolute;
-				top: 22px;
-				right: 30px;
+				top: 10px;
+				right: 10px;
 				&::before,
 				&::after {
 					content: '';
@@ -137,25 +136,33 @@
 					&:last-child {
 						border: none;
 					}
+					> span {
+						font-weight: bold;
+						font-size: 0.7rem;
+						color: var(--pointColor);
+					}
 					a {
 						display: flex;
 						align-items: flex-start;
+						justify-content: space-between;
 						gap: 10px;
-						> span {
-							font-weight: bold;
-						}
 						> div {
 							display: flex;
 							flex-direction: column;
 							justify-content: space-between;
 							> span {
 								font-size: 1.6rem;
-								margin-bottom: 14px;
+								margin-bottom: 8px;
 							}
 							> p {
 								width: 100%;
 								font-size: 0.7rem;
 							}
+						}
+						> span {
+							display: block;
+							color: rgba(var(--baseColor-code), 0.6);
+							margin-top: -16px;
 						}
 					}
 				}

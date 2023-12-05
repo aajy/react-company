@@ -34,7 +34,9 @@ a {
 		border-radius: 4px;
 		background-color: var(--pointColor);
 	}
-	button {
+	button,
+	input[type='text'] {
 		font-family: var(--baseFont);
+		font-weight: 300;
 	}
 }

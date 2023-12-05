@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
-import { RiArrowRightUpLine,RiArrowLeftUpLine  } from "react-icons/ri";
+import { RiArrowRightUpLine, RiArrowLeftUpLine } from 'react-icons/ri';
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -12,7 +12,7 @@ export default function Department() {
 
 	const fetchData = async () => {
 		try {
-			const data = await fetch(`${path.current}/DB/department.json`)
+			const data = await fetch(`${path.current}/DB/department.json`);
 			const json = await data.json();
 
 			setTopData(json.departmentTop);
@@ -24,81 +24,90 @@ export default function Department() {
 		}
 	};
 	useEffect(() => {
-    fetchData();
+		fetchData();
 	}, []);
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>
 			<article className='department-top'>
 				<ul>
-					{TopData.map((data,idx)=>{
-						if (idx<3) {
-							if(idx===2){
+					{TopData.map((data, idx) => {
+						if (idx < 3) {
+							if (idx === 2) {
 								return (
 									<li key={data.name + data.idx}>
 										<div>
 											<h3>{data.name}</h3>
 											<p>{data.text}</p>
 										</div>
-										<span><RiArrowLeftUpLine/>here</span>
+										<span>
+											<RiArrowLeftUpLine />
+											here
+										</span>
 									</li>
-								)
+								);
 							} else {
 								return (
 									<li key={data.name + data.idx}>
-										<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
+										<img
+											src={`${path.current}/img/${data.pic}`}
+											alt={data.name}
+										/>
 									</li>
-								)
+								);
 							}
 						}
 					})}
 				</ul>
-				<ul style={{flexDirection:'row-reverse'}}>
-					{TopData.map((data,idx)=>{
-						if (idx > 2){
-							if(idx===5){
-							return (
-								<li key={data.name + idx}>
-									<div>
-										<h3>{data.name}</h3>
-										<p>{data.text}</p>
-									</div>
-									<span>here<RiArrowRightUpLine/></span>
-								</li>
-							)
-						} else {
-							return (
-								<li key={data.name + idx}>
-									<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
-								</li>
-							)
+				<ul style={{ flexDirection: 'row-reverse' }}>
+					{TopData.map((data, idx) => {
+						if (idx > 2) {
+							if (idx === 5) {
+								return (
+									<li key={data.name + idx}>
+										<div>
+											<h3>{data.name}</h3>
+											<p>{data.text}</p>
+										</div>
+										<span>
+											here
+											<RiArrowRightUpLine />
+										</span>
+									</li>
+								);
+							} else {
+								return (
+									<li key={data.name + idx}>
+										<img
+											src={`${path.current}/img/${data.pic}`}
+											alt={data.name}
+										/>
+									</li>
+								);
+							}
 						}
-					}
 					})}
 				</ul>
 				<div>
 					<h3>CLIENTS</h3>
 					<ul>
-						{ClientData.map((data,idx)=>{
+						{ClientData.map((data, idx) => {
 							return (
-							<li key={data + idx}>
-								<div>
-									<span>where</span>
-									{data}
-								</div>
-								<span>official</span>
-							</li>
-							)
+								<li key={data + idx}>
+									<div>
+										<span>where</span>
+										{data}
+									</div>
+									<span>official</span>
+								</li>
+							);
 						})}
-						</ul>
+					</ul>
 				</div>
 			</article>
 			<article className='department-bottom'>
-				<div>
-					<h2>TEAM</h2>
-					<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad amet quas voluptate ea vero minima atque asperiores sapiente tempore iusto?</p>
-				</div>
+				<h2>TEAM</h2>
 				<ul>
-					{MemberData.map((data,idx)=>{
+					{MemberData.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>
@@ -107,12 +116,12 @@ export default function Department() {
 								</div>
 								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 							</li>
-						)
+						);
 					})}
 				</ul>
 				<h3>Supported by</h3>
 				<ul>
-					{SupportData.map((data,idx)=>{
+					{SupportData.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>
@@ -121,9 +130,18 @@ export default function Department() {
 								</div>
 								<img src={`${path.current}/img/${data.pic}`} alt={data.name} />
 							</li>
-						)
+						);
 					})}
 				</ul>
+				<div>
+					<p>
+						We work closely with
+						<br />
+						brands to shape future
+						<br />
+						business through design.
+					</p>
+				</div>
 			</article>
 		</Layout>
 	);

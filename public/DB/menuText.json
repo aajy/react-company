@@ -4,31 +4,31 @@
       "num": "01",
       "link": "/department",
       "menu": "Department",
-      "description": "Lorem ipsum dolor sit, amet consectetur."
+      "description": "Aorem ipsum dolor sit, amet consectetur."
     },
     {
       "num": "02",
       "link": "/youtube",
       "menu": "Youtube",
-      "description": "Lorem ipsum dolor sit, amet consectetur."
+      "description": "Borem ipsum dolor sit."
     },
     {
       "num": "03",
       "link": "/gallery",
       "menu": "Gallery",
-      "description": "Lorem ipsum dolor sit, amet consectetur."
+      "description": " dolor sit, amet consectetur."
     },
     {
       "num": "04",
       "link": "/community",
       "menu": "Community",
-      "description": "Lorem ipsum dolor sit, amet consectetur."
+      "description": "Bipsum dolor sit, amet consectetur."
     },
     {
       "num": "05",
       "link": "/members",
       "menu": "Members",
-      "description": "Lorem ipsum dolor sit, amet consectetur."
+      "description": "Lorem ipsum dolor sit, Tonsectetur."
     }
   ]
 }

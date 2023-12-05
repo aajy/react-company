@@ -26,7 +26,7 @@ export default function Header({ setToggleMenu, ToggleMenu }) {
 		<header className='Header'>
 			<div className='top'>
 				<h1>
-					<Link to='/'>Abbvie</Link>
+					<Link to='/'>abbvie</Link>
 				</h1>
 				<ul className='menu'>
 					<li>

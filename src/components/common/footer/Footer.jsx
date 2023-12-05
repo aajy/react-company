@@ -55,7 +55,7 @@ export default function Footer() {
 					<br />
 					on processing marketing data
 				</p>
-				<h3>Abbvie</h3>
+				<h3>abbvie</h3>
 				<p>Level up your cases with tons of data</p>
 			</div>
 			<div className='right'>
@@ -84,7 +84,7 @@ export default function Footer() {
 					</li>
 				</ul>
 				<p>
-					<span>Abb</span>
+					<span>abb</span>
 					<span>
 						2023 halo lab
 						<br />

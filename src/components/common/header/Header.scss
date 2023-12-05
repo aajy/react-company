@@ -8,6 +8,7 @@
 	.top {
 		display: flex;
 		justify-content: space-between;
+		align-items: flex-end;
 		border-bottom: 1px solid rgba(var(--baseColor-code), 0.2);
 		position: relative;
 		padding-bottom: 10px;
@@ -17,46 +18,44 @@
 			font-family: var(--pointFont);
 			font-weight: 400;
 		}
-		.dropBox {
-			position: absolute;
-			right: 5px;
-			top: 10px;
-			.container {
-				width: 130px;
-				.dropdown-button {
-					>button{
-						display: block;
-						display: flex;
-						justify-content: space-between;
-						padding:3px;
-						width: 100%;
-						border:none;
-						background-color: transparent;
-						font-family: var(--baseTitFont);
-						cursor: pointer;
-						svg {
-							margin-left: 10px;
-							transform: scale(130%);
-							color:rgba(var(--baseColor-code), 0.6);
-						}
+		ul.menu {
+			display: flex;
+			justify-content: space-between;
+			gap: 10px;
+
+			li {
+				position: relative;
+				&::after {
+					content: '';
+					display: block;
+					position: absolute;
+					right: 0;
+					top: 50%;
+					transform: translateY(-50%);
+					width: 1px;
+					height: 10px;
+					background-color: rgba(var(--baseColor-code), 0.3);
+				}
+				&:last-child {
+					&::after {
+						display: none;
 					}
 				}
-				.dropdown-container{
-					background-color: var(--bgColor);
-					text-align: right;
-					.dropdown-content {
-						li {
-							width: 100%;
-							padding:8px 13px;
-							transition: 0.3s;
-							&:hover {
-								background-color: var(--baseColor2);
-								color:var(--bgColor);
-							}
-						}
+				a {
+					display: block;
+					padding: 0 14px;
+					height: 20px;
+					line-height: 20px;
+					font-size: 1rem;
+					&.on {
+						font-weight: bold;
+						color: var(--pointColor);
 					}
 				}
 			}
+		}
+		.menuToggle {
+			display: none;
 		}
 	}
 	.bottom {
@@ -68,43 +67,108 @@
 			display: flex;
 			gap: 1%;
 			li {
-				font-size: 0.9rem;
+				font-size: 0.7rem;
 				padding: 5px;
 			}
 		}
-		ul.menu {
+		.buttons {
 			display: flex;
-			justify-content: space-between;
-			gap: 10px;
-
-			li a {
-				display: block;
-				padding: 0 14px;
-				height: 20px;
+			gap: 5px;
+			button {
 				line-height: 20px;
-				border: 1px solid rgba(var(--baseColor-code), 0.5);
-				border-radius: 20px;
-				font-size: 0.9rem;
-
-				&.on {
-					color: var(--pointColor);
-				}
-			}
-			> button {
-				width: 20px;
-				height: 20px;
-				border-radius: 10px;
-				border: 1px solid rgba(var(--baseColor-code), 0.5);
 				display: flex;
 				justify-content: center;
 				align-items: center;
 				background-color: transparent;
-				font-size: 0.9rem;
 				color: var(--baseColor2);
+				border-radius: 14px;
+			}
+			> span {
+				display: flex;
+				border-radius: 14px;
+				border: 1px solid rgba(var(--baseColor-code), 0.5);
+				> input {
+					border-radius: 14px;
+					border: none;
+					text-indent: 10px;
+					font-size: 0.8rem;
+					outline: 0;
+					&::placeholder {
+						color: rgba(var(--baseColor-code), 0.4);
+						font-size: 0.7rem;
+					}
+				}
+				> button {
+					width: 30px;
+					height: 20px;
+					font-size: 0.7rem;
+					border: none;
+					border-radius: 0 14px 14px 0;
+					position: relative;
+					&::after {
+						content: '';
+						display: block;
+						position: absolute;
+						left: 0;
+						top: 50%;
+						transform: translateY(-50%);
+						width: 1px;
+						height: 10px;
+						background-color: rgba(var(--baseColor-code), 0.3);
+					}
+				}
+			}
+			> button {
+				border: 1px solid rgba(var(--baseColor-code), 0.5);
+				&:nth-of-type(1),
+				&:nth-of-type(2) {
+					width: 60px;
+					height: 20px;
+					font-size: 0.8rem;
+				}
 			}
 		}
-		.menuToggle {
+		.dropBox {
+			position: absolute;
+			right: 5px;
+			top: 10px;
 			display: none;
+			.container {
+				width: 130px;
+				.dropdown-button {
+					> button {
+						display: block;
+						display: flex;
+						justify-content: space-between;
+						padding: 3px;
+						width: 100%;
+						border: none;
+						background-color: transparent;
+						font-family: var(--baseTitFont);
+						cursor: pointer;
+						svg {
+							margin-left: 10px;
+							transform: scale(130%);
+							color: rgba(var(--baseColor-code), 0.6);
+						}
+					}
+				}
+				.dropdown-container {
+					background-color: var(--bgColor);
+					text-align: right;
+					.dropdown-content {
+						li {
+							width: 100%;
+							padding: 8px 13px;
+							transition: 0.3s;
+							&:hover {
+								background-color: var(--baseColor2);
+								color: var(--bgColor);
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

@@ -1,15 +1,21 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Footer.scss';
-import { FaFacebookF,FaBehance,FaLinkedinIn, FaInstagram, FaDribbble } from "react-icons/fa";
-import { RiArrowRightUpLine,   } from "react-icons/ri";
+import {
+	FaFacebookF,
+	FaBehance,
+	FaLinkedinIn,
+	FaInstagram,
+	FaDribbble,
+} from 'react-icons/fa';
+import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useRef } from 'react';
 
 export default function Footer() {
 	const emailAddress = useRef(null);
 	const handleEmail = (e) => {
 		e.preventDefault();
-		console.log('Newsletter 신청하는 이메일 주소',emailAddress.current.value);
-	}
+		console.log('Newsletter 신청하는 이메일 주소', emailAddress.current.value);
+	};
 	return (
 		<footer className='Footer'>
 			<div className='left'>
@@ -17,37 +23,29 @@ export default function Footer() {
 					<h3>Website map</h3>
 					<ul className='menu'>
 						<li>
-							<NavLink to='/department'>
-								Department
-							</NavLink>
+							<NavLink to='/department'>Department</NavLink>
 						</li>
 						<li>
-							<NavLink to='/youtube'>
-								Youtube
-							</NavLink>
+							<NavLink to='/youtube'>Youtube</NavLink>
 						</li>
 						<li>
-							<NavLink to='/gallery'>
-								Gallery
-							</NavLink>
+							<NavLink to='/gallery'>Gallery</NavLink>
 						</li>
 						<li>
-							<NavLink to='/community'>
-								Community
-							</NavLink>
+							<NavLink to='/community'>Community</NavLink>
 						</li>
 						<li>
-							<NavLink to='/contact'>
-								Contact
-							</NavLink>
+							<NavLink to='/contact'>Contact</NavLink>
 						</li>
 					</ul>
 				</div>
 				<div>
 					<h3>Newsletter our</h3>
 					<div>
-						<input type='text' ref={emailAddress}/>
-						<button onClick={(e)=>handleEmail(e)}><RiArrowRightUpLine/></button>
+						<input type='text' ref={emailAddress} />
+						<button onClick={(e) => handleEmail(e)}>
+							<RiArrowRightUpLine />
+						</button>
 					</div>
 				</div>
 			</div>
@@ -64,22 +62,34 @@ export default function Footer() {
 				<h3>Contacts</h3>
 				<ul>
 					<li>UK: +12 003 345 6789</li>
-					<li>react-portfolio-eosin-sigma.vercel.app</li>
+					<li>react-portfolio vercel</li>
 					<li>aajy.000@gmail.com</li>
 					<li>Seoul Korea</li>
 				</ul>
 				<ul>
-					<li><FaFacebookF /></li>
-					<li><FaBehance /></li>
-					<li><FaLinkedinIn /></li>
-					<li><FaInstagram /></li>
-					<li><FaDribbble /></li>
+					<li>
+						<FaFacebookF />
+					</li>
+					<li>
+						<FaBehance />
+					</li>
+					<li>
+						<FaLinkedinIn />
+					</li>
+					<li>
+						<FaInstagram />
+					</li>
+					<li>
+						<FaDribbble />
+					</li>
 				</ul>
 				<p>
 					<span>Abb</span>
-					<span>2023 halo lab
-					<br />
-					&#169; All rights reserved</span>
+					<span>
+						2023 halo lab
+						<br />
+						&#169; All rights reserved
+					</span>
 				</p>
 			</div>
 		</footer>

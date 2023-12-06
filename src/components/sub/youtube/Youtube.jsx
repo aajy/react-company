@@ -53,7 +53,17 @@ export default function Youtube() {
 	return (
 		<Layout className={'Youtube'}>
 			<div className='top'>
-				<p ref={channelTitle}>{channelTitle.current}</p>
+				<div className='channel'>
+					<div>
+						<p ref={channelTitle}>{channelTitle.current}</p>
+						<p></p>
+					</div>
+					<img
+						src=''
+						alt=''
+						style={{ border: '1px solid #000', width: 300, height: 300 }}
+					/>
+				</div>
 				<p>{ChannelData.subscriberCount}</p>
 				<p>{ChannelData.videoCount}</p>
 				<p>{ChannelData.viewCount}</p>

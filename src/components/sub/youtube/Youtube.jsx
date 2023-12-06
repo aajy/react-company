@@ -6,8 +6,8 @@ export default function Youtube() {
 	const [Vids, setVids] = useState([]);
 
 	const fetchYoutube = async () => {
-		const api_key = 'AIzaSyD3MqYIo5BO0cLJy20Rw1aBXtC1qRjHSlM';
-		const pid = 'PL83BY7FoUdNnvcAqkXwoozropo4gKHl-n';
+		const api_key = process.env.REACT_APP_YOUTUBE_API;
+		const pid = process.env.REACT_APP_YOUTUBE_LIST;
 		const num = 20;
 		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
 		try {
@@ -23,8 +23,8 @@ export default function Youtube() {
 		fetchYoutube();
 	}, []);
 	return (
-	<Layout className={'Youtube'}>
-		{Vids.map((data, idx) => {
+		<Layout className={'Youtube'}>
+			{Vids.map((data, idx) => {
 				const [date, time] = data.snippet.publishedAt.split('T');
 
 				return (
@@ -40,14 +40,14 @@ export default function Youtube() {
 						</div>
 
 						<div className='pic'>
-								<img
-									src={data.snippet.thumbnails.standard.url}
-									alt={data.snippet.title}
-								/>
+							<img
+								src={data.snippet.thumbnails.standard.url}
+								alt={data.snippet.title}
+							/>
 						</div>
 					</article>
 				);
 			})}
-	</Layout>
+		</Layout>
 	);
 }

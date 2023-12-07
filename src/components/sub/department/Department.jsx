@@ -133,7 +133,7 @@ export default function Department() {
 						);
 					})}
 				</ul>
-				<div>
+				<div className='text'>
 					<p>
 						We work closely with
 						<br />

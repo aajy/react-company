@@ -110,7 +110,7 @@
 		ul {
 			display: flex;
 			justify-content: space-between;
-			margin-bottom: 80px;
+			margin-bottom: 60px;
 			gap: 10px;
 			li {
 				flex: 1;
@@ -137,12 +137,12 @@
 				}
 			}
 		}
-		> div {
+		> .text {
 			display: flex;
 			justify-content: space-between;
 			align-items: flex-start;
 			gap: 10px;
-			margin-bottom: 60px;
+			margin-bottom: 100px;
 			p {
 				text-align: left;
 				width: 70%;
@@ -189,6 +189,11 @@
 					width: 46%;
 				}
 			}
+			.text {
+				> p {
+					font-size: 2rem;
+				}
+			}
 		}
 	}
 }
@@ -221,6 +226,12 @@
 					img {
 						height: 500px;
 					}
+				}
+			}
+			.text {
+				p {
+					width: 90%;
+					font-size: 1.6rem;
 				}
 			}
 		}

@@ -149,7 +149,45 @@ export default function Youtube() {
 							<RiArrowRightUpLine />
 						</button>
 					</div>
-					<div className='right'></div>
+					<div className='right'>
+						{/*img-thubnail, h4 - title, p - description */}
+						<div className='preview'>
+							<img
+								src={Vids[0].snippet.thumbnails.standard.url}
+								alt='thumnail'
+							/>
+							<h4>{Vids[0].snippet.title}</h4>
+							<p>{Vids[0].snippet.description}</p>
+						</div>
+						<div className='previewList'>
+							<ul>
+								<li>
+									<span>01</span>
+									<p>sample1</p>
+									<p>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Ipsum aspernatur cupiditate tempore?
+									</p>
+								</li>
+								<li>
+									<span>02</span>
+									<p>sample1</p>
+									<p>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Ipsum aspernatur cupiditate tempore?
+									</p>
+								</li>
+								<li>
+									<span>03</span>
+									<p>sample1</p>
+									<p>
+										Lorem ipsum dolor sit amet consectetur adipisicing elit.
+										Ipsum aspernatur cupiditate tempore?
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 				{Vids &&
 					Vids.map((data, idx) => {

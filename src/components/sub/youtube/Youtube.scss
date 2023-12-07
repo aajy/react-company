@@ -1,5 +1,6 @@
 .Youtube {
 	.top {
+		margin-bottom: 100px;
 		.channel {
 			display: flex;
 			justify-content: space-between;
@@ -20,7 +21,7 @@
 						word-break: keep-all;
 						text-align: left;
 						width: 100%;
-						font-size: 2rem;
+						font-size: 2.6rem;
 						margin-bottom: 16px;
 						font-weight: 500;
 						text-transform: uppercase;
@@ -35,8 +36,8 @@
 					align-items: center;
 					font-size: 1rem;
 					gap: 8px;
-					color: rgba(var(--baseColor-code), 0.8);
-					transition: 0.5s;
+					color: rgba(var(--baseColor-code), 0.7);
+					transition: 0.3s;
 					cursor: pointer;
 					&:hover {
 						color: rgba(var(--baseColor-code), 1);
@@ -67,9 +68,28 @@
 					font-size: 0.7rem;
 				}
 				p {
-					font-size: 1.6rem;
+					font-size: 1.7rem;
 					font-weight: 500;
+					display: flex;
+					align-items: center;
 				}
+			}
+		}
+	}
+	.middle {
+		h3 {
+			font-size: 2.6rem;
+			font-weight: 400;
+		}
+		.inner {
+			display: flex;
+			.left {
+				width: 260px;
+				height: 260px;
+			}
+			.right {
+				width: 70%;
+				border: 1px solid #333;
 			}
 		}
 	}

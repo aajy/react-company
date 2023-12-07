@@ -3,7 +3,8 @@ import Layout from '../../common/layout/Layout';
 import './Youtube.scss';
 import { AiFillPlusCircle } from 'react-icons/ai';
 import { TfiPlus } from 'react-icons/tfi';
-import { PiPercentThin } from 'react-icons/pi';
+import { PiPercentLight } from 'react-icons/pi';
+import { RiArrowRightUpLine } from 'react-icons/ri';
 
 export default function Youtube() {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -54,20 +55,16 @@ export default function Youtube() {
 		}
 	};
 	const formatNumberWithK = (number, k) => {
-		// 숫자가 k를 넘으면 k로 변환
 		if (number >= k) {
 			// k로 나눈 몫을 구하고 소수점 첫째 자리까지만 표시
 			let quotient = (number / k).toFixed(1);
 
-			// 소수점이 .0으로 끝나면 제거
 			if (quotient.endsWith('.0')) {
 				quotient = quotient.slice(0, -2);
 			}
 
-			// 숫자 뒤에 'k' 추가
-			return quotient + 'k';
+			return quotient + 'K';
 		} else {
-			// k를 넘지 않으면 그냥 숫자 반환
 			return number.toString();
 		}
 	};
@@ -90,7 +87,12 @@ export default function Youtube() {
 									House Jo Malone London.
 								</p>
 							</div>
-							<div className='more'>
+							<div
+								className='more'
+								onClick={() =>
+									window.open('https://www.youtube.com/@jomalonelondon')
+								}
+							>
 								<AiFillPlusCircle />
 								<span>more</span>
 							</div>
@@ -118,7 +120,7 @@ export default function Youtube() {
 							<span>Happy client</span>
 							<p>
 								100
-								<PiPercentThin />
+								<PiPercentLight />
 							</p>
 						</div>
 						<div>
@@ -128,7 +130,25 @@ export default function Youtube() {
 					</div>
 				</section>
 			)}
-			<section className='bottom'>
+			<section className='middle'>
+				<h3>OUR VISION</h3>
+				<div className='inner'>
+					<div className='left'>
+						<p>
+							UNLEASHING
+							<br />
+						</p>
+						<span>
+							Lorem ipsum dolor sit amet consectetur adipisicing elit.
+							Praesentium dignissimos iure blanditiis obcaecati quibusdam.
+						</span>
+						<button>
+							detail view
+							<RiArrowRightUpLine />
+						</button>
+					</div>
+					<div className='right'></div>
+				</div>
 				{Vids &&
 					Vids.map((data, idx) => {
 						const [date, time] = data.snippet.publishedAt.split('T');

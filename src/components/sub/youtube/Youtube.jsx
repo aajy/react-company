@@ -5,8 +5,10 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { TfiPlus } from 'react-icons/tfi';
 import { PiPercentLight } from 'react-icons/pi';
 import { RiArrowRightUpLine } from 'react-icons/ri';
+import { useCustomText } from '../../../hooks/useText';
 
 export default function Youtube() {
+	const shortenText = useCustomText('shorten');
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Vids, setVids] = useState([]);
 	const [ChannelData, setChannelData] = useState({});
@@ -68,12 +70,25 @@ export default function Youtube() {
 			return number.toString();
 		}
 	};
+	const handleActive = (vid, index, length) => {
+		console.log('vid, idx: ', vid, index);
+		let newArr = [...Vids];
+		newArr.forEach((el, idx) => {
+			if (0 <= idx && idx < length) {
+				el.active = false;
+			}
+		});
+		newArr[index].active = true;
+		console.log('newArr[index]: ', newArr[index]);
+		setVids(newArr);
+		//TODO:: setActiveVids(); 반영
+	};
 	useEffect(() => {
 		fetchYoutube();
 	}, []);
 	return (
 		<Layout title={'Youtube'} className={'Youtube'}>
-			{Object.values(ChannelData).length && (
+			{ChannelData && Object.values(ChannelData).length && (
 				<section className='top'>
 					<article className='channel'>
 						<div className='title'>
@@ -141,9 +156,7 @@ export default function Youtube() {
 							<br />
 							POTENTIAL
 						</p>
-						<span>
-							Dignissimos ipsum dolor sit amet consectetur adipisicing elit.
-						</span>
+						<span>Dignissimos ipsum dolor consectetur adipisicing elit.</span>
 						<button>
 							detail view
 							<RiArrowRightUpLine />
@@ -151,44 +164,42 @@ export default function Youtube() {
 					</div>
 					<div className='right'>
 						{/*img-thubnail, h4 - title, p - description */}
-						<div className='preview'>
-							<img
-								src={Vids[0].snippet.thumbnails.standard.url}
-								alt='thumnail'
-							/>
-							<div calssName='text'>
-								<h4>{Vids[0].snippet.title}</h4>
-								<p>{Vids[0].snippet.description}</p>
-							</div>
-						</div>
-						<div className='previewList'>
-							<ul>
-								<li>
-									<span>01</span>
-									<p>sample1</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Ipsum aspernatur cupiditate tempore?
-									</p>
-								</li>
-								<li>
-									<span>02</span>
-									<p>sample1</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Ipsum aspernatur cupiditate tempore?
-									</p>
-								</li>
-								<li>
-									<span>03</span>
-									<p>sample1</p>
-									<p>
-										Lorem ipsum dolor sit amet consectetur adipisicing elit.
-										Ipsum aspernatur cupiditate tempore?
-									</p>
-								</li>
-							</ul>
-						</div>
+						{Vids && Vids.length && (
+							<>
+								<div className='preview'>
+									<div className='thumbnail'>
+										<img
+											src={Vids[1]?.snippet.thumbnails.standard.url}
+											alt='thumnail'
+										/>
+									</div>
+									<div className='text'>
+										<h3>{Vids[0]?.snippet.title}</h3>
+										<p>{shortenText(Vids[0]?.snippet.description, 150)}</p>
+									</div>
+								</div>
+								<div className='previewList'>
+									<ul>
+										{Vids.slice(0, 3).map((vid, idx) => {
+											return (
+												<li
+													onClick={() => {
+														handleActive(vid, idx, 3);
+													}}
+													className={vid.active && 'on'}
+												>
+													<div>
+														<span>0{idx + 1}</span>
+														<p>{vid.snippet.title}</p>
+													</div>
+													<p>{shortenText(Vids[0]?.snippet.description, 60)}</p>
+												</li>
+											);
+										})}
+									</ul>
+								</div>
+							</>
+						)}
 					</div>
 				</div>
 				{Vids &&
@@ -196,7 +207,7 @@ export default function Youtube() {
 						const [date, time] = data.snippet.publishedAt.split('T');
 
 						return (
-							<article key={data.id}>
+							<article key={data.id + idx}>
 								<h2>{data.snippet.title}</h2>
 
 								<div className='txt'>

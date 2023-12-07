@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Youtube.scss';
-import { AiFillPlusCircle, AiOutlinePlus } from 'react-icons/ai';
+import { AiFillPlusCircle } from 'react-icons/ai';
+import { TfiPlus } from 'react-icons/tfi';
 import { PiPercentThin } from 'react-icons/pi';
 
 export default function Youtube() {
@@ -27,10 +28,6 @@ export default function Youtube() {
 			const json = await data.json();
 			channelId = json.items[0].snippet.channelId;
 			setChannelTitle(json.items[0].snippet.channelTitle);
-			console.log(
-				'json.items[0].snippet.channelTitle: ',
-				json.items[0].snippet.channelTitle
-			);
 
 			//channel Data
 			const channelDataURL = `https://www.googleapis.com/youtube/v3/channels?key=${api_key}&part=statistics&id=${channelId}&fields=items/statistics`;
@@ -39,10 +36,6 @@ export default function Youtube() {
 				const data = await fetch(channelDataURL);
 				const json = await data.json();
 				setChannelData(json.items[0].statistics);
-				console.log(
-					'json.items[0].statistics: ',
-					JSON.stringify(json.items[0].statistics)
-				);
 			} catch (err) {
 				console.log(err);
 			}
@@ -58,6 +51,24 @@ export default function Youtube() {
 			console.log('json.items: ', json.items);
 		} catch (err) {
 			console.log(err);
+		}
+	};
+	const formatNumberWithK = (number, k) => {
+		// 숫자가 k를 넘으면 k로 변환
+		if (number >= k) {
+			// k로 나눈 몫을 구하고 소수점 첫째 자리까지만 표시
+			let quotient = (number / k).toFixed(1);
+
+			// 소수점이 .0으로 끝나면 제거
+			if (quotient.endsWith('.0')) {
+				quotient = quotient.slice(0, -2);
+			}
+
+			// 숫자 뒤에 'k' 추가
+			return quotient + 'k';
+		} else {
+			// k를 넘지 않으면 그냥 숫자 반환
+			return number.toString();
 		}
 	};
 	useEffect(() => {
@@ -92,15 +103,15 @@ export default function Youtube() {
 						<div>
 							<span>SubscriberCount</span>
 							<p>
-								{ChannelData.subscriberCount}
-								<AiOutlinePlus />
+								{formatNumberWithK(ChannelData.subscriberCount, 1000)}
+								<TfiPlus />
 							</p>
 						</div>
 						<div>
 							<span>VideoCount</span>
 							<p>
-								{ChannelData.videoCount}
-								<AiOutlinePlus />
+								{formatNumberWithK(ChannelData.videoCount, 1000)}
+								<TfiPlus />
 							</p>
 						</div>
 						<div>
@@ -112,7 +123,7 @@ export default function Youtube() {
 						</div>
 						<div>
 							<span>ViewCount</span>
-							<p>{ChannelData.viewCount}</p>
+							<p>{formatNumberWithK(ChannelData.viewCount, 1000)}</p>
 						</div>
 					</div>
 				</section>

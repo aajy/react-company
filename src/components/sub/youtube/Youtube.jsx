@@ -156,8 +156,10 @@ export default function Youtube() {
 								src={Vids[0].snippet.thumbnails.standard.url}
 								alt='thumnail'
 							/>
-							<h4>{Vids[0].snippet.title}</h4>
-							<p>{Vids[0].snippet.description}</p>
+							<div calssName='text'>
+								<h4>{Vids[0].snippet.title}</h4>
+								<p>{Vids[0].snippet.description}</p>
+							</div>
 						</div>
 						<div className='previewList'>
 							<ul>

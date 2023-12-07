@@ -119,6 +119,14 @@
 			.right {
 				width: 70%;
 				border: 1px solid #333;
+				.preview {
+					display: flex;
+					align-items: end;
+					gap: 30px;
+					> img {
+						width: 60%;
+					}
+				}
 			}
 		}
 	}

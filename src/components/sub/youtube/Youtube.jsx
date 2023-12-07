@@ -137,10 +137,12 @@ export default function Youtube() {
 						<p>
 							UNLEASHING
 							<br />
+							YOUR BARNDS'
+							<br />
+							POTENTIAL
 						</p>
 						<span>
-							Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Praesentium dignissimos iure blanditiis obcaecati quibusdam.
+							Dignissimos ipsum dolor sit amet consectetur adipisicing elit.
 						</span>
 						<button>
 							detail view

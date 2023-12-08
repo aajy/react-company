@@ -77,6 +77,7 @@
 		}
 	}
 	.middle {
+		margin-bottom: 100px;
 		> h3 {
 			font-size: 3rem;
 			font-weight: 300;
@@ -105,7 +106,7 @@
 					line-height: 1.2;
 					color: rgba(var(--bgColor-code), 0.5);
 				}
-				button {
+				> button {
 					width: 100px;
 					border-radius: 20px;
 					padding: 3px 10px;
@@ -113,6 +114,7 @@
 					display: flex;
 					justify-content: space-between;
 					align-items: center;
+					cursor: pointer;
 					svg {
 						transform: scale(1.2);
 						margin-bottom: -2px;
@@ -219,6 +221,7 @@
 			> article {
 				padding: 20px;
 				border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
+				cursor: pointer;
 				&:last-child {
 					border-bottom: none;
 				}

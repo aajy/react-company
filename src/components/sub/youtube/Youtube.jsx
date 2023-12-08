@@ -92,6 +92,9 @@ export default function Youtube() {
 		setActiveVids(newArr[index]);
 		//TODO:: setActiveVids(); 반영
 	};
+	const handleModalOpen = (data) => {
+		console.log('Modal data', data);
+	};
 	useEffect(() => {
 		fetchYoutube();
 	}, []);
@@ -221,7 +224,11 @@ export default function Youtube() {
 
 						if (idx === 0) {
 							return (
-								<article key={data.snippet.title + idx} className='big'>
+								<article
+									key={data.snippet.title + idx}
+									className='big'
+									onClick={() => handleModalOpen(data)}
+								>
 									<div>
 										<h2>{data.snippet.title}</h2>
 										<RiArrowRightUpLine />
@@ -244,7 +251,11 @@ export default function Youtube() {
 						}
 						if (idx === 1) {
 							return (
-								<article key={data.snippet.title + idx} className='small'>
+								<article
+									key={data.snippet.title + idx}
+									className='small'
+									onClick={() => handleModalOpen(data)}
+								>
 									<div className='txt'>
 										<h2>{data.snippet.title}</h2>
 										<div>
@@ -273,7 +284,11 @@ export default function Youtube() {
 						const [date, time] = data.snippet.publishedAt.split('T');
 						if (idx === 0) {
 							return (
-								<article key={data.snippet.title + idx} className='small'>
+								<article
+									key={data.snippet.title + idx}
+									className='small'
+									onClick={() => handleModalOpen(data)}
+								>
 									<div className='txt'>
 										<h2>{data.snippet.title}</h2>
 										<div>
@@ -297,7 +312,11 @@ export default function Youtube() {
 						}
 						if (idx === 1) {
 							return (
-								<article key={data.snippet.title + idx} className='big'>
+								<article
+									key={data.snippet.title + idx}
+									className='big'
+									onClick={() => handleModalOpen(data)}
+								>
 									<div>
 										<h2>{data.snippet.title}</h2>
 										<RiArrowRightUpLine />

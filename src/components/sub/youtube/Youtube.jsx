@@ -93,7 +93,7 @@ export default function Youtube() {
 		//TODO:: setActiveVids(); 반영
 	};
 	const handleModalOpen = (data) => {
-		//TODO::modal
+		//TODO::modal component
 		console.log('Modal data', data);
 	};
 	useEffect(() => {

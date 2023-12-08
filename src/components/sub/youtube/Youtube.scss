@@ -128,6 +128,7 @@
 					align-items: end;
 					gap: 30px;
 					margin-bottom: 60px;
+					//TODO :: 사라졌다가 나타나는 모션
 					.thumbnail {
 						max-width: 360px;
 						min-width: 360px;
@@ -138,7 +139,7 @@
 							display: block;
 							width: 100%;
 							object-fit: cover;
-							transform: scale(2.2);
+							transform: scale(2) translateY(10%);
 						}
 					}
 					.text {
@@ -164,11 +165,14 @@
 							align-items: center;
 							gap: 20px;
 							border-bottom: 1px solid rgba(var(--baseColor-code), 0.2);
-							padding: 16px 0;
+							padding: 16px 10px;
 							cursor: pointer;
+							position: relative;
+							transition: 0.3s;
 							> div {
 								display: flex;
-								gap: 10px;
+								align-items: center;
+								gap: 16px;
 								font-size: 1.2rem;
 								font-weight: 400;
 							}
@@ -178,9 +182,25 @@
 								word-break: break-all;
 								text-align: justify;
 							}
+							&:hover {
+								transform: scale(1.005);
+							}
+							&::before {
+								content: '';
+								display: block;
+								position: absolute;
+								left: -20px;
+								top: 0;
+								width: 20px;
+								height: 20px;
+								background-color: rgba(var(--baseColor-code), 0);
+								transition: 0.5s;
+							}
 							&.on {
 								border-bottom: 1px solid rgba(var(--baseColor-code), 1);
-								color: var(--pointColor);
+								&::before {
+									background-color: rgba(var(--baseColor-code), 1);
+								}
 							}
 						}
 					}

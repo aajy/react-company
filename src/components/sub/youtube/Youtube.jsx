@@ -13,6 +13,7 @@ export default function Youtube() {
 	const [Vids, setVids] = useState([]);
 	const [ChannelData, setChannelData] = useState({});
 	const [ChannelTitle, setChannelTitle] = useState('');
+	const [ActiveVids, setActiveVids] = useState({});
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -50,8 +51,15 @@ export default function Youtube() {
 		try {
 			const data = await fetch(baseURL);
 			const json = await data.json();
-			setVids(json.items);
-			console.log('json.items: ', json.items);
+			const originalArr = json.items;
+			const newArray = originalArr.map((item, index) => {
+				if (index === 0) {
+					return { ...item, active: true };
+				}
+				return item;
+			});
+			setVids(newArray);
+			setActiveVids(json.items[0]);
 		} catch (err) {
 			console.log(err);
 		}
@@ -81,6 +89,7 @@ export default function Youtube() {
 		newArr[index].active = true;
 		console.log('newArr[index]: ', newArr[index]);
 		setVids(newArr);
+		setActiveVids(newArr[index]);
 		//TODO:: setActiveVids(); 반영
 	};
 	useEffect(() => {
@@ -164,18 +173,18 @@ export default function Youtube() {
 					</div>
 					<div className='right'>
 						{/*img-thubnail, h4 - title, p - description */}
-						{Vids && Vids.length && (
+						{ActiveVids && Object.keys(ActiveVids).length && (
 							<>
 								<div className='preview'>
 									<div className='thumbnail'>
 										<img
-											src={Vids[1]?.snippet.thumbnails.standard.url}
+											src={ActiveVids?.snippet.thumbnails.standard.url}
 											alt='thumnail'
 										/>
 									</div>
 									<div className='text'>
-										<h3>{Vids[0]?.snippet.title}</h3>
-										<p>{shortenText(Vids[0]?.snippet.description, 150)}</p>
+										<h3>{ActiveVids?.snippet.title}</h3>
+										<p>{shortenText(ActiveVids?.snippet.description, 150)}</p>
 									</div>
 								</div>
 								<div className='previewList'>
@@ -186,13 +195,13 @@ export default function Youtube() {
 													onClick={() => {
 														handleActive(vid, idx, 3);
 													}}
-													className={vid.active && 'on'}
+													className={vid.active ? 'on' : ''}
 												>
 													<div>
 														<span>0{idx + 1}</span>
 														<p>{vid.snippet.title}</p>
 													</div>
-													<p>{shortenText(Vids[0]?.snippet.description, 60)}</p>
+													<p>{shortenText(vid.snippet.description, 60)}</p>
 												</li>
 											);
 										})}

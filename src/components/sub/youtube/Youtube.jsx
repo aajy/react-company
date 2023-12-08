@@ -18,7 +18,7 @@ export default function Youtube() {
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
 		const pid = process.env.REACT_APP_YOUTUBE_LIST;
-		const num = 20;
+		const num = 9;
 		let channelId = '';
 
 		const vidIdForChannelId = 'uIZHsUT43l4';
@@ -166,6 +166,7 @@ export default function Youtube() {
 							POTENTIAL
 						</p>
 						<span>Dignissimos ipsum dolor consectetur adipisicing elit.</span>
+						{/* TODO::클릭 시 상세 모달 추가 */}
 						<button>
 							detail view
 							<RiArrowRightUpLine />
@@ -192,6 +193,7 @@ export default function Youtube() {
 										{Vids.slice(0, 3).map((vid, idx) => {
 											return (
 												<li
+													key={vid.title + idx}
 													onClick={() => {
 														handleActive(vid, idx, 3);
 													}}
@@ -211,31 +213,113 @@ export default function Youtube() {
 						)}
 					</div>
 				</div>
-				{Vids &&
-					Vids.map((data, idx) => {
+			</section>
+			<section className='bottom'>
+				<div className='left'>
+					{Vids.slice(3, 5).map((data, idx) => {
 						const [date, time] = data.snippet.publishedAt.split('T');
 
-						return (
-							<article key={data.id + idx}>
-								<h2>{data.snippet.title}</h2>
-
-								<div className='txt'>
-									<p>{data.snippet.description}</p>
-									<div className='infoBox'>
-										<span>{date}</span>
-										<em>{time.split('Z')[0]}</em>
+						if (idx === 0) {
+							return (
+								<article key={data.snippet.title + idx} className='big'>
+									<div>
+										<h2>{data.snippet.title}</h2>
+										<RiArrowRightUpLine />
 									</div>
-								</div>
+									<div className='txt'>
+										<p>{shortenText(data.snippet.description, 500)}</p>
+										<div className='infoBox'>
+											<span>{date}</span>
+											<em>{time.split('Z')[0]}</em>
+										</div>
+									</div>
+									<div className='pic'>
+										<img
+											src={data.snippet.thumbnails.standard.url}
+											alt={data.snippet.title}
+										/>
+									</div>
+								</article>
+							);
+						}
+						if (idx === 1) {
+							return (
+								<article key={data.snippet.title + idx} className='small'>
+									<div className='txt'>
+										<h2>{data.snippet.title}</h2>
+										<div>
+											<p>{shortenText(data.snippet.description, 200)}</p>
+											<div className='infoBox'>
+												<span>{date}</span>
+												<em>{time.split('Z')[0]}</em>
+											</div>
+											<RiArrowRightUpLine />
+										</div>
+									</div>
 
-								<div className='pic'>
-									<img
-										src={data.snippet.thumbnails.standard.url}
-										alt={data.snippet.title}
-									/>
-								</div>
-							</article>
-						);
+									<div className='pic'>
+										<img
+											src={data.snippet.thumbnails.standard.url}
+											alt={data.snippet.title}
+										/>
+									</div>
+								</article>
+							);
+						}
 					})}
+				</div>
+				<div className='right'>
+					{Vids.slice(5, 8).map((data, idx) => {
+						const [date, time] = data.snippet.publishedAt.split('T');
+						if (idx === 0) {
+							return (
+								<article key={data.snippet.title + idx} className='small'>
+									<div className='txt'>
+										<h2>{data.snippet.title}</h2>
+										<div>
+											<p>{shortenText(data.snippet.description, 200)}</p>
+											<div className='infoBox'>
+												<span>{date}</span>
+												<em>{time.split('Z')[0]}</em>
+											</div>
+											<RiArrowRightUpLine />
+										</div>
+									</div>
+
+									<div className='pic'>
+										<img
+											src={data.snippet.thumbnails.standard.url}
+											alt={data.snippet.title}
+										/>
+									</div>
+								</article>
+							);
+						}
+						if (idx === 1) {
+							return (
+								<article key={data.snippet.title + idx} className='big'>
+									<div>
+										<h2>{data.snippet.title}</h2>
+										<RiArrowRightUpLine />
+									</div>
+									<div className='txt'>
+										<p>{shortenText(data.snippet.description, 400)}</p>
+										<div className='infoBox'>
+											<span>{date}</span>
+											<em>{time.split('Z')[0]}</em>
+										</div>
+									</div>
+									<div className='pic'>
+										<img
+											src={data.snippet.thumbnails.standard.url}
+											alt={data.snippet.title}
+										/>
+									</div>
+								</article>
+							);
+						}
+					})}
+				</div>
 			</section>
 		</Layout>
 	);

@@ -215,17 +215,22 @@
 		display: flex;
 		> div {
 			width: 50%;
-			border-right: 1px solid rgba(var(--baseColor-code), 0.6);
+			border-right: 1px solid rgba(var(--baseColor-code), 0.3);
 			&:last-child {
 				border-right: none;
 			}
-			> article {
-				padding: 20px;
-				border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
-				cursor: pointer;
+			>a {
+				display: block;
+				border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
 				&:last-child {
 					border-bottom: none;
 				}
+			}
+			article {
+				display: block;
+				padding: 20px;
+				cursor: pointer;
+				
 				&:hover {
 					svg {
 						color: var(--pointColor);

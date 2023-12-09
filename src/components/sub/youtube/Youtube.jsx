@@ -6,6 +6,7 @@ import { TfiPlus } from 'react-icons/tfi';
 import { PiPercentLight } from 'react-icons/pi';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useCustomText } from '../../../hooks/useText';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Youtube() {
 	const shortenText = useCustomText('shorten');
@@ -167,14 +168,15 @@ export default function Youtube() {
 								POTENTIAL
 							</p>
 							<span>Dignissimos ipsum dolor consectetur adipisicing elit.</span>
-							{/* TODO::클릭 시 상세 모달 추가 */}
 							<button>
-								detail view
-								<RiArrowRightUpLine />
+								<Link to={`/youtube/detail/${ActiveVids.id}`}>
+									detail view
+									<RiArrowRightUpLine />
+								</Link>
 							</button>
 						</div>
 						<div className='right'>
-							{/*img-thubnail, h4 - title, p - description */}
+							{/*img-thumbnail, h4 - title, p - description */}
 							{ActiveVids && Object.keys(ActiveVids).length && (
 								<>
 									<div className='preview'>
@@ -222,55 +224,59 @@ export default function Youtube() {
 
 							if (idx === 0) {
 								return (
-									<article
-										key={data.snippet.title + idx}
-										className='big'
-									>
-										<div>
-											<h2>{data.snippet.title}</h2>
-											<RiArrowRightUpLine />
-										</div>
-										<div className='txt'>
-											<p>{shortenText(data.snippet.description, 500)}</p>
-											<div className='infoBox'>
-												<span>{date}</span>
-												<em>{time.split('Z')[0]}</em>
-											</div>
-										</div>
-										<div className='pic'>
-											<img
-												src={data.snippet.thumbnails.standard.url}
-												alt={data.snippet.title}
-											/>
-										</div>
-									</article>
+									<Link to={`/youtube/detail/${data.id}`}>
+										<article
+											key={data.snippet.title + idx}
+											className='big'
+										>
+												<div>
+													<h2>{data.snippet.title}</h2>
+													<RiArrowRightUpLine />
+												</div>
+												<div className='txt'>
+													<p>{shortenText(data.snippet.description, 500)}</p>
+													<div className='infoBox'>
+														<span>{date}</span>
+														<em>{time.split('Z')[0]}</em>
+													</div>
+												</div>
+												<div className='pic'>
+													<img
+														src={data.snippet.thumbnails.standard.url}
+														alt={data.snippet.title}
+													/>
+												</div>
+										</article>
+									</Link>
 								);
 							}
 							if (idx === 1) {
 								return (
-									<article
-										key={data.snippet.title + idx}
-										className='small'
-									>
-										<div className='txt'>
-											<h2>{data.snippet.title}</h2>
-											<div>
-												<p>{shortenText(data.snippet.description, 200)}</p>
-												<div className='infoBox'>
-													<span>{date}</span>
-													<em>{time.split('Z')[0]}</em>
+									<Link to={`/youtube/detail/${data.id}`}>
+										<article
+											key={data.snippet.title + idx}
+											className='small'
+										>
+												<div className='txt'>
+													<h2>{data.snippet.title}</h2>
+													<div>
+														<p>{shortenText(data.snippet.description, 200)}</p>
+														<div className='infoBox'>
+															<span>{date}</span>
+															<em>{time.split('Z')[0]}</em>
+														</div>
+														<RiArrowRightUpLine />
+													</div>
 												</div>
-												<RiArrowRightUpLine />
-											</div>
-										</div>
-
-										<div className='pic'>
-											<img
-												src={data.snippet.thumbnails.standard.url}
-												alt={data.snippet.title}
-											/>
-										</div>
-									</article>
+												
+												<div className='pic'>
+													<img
+														src={data.snippet.thumbnails.standard.url}
+														alt={data.snippet.title}
+													/>
+												</div>
+										</article>
+									</Link>
 								);
 							}
 						})}
@@ -280,55 +286,59 @@ export default function Youtube() {
 							const [date, time] = data.snippet.publishedAt.split('T');
 							if (idx === 0) {
 								return (
-									<article
-										key={data.snippet.title + idx}
-										className='small'
-									>
-										<div className='txt'>
-											<h2>{data.snippet.title}</h2>
-											<div>
-												<p>{shortenText(data.snippet.description, 200)}</p>
-												<div className='infoBox'>
-													<span>{date}</span>
-													<em>{time.split('Z')[0]}</em>
+									<Link to={`/youtube/detail/${data.id}`}>
+										<article
+											key={data.snippet.title + idx}
+											className='small'
+										>
+												<div className='txt'>
+													<h2>{data.snippet.title}</h2>
+													<div>
+														<p>{shortenText(data.snippet.description, 200)}</p>
+														<div className='infoBox'>
+															<span>{date}</span>
+															<em>{time.split('Z')[0]}</em>
+														</div>
+														<RiArrowRightUpLine />
+													</div>
 												</div>
-												<RiArrowRightUpLine />
-											</div>
-										</div>
-
-										<div className='pic'>
-											<img
-												src={data.snippet.thumbnails.standard.url}
-												alt={data.snippet.title}
-											/>
-										</div>
-									</article>
+												
+												<div className='pic'>
+													<img
+														src={data.snippet.thumbnails.standard.url}
+														alt={data.snippet.title}
+													/>
+												</div>
+										</article>	
+									</Link>
 								);
 							}
 							if (idx === 1) {
 								return (
-									<article
-										key={data.snippet.title + idx}
-										className='big'
-									>
-										<div>
-											<h2>{data.snippet.title}</h2>
-											<RiArrowRightUpLine />
-										</div>
-										<div className='txt'>
-											<p>{shortenText(data.snippet.description, 400)}</p>
-											<div className='infoBox'>
-												<span>{date}</span>
-												<em>{time.split('Z')[0]}</em>
-											</div>
-										</div>
-										<div className='pic'>
-											<img
-												src={data.snippet.thumbnails.standard.url}
-												alt={data.snippet.title}
-											/>
-										</div>
-									</article>
+									<Link to={`/youtube/detail/${data.id}`}>
+										<article
+											key={data.snippet.title + idx}
+											className='big'
+										>
+												<div>
+													<h2>{data.snippet.title}</h2>
+													<RiArrowRightUpLine />
+												</div>
+												<div className='txt'>
+													<p>{shortenText(data.snippet.description, 400)}</p>
+													<div className='infoBox'>
+														<span>{date}</span>
+														<em>{time.split('Z')[0]}</em>
+													</div>
+												</div>
+												<div className='pic'>
+													<img
+														src={data.snippet.thumbnails.standard.url}
+														alt={data.snippet.title}
+													/>
+												</div>
+										</article>
+									</Link>
 								);
 							}
 						})}

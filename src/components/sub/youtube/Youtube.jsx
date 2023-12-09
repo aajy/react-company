@@ -345,7 +345,7 @@ export default function Youtube() {
 					</div>
 				</section>
 			</Layout>
-			<Modal setOpen={setModalOpen}></Modal>
+			{ModalOpen && <Modal setOpen={setModalOpen}></Modal>}
 		</>
 	);
 }

@@ -6,7 +6,6 @@ import { TfiPlus } from 'react-icons/tfi';
 import { PiPercentLight } from 'react-icons/pi';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useCustomText } from '../../../hooks/useText';
-import Modal from '../../common/modal/Modal';
 
 export default function Youtube() {
 	const shortenText = useCustomText('shorten');
@@ -15,8 +14,6 @@ export default function Youtube() {
 	const [ChannelData, setChannelData] = useState({});
 	const [ChannelTitle, setChannelTitle] = useState('');
 	const [ActiveVids, setActiveVids] = useState({});
-	const [ModalOpen, setModalOpen] = useState(false);
-	const [Index, setIndex] = useState(0);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -94,10 +91,6 @@ export default function Youtube() {
 		setVids(newArr);
 		setActiveVids(newArr[index]);
 		//TODO:: setActiveVids(); 반영
-	};
-	const handleModalOpen = (data,idx) => {
-		setModalOpen(true);
-		setIndex(idx)
 	};
 	useEffect(() => {
 		fetchYoutube();
@@ -232,7 +225,6 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='big'
-										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div>
 											<h2>{data.snippet.title}</h2>
@@ -259,7 +251,6 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='small'
-										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div className='txt'>
 											<h2>{data.snippet.title}</h2>
@@ -292,7 +283,6 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='small'
-										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div className='txt'>
 											<h2>{data.snippet.title}</h2>
@@ -320,7 +310,6 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='big'
-										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div>
 											<h2>{data.snippet.title}</h2>
@@ -346,12 +335,7 @@ export default function Youtube() {
 					</div>
 				</section>
 			</Layout>
-			{ModalOpen && <Modal setOpen={setModalOpen}>
-				<div>
-					<img src={Vids[Index+3].snippet.thumbnails.standard.url}
-								alt={Vids[Index+3].snippet.title} />
-				</div>
-				</Modal>}
+			
 		</>
 	);
 }

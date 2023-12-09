@@ -10,7 +10,7 @@ import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 
 import { Route } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
 import { AnimatePresence } from 'framer-motion';

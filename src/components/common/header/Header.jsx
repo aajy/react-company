@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import { LuSearch, LuChevronDown, LuChevronUp } from 'react-icons/lu';

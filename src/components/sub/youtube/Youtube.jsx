@@ -16,6 +16,7 @@ export default function Youtube() {
 	const [ChannelTitle, setChannelTitle] = useState('');
 	const [ActiveVids, setActiveVids] = useState({});
 	const [ModalOpen, setModalOpen] = useState(false);
+	const [Index, setIndex] = useState(0);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -94,9 +95,9 @@ export default function Youtube() {
 		setActiveVids(newArr[index]);
 		//TODO:: setActiveVids(); 반영
 	};
-	const handleModalOpen = (data) => {
+	const handleModalOpen = (data,idx) => {
 		setModalOpen(true);
-		console.log('Modal data', data);
+		setIndex(idx)
 	};
 	useEffect(() => {
 		fetchYoutube();
@@ -200,7 +201,7 @@ export default function Youtube() {
 											{Vids.slice(0, 3).map((vid, idx) => {
 												return (
 													<li
-														key={vid.title + idx}
+														key={vid.snippet.title + idx}
 														onClick={() => {
 															handleActive(vid, idx, 3);
 														}}
@@ -231,7 +232,7 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='big'
-										onClick={() => handleModalOpen(data)}
+										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div>
 											<h2>{data.snippet.title}</h2>
@@ -258,7 +259,7 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='small'
-										onClick={() => handleModalOpen(data)}
+										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div className='txt'>
 											<h2>{data.snippet.title}</h2>
@@ -291,7 +292,7 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='small'
-										onClick={() => handleModalOpen(data)}
+										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div className='txt'>
 											<h2>{data.snippet.title}</h2>
@@ -319,7 +320,7 @@ export default function Youtube() {
 									<article
 										key={data.snippet.title + idx}
 										className='big'
-										onClick={() => handleModalOpen(data)}
+										onClick={() => handleModalOpen(data,idx)}
 									>
 										<div>
 											<h2>{data.snippet.title}</h2>
@@ -345,7 +346,12 @@ export default function Youtube() {
 					</div>
 				</section>
 			</Layout>
-			{ModalOpen && <Modal setOpen={setModalOpen}></Modal>}
+			{ModalOpen && <Modal setOpen={setModalOpen}>
+				<div>
+					<img src={Vids[Index+3].snippet.thumbnails.standard.url}
+								alt={Vids[Index+3].snippet.title} />
+				</div>
+				</Modal>}
 		</>
 	);
 }

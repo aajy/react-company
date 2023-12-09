@@ -1,8 +1,10 @@
 import { useEffect, useRef } from 'react';
 import './Layout.scss';
 import { useSplitText } from '../../../hooks/useText';
+import { useHistory } from 'react-router-dom';
 
 export default function Layout({ title, className, children }) {
+	const history = useHistory();
 	const splitText = useSplitText();
 	const splitTxt = useRef(null);
 	const refFrame = useRef(null);
@@ -15,7 +17,13 @@ export default function Layout({ title, className, children }) {
 	}, []);
 	return (
 		<main className={`Layout ${className}`} ref={refFrame}>
-			<h1 ref={splitTxt}>{title  || className}</h1>
+			<div className='layout_top'>
+				<span
+				style={{ display: className === 'detail' ? 'block' : 'none' }}
+				onClick={()=>history.goBack()}
+				><span>previous<br/>page</span></span>
+				<h1 ref={splitTxt}>{title  || className}</h1>
+			</div>
 			<div className='layoutWrap'>{children}</div>
 		</main>
 	);

@@ -14,6 +14,7 @@ import { useState } from 'react';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
 import { AnimatePresence } from 'framer-motion';
+import Detail from './components/sub/youtube/Detail';
 
 export default function App() {
 	const [Dark, setDark] = useState(false);
@@ -28,7 +29,8 @@ export default function App() {
 				setToggleMenu={setToggleMenu}/>
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
-			<Route path='/youtube' component={Youtube} />
+			<Route exact path='/youtube' component={Youtube} />
+			<Route path='/youtube/detail/:id' component={Detail} />
 			<Route path='/gallery' component={Gallery} />
 			<Route path='/community' component={Community} />
 			<Route path='/contact' component={Contact} />

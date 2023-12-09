@@ -131,6 +131,8 @@
 					align-items: end;
 					gap: 30px;
 					margin-bottom: 60px;
+					transition: 0.2s;
+					transform: translateX(10px);
 					//TODO :: 사라졌다가 나타나는 모션
 					.thumbnail {
 						max-width: 360px;
@@ -144,6 +146,10 @@
 							object-fit: cover;
 							transform: scale(2) translateY(10%);
 						}
+					}
+					&.on {
+						transition: 0.6s;
+						transform: translateX(0);
 					}
 					.text {
 						width: 60%;
@@ -315,7 +321,7 @@
 						> img {
 							transition: 0.7s;
 							display: block;
-							transform: scale(1.4);
+							transform: scale(1.3);
 						}
 					}
 				}

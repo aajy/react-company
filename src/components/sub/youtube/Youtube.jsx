@@ -15,6 +15,7 @@ export default function Youtube() {
 	const [ChannelData, setChannelData] = useState({});
 	const [ChannelTitle, setChannelTitle] = useState('');
 	const [ActiveVids, setActiveVids] = useState({});
+	const [IsActive, setIsActive] = useState(true);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -80,6 +81,7 @@ export default function Youtube() {
 		}
 	};
 	const handleActive = (vid, index, length) => {
+		setIsActive(false);
 		console.log('vid, idx: ', vid, index);
 		let newArr = [...Vids];
 		newArr.forEach((el, idx) => {
@@ -91,7 +93,9 @@ export default function Youtube() {
 		console.log('newArr[index]: ', newArr[index]);
 		setVids(newArr);
 		setActiveVids(newArr[index]);
-		//TODO:: setActiveVids(); 반영
+		setTimeout(()=>{
+			setIsActive(true);
+		},300)
 	};
 	useEffect(() => {
 		fetchYoutube();
@@ -179,7 +183,7 @@ export default function Youtube() {
 							{/*img-thumbnail, h4 - title, p - description */}
 							{ActiveVids && Object.keys(ActiveVids).length && (
 								<>
-									<div className='preview'>
+									<div className={IsActive?'preview on':'preview'}>
 										<div className='thumbnail'>
 											<img
 												src={ActiveVids?.snippet.thumbnails.standard.url}

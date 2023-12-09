@@ -8,7 +8,7 @@ export default function Layout({ title, className, children }) {
 	const refFrame = useRef(null);
 
 	useEffect(() => {
-		splitText(splitTxt.current, title ? title.toUpperCase() : className.toUpperCase());
+		splitText(splitTxt.current, title ? title.toUpperCase() : className.toUpperCase(),0.2, 0);
 		setTimeout(() => {
 			refFrame.current.classList.add('on');
 		}, 300);

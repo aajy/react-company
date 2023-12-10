@@ -22,14 +22,15 @@ export default function App() {
 
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header 
+			<Header
 				isDark={Dark}
 				setDark={() => setDark(!Dark)}
 				ToggleMenu={ToggleMenu}
-				setToggleMenu={setToggleMenu}/>
+				setToggleMenu={setToggleMenu}
+			/>
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
-			<Route path='/youtube' component={Youtube} />
+			<Route exact path='/youtube' component={Youtube} />
 			<Route path='/youtube/detail/:id' component={Detail} />
 			<Route path='/gallery' component={Gallery} />
 			{/* <Route path='/gallery/:paramsKeyword' component={Gallery} /> */}
@@ -37,12 +38,13 @@ export default function App() {
 			<Route path='/contact' component={Contact} />
 			<Footer />
 			<AnimatePresence>
-				{ToggleMenu &&
-					<Menu 
-					isDark={Dark}
-					setDark={() => setDark(!Dark)}
-					setToggleMenu={setToggleMenu} />
-				}
+				{ToggleMenu && (
+					<Menu
+						isDark={Dark}
+						setDark={() => setDark(!Dark)}
+						setToggleMenu={setToggleMenu}
+					/>
+				)}
 			</AnimatePresence>
 		</div>
 	);

@@ -19,6 +19,7 @@ export default function Detail() {
     try {
       const data = await fetch(baseURL);
       const json = await data.json();
+			console.log('json.items[0]: ', json.items[0]);
       setYoutubeData(json.items[0].snippet);
 			//댓글가져오는 요청 
       const commentURL = `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&part=replies&videoId=${json.items[0].snippet.resourceId.videoId}`
@@ -45,38 +46,40 @@ export default function Detail() {
 	}, []);
 	return (
 		<Layout title={'Detail'} className={'Detail'}>
-			{(YoutubeData&& CommentData) && (
-				<article>
-					<div className='videoBox'>
-						<iframe
-							title={YoutubeData.title}
-							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
-							frameborder='0'
-              allowfullscreen="allowfullscreen"
-						></iframe>
-					</div>
-					<h3>{YoutubeData.title}</h3>
-					<p>{YoutubeData.description}</p>
-					{IsComment && CommentData.map((comment,idx)=>{
-						return(
-							<div key={comment.id + idx}>
-								<img src={comment.snippet.authorProfileImageUrl} alt="profileUrl" />
-								<p>{comment.snippet.authorDisplayName}</p>
-								<p>{comment.snippet.textDisplay}</p>
-								<p>{comment.snippet.publishedAt}</p>
+		{(YoutubeData&& CommentData) && (
+			<article>
+				<div className='videoBox'>
+					<iframe
+						title={YoutubeData.title}
+						src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
+						frameborder='0'
+						allowfullscreen="allowfullscreen"
+					></iframe>
+				</div>
+				<h3>{YoutubeData.title}</h3>
+				<p>{YoutubeData.description}</p>
+				<span>댓글 {CommentData.length} 개</span>
+				{IsComment && CommentData.map((comment,idx)=>{
+					return(
+						<div className='comment' key={comment.id + idx}>
+							<div className='profile'>
+								<div>
+									<img src={comment.snippet.authorProfileImageUrl} alt="profileUrl" />
+									<div>
+										<p>
+											<span>{comment.snippet.authorDisplayName}</span>
+											<span>{comment.snippet.publishedAt}</span>
+										</p>
+										<p>{comment.snippet.textDisplay}</p>
+									</div>
+								</div>
 								<p><IoMdHeart />{comment.snippet.likeCount}</p>
 							</div>
-						)
-					})}
-				</article>
-			)}
-			{/* <article>
-				<div className='videoBox'>
-					<img src={`${path.current}/img/youtubeprofile.jpg`} alt='' />
-				</div>
-				<h3>임시 데이터 : Youtube playlist title | Lorem ipsum dolor sit.</h3>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Blanditiis odio fugit ducimus exercitationem eveniet in dicta ut, sequi repellat libero?</p>
-			</article> */}
-		</Layout>
+						</div>
+					)
+				})}
+			</article>
+		)}
+	</Layout>
 	);
 }

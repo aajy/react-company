@@ -16,6 +16,7 @@ export default function Youtube() {
 	const [ChannelTitle, setChannelTitle] = useState('');
 	const [ActiveVids, setActiveVids] = useState({});
 	const [IsActive, setIsActive] = useState(true);
+	const OriginVids = useRef(null);
 	const refSearchKeyword = useRef(null);
 	const [SearchResult, setSearchResult] = useState(true);
 
@@ -63,6 +64,7 @@ export default function Youtube() {
 				return item;
 			});
 			setVids(newArray);
+			OriginVids.current = newArray;
 			setActiveVids(json.items[0]);
 		} catch (err) {
 			console.log(err);
@@ -76,20 +78,28 @@ export default function Youtube() {
 			try {
 				const data = await fetch(searchURL);
 				const json = await data.json();
-				if (json.items.length) {
+				if (json.items) {
+					setSearchResult(true);
 					setVids(prevVids => [
 						...prevVids.slice(0, 3),
 						...json.items
 					]);
 				} else {
-					setSearchResult(false)
+					setSearchResult(false);
 					setVids(prevVids => [
-						...prevVids.slice(0, 3)
+						...prevVids.slice(0, 3),
+						...Vids.slice(3,7)
 					]);
 				}
 			} catch (err) {
 				console.log(err);
 			}
+		} else {
+			setSearchResult(true);
+			setVids(prevVids => [
+				...prevVids.slice(0, 3),
+				...Vids.slice(3,7)
+			]);
 		}
 	}
 	const formatNumberWithK = (number, k) => {
@@ -253,7 +263,7 @@ export default function Youtube() {
 							<input type="text" ref={refSearchKeyword} placeholder='Find out more interesting things!'/>
 							<button onClick={searchYoutube}>search</button>
 						</div>
-						{SearchResult && <div className='noResult'>No Result Found<RiArrowRightUpLine /></div>}
+						{!SearchResult && <div className='noResult'>No Result Found<RiArrowRightUpLine /></div>}
 					</div>
 					<div className='left'>
 						{Vids.length && Vids.slice(3, 5).map((data, idx) => {

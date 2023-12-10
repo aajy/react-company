@@ -248,7 +248,6 @@
 				margin-bottom: 60px;
 				>div {
 					display: flex;
-					margin-bottom: 30px;
 					input {
 						width: 60%;
 						height: 40px;
@@ -563,8 +562,44 @@
 		.bottom {
 			flex-direction: column;
 			flex-wrap: nowrap;
-			.search {
+			.search{
 				width: 100%;
+				border: none;
+				margin-bottom: 30px;
+				>div {
+					display: flex;
+					input {
+						width: 70%;
+						height: 40px;
+						line-height: 1;
+						border:1px solid rgba(var(--baseColor-code), 0.5);
+						border-radius: 30px;
+						padding-left: 20px;
+						margin-right: 10px;
+						margin-bottom: 20px;
+						&:focus{
+							outline:0;
+						}
+					}
+					button {
+						width: 70px;
+						height: 40px;
+						border-radius: 20px;
+						background-color: var(--baseColor);
+						color:var(--bgColor);
+						border:none;
+						font-size: 0.8rem;
+					}
+				}
+				.noResult {
+					padding:10px 20px;
+					border-left: 1px solid rgba(var(--baseColor-code), 0.5);
+					font-size: 1.3rem;
+					color:rgba(var(--baseColor-code), 0.5);
+					>svg {
+						font-size: 2rem;
+					}
+				}
 			}
 			> div {
 				width: 100%;

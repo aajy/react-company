@@ -1,0 +1,130 @@
+.Gallery {
+	--num: 4;
+
+	.controls {
+		width: 100%;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		align-items: flex-end;
+		padding: 20px 5px;
+		.btnSet {
+			display: flex;
+			gap: 20px;
+			button {
+				background-color: transparent;
+				border: none;
+				cursor: pointer;
+				padding: 10px 0;
+				border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
+				font-size: 1rem;
+				color: rgba(var(--baseColor-code), 0.6);
+				position: relative;
+				transition: 0.5s;
+				&::after {
+					content: '';
+					display: block;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					width: 0%;
+					height: 1px;
+					background: var(--baseColor);
+					transition: 0.5s;
+				}
+
+				&.on {
+					color: rgba(var(--baseColor-code), 1);
+					&::after {
+						width: 100%;
+					}
+				}
+			}
+		}
+		form {
+			display: flex;
+			align-items: center;
+			gap: 10px;
+			input {
+				width: 120px;
+				border: none;
+				background-color: transparent;
+				border-bottom: 1px solid rgba(var(--baseColor-code), 0.5);
+				outline: 0;
+			}
+			.btnSearch {
+				border: none;
+				background-color: transparent;
+				font-size: 1.2rem;
+				color: var(--baseColor);
+				cursor: pointer;
+			}
+		}
+	}
+	.frameWrap {
+		--gap: 20px;
+		.frame {
+			width: 100%;
+			display: flex;
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			gap: var(--gap);
+
+			article {
+				//사이간격 고정값 쓰는 경우
+				//각 박스 넓이값 : 전체 넓이값에서 사이간격의 총 넓이를 빼주고 다시 컬럼수만큼 나누기
+				//calc((부모넓이값 - 사이간격 * 사이간격 수) / 컬럼수)
+				width: calc((100% - var(--gap) * (var(--num) - 1)) / var(--num));
+				margin-bottom: 70px;
+				border-bottom: 1px solid rgba(var(--baseColor-code), 0.5);
+
+				.pic {
+					width: 100%;
+					margin-bottom: 10px;
+
+					img {
+						width: 100%;
+					}
+				}
+				h2 {
+					font-weight: normal;
+					font-size: 1rem;
+					line-height: 1.2;
+				}
+				.profile {
+					width: 100%;
+					display: flex;
+					align-items: flex-end;
+					gap: 10px;
+					margin-bottom: 20px;
+					img {
+						width: 40px;
+					}
+					span {
+						color: var(-pointColor);
+						font-size: 0.8rem;
+					}
+				}
+			}
+		}
+	}
+}
+
+//laptop
+.laptop {
+	.Gallery {
+		--num: 3;
+	}
+}
+//tablet
+.tablet {
+	.Gallery {
+		--num: 2;
+	}
+}
+//mobile
+.mobile {
+	.Gallery {
+		--num: 1;
+	}
+}

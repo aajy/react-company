@@ -19,7 +19,7 @@ export default function Layout({ title, className, children }) {
 		<main className={`Layout ${className}`} ref={refFrame}>
 			<div className='layout_top'>
 				<span
-				style={{ display: className === 'detail' ? 'block' : 'none' }}
+				style={{ display: className === 'Detail' ? 'block' : 'none' }}
 				onClick={()=>history.goBack()}
 				><span>previous<br/>page</span></span>
 				<h1 ref={splitTxt}>{title  || className}</h1>

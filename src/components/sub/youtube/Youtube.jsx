@@ -66,6 +66,21 @@ export default function Youtube() {
 			console.log(err);
 		}
 	};
+	//TODO :: 검색기능
+	// const searchYoutube = async (keyword) => {
+	// 	const api_key = process.env.REACT_APP_YOUTUBE_API;
+	// 	const num = 4;
+
+	// 	const searchURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${keyword}&type=video&maxResults=${num}`;
+
+	// 	try {
+	// 		const data = await fetch(searchURL);
+	// 		const json = await data.json();
+	// 		setVids();
+	// 	} catch (err) {
+	// 		console.log(err);
+	// 	}
+	// }
 	const formatNumberWithK = (number, k) => {
 		if (number >= k) {
 			// k로 나눈 몫을 구하고 소수점 첫째 자리까지만 표시
@@ -95,7 +110,7 @@ export default function Youtube() {
 		setActiveVids(newArr[index]);
 		setTimeout(()=>{
 			setIsActive(true);
-		},300)
+		},100)
 	};
 	useEffect(() => {
 		fetchYoutube();
@@ -109,7 +124,7 @@ export default function Youtube() {
 							<div className='title'>
 								<div>
 									<p>
-										{ChannelTitle} <strong>&reg;</strong>
+										<span>{ChannelTitle}</span><strong>&reg;</strong>
 									</p>
 									<p>
 										Contemporary and Enchanted.
@@ -222,6 +237,9 @@ export default function Youtube() {
 					</div>
 				</section>
 				<section className='bottom'>
+					<div className="search">
+						<input type="text" />
+					</div>
 					<div className='left'>
 						{Vids.slice(3, 5).map((data, idx) => {
 							const [date, time] = data.snippet.publishedAt.split('T');

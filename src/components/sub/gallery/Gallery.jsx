@@ -101,10 +101,6 @@ export default function Gallery() {
 		setPics(json.photos.photo);
 	};
 
-	const openModal = (e) => {
-		setOpen(true);
-	};
-
 	useEffect(() => {
 		refSearchKeyword.current.value = null;
 		refFrameWrap.current.style.setProperty('--gap', gap.current + 'px');
@@ -182,6 +178,7 @@ export default function Gallery() {
 										<div
 											className='pic'
 											onClick={() => {
+												console.log('open',Pics[Index]);
 												setOpen(true);
 												setIndex(idx);
 											}}
@@ -230,14 +227,38 @@ export default function Gallery() {
 				</section>
 			</Layout>
 
-			{/* <Modal Open={Open} setOpen={setOpen}>
-				{Pics[Index] && (
-					<img
-						src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
-						alt={'img'}
-					/>
+			{Open && <Modal Open={Open} setOpen={setOpen}>
+				{
+				Pics[Index] && (
+					<>
+						<img
+							src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+							alt={'img'}
+						/>
+						<div className="info">
+							<p>{Pics[Index].title}</p>
+							<h2>{Pics[Index].owner}</h2>
+							<div>
+								<span>{Pics[Index].id}</span>
+								<span>{Pics[Index].server}</span>
+							</div>
+							<div>
+								<span>{Pics[Index].secret}</span>
+								<img
+									src={`http://farm${Pics[Index].farm}.staticflickr.com/${Pics[Index].server}/buddyicons/${Pics[Index].owner}.jpg`}
+									alt='사용자 프로필 이미지'
+									onError={(e) =>
+										e.target.setAttribute(
+											'src',
+											'https://www.flickr.com/images/buddyicon.gif'
+										)
+									}
+								/>
+							</div>
+						</div>
+					</>
 				)}
-			</Modal> */}
+			</Modal>}
 		</>
 	);
 }

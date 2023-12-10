@@ -248,6 +248,7 @@
 				margin-bottom: 60px;
 				>div {
 					display: flex;
+					margin-bottom: 30px;
 					input {
 						width: 60%;
 						height: 40px;
@@ -267,6 +268,22 @@
 						background-color: var(--baseColor);
 						color:var(--bgColor);
 						border:none;
+						margin-right: 5px;
+					}
+					>span {
+						display: block;
+						display: flex;
+						align-items: center;
+						justify-content: center;
+						width: 40px;
+						height: 40px;
+						border-radius: 20px;
+						background-color: var(--baseColor);
+						cursor: pointer;
+						svg {
+							font-size: 0.8rem;
+							color:var(--bgColor);
+						}
 					}
 				}
 				.noResult {

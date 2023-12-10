@@ -5,6 +5,7 @@ import { AiFillPlusCircle } from 'react-icons/ai';
 import { TfiPlus } from 'react-icons/tfi';
 import { PiPercentLight } from 'react-icons/pi';
 import { RiArrowRightUpLine } from 'react-icons/ri';
+import { GrPowerReset } from "react-icons/gr";
 import { useCustomText } from '../../../hooks/useText';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
@@ -78,7 +79,7 @@ export default function Youtube() {
 			try {
 				const data = await fetch(searchURL);
 				const json = await data.json();
-				if (json.items) {
+				if (json.items.length > 0) {
 					setSearchResult(true);
 					setVids(prevVids => [
 						...prevVids.slice(0, 3),
@@ -87,20 +88,21 @@ export default function Youtube() {
 				} else {
 					setSearchResult(false);
 					setVids(prevVids => [
-						...prevVids.slice(0, 3),
-						...Vids.slice(3,7)
+						...prevVids.slice(0, 3)
 					]);
 				}
 			} catch (err) {
 				console.log(err);
 			}
-		} else {
-			setSearchResult(true);
-			setVids(prevVids => [
-				...prevVids.slice(0, 3),
-				...Vids.slice(3,7)
-			]);
 		}
+	}
+	const resetSearch = () => {
+		setSearchResult(true);
+		refSearchKeyword.current.value = '';
+		setVids(prevVids => [
+			...prevVids.slice(0, 3),
+			...OriginVids.current.slice(3,7)
+		]);
 	}
 	const formatNumberWithK = (number, k) => {
 		if (number >= k) {
@@ -260,8 +262,12 @@ export default function Youtube() {
 				<section className='bottom'>
 					<div className="search">
 						<div>
+							{/* 주의  : 일일 할당량 10000인데, 검색기능 1회 100 cost */}
 							<input type="text" ref={refSearchKeyword} placeholder='Find out more interesting things!'/>
 							<button onClick={searchYoutube}>search</button>
+							<span onClick={resetSearch}>
+								<GrPowerReset />
+							</span>
 						</div>
 						{!SearchResult && <div className='noResult'>No Result Found<RiArrowRightUpLine /></div>}
 					</div>

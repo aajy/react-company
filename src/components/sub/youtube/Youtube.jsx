@@ -71,7 +71,8 @@ export default function Youtube() {
 			console.log(err);
 		}
 	};
-	const searchYoutube = async () => {
+	const searchYoutube = async (e) => {
+		e.preventDefault();
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
 		const num = 4;
 		const searchURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${refSearchKeyword.current.value}&type=video&maxResults=${num}`;
@@ -261,14 +262,14 @@ export default function Youtube() {
 				</section>
 				<section className='bottom'>
 					<div className="search">
-						<div>
+						<form onSubmit={searchYoutube}>
 							{/* 주의  : 일일 할당량 10000인데, 검색기능 1회 100 cost */}
 							<input type="text" ref={refSearchKeyword} placeholder='Find out more interesting things!'/>
-							<button onClick={searchYoutube}>search</button>
+							<button>search</button>
 							<span onClick={resetSearch}>
 								<GrPowerReset />
 							</span>
-						</div>
+						</form>
 						{!SearchResult && <div className='noResult'>No Result Found<RiArrowRightUpLine /></div>}
 					</div>
 					<div className='left'>

@@ -226,9 +226,6 @@
 	.bottom {
 		display: flex;
 		flex-wrap: wrap;
-		.search {
-			width: 100%;
-		}
 		> div {
 			width: 50%;
 			border-right: 1px solid rgba(var(--baseColor-code), 0.3);
@@ -243,10 +240,11 @@
 				}
 			}
 			&.search{
+				
 				width: 100%;
 				border: none;
 				margin-bottom: 60px;
-				>div {
+				form {
 					display: flex;
 					margin-bottom: 30px;
 					input {
@@ -269,7 +267,7 @@
 						color:var(--bgColor);
 						border:none;
 						margin-right: 5px;
-					}
+					}	
 					>span {
 						display: block;
 						display: flex;

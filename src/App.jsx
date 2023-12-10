@@ -29,9 +29,10 @@ export default function App() {
 				setToggleMenu={setToggleMenu}/>
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
-			<Route exact path='/youtube' component={Youtube} />
+			<Route path='/youtube' component={Youtube} />
 			<Route path='/youtube/detail/:id' component={Detail} />
 			<Route path='/gallery' component={Gallery} />
+			{/* <Route path='/gallery/:paramsKeyword' component={Gallery} /> */}
 			<Route path='/community' component={Community} />
 			<Route path='/contact' component={Contact} />
 			<Footer />

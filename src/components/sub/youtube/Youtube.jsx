@@ -16,6 +16,8 @@ export default function Youtube() {
 	const [ChannelTitle, setChannelTitle] = useState('');
 	const [ActiveVids, setActiveVids] = useState({});
 	const [IsActive, setIsActive] = useState(true);
+	const refSearchKeyword = useRef(null);
+	const [SearchResult, setSearchResult] = useState(true);
 
 	const fetchYoutube = async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -66,21 +68,30 @@ export default function Youtube() {
 			console.log(err);
 		}
 	};
-	//TODO :: 검색기능
-	// const searchYoutube = async (keyword) => {
-	// 	const api_key = process.env.REACT_APP_YOUTUBE_API;
-	// 	const num = 4;
-
-	// 	const searchURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${keyword}&type=video&maxResults=${num}`;
-
-	// 	try {
-	// 		const data = await fetch(searchURL);
-	// 		const json = await data.json();
-	// 		setVids();
-	// 	} catch (err) {
-	// 		console.log(err);
-	// 	}
-	// }
+	const searchYoutube = async () => {
+		const api_key = process.env.REACT_APP_YOUTUBE_API;
+		const num = 4;
+		const searchURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${refSearchKeyword.current.value}&type=video&maxResults=${num}`;
+		if (refSearchKeyword.current.value.trim().length){
+			try {
+				const data = await fetch(searchURL);
+				const json = await data.json();
+				if (json.items.length) {
+					setVids(prevVids => [
+						...prevVids.slice(0, 3),
+						...json.items
+					]);
+				} else {
+					setSearchResult(false)
+					setVids(prevVids => [
+						...prevVids.slice(0, 3)
+					]);
+				}
+			} catch (err) {
+				console.log(err);
+			}
+		}
+	}
 	const formatNumberWithK = (number, k) => {
 		if (number >= k) {
 			// k로 나눈 몫을 구하고 소수점 첫째 자리까지만 표시
@@ -212,7 +223,7 @@ export default function Youtube() {
 									</div>
 									<div className='previewList'>
 										<ul>
-											{Vids.slice(0, 3).map((vid, idx) => {
+											{Vids && Vids.slice(0, 3).map((vid, idx) => {
 												return (
 													<li
 														key={vid.snippet.title + idx}
@@ -238,13 +249,18 @@ export default function Youtube() {
 				</section>
 				<section className='bottom'>
 					<div className="search">
-						<input type="text" />
+						<div>
+							<input type="text" ref={refSearchKeyword} placeholder='Find out more interesting things!'/>
+							<button onClick={searchYoutube}>search</button>
+						</div>
+						{SearchResult && <div className='noResult'>No Result Found<RiArrowRightUpLine /></div>}
 					</div>
 					<div className='left'>
-						{Vids.slice(3, 5).map((data, idx) => {
-							const [date, time] = data.snippet.publishedAt.split('T');
+						{Vids.length && Vids.slice(3, 5).map((data, idx) => {
+							const publishedAt = data.snippet?.publishedAt;
+							const [date, time] = publishedAt ? publishedAt.split('T') : ['','']
 
-							if (idx === 0) {
+							if (idx === 0 && data.snippet) {
 								return (
 									<Link to={`/youtube/detail/${data.id}`}>
 										<article
@@ -264,7 +280,7 @@ export default function Youtube() {
 												</div>
 												<div className='pic'>
 													<img
-														src={data.snippet.thumbnails.standard.url}
+														src={data.snippet.thumbnails.standard!== undefined?data.snippet.thumbnails.standard.url :data.snippet.thumbnails.default.url}
 														alt={data.snippet.title}
 													/>
 												</div>
@@ -272,7 +288,7 @@ export default function Youtube() {
 									</Link>
 								);
 							}
-							if (idx === 1) {
+							if (idx === 1 && data.snippet) {
 								return (
 									<Link to={`/youtube/detail/${data.id}`}>
 										<article
@@ -293,7 +309,7 @@ export default function Youtube() {
 												
 												<div className='pic'>
 													<img
-														src={data.snippet.thumbnails.standard.url}
+														src={data.snippet.thumbnails.standard !== undefined? data.snippet.thumbnails.standard.url : data.snippet.thumbnails.default.url}
 														alt={data.snippet.title}
 													/>
 												</div>
@@ -304,9 +320,10 @@ export default function Youtube() {
 						})}
 					</div>
 					<div className='right'>
-						{Vids.slice(5, 8).map((data, idx) => {
-							const [date, time] = data.snippet.publishedAt.split('T');
-							if (idx === 0) {
+						{Vids.length && Vids.slice(5, 8).map((data, idx) => {
+							const publishedAt = data.snippet?.publishedAt;
+							const [date, time] = publishedAt ? publishedAt.split('T') : ['',''];
+							if (idx === 0 && data.snippet) {
 								return (
 									<Link to={`/youtube/detail/${data.id}`}>
 										<article
@@ -327,7 +344,7 @@ export default function Youtube() {
 												
 												<div className='pic'>
 													<img
-														src={data.snippet.thumbnails.standard.url}
+														src={data.snippet.thumbnails.standard !== undefined? data.snippet.thumbnails.standard.url : data.snippet.thumbnails.default.url}
 														alt={data.snippet.title}
 													/>
 												</div>
@@ -335,7 +352,7 @@ export default function Youtube() {
 									</Link>
 								);
 							}
-							if (idx === 1) {
+							if (idx === 1 && data.snippet) {
 								return (
 									<Link to={`/youtube/detail/${data.id}`}>
 										<article
@@ -355,7 +372,7 @@ export default function Youtube() {
 												</div>
 												<div className='pic'>
 													<img
-														src={data.snippet.thumbnails.standard.url}
+														src={data.snippet.thumbnails.standard !== undefined ? data.snippet.thumbnails.standard.url : data.snippet.thumbnails.default.url}
 														alt={data.snippet.title}
 													/>
 												</div>

@@ -100,7 +100,6 @@ export default function Gallery() {
 		opt.type === 'search' && (url = searchURL);
 		const data = await fetch(url);
 		const json = await data.json();
-		console.log(json.photos);
 		setPics(json.photos.photo);
 	};
 
@@ -198,7 +197,6 @@ export default function Gallery() {
 										<div
 											className='pic'
 											onClick={() => {
-												console.log('open', Pics[Index]);
 												setOpen(true);
 												setIndex(idx);
 											}}

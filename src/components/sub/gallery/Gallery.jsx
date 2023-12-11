@@ -3,8 +3,8 @@ import Masonry from 'react-masonry-component';
 import Layout from '../../common/layout/Layout';
 import './Gallery.scss';
 import Modal from '../../common/modal/Modal';
-import { AiOutlineClose } from "react-icons/ai";
-import { RiArrowRightDownLine,RiArrowRightUpLine } from 'react-icons/ri';
+import { AiOutlineClose } from 'react-icons/ai';
+import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Gallery() {
@@ -21,7 +21,7 @@ export default function Gallery() {
 	const [Index, setIndex] = useState(0);
 	const [IsMask, setIsMask] = useState(false);
 
-	const searchedKeywords = ['computer', 'keyboard', 'tea', 'grey']
+	const searchedKeywords = ['computer', 'keyboard', 'tea', 'grey'];
 	const activateBtn = (e) => {
 		const btns = refNav.current.querySelectorAll('button');
 		btns.forEach((btn) => btn.classList.remove('on'));
@@ -31,9 +31,9 @@ export default function Gallery() {
 		if (e.target.classList.contains('on')) return;
 		isUser.current = '';
 		if (refSearchKeyword.current) {
-      refSearchKeyword.current.value = '';
+			refSearchKeyword.current.value = '';
 			setSearchKeyword('');
-    }
+		}
 		activateBtn(e);
 		fetchFlickr({ type: 'interest' });
 	};
@@ -42,9 +42,9 @@ export default function Gallery() {
 			return;
 		isUser.current = myID.current;
 		if (refSearchKeyword.current) {
-      refSearchKeyword.current.value = '';
+			refSearchKeyword.current.value = '';
 			setSearchKeyword('');
-    }
+		}
 		activateBtn(e);
 		fetchFlickr({ type: 'user', id: myID.current });
 	};
@@ -54,20 +54,23 @@ export default function Gallery() {
 		activateBtn();
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 	};
-	const handleSearch = (e,paramsKeyword='') => {
+	const handleSearch = (e, paramsKeyword = '') => {
 		let keyword;
 		if (paramsKeyword) {
 			keyword = paramsKeyword;
-		}else {
+		} else {
 			e.preventDefault();
 			activateBtn(e);
-			keyword = e.target.tagName !== 'BUTTON' ? e.target.innerText : refSearchKeyword.current.value;
+			keyword =
+				e.target.tagName !== 'BUTTON'
+					? e.target.innerText
+					: refSearchKeyword.current.value;
 		}
 		isUser.current = '';
 
 		const btns = refNav.current.querySelectorAll('button');
 		btns.forEach((btn) => btn.classList.remove('on'));
-		btns[btns.length-1].classList.add('on');
+		btns[btns.length - 1].classList.add('on');
 		refSearchKeyword.current.value = keyword;
 		setSearchKeyword(keyword);
 
@@ -77,9 +80,9 @@ export default function Gallery() {
 	};
 	const handleResetInput = (e) => {
 		if (refSearchKeyword.current) {
-      refSearchKeyword.current.value = '';
-    }
-	}
+			refSearchKeyword.current.value = '';
+		}
+	};
 	const fetchFlickr = async (opt) => {
 		const num = 12;
 
@@ -105,28 +108,35 @@ export default function Gallery() {
 		refSearchKeyword.current.value = null;
 		refFrameWrap.current.style.setProperty('--gap', gap.current + 'px');
 		fetchFlickr({ type: 'user', id: myID.current });
-		if(paramsKeyword) handleSearch(paramsKeyword);
+		if (paramsKeyword) handleSearch(paramsKeyword);
 	}, []);
 
 	return (
 		<>
-		{/* TODO::
+			{/* TODO::
 			1. mask on off  토글 버튼
 			2. 추천 검색어 클릭 시 검색
 			3. tap메뉴
 		*/}
 			<Layout title={'Gallery'} className={'Gallery'}>
 				<div className='top'>
-					<h2>CREATIVE<br/>
-						BOXING<br/>
+					<h2>
+						CREATIVE
+						<br />
+						BOXING
+						<br />
 						CO<strong>&reg;</strong>
 					</h2>
 					<div>
 						<form onSubmit={handleSearch} className='search'>
 							<div>
-								<input type="text" ref={refSearchKeyword} placeholder='Find out more interesting things!'/>
+								<input
+									type='text'
+									ref={refSearchKeyword}
+									placeholder='Find out more interesting things!'
+								/>
 								<span onClick={handleResetInput}>
-									<AiOutlineClose/>
+									<AiOutlineClose />
 								</span>
 							</div>
 							<button onClick={handleSearch}>search</button>
@@ -136,12 +146,13 @@ export default function Gallery() {
 							{/* TODO:: table 생성 후, 추천 검색어 입니다.
 							검색어 관리 Modal을 여시겠습니까?로 검색어 관리 Modal open*/}
 							<ul>
-								{searchedKeywords.map((keyword,idx)=>{
+								{searchedKeywords.map((keyword, idx) => {
 									return (
-										<li key={keyword+idx} onClick={handleSearch}>
-											{keyword}<AiOutlineClose />
+										<li key={keyword + idx} onClick={handleSearch}>
+											{keyword}
+											<AiOutlineClose />
 										</li>
-									)
+									);
 								})}
 							</ul>
 						</div>
@@ -153,7 +164,13 @@ export default function Gallery() {
 						<button className='on' onClick={handleMine}>
 							My Gallery
 						</button>
-						<button onClick={()=>{refSearchKeyword.current.focus()}}>Search</button>
+						<button
+							onClick={() => {
+								refSearchKeyword.current.focus();
+							}}
+						>
+							Search
+						</button>
 					</nav>
 				</article>
 
@@ -164,12 +181,15 @@ export default function Gallery() {
 					>
 						{Pics.length === 0 ? (
 							<div className='noPics'>
-								<h2>No search results for that keyword.<RiArrowRightUpLine /></h2>
+								<h2>
+									No search results for that keyword.
+									<RiArrowRightUpLine />
+								</h2>
 							</div>
 						) : (
 							Pics.map((pic, idx) => {
 								return (
-									<article key={pic.id} className={IsMask?'mask':''}>
+									<article key={pic.id} className={IsMask ? 'mask' : ''}>
 										<p>
 											<span>{pic.id}</span>
 											<span>{pic.secret}</span>
@@ -178,7 +198,7 @@ export default function Gallery() {
 										<div
 											className='pic'
 											onClick={() => {
-												console.log('open',Pics[Index]);
+												console.log('open', Pics[Index]);
 												setOpen(true);
 												setIndex(idx);
 											}}
@@ -209,56 +229,59 @@ export default function Gallery() {
 							})
 						)}
 					</Masonry>
-				<article className='info'>
-					<h3>{SearchKeyword.toUpperCase() || 'KEYWORD'}</h3>
-					<div className='topBottom'>
-						<div>
-							Mask
-							<RiArrowRightDownLine />
+					<article className='info'>
+						<h3>{SearchKeyword.toUpperCase() || 'KEYWORD'}</h3>
+						<div className='topBottom'>
+							<div>
+								Mask
+								<RiArrowRightDownLine />
+							</div>
+							<div
+								className={`themeBox ${IsMask && 'mask'}`}
+								onClick={() => setIsMask(!IsMask)}
+							>
+								<div className='ball'>{IsMask ? 'ON' : 'OFF'}</div>
+							</div>
 						</div>
-						<div
-							className={`themeBox ${IsMask && 'mask'}`}
-							onClick={() => setIsMask(!IsMask)}
-						>
-							<div className='ball'>{IsMask ? 'ON' : 'OFF'}</div>
-						</div>
-					</div>
-				</article>
+					</article>
 				</section>
 			</Layout>
 
-			{Open && <Modal Open={Open} setOpen={setOpen}>
-				{
-				Pics[Index] && (
-					<>
-						<img
-							src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
-							alt={'img'}
-						/>
-						<div className="info">
-							<p>{Pics[Index].title}</p>
-							<h2>{Pics[Index].owner}</h2>
-							<div>
-								<span>{Pics[Index].id}</span>
-								<span>{Pics[Index].server}</span>
-							</div>
-							<div>
-								<span>{Pics[Index].secret}</span>
+			{Open && (
+				<Modal Open={Open}>
+					{Pics[Index] && (
+						<>
+							<div className='img'>
 								<img
-									src={`http://farm${Pics[Index].farm}.staticflickr.com/${Pics[Index].server}/buddyicons/${Pics[Index].owner}.jpg`}
-									alt='사용자 프로필 이미지'
-									onError={(e) =>
-										e.target.setAttribute(
-											'src',
-											'https://www.flickr.com/images/buddyicon.gif'
-										)
-									}
+									src={`https://live.staticflickr.com/${Pics[Index].server}/${Pics[Index].id}_${Pics[Index].secret}_b.jpg`}
+									alt={'img'}
 								/>
 							</div>
-						</div>
-					</>
-				)}
-			</Modal>}
+							<button
+								className='closeMenu'
+								onClick={() => setOpen(!Open)}
+							></button>
+							<div className='info'>
+								<h2>{Pics[Index].title}</h2>
+								<p>{Pics[Index].owner}</p>
+								<div>
+									<span>{Pics[Index].secret}</span>
+									<img
+										src={`http://farm${Pics[Index].farm}.staticflickr.com/${Pics[Index].server}/buddyicons/${Pics[Index].owner}.jpg`}
+										alt='사용자 프로필 이미지'
+										onError={(e) =>
+											e.target.setAttribute(
+												'src',
+												'https://www.flickr.com/images/buddyicon.gif'
+											)
+										}
+									/>
+								</div>
+							</div>
+						</>
+					)}
+				</Modal>
+			)}
 		</>
 	);
 }

@@ -5,7 +5,7 @@
 	display: flex;
 	justify-content: space-between;
 	background-color: var(--baseColor);
-	color :rgba(var(--bgColor-code), 0.9);
+	color: rgba(var(--bgColor-code), 0.9);
 	> div {
 		display: flex;
 		flex-direction: column;
@@ -168,8 +168,8 @@
 }
 .mobile {
 	.Footer {
-		width: 90vw;
-		margin: 20px auto;
+		width: 100vw;
+		margin: 0px auto;
 		flex-direction: column;
 		> div {
 			justify-content: center;

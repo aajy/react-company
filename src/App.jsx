@@ -33,7 +33,7 @@ export default function App() {
 			<Route exact path='/youtube' component={Youtube} />
 			<Route path='/youtube/detail/:id' component={Detail} />
 			<Route path='/gallery' component={Gallery} />
-			{/* <Route path='/gallery/:paramsKeyword' component={Gallery} /> */}
+			{/*TODO:: 게시글 검색 페이지 생성 <Route path='/community/search/:paramsKeyword' component={Contact} /> */}
 			<Route path='/community' component={Community} />
 			<Route path='/contact' component={Contact} />
 			<Footer />

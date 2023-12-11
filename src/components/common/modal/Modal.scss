@@ -68,9 +68,9 @@
 			> h2 {
 				font-weight: 500;
 				font-size: 3rem;
-				padding-bottom: 3vw;
+				padding-bottom: 5vw;
 				line-height: 1;
-				border-bottom: 1px solid #333;
+				border-bottom: 1px solid rgba(var(--baseColor-code), 0.3);
 			}
 			> p {
 				font-size: 1.4rem;
@@ -155,16 +155,17 @@
 		}
 		.info {
 			width: 100%;
+			min-height: 26vh;
 			justify-content: space-between;
 			> h2 {
 				font-weight: 500;
-				font-size: 2rem;
+				font-size: 1.6rem;
 				margin-bottom: 3vw;
 			}
 			> p {
 				font-size: 1rem;
 				font-weight: 400;
-				margin-bottom: 30px;
+				margin-bottom: 10px;
 			}
 			> div {
 				display: flex;
@@ -179,7 +180,7 @@
 					}
 					img {
 						display: block;
-						height: 70px;
+						height: 60px;
 						margin-left: 10px;
 					}
 				}

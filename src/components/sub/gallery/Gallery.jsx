@@ -20,6 +20,7 @@ export default function Gallery() {
 	const [Open, setOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [IsMask, setIsMask] = useState(false);
+	const [CheckedList, setCheckedList] = useState([]);
 
 	const searchedKeywords = ['computer', 'keyboard', 'tea', 'grey'];
 	const activateBtn = (e) => {
@@ -112,11 +113,6 @@ export default function Gallery() {
 
 	return (
 		<>
-			{/* TODO::
-			1. mask on off  토글 버튼
-			2. 추천 검색어 클릭 시 검색
-			3. tap메뉴
-		*/}
 			<Layout title={'Gallery'} className={'Gallery'}>
 				<div className='top'>
 					<h2>
@@ -194,6 +190,22 @@ export default function Gallery() {
 											<span>{pic.secret}</span>
 										</p>
 										<h2>{pic.title}</h2>
+										<div>
+											<input
+												type='checkbox'
+												onChange={() => {
+													setCheckedList((prevList) => [
+														...prevList,
+														{
+															id: pic.id,
+															title: pic.title,
+															server: pic.server,
+															secret: pic.secret,
+														},
+													]);
+												}}
+											/>
+										</div>
 										<div
 											className='pic'
 											onClick={() => {
@@ -241,6 +253,28 @@ export default function Gallery() {
 								<div className='ball'>{IsMask ? 'ON' : 'OFF'}</div>
 							</div>
 						</div>
+						{/* TODO:: 
+						input check 토글기능
+						 checkedlist 에 x 버튼 
+						 스크랩 바구니 열고 닫기
+						 */}
+						{CheckedList.length > 0 && (
+							<div className='checkedList'>
+								{CheckedList.map((pic, idx) => {
+									return (
+										<article>
+											<div className='img'>
+												<img
+													src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
+													alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+												/>
+												{/* <span>x</span> */}
+											</div>
+										</article>
+									);
+								})}
+							</div>
+						)}
 					</article>
 				</section>
 			</Layout>

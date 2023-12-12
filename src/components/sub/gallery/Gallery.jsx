@@ -209,15 +209,17 @@ export default function Gallery() {
 												<input
 													type='checkbox'
 													onChange={(e) => {
-														setCheckedList((prevList) => [
-															...prevList,
-															{
-																id: pic.id,
-																title: pic.title,
-																server: pic.server,
-																secret: pic.secret,
-															},
-														]);
+														e.target.checked
+															? setCheckedList((prevList) => [
+																	...prevList,
+																	{
+																		id: pic.id,
+																		title: pic.title,
+																		server: pic.server,
+																		secret: pic.secret,
+																	},
+															  ])
+															: console.log('remove');
 													}}
 												/>
 												<span className='checkbox-button'></span>

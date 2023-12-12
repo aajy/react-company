@@ -214,7 +214,9 @@
 				padding-top: 10px;
 				&:hover {
 					.pic {
-						filter: grayscale(1);
+						> img {
+							filter: grayscale(1);
+						}
 					}
 				}
 				&.mask {
@@ -238,14 +240,14 @@
 				.pic {
 					width: 100%;
 					margin-bottom: 10px;
-					transition: 0.5s;
-					filter: grayscale(0);
-					cursor: pointer;
 					position: relative;
 					img {
 						width: 100%;
 						transition: 0.5s;
 						border-radius: 16px;
+						filter: grayscale(0);
+						cursor: pointer;
+						transition: 0.5s;
 					}
 					.checkBox {
 						position: absolute;
@@ -259,24 +261,17 @@
 						}
 						.checkbox-button {
 							display: block;
-							width: 20px; /* 이미지의 크기 조절 */
-							height: 20px;
-							background-color: var(--baseColor);
+							width: 26px; /* 이미지의 크기 조절 */
+							height: 26px;
+							border-radius: 8px;
 							cursor: pointer;
-							&.checked {
-								display: none;
-								background-color: var(--pointColor);
-							}
+						}
+						> input:not(:checked) + .checkbox-button {
+							background-color: var(--baseColor);
 						}
 
 						> input:checked + .checkbox-button {
-							border: 1px solid red;
-							display: none;
-						}
-
-						> input:checked + .checkbox-button.checked {
-							border: 1px solid yellow;
-							display: inline-block;
+							background-color: var(--pointColor);
 						}
 					}
 					> svg {

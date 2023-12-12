@@ -5,10 +5,9 @@ import './Gallery.scss';
 import Modal from '../../common/modal/Modal';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Gallery() {
-	const { paramsKeyword } = useParams();
+	const path = useRef(process.env.PUBLIC_URL);
 	const myID = useRef('198783018@N02');
 	const isUser = useRef(myID.current);
 	const refNav = useRef(null);
@@ -55,18 +54,14 @@ export default function Gallery() {
 		activateBtn();
 		fetchFlickr({ type: 'user', id: e.target.innerText });
 	};
-	const handleSearch = (e, paramsKeyword = '') => {
+	const handleSearch = (e) => {
 		let keyword;
-		if (paramsKeyword) {
-			keyword = paramsKeyword;
-		} else {
-			e.preventDefault();
-			activateBtn(e);
-			keyword =
-				e.target.tagName !== 'BUTTON'
-					? e.target.innerText
-					: refSearchKeyword.current.value;
-		}
+		e.preventDefault();
+		activateBtn(e);
+		keyword =
+			e.target.tagName !== 'BUTTON'
+				? e.target.innerText
+				: refSearchKeyword.current.value;
 		isUser.current = '';
 
 		const btns = refNav.current.querySelectorAll('button');
@@ -108,7 +103,6 @@ export default function Gallery() {
 		refSearchKeyword.current.value = null;
 		refFrameWrap.current.style.setProperty('--gap', gap.current + 'px');
 		fetchFlickr({ type: 'user', id: myID.current });
-		if (paramsKeyword) handleSearch(paramsKeyword);
 	}, []);
 
 	return (
@@ -190,33 +184,45 @@ export default function Gallery() {
 											<span>{pic.secret}</span>
 										</p>
 										<h2>{pic.title}</h2>
-										<div>
-											<input
-												type='checkbox'
-												onChange={() => {
-													setCheckedList((prevList) => [
-														...prevList,
-														{
-															id: pic.id,
-															title: pic.title,
-															server: pic.server,
-															secret: pic.secret,
-														},
-													]);
-												}}
-											/>
-										</div>
-										<div
-											className='pic'
-											onClick={() => {
-												setOpen(true);
-												setIndex(idx);
-											}}
-										>
+										<div className='pic'>
 											<img
 												src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
 												alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
+												onClick={() => {
+													setOpen(true);
+													setIndex(idx);
+												}}
 											/>
+
+											<svg
+												viewBox='0 0 350 350'
+												xmlns='http://www.w3.org/2000/svg'
+												fill='none'
+											>
+												<path
+													fill-rule='evenodd'
+													clip-rule='evenodd'
+													d='M350 0H0C55.2285 0 100 44.7715 100 100V150C100 205.228 144.772 250 200 250H250C305.228 250 350 294.772 350 350V0Z'
+												/>
+											</svg>
+											<label className='checkBox'>
+												<input
+													type='checkbox'
+													onChange={(e) => {
+														setCheckedList((prevList) => [
+															...prevList,
+															{
+																id: pic.id,
+																title: pic.title,
+																server: pic.server,
+																secret: pic.secret,
+															},
+														]);
+													}}
+												/>
+												<span className='checkbox-button'></span>
+												<span className='checkbox-button checked'></span>
+											</label>
 										</div>
 										<div className='profile'>
 											<p onClick={handleUser}>

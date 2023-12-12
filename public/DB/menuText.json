@@ -1,34 +1,40 @@
 {
-  "menuTextArr": [
-    {
-      "num": "01",
-      "link": "/department",
-      "menu": "Department",
-      "description": "Aorem ipsum dolor sit, amet consectetur."
-    },
-    {
-      "num": "02",
-      "link": "/youtube",
-      "menu": "Youtube",
-      "description": "Borem ipsum dolor sit."
-    },
-    {
-      "num": "03",
-      "link": "/gallery",
-      "menu": "Gallery",
-      "description": " dolor sit, amet consectetur."
-    },
-    {
-      "num": "04",
-      "link": "/community",
-      "menu": "Community",
-      "description": "Bipsum dolor sit, amet consectetur."
-    },
-    {
-      "num": "05",
-      "link": "/members",
-      "menu": "Members",
-      "description": "Lorem ipsum dolor sit, Tonsectetur."
-    }
-  ]
+	"menuTextArr": [
+		{
+			"num": "01",
+			"link": "/department",
+			"menu": "Department",
+			"description": "Aorem ipsum dolor sit, amet consectetur."
+		},
+		{
+			"num": "02",
+			"link": "/youtube",
+			"menu": "Youtube",
+			"description": "Borem ipsum dolor sit."
+		},
+		{
+			"num": "03",
+			"link": "/gallery",
+			"menu": "Gallery",
+			"description": "Dolor sit, amet consectetur."
+		},
+		{
+			"num": "04",
+			"link": "/community",
+			"menu": "Community",
+			"description": "Bipsum dolor sit, amet consectetur."
+		},
+		{
+			"num": "05",
+			"link": "/members",
+			"menu": "Members",
+			"description": "Lorem ipsum dolor sit, Tonsectetur."
+		},
+		{
+			"num": "06",
+			"link": "/contact",
+			"menu": "Contact",
+			"description": "Dolor sit, Tonsectetur."
+		}
+	]
 }

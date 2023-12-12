@@ -42,13 +42,13 @@
 		}
 		.top {
 			border-bottom: 1px solid var(--baseColor);
-			padding: 20px 30px;
+			padding: 10px 30px;
 			h2 {
 				color: var(--logoColor);
 				font-family: var(--pointFont);
 				font-weight: 400;
 				font-size: 7cqh;
-				margin-bottom: 30px;
+				margin-bottom: 20px;
 			}
 			.closeMenu {
 				width: 24px;
@@ -151,8 +151,8 @@
 							flex-direction: column;
 							justify-content: space-between;
 							> span {
-								font-size: 1.6rem;
-								margin-bottom: 8px;
+								font-size: 1.4rem;
+								margin-bottom: 4px;
 							}
 							> p {
 								width: 100%;

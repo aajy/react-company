@@ -15,6 +15,7 @@ import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
 import { AnimatePresence } from 'framer-motion';
 import Detail from './components/sub/youtube/Detail';
+import Members from './components/sub/members/Members';
 
 export default function App() {
 	const [Dark, setDark] = useState(false);
@@ -35,6 +36,7 @@ export default function App() {
 			<Route path='/gallery' component={Gallery} />
 			{/*TODO:: 게시글 검색 페이지 생성 <Route path='/community/search/:paramsKeyword' component={Contact} /> */}
 			<Route path='/community' component={Community} />
+			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
 			<Footer />
 			<AnimatePresence>

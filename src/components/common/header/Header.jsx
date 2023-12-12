@@ -50,6 +50,11 @@ export default function Header({ setToggleMenu, ToggleMenu }) {
 						</NavLink>
 					</li>
 					<li>
+						<NavLink to='/members' activeClassName={'on'}>
+							Members
+						</NavLink>
+					</li>
+					<li>
 						<NavLink to='/contact' activeClassName={'on'}>
 							Contact
 						</NavLink>

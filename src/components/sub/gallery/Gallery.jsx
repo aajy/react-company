@@ -37,6 +37,7 @@ export default function Gallery() {
 		const newMask = el;
 		setMaskNum(newMask);
 		setIsMaskDropBoxOpen(false);
+		setIsMask(true);
 	};
 
 	const [CheckedList, setCheckedList] = useState([]);

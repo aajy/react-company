@@ -261,17 +261,33 @@
 						}
 						.checkbox-button {
 							display: block;
-							width: 26px; /* 이미지의 크기 조절 */
-							height: 26px;
+							width: 22px;
+							height: 22px;
 							border-radius: 8px;
 							cursor: pointer;
+							display: flex;
+							align-items: center;
+							justify-content: center;
+							border-radius: 6px;
+							transition: 0.1s;
+							> svg {
+								display: block;
+								color: var(--bgColor);
+							}
 						}
 						> input:not(:checked) + .checkbox-button {
-							background-color: var(--baseColor);
+							border: 1px solid rgba(var(--baseColor-code), 0.5);
+							> svg {
+								color: transparent;
+							}
 						}
 
 						> input:checked + .checkbox-button {
+							border: transparent;
 							background-color: var(--pointColor);
+							> svg {
+								color: var(--bgColor);
+							}
 						}
 					}
 					> svg {
@@ -321,7 +337,8 @@
 							font-weight: 300;
 							border: 1px solid rgba(var(--baseColor-code), 0.6);
 							border-radius: 20px;
-							padding: 3px 5px;
+							padding: 1px 5px;
+							margin-bottom: 3px;
 						}
 					}
 				}

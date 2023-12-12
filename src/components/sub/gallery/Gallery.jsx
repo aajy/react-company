@@ -201,8 +201,8 @@ export default function Gallery() {
 												fill='none'
 											>
 												<path
-													fill-rule='evenodd'
-													clip-rule='evenodd'
+													fillRule='evenodd'
+													clipRule='evenodd'
 													d='M350 0H0C55.2285 0 100 44.7715 100 100V150C100 205.228 144.772 250 200 250H250C305.228 250 350 294.772 350 350V0Z'
 												/>
 											</svg>
@@ -223,7 +223,9 @@ export default function Gallery() {
 															: console.log('remove');
 													}}
 												/>
-												<span className='checkbox-button'></span>
+												<span className='checkbox-button'>
+													<IoCheckmarkSharp />
+												</span>
 											</label>
 										</div>
 										<div className='profile'>
@@ -270,7 +272,7 @@ export default function Gallery() {
 							<div className='checkedList'>
 								{CheckedList.map((pic, idx) => {
 									return (
-										<article>
+										<article key={pic.id + idx}>
 											<div className='img'>
 												<img
 													src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}

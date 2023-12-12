@@ -222,10 +222,36 @@
 				&.mask {
 					.pic {
 						img {
-							mask: url('../../../../public/img/mask.png');
-							mask-size: contain;
-							mask-repeat: no-repeat;
-							mask-position: 50% 50%;
+							&.Mask1 {
+								mask: url('../../../../public/img/mask1.png');
+								mask-size: contain;
+								mask-repeat: no-repeat;
+								mask-position: 50% 50%;
+							}
+							&.Mask2 {
+								mask: url('../../../../public/img/mask2.png');
+								mask-size: contain;
+								mask-repeat: no-repeat;
+								mask-position: 50% 50%;
+							}
+							&.Mask3 {
+								mask: url('../../../../public/img/mask3.png');
+								mask-size: contain;
+								mask-repeat: no-repeat;
+								mask-position: 50% 50%;
+							}
+							&.Mask4 {
+								mask: url('../../../../public/img/mask4.png');
+								mask-size: contain;
+								mask-repeat: no-repeat;
+								mask-position: 50% 50%;
+							}
+							&.Mask5 {
+								mask: url('../../../../public/img/mask5.png');
+								mask-size: contain;
+								mask-repeat: no-repeat;
+								mask-position: 50% 50%;
+							}
 						}
 						> svg {
 							display: none;
@@ -357,28 +383,13 @@
 			.topBottom {
 				display: flex;
 				margin-bottom: 50px;
-				> div {
-					height: 26px;
-					border: 1px solid rgba(var(--baseColor-code), 0.6);
-					border-radius: 18px;
-					&:nth-child(1) {
-						width: 100px;
-						display: flex;
-						justify-content: space-between;
-						align-items: center;
-						padding: 0px 10px;
-						margin-right: 20px;
-						svg {
-							margin-bottom: -5px;
-							transform: scale(130%);
-						}
-					}
-				}
 				.themeBox {
 					width: 100px;
 					cursor: pointer;
 					position: relative;
 					background-color: rgba(var(--baseColor-code));
+					border: 1px solid rgba(var(--baseColor-code), 0.6);
+					border-radius: 18px;
 					.ball {
 						position: absolute;
 						left: 0px;
@@ -396,6 +407,57 @@
 						.ball {
 							transition: 0.5s;
 							left: 38px;
+						}
+					}
+				}
+				.dropBox {
+					height: 26px;
+					border: 1px solid rgba(var(--baseColor-code), 0.6);
+					border-radius: 18px;
+					margin-right: 20px;
+					position: relative;
+					z-index: 5;
+					.container {
+						.dropdown-button {
+							width: 100px;
+							display: flex;
+							justify-content: space-between;
+							align-items: center;
+							> button {
+								display: block;
+								width: 100%;
+								line-height: 26px;
+								border: none;
+								background-color: transparent;
+								padding: 0px 10px;
+								cursor: pointer;
+								color: rgba(var(--baseColor-code), 0.9);
+								svg {
+									margin-left: 10px;
+									margin-bottom: -2px;
+									transform: scale(130%);
+									color: rgba(var(--baseColor-code), 0.6);
+								}
+							}
+						}
+						.dropdown-container {
+							background-color: var(--bgColor);
+							.dropdown-content {
+								li {
+									width: 100%;
+									height: 26px;
+									line-height: 26px;
+									font-size: 0.8rem;
+									transition: 0.3s;
+									border: 1px solid rgba(var(--baseColor-code), 0.6);
+									border-radius: 18px;
+									text-align: center;
+									&:hover {
+										background-color: rgba(var(--baseColor-code), 0.8);
+										color: var(--bgColor);
+									}
+								}
+							}
 						}
 					}
 				}

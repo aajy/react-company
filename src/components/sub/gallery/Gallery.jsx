@@ -20,6 +20,25 @@ export default function Gallery() {
 	const [Open, setOpen] = useState(false);
 	const [Index, setIndex] = useState(0);
 	const [IsMask, setIsMask] = useState(false);
+	const [MaskNum, setMaskNum] = useState('Mask1');
+	const [IsMaskDropBoxOpen, setIsMaskDropBoxOpen] = useState(false);
+
+	const maskList = ['Mask1', 'Mask2', 'Mask3', 'Mask4', 'Mask5'];
+	const handleBlurMaskContainer = () => {
+		setTimeout(() => {
+			setIsMaskDropBoxOpen(false);
+		}, 200);
+	};
+	const handleMaskOpen = () => {
+		setIsMaskDropBoxOpen(!IsMaskDropBoxOpen);
+	};
+	const handleMask = (e, el) => {
+		e.preventDefault();
+		const newMask = el;
+		setMaskNum(newMask);
+		setIsMaskDropBoxOpen(false);
+	};
+
 	const [CheckedList, setCheckedList] = useState([]);
 
 	const searchedKeywords = ['computer', 'keyboard', 'tea', 'grey'];
@@ -193,6 +212,7 @@ export default function Gallery() {
 													setOpen(true);
 													setIndex(idx);
 												}}
+												className={MaskNum}
 											/>
 
 											<svg
@@ -252,13 +272,41 @@ export default function Gallery() {
 					<article className='info'>
 						<h3>{SearchKeyword.toUpperCase() || 'KEYWORD'}</h3>
 						<div className='topBottom'>
-							<div>
-								Mask
-								<RiArrowRightDownLine />
+							<div className='dropBox'>
+								<div
+									className='container'
+									onBlur={(e) => handleBlurMaskContainer(e)}
+								>
+									<label className='dropdown-button'>
+										<button onClick={() => handleMaskOpen()}>
+											{MaskNum ? MaskNum : `Mask`}
+											<RiArrowRightDownLine />
+										</button>
+									</label>
+									{IsMaskDropBoxOpen && (
+										<div
+											className={
+												IsMaskDropBoxOpen
+													? 'dropdown-container open'
+													: 'dropdown-container'
+											}
+										>
+											<ul className='dropdown-content'>
+												{maskList.map((el, idx) => (
+													<li key={idx} onClick={(e) => handleMask(e, el)}>
+														{el}
+													</li>
+												))}
+											</ul>
+										</div>
+									)}
+								</div>
 							</div>
 							<div
 								className={`themeBox ${IsMask && 'mask'}`}
-								onClick={() => setIsMask(!IsMask)}
+								onClick={() => {
+									setIsMask(!IsMask);
+								}}
 							>
 								<div className='ball'>{IsMask ? 'ON' : 'OFF'}</div>
 							</div>

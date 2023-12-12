@@ -5,6 +5,7 @@ import './Gallery.scss';
 import Modal from '../../common/modal/Modal';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
+import { IoCheckmarkSharp } from 'react-icons/io5';
 
 export default function Gallery() {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -223,7 +224,6 @@ export default function Gallery() {
 													}}
 												/>
 												<span className='checkbox-button'></span>
-												<span className='checkbox-button checked'></span>
 											</label>
 										</div>
 										<div className='profile'>

@@ -1,8 +1,9 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import './InputBox.scss';
 import { GrPowerReset } from 'react-icons/gr';
 
-export default function InputBox() {
+export default function InputBox({ Open }) {
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
 		if (data) return JSON.parse(data);
@@ -54,29 +55,38 @@ export default function InputBox() {
 		console.log('Post', Post);
 	}, [Post]);
 	return (
-		<div className='InputBox'>
-			<h2>Let's Talk</h2>
-			<p>Ask us anything or just say hi!</p>
-			<input type='text' placeholder='title' ref={refTit} />
-			<textarea
-				cols='30'
-				rows='3'
-				placeholder='content'
-				ref={refCon}
-			></textarea>
-			<input type='text' placeholder='nickname' ref={refNickname} />
-			<input
-				type='file'
-				accept='image/jpg,image/jpeg,image/png,image/svg,image/gif'
-				ref={inputRef}
-				onChange={onUploadImage}
-			></input>
-			<nav>
-				<button onClick={resetPost}>
-					<GrPowerReset />
-				</button>
-				<button onClick={createPost}>+</button>
-			</nav>
-		</div>
+		<AnimatePresence>
+			{Open && (
+				<motion.aside>
+					<div className='InputBox'>
+						<h2>Let's Talk</h2>
+						<p>Ask us anything or just say hi!</p>
+						<span>Required Info</span>
+
+						<input type='text' placeholder='title' ref={refTit} />
+						<textarea
+							cols='30'
+							rows='3'
+							placeholder='content'
+							ref={refCon}
+						></textarea>
+						<span>Selective Info</span>
+						<input type='text' placeholder='nickname' ref={refNickname} />
+						<input
+							type='file'
+							accept='image/jpg,image/jpeg,image/png,image/svg,image/gif'
+							ref={inputRef}
+							onChange={onUploadImage}
+						></input>
+						<nav>
+							<button onClick={resetPost}>
+								<GrPowerReset />
+							</button>
+							<button onClick={createPost}>+</button>
+						</nav>
+					</div>
+				</motion.aside>
+			)}
+		</AnimatePresence>
 	);
 }

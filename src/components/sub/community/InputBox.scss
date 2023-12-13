@@ -2,4 +2,20 @@
 	width: 50vw;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	h2 {
+		font-size: 4rem;
+	}
+	> p {
+	}
+	input,
+	textarea {
+		border-radius: 17px;
+		background-color: var(--bgColor);
+		transition: 0.3s;
+		color: rgba(var(--baseColor-code));
+		border: 1px solid rgba(var(--baseColor-code), 0.6);
+	}
+	nav {
+	}
 }

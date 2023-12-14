@@ -1,11 +1,52 @@
 {
-  "postData" : [
+  "dummyPosts" : [
     {
-      "content":"test",
-      "date":"2023-12-14T23:57:06.400Z",
-      "enableUpdate": false,
-      "nickname":"test",
-      "title":"test"
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character1.jpg",
+      "title":"Title1"
+    },
+    {
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character2.jpg",
+      "title":"Title2"
+    },
+    {
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character3.jpg",
+      "title":"Title3"
+    },
+    {
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character4.jpg",
+      "title":"Title4"
+    },
+    {
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character5.jpg",
+      "title":"Title5"
+    },
+    {
+      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+      "date":"2023-12-15T01:42:47.782Z",
+      "enableUpdate":false,
+      "nickname":"nickname",
+      "src":"http://localhost:3000/img/character1.jpg",
+      "title":"Title6"
     }
   ]
 }

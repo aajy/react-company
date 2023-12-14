@@ -2,18 +2,22 @@ import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Community.scss';
 import InputBox from './InputBox';
+import { useCustomText } from '../../../hooks/useText';
 
 export default function Community() {
 	const [Open, setOpen] = useState(true);
+	const changeText = useCustomText('combined');
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
 		if (data) return JSON.parse(data);
 		else return [];
 	};
 	const [Post, setPost] = useState(getLocalData());
+	const [CurNum, setCurNum] = useState(0);
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
 	const pageNum = useRef(0); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
 	const perNum = useRef(3); //한 페이지당 보일 포스트 갯수
+	
 
 	useEffect(() => {
 		len.current = Post.length;
@@ -45,8 +49,8 @@ export default function Community() {
 									<span>{strDate}</span>
 								</div>
 								<nav>
-									<button onClick={() => enableUpdate(idx)}>Edit</button>
-									<button onClick={() => deletePost(idx)}>Delete</button>
+									{/* <button onClick={() => enableUpdate(idx)}>Edit</button>
+									<button onClick={() => deletePost(idx)}>Delete</button> */}
 								</nav>
 							</article>
 						);

@@ -29,8 +29,17 @@ export default function App() {
 		const json = await data.json();
 		dispatch({ type: 'SET_MEMBERS', payload: json });
 	};
+	const fetchMenu = () => {
+		fetch(`${path.current}/DB/menuText.json`)
+		.then(data => data.json())
+		.then(json => {
+			console.log('menu',json.menuTextArr);
+			dispatch({ type: 'SET_MENU', payload: json.menuTextArr})
+		})
+	};
 	useEffect(()=>{
 		fetchDepartment();
+		fetchMenu();
 	},[])
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

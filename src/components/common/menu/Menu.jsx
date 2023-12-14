@@ -1,26 +1,16 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Menu.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect} from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 export default function Menu({ setDark, isDark, setToggleMenu }) {
-	const path = useRef(process.env.PUBLIC_URL);
-	const [MenuData, setMenuData] = useState([]);
+	const MenuData = useSelector(store => store.menuReducer.menuTextArr)
 	const closeMenu = () => {
 		window.innerWidth >= 1000 && setToggleMenu(false);
 	};
-	const fetchMenu = async () => {
-		try {
-			const data = await fetch(`${path.current}/DB/menuText.json`);
-			const json = await data.json();
-			setMenuData(json.menuTextArr);
-		} catch (err) {
-			console.log(err);
-		}
-	};
 	useEffect(() => {
-		fetchMenu();
 		window.addEventListener('resize', closeMenu);
 		return () => window.removeEventListener('resize', closeMenu);
 	}, []);
@@ -30,7 +20,7 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 			animate={{ opacity: 1, transition: { duration: 0.3 } }}
 			exit={{
 				opacity: 0,
-				transition: { delay: 0.2, duration: 0.1 },
+				transition: { delay: 0.2, duration: 0.3 },
 				transitionProperty: 'opacity',
 			}}
 		>
@@ -40,8 +30,9 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 					initial={{ x: -100 }}
 					animate={{ x: 0, transition: { duration: 0.2, ease: 'linear' } }}
 					exit={{
+						x: -10,
 						opacity: 0,
-						transition: { delay: 0.3, duration: 0.1 },
+						transition: { delay: 0.2, duration: 0.2 },
 						transitionProperty: 'opacity x',
 					}}
 				>
@@ -67,7 +58,7 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 						</div>
 						<div className='bottom'>
 							<ul>
-								{MenuData.map((menu, index) => {
+								{MenuData && MenuData.map((menu, index) => {
 									return (
 										<li key={menu.num + index}>
 											<span>{menu.num}</span>

@@ -1,0 +1,11 @@
+{
+  "postData" : [
+    {
+      "content":"test",
+      "date":"2023-12-14T23:57:06.400Z",
+      "enableUpdate": false,
+      "nickname":"test",
+      "title":"test"
+    }
+  ]
+}

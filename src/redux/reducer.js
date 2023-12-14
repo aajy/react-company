@@ -1,88 +1,12 @@
 import { combineReducers } from 'redux';
 
-const initData = {
-	departmentTop: [
-		{
-			name: 'David',
-			position: 'President',
-			pic: 'member1.jpg',
-		},
-		{
-			name: 'Julia',
-			position: 'Vice President',
-			pic: 'member2.jpg',
-		},
-		{
-			name: 'Alberto Maestro',
-			text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?',
-		},
-		{
-			name: 'Emily',
-			position: 'President',
-			pic: 'member3.jpg',
-		},
-		{
-			name: 'Julia',
-			position: 'Vice President',
-			pic: 'member4.jpg',
-		},
-		{
-			name: 'Paola Vilatels',
-			text: 'Lorem, ipsum dolor sit amet consectetur adipisicing elit. Cumque, quidem. Laudantium, autem?',
-		},
-	],
-	departmentClients: [
-		'OCEANIA',
-		'FLEURE',
-		'NORTHLAND',
-		'VELOCE',
-		'AZURE',
-		'SAGE',
-	],
-	departmentMember: [
-		{
-			name: 'Stephanie Crespin',
-			position: 'UI Designer',
-			pic: 'member5.jpg',
-		},
-		{
-			name: 'Philippe Benedetti',
-			position: 'Chief Designer',
-			pic: 'member6.jpg',
-		},
-		{
-			name: 'Felix Winckler ',
-			position: 'Creation Partner',
-			pic: 'member7.jpg',
-		},
-		{
-			name: 'Esther Howard ',
-			position: 'Web Developer',
-			pic: 'member8.jpg',
-		},
-	],
-	departmentSupport: [
-		{
-			name: 'Emily Joy',
-			position: 'CEO BALANCIAGA',
-			pic: 'member9.jpg',
-		},
-		{
-			name: 'Jack Ostrwski',
-			position: 'CEO REGAIN',
-			pic: 'member10.jpg',
-		},
-		{
-			name: 'Vanessa Cheung',
-			position: 'FOUNDER THE NILLS',
-			pic: 'member11.jpg',
-		},
-		{
-			name: 'Cedric Charbit',
-			position: 'CEO ATHLETE',
-			pic: 'member12.jpg',
-		},
-	],
+const memberReducer = (state = [], action) => {
+	switch (action.type) {
+		case "SET_MEMBERS":
+			return {...state, members:action.payload}
+		default:
+			return state;
+	}
 };
-
-const DepartmentReducer = (state = initData, action) => {};
+const reducers = combineReducers({memberReducer})
+export default reducers;

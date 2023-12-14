@@ -51,12 +51,12 @@ export default function Community() {
 		);
 		if (siblingElement.value) {
 			const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
-			setPost((prevPost) =>
-				prevPost.map((el, idx) => {
-					if (replyIndex === idx) {
+			setPost(
+				Post.map((el, idx) => {
+					if (replyIndex === idx && el && el.reply) {
 						return {
 							...el,
-							reply: [...el.reply, { value: siblingElement.value, date: new Date(korTime) }],
+							reply: [...el.reply , { value: siblingElement.value, date: new Date(korTime) }],
 						};
 					}else {
 						return el;
@@ -141,13 +141,12 @@ export default function Community() {
 										{(el.replyView && el.reply && el.reply.length > 0) &&
 											<div className='replyView'>
 												<ul>
-													{el.reply.map((reply,idx)=> {
+													{el.reply.map((reply, idx) => {
 														if(Object.keys(reply).length > 0) {
 															const date = JSON.stringify(reply.date);
-															console.log('date: ', date);
 															const replyStrDate = changeText(date.split('T')[0].slice(1), '.');
-
-															<li key={reply+idx}>
+															console.log('reply',reply);
+															return <li key={reply.value+idx}>
 																<span>{reply.value}</span>
 																<span>{replyStrDate}</span>
 															</li>

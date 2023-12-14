@@ -15,16 +15,14 @@ export default function InputBox({ Open }) {
 	const refTit = useRef(null);
 	const refCon = useRef(null);
 	const refNickname = useRef(null);
-	const refSelectedCharacter = useRef(0);
-	const [CharacterSrc, setCharacterSrc] = useState('');
 	const CharacterData = [
 		"character1","character2","character3","character4","character5"
 	]
+	const [CharacterSrc, setCharacterSrc] = useState(CharacterData[0]);
 
 	const resetPost = () => {
 		refTit.current.value = '';
 		refCon.current.value = '';
-		refSelectedCharacter.current = 0;
 		setCharacterSrc('');
 		refNickname.current.value = '';
 	};
@@ -47,15 +45,19 @@ export default function InputBox({ Open }) {
 		]);
 		resetPost();
 	};
-	const handleCharacter = (e, idx) => {
-		const src = e.currentTarget.src;
-		setCharacterSrc(src);
-		refSelectedCharacter.current=idx;
+	const handleCharacter = (e, img) => {
+		const srcName = img;
+		console.log('srcName: ', srcName);
+		setCharacterSrc(srcName);
   };
 
 	useEffect(() => {
 		//Post데이터가 변경되면 수정모드를 강제로 false처리하면서 로컬저장소에 저장하고 컴포넌트 재실행
-		Post.map((el) => (el.enableUpdate = false));
+		Post.map((el) => {
+			el.replyView = false;
+			el.onReply = false;
+			el.enableUpdate = false;
+		});
 		localStorage.setItem('post', JSON.stringify(Post));
 	}, [Post]);
 	return (
@@ -87,10 +89,9 @@ export default function InputBox({ Open }) {
 							<ul>
 								{CharacterData.map((img,idx)=>{
 									return (
-										<li key={img+idx}
-										className={refSelectedCharacter.current === idx ? 'on' : ''}>
-											<img src={`${path.current}/img/${img}.jpg`} alt="" onClick={(e)=>handleCharacter(e, idx)}/>
-											{refSelectedCharacter.current === idx && <span><TbCircleCheckFilled /></span>}
+										<li key={img+idx}>
+											<img src={`${path.current}/img/${img}.jpg`} alt="" onClick={(e)=>handleCharacter(e, img)}/>
+											{CharacterSrc === img && <span><TbCircleCheckFilled /></span>}
 										</li>
 									)
 								})}

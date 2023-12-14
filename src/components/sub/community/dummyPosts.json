@@ -5,7 +5,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character1.jpg",
+      "src":"character1",
       "title":"Title1"
     },
     {
@@ -13,7 +13,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character2.jpg",
+      "src":"character2",
       "title":"Title2"
     },
     {
@@ -21,7 +21,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character3.jpg",
+      "src":"character3",
       "title":"Title3"
     },
     {
@@ -29,7 +29,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character4.jpg",
+      "src":"character4",
       "title":"Title4"
     },
     {
@@ -37,7 +37,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character5.jpg",
+      "src":"character5",
       "title":"Title5"
     },
     {
@@ -45,7 +45,7 @@
       "date":"2023-12-15T01:42:47.782Z",
       "enableUpdate":false,
       "nickname":"nickname",
-      "src":"http://localhost:3000/img/character1.jpg",
+      "src":"character1",
       "title":"Title6"
     }
   ]

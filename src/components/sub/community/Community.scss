@@ -1,85 +1,100 @@
 .Community {
 	min-height: 100vh;
 	.communityWrap {
-		display: flex;
+		position: relative;
+	}
+	.openToggleButton {
+		width: 40px;
+		height: 40px;
+		border-radius: 20px;
+		color: var(--bgColor);
+		background-color: var(--pointColor);
+		border: none;
+		font-size: 1.6rem;
+		line-height: 34px;
+		text-align: center;
 	}
 	.showBox {
 		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		gap: 10px;
-		>nav {
-			border:1px solid red;
+		flex-direction: column;
+		> nav {
+			border: 1px solid red;
 		}
-		.commentBox {
-			width: 32%;
-			padding:20px 30px;
-			transition: 0.2s;
-			border-radius: 10px;
-			>.txt {
-				.top {
-					display: flex;
-					align-items: center;
-					gap: 20px;
-					>.img {
-						width: 40px;
-						height: 40px;
+		.postList {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			justify-content: space-between;
+			gap: 10px;
+			.commentBox {
+				width: 32%;
+				padding: 20px 30px;
+				transition: 0.2s;
+				border-radius: 10px;
+				> .txt {
+					.top {
+						display: flex;
+						align-items: center;
+						gap: 20px;
+						> .img {
+							width: 40px;
+							height: 40px;
+							border-radius: 20px;
+							overflow: hidden;
+							img {
+								width: 100%;
+								height: 100%;
+								object-fit: cover;
+							}
+						}
+					}
+					.replyView {
+						ul {
+							li {
+								width: 100%;
+								// border: 1px solid rgba(var(--baseColor-code),0.5);
+								background-color: var(--bgColor);
+								margin: 2px;
+							}
+						}
+					}
+				}
+				.replyInput {
+				}
+				> nav {
+					button {
+						border: none;
+						// border:1px solid rgba(var(--baseColor-code),0.5);
+						padding: 2px 5px;
+						margin-right: 5px;
+						font-size: 1rem;
+						width: 30px;
+						height: 30px;
 						border-radius: 20px;
-						overflow: hidden;
-						img {
-							width: 100%;
-							height: 100%;
-							object-fit: cover;
+						color: var(--bgColor);
+						background-color: var(--baseColor);
+						transition: 0.5s;
+						&.on {
+							background-color: var(--pointColor);
 						}
 					}
 				}
-				.replyView {
-					ul {
-						li {
-							width: 100%;
-							// border: 1px solid rgba(var(--baseColor-code),0.5);
-							background-color: var(--bgColor);
-							margin:2px;
-						}
-					}
-				}
-			}
-			.replyInput {
 
-			}
-			> nav {
-				button {
-					border: none;
-					// border:1px solid rgba(var(--baseColor-code),0.5);
-					padding:2px 5px;
-					margin-right: 5px;
-					font-size: 1rem;
-					width: 30px;
-					height: 30px;
-					border-radius: 20px;
-					color:var(--bgColor);
-					background-color: var(--baseColor);
-					transition: 0.5s;
-					&.on{
-						background-color:var(--pointColor);
-					}
+				&.character1 {
+					background-color: rgba(255, 165, 0, 0.1);
 				}
-			}
-			
-			&.character1{
-				background-color: rgba(255, 165, 0, 0.1);
-			}
-			&.character2{
-				background-color: rgba(100, 149, 237, 0.1);
-			}
-			&.character3{
-				background-color: rgba(34, 139, 34, 0.1);
-			}
-			&.character4{
-				background-color: rgba(255, 228, 196, 0.1);
-			}
-			&.character5{
-				background-color: rgba(255, 192, 203, 0.1);
+				&.character2 {
+					background-color: rgba(100, 149, 237, 0.1);
+				}
+				&.character3 {
+					background-color: rgba(34, 139, 34, 0.1);
+				}
+				&.character4 {
+					background-color: rgba(255, 228, 196, 0.1);
+				}
+				&.character5 {
+					background-color: rgba(255, 192, 203, 0.1);
+				}
 			}
 		}
 	}

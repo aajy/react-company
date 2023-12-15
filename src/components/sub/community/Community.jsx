@@ -119,111 +119,114 @@ export default function Community() {
 			<button className='openToggleButton' onClick={() => setOpen(!Open)}>
 				+
 			</button>
-			<nav className='pagination'>
-				{Array(pageNum.current).length > 0 &&
-					Array(pageNum.current)
-						.fill()
-						.map((_, idx) => {
-							return (
-								<button key={idx} onClick={() => setCurNum(idx)}>
-									{idx + 1}
-								</button>
-							);
-						})}
-			</nav>
+
 			<div className='communityWrap'>
 				<InputBox Open={Open} setOpen={setOpen} />
 				<div className='showBox'>
-					{Post &&
-						Post.map((el, idx) => {
-							const date = JSON.stringify(el.date);
-							const strDate = changeText(date.split('T')[0].slice(1), '.');
+					<nav className='pagination'>
+						{Array(pageNum.current).length > 0 &&
+							Array(pageNum.current)
+								.fill()
+								.map((_, idx) => {
+									return (
+										<button key={idx} onClick={() => setCurNum(idx)}>
+											{idx + 1}
+										</button>
+									);
+								})}
+					</nav>
+					<div className='postList'>
+						{Post &&
+							Post.map((el, idx) => {
+								const date = JSON.stringify(el.date);
+								const strDate = changeText(date.split('T')[0].slice(1), '.');
 
-							if (
-								idx >= perNum.current * CurNum &&
-								idx < perNum.current * (CurNum + 1)
-							) {
-								return (
-									<article key={el + idx} className={`commentBox ${el.src}`}>
-										<div className='txt'>
-											<div className='top'>
-												<div className='img'>
-													<img
-														src={`${path.current}/img/${el.src}.jpg`}
-														alt=''
-													/>
+								if (
+									idx >= perNum.current * CurNum &&
+									idx < perNum.current * (CurNum + 1)
+								) {
+									return (
+										<article key={el + idx} className={`commentBox ${el.src}`}>
+											<div className='txt'>
+												<div className='top'>
+													<div className='img'>
+														<img
+															src={`${path.current}/img/${el.src}.jpg`}
+															alt=''
+														/>
+													</div>
+													<p>{el.nickname}</p>
 												</div>
-												<p>{el.nickname}</p>
+												<h2>{el.title}</h2>
+												<p>{el.content}</p>
+
+												<span>{strDate}</span>
+												<span onClick={(e) => handleReplyView(e, idx)}>
+													replay view
+													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
+												</span>
+												{el.replyView && el.reply && el.reply.length > 0 && (
+													<div className='replyView'>
+														<ul>
+															{el.reply.map((reply, idx) => {
+																if (Object.keys(reply).length > 0) {
+																	const date = JSON.stringify(reply.date);
+																	const replyStrDate = changeText(
+																		date.split('T')[0].slice(1),
+																		'.'
+																	);
+																	console.log('reply', reply);
+																	return (
+																		<li key={reply.value + idx}>
+																			<span>{reply.value}</span>
+																			<span>{replyStrDate}</span>
+																		</li>
+																	);
+																} else {
+																	<li>댓글없음</li>;
+																}
+															})}
+														</ul>
+													</div>
+												)}
 											</div>
-											<h2>{el.title}</h2>
-											<p>{el.content}</p>
-
-											<span>{strDate}</span>
-											<span onClick={(e) => handleReplyView(e, idx)}>
-												replay view
-												{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
-											</span>
-											{el.replyView && el.reply && el.reply.length > 0 && (
-												<div className='replyView'>
-													<ul>
-														{el.reply.map((reply, idx) => {
-															if (Object.keys(reply).length > 0) {
-																const date = JSON.stringify(reply.date);
-																const replyStrDate = changeText(
-																	date.split('T')[0].slice(1),
-																	'.'
-																);
-																console.log('reply', reply);
-																return (
-																	<li key={reply.value + idx}>
-																		<span>{reply.value}</span>
-																		<span>{replyStrDate}</span>
-																	</li>
-																);
-															} else {
-																<li>댓글없음</li>;
-															}
-														})}
-													</ul>
-												</div>
+											{el.onReply && (
+												<label htmlFor='replyInput' className='replyInput'>
+													<input
+														type='text'
+														id='replyInput'
+														placeholder='reply'
+														ref={refReply}
+													/>
+													<button
+														type='button'
+														onClick={(e) => handleInputChange(e, idx)}
+													>
+														add reply
+													</button>
+												</label>
 											)}
-										</div>
-										{el.onReply && (
-											<label htmlFor='replyInput' className='replyInput'>
-												<input
-													type='text'
-													id='replyInput'
-													placeholder='reply'
-													ref={refReply}
-												/>
+											<nav>
 												<button
-													type='button'
-													onClick={(e) => handleInputChange(e, idx)}
+													className={el.onReply ? 'onReply on' : 'replyOn'}
+													onClick={() => addReply(idx)}
 												>
-													add reply
+													<AiFillPlusCircle />
 												</button>
-											</label>
-										)}
-										<nav>
-											<button
-												className={el.onReply ? 'onReply on' : 'replyOn'}
-												onClick={() => addReply(idx)}
-											>
-												<AiFillPlusCircle />
-											</button>
-											<button onClick={() => enableUpdate(idx)}>
-												<LiaEdit />
-											</button>
-											<button onClick={() => deletePost(idx)}>
-												<AiOutlineDelete />
-											</button>
-										</nav>
-									</article>
-								);
-							} else {
-								return null;
-							}
-						})}
+												<button onClick={() => enableUpdate(idx)}>
+													<LiaEdit />
+												</button>
+												<button onClick={() => deletePost(idx)}>
+													<AiOutlineDelete />
+												</button>
+											</nav>
+										</article>
+									);
+								} else {
+									return null;
+								}
+							})}
+					</div>
 				</div>
 			</div>
 		</Layout>

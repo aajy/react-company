@@ -5,6 +5,7 @@ import InputBox from './InputBox';
 import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
 import { LiaEdit } from 'react-icons/lia';
+import { BsArrowReturnRight } from 'react-icons/bs';
 import {
 	AiOutlineDelete,
 	AiFillPlusCircle,
@@ -162,7 +163,7 @@ export default function Community() {
 
 												<span>{strDate}</span>
 												<span onClick={(e) => handleReplyView(e, idx)}>
-													replay view
+													<span>replay view</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
 												{el.replyView && el.reply && el.reply.length > 0 && (
@@ -175,15 +176,15 @@ export default function Community() {
 																		date.split('T')[0].slice(1),
 																		'.'
 																	);
-																	console.log('reply', reply);
 																	return (
 																		<li key={reply.value + idx}>
-																			<span>{reply.value}</span>
+																			<span>
+																				<BsArrowReturnRight />
+																				{reply.value}
+																			</span>
 																			<span>{replyStrDate}</span>
 																		</li>
 																	);
-																} else {
-																	<li>댓글없음</li>;
 																}
 															})}
 														</ul>

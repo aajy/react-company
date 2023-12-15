@@ -13,12 +13,17 @@
 		font-size: 1.6rem;
 		line-height: 34px;
 		text-align: center;
+		cursor: pointer;
 	}
 	.showBox {
 		display: flex;
 		flex-direction: column;
 		> nav {
-			border: 1px solid red;
+			width: 50%;
+			margin: 0 auto;
+			margin-bottom: 30px;
+			display: flex;
+			justify-content: center;
 		}
 		.postList {
 			display: flex;
@@ -47,14 +52,50 @@
 								object-fit: cover;
 							}
 						}
+						> p {
+							font-size: 0.8rem;
+						}
+					}
+					> span {
+						display: block;
+						&:nth-of-type(2) {
+							display: flex;
+							width: 130px;
+							border: 1px solid rgba(var(--baseColor-code), 0.5);
+							background-color: var(--bgColor);
+							border-radius: 20px;
+							padding: 2px 8px;
+							justify-content: space-between;
+							align-items: center;
+							gap: 10px;
+							> svg {
+								margin-bottom: -3px;
+							}
+						}
 					}
 					.replyView {
 						ul {
+							background-color: var(--bgColor);
+							padding: 3px;
+							border-radius: 2px;
 							li {
 								width: 100%;
-								// border: 1px solid rgba(var(--baseColor-code),0.5);
-								background-color: var(--bgColor);
+								border-bottom: 1px solid rgba(var(--baseColor-code), 0.2);
 								margin: 2px;
+								display: flex;
+								justify-content: space-between;
+								align-items: center;
+								padding: 3px 5px;
+								> span {
+									font-size: 0.9rem;
+									> svg {
+										margin-right: 5px;
+										color: var(--pointColor);
+									}
+									&:nth-of-type(2) {
+										font-size: 0.7rem;
+									}
+								}
 							}
 						}
 					}

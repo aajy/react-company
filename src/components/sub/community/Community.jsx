@@ -221,9 +221,9 @@ export default function Community() {
 												>
 													<AiFillPlusCircle />
 												</button>
-												<button onClick={() => enableUpdate(idx)}>
+												{/* <button onClick={() => enableUpdate(idx)}>
 													<LiaEdit />
-												</button>
+												</button> */}
 												<button onClick={() => deletePost(idx)}>
 													<AiOutlineDelete />
 												</button>

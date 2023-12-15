@@ -2,7 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './InputBox.scss';
 import { GrPowerReset } from 'react-icons/gr';
-import { TbCircleCheckFilled } from "react-icons/tb";
+import { TbCircleCheckFilled } from 'react-icons/tb';
+import { BiCommentCheck } from 'react-icons/bi';
 
 export default function InputBox({ Open }) {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -16,8 +17,12 @@ export default function InputBox({ Open }) {
 	const refCon = useRef(null);
 	const refNickname = useRef(null);
 	const CharacterData = [
-		"character1","character2","character3","character4","character5"
-	]
+		'character1',
+		'character2',
+		'character3',
+		'character4',
+		'character5',
+	];
 	const [CharacterSrc, setCharacterSrc] = useState(CharacterData[0]);
 
 	const resetPost = () => {
@@ -37,9 +42,9 @@ export default function InputBox({ Open }) {
 			{
 				title: refTit.current.value,
 				content: refCon.current.value,
-				nickname: refNickname.current.value,
+				nickname: refNickname.current.value || 'nickname',
 				date: new Date(korTime),
-				src:CharacterSrc
+				src: CharacterSrc,
 			},
 			...Post,
 		]);
@@ -49,7 +54,7 @@ export default function InputBox({ Open }) {
 		const srcName = img;
 		console.log('srcName: ', srcName);
 		setCharacterSrc(srcName);
-  };
+	};
 
 	useEffect(() => {
 		//Post데이터가 변경되면 수정모드를 강제로 false처리하면서 로컬저장소에 저장하고 컴포넌트 재실행
@@ -68,9 +73,10 @@ export default function InputBox({ Open }) {
 					animate={{ x: 0, transition: { duration: 0.2, ease: 'linear' } }}
 					exit={{
 						x: -100,
-						opacity:0,
-						transition: { duration: 0.2, ease: 'linear'  },
-					}}>
+						opacity: 0,
+						transition: { duration: 0.2, ease: 'linear' },
+					}}
+				>
 					<div className='InputBox'>
 						<h2>Let's Talk</h2>
 						<p>Ask us anything or just say hi!</p>
@@ -85,15 +91,24 @@ export default function InputBox({ Open }) {
 						></textarea>
 						<span>Selective Info</span>
 						<input type='text' placeholder='nickname' ref={refNickname} />
-						<div className="character">
+						<span>choose your charater!</span>
+						<div className='character'>
 							<ul>
-								{CharacterData.map((img,idx)=>{
+								{CharacterData.map((img, idx) => {
 									return (
-										<li key={img+idx}>
-											<img src={`${path.current}/img/${img}.jpg`} alt="" onClick={(e)=>handleCharacter(e, img)}/>
-											{CharacterSrc === img && <span><TbCircleCheckFilled /></span>}
+										<li key={img + idx}>
+											<img
+												src={`${path.current}/img/${img}.jpg`}
+												alt=''
+												onClick={(e) => handleCharacter(e, img)}
+											/>
+											{CharacterSrc === img && (
+												<span>
+													<TbCircleCheckFilled />
+												</span>
+											)}
 										</li>
-									)
+									);
 								})}
 							</ul>
 						</div>
@@ -101,7 +116,9 @@ export default function InputBox({ Open }) {
 							<button onClick={resetPost}>
 								<GrPowerReset />
 							</button>
-							<button onClick={createPost}>+</button>
+							<button onClick={createPost}>
+								<BiCommentCheck />
+							</button>
 						</nav>
 					</div>
 				</motion.aside>

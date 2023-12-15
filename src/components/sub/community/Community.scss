@@ -1,7 +1,14 @@
 .Community {
-	min-height: 100vh;
+	width: 100%;
+	transition: 0.5s;
+	.layoutWrap {
+		padding: 0px 0px;
+	}
 	.communityWrap {
 		position: relative;
+		min-height: 100vh;
+		background-color: #fff;
+		padding:40px 50px;
 	}
 	.openToggleButton {
 		width: 40px;

@@ -81,22 +81,25 @@ export default function InputBox({ Open, setPostCall }) {
 					}}
 				>
 					<div className='InputBox'>
-						<h2>Let's Talk</h2>
 						<p>Ask us anything or just say hi!</p>
 						<span>Required Info</span>
-
-						<input type='text' placeholder='title' ref={refTit} />
+						<label htmlFor="refTit">Title : </label>
+						<input type='text' placeholder='title' ref={refTit} id="refTit"/>
+						<label htmlFor="refCon">Content : </label>
 						<textarea
 							cols='30'
 							rows='3'
 							placeholder='content'
 							ref={refCon}
+							id ='refCon'
 						></textarea>
 						<span>Selective Info</span>
-						<input type='text' placeholder='nickname' ref={refNickname} />
+						<label htmlFor="refNickname">Nickname : </label>
+						<input type='text' placeholder='nickname' ref={refNickname} id="refNickname"/>
 						<span>choose your charater!</span>
 						<div className='character'>
 							<ul>
+								<li>Character :</li>
 								{CharacterData.map((img, idx) => {
 									return (
 										<li key={img + idx}>

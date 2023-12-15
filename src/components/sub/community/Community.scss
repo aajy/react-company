@@ -1,14 +1,45 @@
 .Community {
-	width: 100%;
+	width: 96%;
 	transition: 0.5s;
-	.layoutWrap {
-		padding: 0px 0px;
-	}
+	// .layoutWrap {
+	// 	padding: 0px 0px;
+	// }
 	.communityWrap {
 		position: relative;
 		min-height: 100vh;
 		background-color: #fff;
 		padding:40px 50px;
+		border-radius: 20px;
+		h1 {
+			font-size: 4rem;
+			line-height: 0.9;
+			font-weight: 300;
+			>span {
+				display: block;
+				font-size: 2rem;
+				font-weight: 300;
+				font-family: var(--pointFont2);
+				color:var(--pointColor);
+			}
+			>em {
+				display: inline-block;
+				width: 100px;
+				height: 1px;
+				background-color: rgba(var(--baseColor-code), 0.6);
+				margin-bottom: 20px;
+			}
+		}
+		.bottomText {
+			width: 100%;
+			position: absolute;
+			left: 50%;
+			bottom: 0;
+			transform: translateX(-50%);
+			font-size: 9rem;
+			font-family: var(--pointFont);
+			font-weight: normal;
+			text-align: center;
+		}
 	}
 	.openToggleButton {
 		width: 40px;
@@ -40,13 +71,12 @@
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
-			justify-content: space-between;
-			gap: 10px;
+			justify-content: flex-start;
+			gap: 10px 0px;
 			.commentBox {
-				width: 32%;
+				width: calc(100% / 4);
 				padding: 20px 30px;
 				transition: 0.2s;
-				border-radius: 10px;
 				> .txt {
 					.top {
 						display: flex;

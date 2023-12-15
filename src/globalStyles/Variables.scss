@@ -1,9 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Noto+Sans+KR:wght@200;300;400;500;600&family=Syncopate:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@1,300;1,400&family=Montserrat:wght@300;400&family=Noto+Sans+KR:wght@200;300;400;500;600&family=Syncopate:wght@400;700&display=swap');
 
 :root {
 	--baseTitFont: 'Montserrat', sans-serif, 'arial', '돋움';
 	--baseFont: 'Noto Sans KR', sans-serif, 'arial', '돋움';
 	--pointFont: 'Syncopate', 'arial';
+	--pointFont2: 'Cormorant Garamond', serif;
 	--baseTitWeight: 400;
 	--baseWeight: 300;
 	--logoColor: #111;

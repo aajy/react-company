@@ -121,14 +121,19 @@ export default function Community() {
 	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<button
-				className={Open ? 'openToggleButton on' : 'openToggleButton'}
-				onClick={() => setOpen(!Open)}
-			>
-				+
-			</button>
-
 			<div className='communityWrap'>
+				<h1>
+					IT ALL STARTS<br/>
+					WITH A FEW <br/>
+					<span>without boundaries</span>
+					<em></em> SQUARE MATERS
+				</h1>
+				<button
+					className={Open ? 'openToggleButton on' : 'openToggleButton'}
+					onClick={() => setOpen(!Open)}
+				>
+					+
+				</button>
 				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
 				<div className='showBox'>
 					<nav className='pagination'>
@@ -236,6 +241,7 @@ export default function Community() {
 							})}
 					</div>
 				</div>
+				<h2 className='bottomText'>LeT'S TaLK.</h2>
 			</div>
 		</Layout>
 	);

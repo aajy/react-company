@@ -5,7 +5,7 @@ import { GrPowerReset } from 'react-icons/gr';
 import { TbCircleCheckFilled } from 'react-icons/tb';
 import { BiCommentCheck } from 'react-icons/bi';
 
-export default function InputBox({ Open }) {
+export default function InputBox({ Open, setPostCall }) {
 	const path = useRef(process.env.PUBLIC_URL);
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
@@ -38,21 +38,19 @@ export default function InputBox({ Open }) {
 			return alert('제목과 본문을 모두 입력하세요.');
 		}
 		const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
-		setPost([
-			{
-				title: refTit.current.value,
-				content: refCon.current.value,
-				nickname: refNickname.current.value || 'nickname',
-				date: new Date(korTime),
-				src: CharacterSrc,
-			},
-			...Post,
-		]);
+		const createPostData = {
+			title: refTit.current.value,
+			content: refCon.current.value,
+			nickname: refNickname.current.value || 'nickname',
+			date: new Date(korTime),
+			src: CharacterSrc,
+		};
+		setPostCall([createPostData, ...Post]);
+		setPost([createPostData, ...Post]);
 		resetPost();
 	};
 	const handleCharacter = (e, img) => {
 		const srcName = img;
-		console.log('srcName: ', srcName);
 		setCharacterSrc(srcName);
 	};
 
@@ -69,10 +67,15 @@ export default function InputBox({ Open }) {
 		<AnimatePresence>
 			{Open && (
 				<motion.aside
-					initial={{ x: -100 }}
-					animate={{ x: 0, transition: { duration: 0.2, ease: 'linear' } }}
+					initial={{ x: -100, y: 50 }}
+					animate={{
+						x: 0,
+						y: 50,
+						transition: { duration: 0.2, ease: 'linear' },
+					}}
 					exit={{
 						x: -100,
+						y: 50,
 						opacity: 0,
 						transition: { duration: 0.2, ease: 'linear' },
 					}}

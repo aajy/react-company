@@ -14,6 +14,10 @@
 		line-height: 34px;
 		text-align: center;
 		cursor: pointer;
+		transition: 0.5s;
+		&.on {
+			transform: rotate(45deg);
+		}
 	}
 	.showBox {
 		display: flex;
@@ -52,14 +56,26 @@
 								object-fit: cover;
 							}
 						}
-						> p {
-							font-size: 0.8rem;
-						}
+					}
+					> h2 {
+						font-size: 1rem;
+						border-bottom: 1px solid rgba(var(--baseColor-code), 0.6);
+						margin-bottom: 10px;
+					}
+					.content {
+						display: block;
+						padding: 5px;
+						background-color: rgba(var(--bgColor-code), 1);
+						font-size: 0.8rem;
+						margin-bottom: 20px;
 					}
 					> span {
 						display: block;
+						font-size: 0.7rem;
+						margin-bottom: 10px;
 						&:nth-of-type(2) {
 							display: flex;
+							font-size: 0.8rem;
 							width: 130px;
 							border: 1px solid rgba(var(--baseColor-code), 0.5);
 							background-color: var(--bgColor);

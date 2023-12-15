@@ -1,52 +1,82 @@
 {
-  "dummyPosts" : [
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character1",
-      "title":"Title1"
-    },
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character2",
-      "title":"Title2"
-    },
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character3",
-      "title":"Title3"
-    },
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character4",
-      "title":"Title4"
-    },
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character5",
-      "title":"Title5"
-    },
-    {
-      "content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
-      "date":"2023-12-15T01:42:47.782Z",
-      "enableUpdate":false,
-      "nickname":"nickname",
-      "src":"character1",
-      "title":"Title6"
-    }
-  ]
+	"dummyPosts": [
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character1",
+			"title": "Title1"
+		},
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character2",
+			"title": "Title2"
+		},
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character3",
+			"title": "Title3"
+		},
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character4",
+			"title": "Title4"
+		},
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character5",
+			"title": "Title5"
+		},
+		{
+			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
+			"date": "2023-12-15T01:42:47.782Z",
+			"enableUpdate": false,
+			"nickname": "nickname",
+			"reply": [
+				{ "value": "111", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "222", "date": "2023-12-15T10:49:15.724Z" },
+				{ "value": "333", "date": "2023-12-15T10:49:15.724Z" }
+			],
+			"src": "character1",
+			"title": "Title6"
+		}
+	]
 }

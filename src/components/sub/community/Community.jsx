@@ -23,7 +23,6 @@ export default function Community() {
 		else return postData.dummyPosts;
 	};
 	const [Post, setPost] = useState(getLocalData());
-	console.log('Post', Post);
 	const [CurNum, setCurNum] = useState(0);
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
 	const pageNum = useRef(0); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
@@ -80,7 +79,6 @@ export default function Community() {
 					}
 				})
 			);
-			console.log(Post);
 			siblingElement.value = '';
 		}
 	};
@@ -100,6 +98,7 @@ export default function Community() {
 
 	useEffect(() => {
 		Post.map((el) => {
+			el.onReply = false;
 			el.enableUpdate = false;
 		});
 		localStorage.setItem('post', JSON.stringify(Post));
@@ -111,18 +110,26 @@ export default function Community() {
 				len.current % perNum.current === 0
 					? len.current / perNum.current
 					: parseInt(len.current / perNum.current) + 1;
-			console.log(pageNum.current);
 		}
 	}, [Post]);
-
+	useEffect(() => {
+		Post.map((el) => {
+			el.replyView = false;
+			el.onReply = false;
+			el.enableUpdate = false;
+		});
+	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<button className='openToggleButton' onClick={() => setOpen(!Open)}>
+			<button
+				className={Open ? 'openToggleButton on' : 'openToggleButton'}
+				onClick={() => setOpen(!Open)}
+			>
 				+
 			</button>
 
 			<div className='communityWrap'>
-				<InputBox Open={Open} setOpen={setOpen} />
+				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
 				<div className='showBox'>
 					<nav className='pagination'>
 						{Array(pageNum.current).length > 0 &&
@@ -159,7 +166,7 @@ export default function Community() {
 													<p>{el.nickname}</p>
 												</div>
 												<h2>{el.title}</h2>
-												<p>{el.content}</p>
+												<p className='content'>{el.content}</p>
 
 												<span>{strDate}</span>
 												<span onClick={(e) => handleReplyView(e, idx)}>

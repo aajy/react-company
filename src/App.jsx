@@ -33,7 +33,6 @@ export default function App() {
 		fetch(`${path.current}/DB/menuText.json`)
 		.then(data => data.json())
 		.then(json => {
-			console.log('menu',json.menuTextArr);
 			dispatch({ type: 'SET_MENU', payload: json.menuTextArr})
 		})
 	};

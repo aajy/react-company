@@ -4,18 +4,20 @@ import './Community.scss';
 import InputBox from './InputBox';
 import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
-import { LiaEdit } from 'react-icons/lia';
 import { BsArrowReturnRight } from 'react-icons/bs';
+import { TfiPlus } from 'react-icons/tfi';
 import {
 	AiOutlineDelete,
 	AiFillPlusCircle,
 	AiOutlineDown,
 	AiOutlineUp,
 } from 'react-icons/ai';
+import { RiArrowRightDownLine } from 'react-icons/ri';
 
 export default function Community() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const [Open, setOpen] = useState(false);
+	const [ThemeOnIdx, setThemeOnIdx] = useState(0);
 	const changeText = useCustomText('combined');
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
@@ -25,7 +27,7 @@ export default function Community() {
 	const [Post, setPost] = useState(getLocalData());
 	const [CurNum, setCurNum] = useState(0);
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
-	const pageNum = useRef(0); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
+	const pageNum = useRef(1); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
 	const perNum = useRef(6); //한 페이지당 보일 포스트 갯수
 	const refReply = useRef('');
 
@@ -95,6 +97,13 @@ export default function Community() {
 		if (!window.confirm('정말 해당 게시글을 삭제하겠습니까?')) return;
 		setPost(Post.filter((_, idx) => delIndex !== idx));
 	};
+	const handleIsThemeOn = (idx) => {
+		const newIdx = idx;
+		if (ThemeOnIdx === idx) return;
+		console.log('newIdx: ', newIdx);
+		setThemeOnIdx(newIdx);
+
+	}
 
 	useEffect(() => {
 		Post.map((el) => {
@@ -103,9 +112,9 @@ export default function Community() {
 		});
 		localStorage.setItem('post', JSON.stringify(Post));
 		// localStorage.clear();
-		if (Post) {
+		if (Post && Post.length > 0) {
 			len.current = Post.length;
-
+			console.log('pageNum.current: ', pageNum.current);
 			pageNum.current =
 				len.current % perNum.current === 0
 					? len.current / perNum.current
@@ -118,36 +127,47 @@ export default function Community() {
 			el.onReply = false;
 			el.enableUpdate = false;
 		});
+		if (Post && Post.length > 0) {
+			len.current = Post.length;
+
+			console.log('pageNum.current: ', pageNum.current);
+			pageNum.current =
+			len.current % perNum.current === 0
+			? len.current / perNum.current
+			: parseInt(len.current / perNum.current) + 1;
+		}
 	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
 			<div className='communityWrap'>
-				<h1>
-					IT ALL STARTS<br/>
-					WITH A FEW <br/>
-					<span>without boundaries</span>
-					<em></em> SQUARE MATERS
-				</h1>
-				<button
-					className={Open ? 'openToggleButton on' : 'openToggleButton'}
-					onClick={() => setOpen(!Open)}
-				>
-					+
-				</button>
+				<div className='top'>
+					<h1>
+						IT ALL STARTS<br/>
+						WITH A FEW <br/>
+						<span>without boundaries</span>
+						<em></em> SQUARE MATERS
+					</h1>
+					<button
+						className={Open ? 'openToggleButton on' : 'openToggleButton'}
+						onClick={() => setOpen(!Open)}
+					>
+						<TfiPlus />
+					</button>
+				</div>
 				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
+				<nav className='pagination'>
+					{(Post.length > 0) &&
+						Array(pageNum.current)
+							.fill()
+							.map((_, idx) => {
+								return (
+									<button key={idx} onClick={() => setCurNum(idx)}>
+										{idx + 1}
+									</button>
+								);
+							})}
+				</nav>
 				<div className='showBox'>
-					<nav className='pagination'>
-						{Array(pageNum.current).length > 0 &&
-							Array(pageNum.current)
-								.fill()
-								.map((_, idx) => {
-									return (
-										<button key={idx} onClick={() => setCurNum(idx)}>
-											{idx + 1}
-										</button>
-									);
-								})}
-					</nav>
 					<div className='postList'>
 						{Post &&
 							Post.map((el, idx) => {
@@ -159,23 +179,21 @@ export default function Community() {
 									idx < perNum.current * (CurNum + 1)
 								) {
 									return (
-										<article key={el + idx} className={`commentBox ${el.src}`}>
+										<article 
+											key={el + idx}
+											className={ThemeOnIdx === idx ? `commentBox ${el.theme}`:'commentBox'}
+											onClick={()=>handleIsThemeOn(idx)}
+										>
+											<div className="bg"></div>
 											<div className='txt'>
-												<div className='top'>
-													<div className='img'>
-														<img
-															src={`${path.current}/img/${el.src}.jpg`}
-															alt=''
-														/>
-													</div>
-													<p>{el.nickname}</p>
-												</div>
 												<h2>{el.title}</h2>
 												<p className='content'>{el.content}</p>
 
 												<span>{strDate}</span>
-												<span onClick={(e) => handleReplyView(e, idx)}>
-													<span>replay view</span>
+												<span onClick={(e) => {
+													handleReplyView(e, idx)
+												}}>
+													<span>View Reply</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
 												{el.replyView && el.reply && el.reply.length > 0 && (
@@ -202,6 +220,14 @@ export default function Community() {
 														</ul>
 													</div>
 												)}
+												<div className='bottom'>
+													<p>{el.nickname}</p>
+													<span 
+														className={`themeImg ${el.theme}`}
+													>
+														<RiArrowRightDownLine />
+													</span>
+												</div>
 											</div>
 											{el.onReply && (
 												<label htmlFor='replyInput' className='replyInput'>
@@ -241,6 +267,7 @@ export default function Community() {
 							})}
 					</div>
 				</div>
+				<div className="gradationBox"></div>
 				<h2 className='bottomText'>LeT'S TaLK.</h2>
 			</div>
 		</Layout>

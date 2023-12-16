@@ -3,9 +3,19 @@
 	transition: 0.5s;
 	position: relative;
 	.InputBoxWrap{
-		position: absolute;
-		z-index: 5;
+		position: fixed;
+		z-index: 0;
+		width: 100%;
+		height: 0;
+		left: 0;
 		top: 0;
+		transition: 0.5s;
+		// background-color: rgba(var(--baseColor-code), 0.6);
+		&.open{
+		height: 100vh;
+			z-index: 5;
+			transition: 0.3s;
+		}
 	}
 	.communityWrap {
 		position: relative;
@@ -50,6 +60,7 @@
 				align-items: center;
 				justify-content: center;
 				cursor: pointer;
+				z-index: 6;
 				> svg {
 					transition: 0.5s;
 				}
@@ -130,7 +141,7 @@
 					}
 				}
 				> .txt {
-					transition: 0.2s;
+					transition: 0.3s;
 					> h2 {
 						font-size: 1rem;
 						margin-bottom: 10px;
@@ -175,11 +186,22 @@
 					}
 					.replyView {
 						position: relative;
-						z-index: 5;
+						z-index: 2;
+						transition: 0.5s;
+						&.on {
+							ul {
+								transform: translateX(0px);
+								opacity: 1;
+								height: auto;
+								transition:all 0.1s ease-in 0.3s;
+							}
+						}
 						ul {
 							padding: 3px;
 							border-radius: 2px;
-							margin-bottom: 10px;
+							transform: translateX(5px);
+							opacity: 0;
+							height: 0;
 							li {
 								width: 100%;
 								border-bottom: 1px solid rgba(var(--baseColor-code), 0.2);
@@ -205,31 +227,32 @@
 									}
 								}
 							}
-						}
-						.replyInput {
-							display: block;
-							margin-bottom: 20px;
-							position: relative;
-							z-index: 2;
-							> input {
-								border: 1px solid rgba(var(--baseColor-code), 0.5);
-								border-radius: 20px;
-								padding: 2px 8px;
-								margin-right: 5px;
-								&::placeholder {
-									font-size: 0.7rem;
-									color: var(--pointColor);
+							.replyInput {
+								display: block;
+								margin-bottom: 20px;
+								position: relative;
+								z-index: 2;
+								> input {
+									border: 1px solid rgba(var(--baseColor-code), 0.5);
+									border-radius: 20px;
+									padding: 2px 8px;
+									margin-right: 5px;
+									&::placeholder {
+										font-size: 0.7rem;
+										color: var(--pointColor);
+									}
+									&:focus {
+										outline: 0;
+									}
 								}
-								&:focus {
-									outline: 0;
+								> button {
+									border: 1px solid rgba(var(--baseColor-code), 0.5);
+									border-radius: 20px;
+									padding: 2px 8px;
+									color: var(--bgColor);
+									background-color: var(--baseColor);
+									cursor: pointer;
 								}
-							}
-							> button {
-								border: 1px solid rgba(var(--baseColor-code), 0.5);
-								border-radius: 20px;
-								padding: 2px 8px;
-								color: var(--bgColor);
-								background-color: var(--baseColor);
 							}
 						}
 					}

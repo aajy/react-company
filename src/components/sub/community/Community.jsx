@@ -144,9 +144,10 @@ export default function Community() {
 					: parseInt(len.current / perNum.current) + 1;
 		}
 	}, []);
+
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<div className='InputBoxWrap'>
+			<div className={Open ? 'InputBoxWrap open': 'InputBoxWrap'} onClick={()=>{if(Open) setOpen(!Open)}}>
 				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>
@@ -220,45 +221,47 @@ export default function Community() {
 													<span>View Reply</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
-												{el.replyView && el.reply && el.reply.length > 0 && (
-													<div className='replyView'>
+												{el.reply && el.reply.length > 0 && (
+													<div className={
+														el.replyView ? 'replyView on' : 'replyView'
+													}>
 														<ul>
-															{el.reply.map((reply, index) => {
-																if (Object.keys(reply).length > 0) {
-																	const date = JSON.stringify(reply.date);
-																	const replyStrDate = changeDate(
-																		date.slice(1,-1)
-																	);
-																	return (
-																		<li key={reply.date + idx}>
-																			<span>
-																				<BsArrowReturnRight />
-																				{reply.value}
-																			</span>
-																			<span>
-																				<span>{replyStrDate[0]}</span>
-																				<span>{replyStrDate[1]}</span>
-																				<span onClick={()=>handleReplyDelete(idx, index)}><AiOutlineDelete /></span>
-																			</span>
-																		</li>
-																	);
-																}
-															})}
+																{el.reply.map((reply, index) => {
+																	if (Object.keys(reply).length > 0) {
+																		const date = JSON.stringify(reply.date);
+																		const replyStrDate = changeDate(
+																			date.slice(1,-1)
+																		);
+																		return (
+																			<li key={reply.date + idx}>
+																				<span>
+																					<BsArrowReturnRight />
+																					{reply.value}
+																				</span>
+																				<span>
+																					<span>{replyStrDate[0]}</span>
+																					<span>{replyStrDate[1]}</span>
+																					<span onClick={()=>handleReplyDelete(idx, index)}><AiOutlineDelete /></span>
+																				</span>
+																			</li>
+																		);
+																	}
+																})}
+																<label htmlFor='replyInput' className='replyInput'>
+																	<input
+																		type='text'
+																		id='replyInput'
+																		placeholder='Leave your reply!'
+																		ref={refReply}
+																	/>
+																	<button
+																		type='button'
+																		onClick={(e) => handleInputChange(e, idx)}
+																	>
+																		add reply
+																	</button>
+																</label>
 														</ul>
-														<label htmlFor='replyInput' className='replyInput'>
-															<input
-																type='text'
-																id='replyInput'
-																placeholder='Leave your reply!'
-																ref={refReply}
-															/>
-															<button
-																type='button'
-																onClick={(e) => handleInputChange(e, idx)}
-															>
-																add reply
-															</button>
-														</label>
 													</div>
 												)}
 												<div className='bottom'>

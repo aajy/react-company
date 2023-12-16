@@ -185,6 +185,8 @@
 						align-items: center;
 						gap: 10px;
 						transition: 0.2s;
+						position: relative;
+						z-index: 1;
 						&.on {
 							background-color: var(--bgColorfff);
 						}
@@ -194,7 +196,7 @@
 					}
 					.replyView {
 						position: relative;
-						z-index: 2;
+						z-index: 1;
 						transition: 0.5s;
 						&.on {
 							ul {

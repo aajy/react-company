@@ -339,7 +339,7 @@ export default function Gallery() {
 			</Layout>
 
 			{Open && (
-				<Modal Open={Open}>
+				<Modal Open={Open} setOpen={setOpen}>
 					{Pics[Index] && (
 						<>
 							<div className='img'>

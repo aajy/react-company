@@ -16,7 +16,7 @@ import { RiArrowRightDownLine } from 'react-icons/ri';
 
 export default function Community() {
 	const [Open, setOpen] = useState(false);
-	const [ThemeOnIdx, setThemeOnIdx] = useState(0);
+	const [ThemeOnIdx, setThemeOnIdx] = useState(null);
 	const changeText = useCustomText('combined');
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
@@ -243,7 +243,7 @@ export default function Community() {
 												<div className='bottom'>
 													<p>&#64;{el.nickname}</p>
 													<span className={`themeImg ${el.theme}`}>
-														<RiArrowRightDownLine />
+														<RiArrowRightDownLine onClick={()=>setThemeOnIdx(null)}/>
 													</span>
 													<nav>
 														<button

@@ -58,7 +58,6 @@
 			width: 100%;
 			position: absolute;
 			left: 50%;
-			bottom: 0;
 			transform: translateX(-50%);
 			font-size: 9rem;
 			font-family: var(--pointFont);
@@ -83,9 +82,10 @@
 	.showBox {
 		display: flex;
 		flex-direction: column;
-		height: 50vh;
+		height: 60vh;
 		overflow-y: scroll;
 		padding-bottom: 300px;
+		//TODO :: laptop부턴 height:100vh;
 		.postList {
 			display: flex;
 			flex-direction: row;
@@ -94,9 +94,9 @@
 			gap: 10px 0px;
 			.commentBox {
 				width: calc(100% / 4);
-
 				position: relative;
 				padding: 20px 30px;
+				cursor: pointer;
 				.bg {
 					position: absolute;
 					width: 100%;
@@ -154,33 +154,33 @@
 					> span {
 						display: block;
 						font-size: 0.7rem;
+						text-align: right;
 						margin-bottom: 10px;
 						position: relative;
 						z-index: 1;
-						&:nth-of-type(2) {
-							display: flex;
-							font-size: 0.8rem;
-							width: 130px;
-							border: 1px solid rgba(var(--baseColor-code), 0.5);
-							border-radius: 20px;
-							padding: 2px 8px;
-							justify-content: space-between;
-							align-items: center;
-							gap: 10px;
-							transition: 0.2s;
-							&.on {
-								background-color: var(--bgColorfff);
-							}
-							> svg {
-								margin-bottom: -3px;
-							}
+					}
+					.replyViewBtn {
+						display: flex;
+						font-size: 0.8rem;
+						width: 130px;
+						border: 1px solid rgba(var(--baseColor-code), 0.5);
+						border-radius: 20px;
+						padding: 2px 8px;
+						justify-content: space-between;
+						align-items: center;
+						gap: 10px;
+						transition: 0.2s;
+						&.on {
+							background-color: var(--bgColorfff);
+						}
+						> svg {
+							margin-bottom: -3px;
 						}
 					}
 					.replyView {
 						position: relative;
 						z-index: 5;
 						ul {
-							// background-color: var(--bgColor);
 							padding: 3px;
 							border-radius: 2px;
 							li {
@@ -213,6 +213,10 @@
 						transition: 0.5s;
 						position: relative;
 						z-index: 1;
+						> p {
+							font-size: 0.9rem;
+							color: var(--pointColor);
+						}
 						> span {
 							display: block;
 							width: 60px;
@@ -264,6 +268,7 @@
 								color: var(--bgColor);
 								background-color: var(--baseColor);
 								transition: 0.5s;
+								cursor: pointer;
 								&.on {
 									background-color: var(--pointColor);
 								}
@@ -276,6 +281,26 @@
 					margin-bottom: 20px;
 					position: relative;
 					z-index: 2;
+					> input {
+						border: 1px solid rgba(var(--baseColor-code), 0.5);
+						border-radius: 20px;
+						padding: 2px 8px;
+						margin-right: 5px;
+						&::placeholder {
+							font-size: 0.7rem;
+							color: var(--pointColor);
+						}
+						&:focus {
+							outline: 0;
+						}
+					}
+					> button {
+						border: 1px solid rgba(var(--baseColor-code), 0.5);
+						border-radius: 20px;
+						padding: 2px 8px;
+						color: var(--bgColor);
+						background-color: var(--baseColor);
+					}
 				}
 				&.theme1,
 				&.theme2,

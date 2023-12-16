@@ -16,19 +16,19 @@ export default function InputBox({ Open, setPostCall }) {
 	const refTit = useRef(null);
 	const refCon = useRef(null);
 	const refNickname = useRef(null);
-	const CharacterData = [
-		'character1',
-		'character2',
-		'character3',
-		'character4',
-		'character5',
+	const ThemeData = [
+		'theme1',
+		'theme2',
+		'theme3',
+		'theme4',
+		'theme5',
 	];
-	const [CharacterSrc, setCharacterSrc] = useState(CharacterData[0]);
+	const [ThemeSrc, setThemeSrc] = useState(ThemeData[0]);
 
 	const resetPost = () => {
 		refTit.current.value = '';
 		refCon.current.value = '';
-		setCharacterSrc('');
+		setThemeSrc('');
 		refNickname.current.value = '';
 	};
 
@@ -43,15 +43,15 @@ export default function InputBox({ Open, setPostCall }) {
 			content: refCon.current.value,
 			nickname: refNickname.current.value || 'nickname',
 			date: new Date(korTime),
-			src: CharacterSrc,
+			theme: ThemeSrc,
 		};
 		setPostCall([createPostData, ...Post]);
 		setPost([createPostData, ...Post]);
 		resetPost();
 	};
-	const handleCharacter = (e, img) => {
-		const srcName = img;
-		setCharacterSrc(srcName);
+	const handleTheme = (e, img) => {
+		const themeName = img;
+		setThemeSrc(themeName);
 	};
 
 	useEffect(() => {
@@ -97,21 +97,25 @@ export default function InputBox({ Open, setPostCall }) {
 						<label htmlFor="refNickname">Nickname : </label>
 						<input type='text' placeholder='nickname' ref={refNickname} id="refNickname"/>
 						<span>choose your charater!</span>
-						<div className='character'>
+						<div className='theme'>
 							<ul>
-								<li>Character :</li>
-								{CharacterData.map((img, idx) => {
+								<li>Theme :</li>
+								{ThemeData.map((img, idx) => {
 									return (
 										<li key={img + idx}>
-											<img
+											{/* <img
 												src={`${path.current}/img/${img}.jpg`}
 												alt=''
-												onClick={(e) => handleCharacter(e, img)}
-											/>
-											{CharacterSrc === img && (
-												<span>
+												onClick={(e) => handleTheme(e, img)}
+											/> */}
+											<span
+											className={img}
+											onClick={(e) => handleTheme(e, img)}
+											></span>
+											{ThemeSrc === img && (
+												<em>
 													<TbCircleCheckFilled />
-												</span>
+												</em>
 											)}
 										</li>
 									);

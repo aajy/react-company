@@ -147,7 +147,8 @@ export default function Community() {
 
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<div className={Open ? 'InputBoxWrap open': 'InputBoxWrap'} onClick={()=>{if(Open) setOpen(!Open)}}>
+			<div className={Open ? 'InputBoxWrap open': 'InputBoxWrap'}>
+				<div className="modal" onClick={()=>{if(Open) setOpen(!Open)}}></div>
 				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>

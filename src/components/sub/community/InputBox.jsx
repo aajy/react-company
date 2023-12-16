@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import './InputBox.scss';
 import { GrPowerReset } from 'react-icons/gr';
@@ -15,7 +15,7 @@ export default function InputBox({ Open, setNewPost }) {
 	const resetInput = () => {
 		refTit.current.value = '';
 		refCon.current.value = '';
-		setThemeName('');
+		setThemeName(ThemeData[0]);
 		refNickname.current.value = '';
 	};
 
@@ -39,26 +39,28 @@ export default function InputBox({ Open, setNewPost }) {
 		const themeName = img;
 		setThemeName(themeName);
 	};
+	useEffect(()=>{
+		Open && resetInput();
+	},[Open])
 
 	return (
 		<AnimatePresence>
 			{Open && (
 				<motion.aside
-					initial={{ x: -100, y: 50 }}
+					initial={{ x: -100, y: 100 }}
 					animate={{
 						x: 0,
-						y: 50,
-						transition: { duration: 0.2, ease: 'linear' },
+						y: 100,
+						transition: { duration: 0.2, ease: 'easeIn' },
 					}}
 					exit={{
 						x: -100,
-						y: 50,
-						opacity: 0,
+						y: 100,
 						transition: { duration: 0.2, ease: 'linear' },
 					}}
 				>
 					<div className='InputBox'>
-						<p>Ask us anything or just say hi!</p>
+						<h2>Ask us anything or just say hi!</h2>
 						<span>Required Info</span>
 						<label htmlFor='refTit'>Title : </label>
 						<input type='text' placeholder='title' ref={refTit} id='refTit' />

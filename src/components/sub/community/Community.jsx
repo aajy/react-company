@@ -15,7 +15,6 @@ import {
 import { RiArrowRightDownLine } from 'react-icons/ri';
 
 export default function Community() {
-	const path = useRef(process.env.PUBLIC_URL);
 	const [Open, setOpen] = useState(false);
 	const [ThemeOnIdx, setThemeOnIdx] = useState(0);
 	const changeText = useCustomText('combined');
@@ -39,7 +38,7 @@ export default function Community() {
 			})
 		);
 	};
-	const handleReplyView = (e, replyIndex) => {
+	const handleReplyView = (e, replyIndex = 'none') => {
 		setPost(
 			Post.map((el, idx) => {
 				if (replyIndex === idx) el.replyView = !el.replyView;
@@ -97,7 +96,7 @@ export default function Community() {
 		if (!window.confirm('정말 해당 게시글을 삭제하겠습니까?')) return;
 		setPost(Post.filter((_, idx) => delIndex !== idx));
 	};
-	const handleIsThemeOn = (idx) => {
+	const handleThemeOnIdx = (idx = 'none') => {
 		const newIdx = idx;
 		if (ThemeOnIdx === idx) return;
 		setThemeOnIdx(newIdx);
@@ -107,16 +106,19 @@ export default function Community() {
 				return el;
 			})
 		);
-	}
+	};
+
+	const updatePost = (obj) => {
+		setPost([obj, ...Post]);
+	};
 
 	useEffect(() => {
-		Post.map(el => {
+		Post.map((el) => {
 			el.replyView = false;
 			el.onReply = false;
 			el.enableUpdate = false;
 		});
 		localStorage.setItem('post', JSON.stringify(Post));
-		// localStorage.clear();
 		if (Post && Post.length > 0) {
 			len.current = Post.length;
 			console.log('pageNum.current: ', pageNum.current);
@@ -127,7 +129,8 @@ export default function Community() {
 		}
 	}, [Post.length]);
 	useEffect(() => {
-		Post.map(el => {
+		// localStorage.clear();
+		Post.map((el) => {
 			el.onReply = false;
 			el.enableUpdate = false;
 		});
@@ -136,33 +139,38 @@ export default function Community() {
 
 			console.log('pageNum.current: ', pageNum.current);
 			pageNum.current =
-			len.current % perNum.current === 0
-			? len.current / perNum.current
-			: parseInt(len.current / perNum.current) + 1;
+				len.current % perNum.current === 0
+					? len.current / perNum.current
+					: parseInt(len.current / perNum.current) + 1;
 		}
 	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<div style={{position:'relative', zIndex:5}}>
-				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
+			<div style={{ position: 'relative', zIndex: 5 }}>
+				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>
 				<div className='top'>
 					<h1>
-						IT ALL STARTS<br/>
-						WITH A FEW <br/>
+						IT ALL STARTS
+						<br />
+						WITH A FEW <br />
 						<span>without boundaries</span>
 						<em></em> SQUARE MATERS
 					</h1>
 					<button
 						className={Open ? 'openToggleButton on' : 'openToggleButton'}
-						onClick={() => setOpen(!Open)}
+						onClick={() => {
+							handleThemeOnIdx();
+							setThemeOnIdx('');
+							setOpen(!Open);
+						}}
 					>
 						<TfiPlus />
 					</button>
 				</div>
 				<nav className='pagination'>
-					{(Post.length > 0) &&
+					{Post.length > 0 &&
 						Array(pageNum.current)
 							.fill()
 							.map((_, idx) => {
@@ -185,20 +193,26 @@ export default function Community() {
 									idx < perNum.current * (CurNum + 1)
 								) {
 									return (
-										<article 
+										<article
 											key={el + idx}
-											className={ThemeOnIdx === idx ? `commentBox ${el.theme}`:'commentBox'}
-											onClick={()=>handleIsThemeOn(idx)}
+											className={
+												ThemeOnIdx === idx
+													? `commentBox ${el.theme}`
+													: 'commentBox'
+											}
+											onClick={() => handleThemeOnIdx(idx)}
 										>
-											<div className="bg"></div>
+											<div className='bg'></div>
 											<div className='txt'>
 												<h2>{el.title}</h2>
 												<p className='content'>{el.content}</p>
 
 												<span>{strDate}</span>
-												<span 
+												<span
 													className={el.replyView ? 'on' : ''}
-													onClick={(e) => {handleReplyView(e, idx)}}
+													onClick={(e) => {
+														handleReplyView(e, idx);
+													}}
 												>
 													<span>View Reply</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
@@ -229,9 +243,7 @@ export default function Community() {
 												)}
 												<div className='bottom'>
 													<p>{el.nickname}</p>
-													<span 
-														className={`themeImg ${el.theme}`}
-													>
+													<span className={`themeImg ${el.theme}`}>
 														<RiArrowRightDownLine />
 													</span>
 													<nav>
@@ -274,7 +286,7 @@ export default function Community() {
 							})}
 					</div>
 				</div>
-				<div className="gradationBox"></div>
+				<div className='gradationBox'></div>
 				<h2 className='bottomText'>LeT'S TaLK.</h2>
 			</div>
 		</Layout>

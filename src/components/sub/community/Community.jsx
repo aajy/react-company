@@ -6,6 +6,7 @@ import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import { TfiPlus } from 'react-icons/tfi';
+import { LiaEdit } from "react-icons/lia";
 import {
 	AiOutlineDelete,
 	AiFillPlusCircle,
@@ -18,6 +19,7 @@ export default function Community() {
 	const [Open, setOpen] = useState(false);
 	const [ThemeOnIdx, setThemeOnIdx] = useState(null);
 	const changeText = useCustomText('combined');
+	const changeDate = useCustomText('dateTime');
 	const getLocalData = () => {
 		const data = localStorage.getItem('post');
 		if (data && data.length > 0) return JSON.parse(data);
@@ -29,25 +31,30 @@ export default function Community() {
 	const pageNum = useRef(1); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
 	const perNum = useRef(6); //한 페이지당 보일 포스트 갯수
 	const refReply = useRef('');
-
-	const addReply = (replyIndex) => {
-		setPost(
-			Post.map((el, idx) => {
-				if (replyIndex === idx) el.onReply = !el.onReply;
-				return el;
-			})
-		);
+	
+	const handleReplyView = (replyViewIndex = 'none') => {
+		const newPost = 	Post.map((el, idx) => {
+			if (replyViewIndex === idx) el.replyView = !el.replyView;
+			return el;
+		})
+		setPost(newPost);
 	};
-	const handleReplyView = (e, replyIndex = 'none') => {
-		setPost(
-			Post.map((el, idx) => {
-				if (replyIndex === idx) el.replyView = !el.replyView;
-				return el;
-			})
-		);
-	};
+	const handleReplyDelete = (commentIdx, replyIdx) => {
+		const newPost = Post.map((el, idx) => {
+			if (commentIdx === idx) return {
+				...el,
+				reply: [
+					...el.reply.slice(0, replyIdx),
+					...el.reply.slice(replyIdx + 1)
+				]
+			}
+			return el;
+		})
+		setPost(newPost);
+		localStorage.setItem('post', JSON.stringify(newPost));
+	}
 
-	const handleInputChange = (e, replyIndex) => {
+	const handleInputChange = (e, replyAddIndex) => {
 		const parentElement = e.target.parentElement;
 
 		// 부모 요소의 자식들 중에서 형제 요소 찾기
@@ -56,31 +63,31 @@ export default function Community() {
 		);
 		if (siblingElement.value) {
 			const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
-			setPost(
-				Post.map((el, idx) => {
-					if (replyIndex === idx && el) {
-						if (el.reply) {
-							return {
-								...el,
-								reply: [
-									...el.reply,
-									{ value: siblingElement.value, date: new Date(korTime) },
-								],
-							};
-						} else {
-							return {
-								...el,
-								reply: [
-									{ value: siblingElement.value, date: new Date(korTime) },
-								],
-							};
-						}
+			const newPost = Post.map((el, idx) => {
+				if (replyAddIndex === idx && el) {
+					if (el.reply) {
+						return {
+							...el,
+							reply: [
+								...el.reply,
+								{ value: siblingElement.value, date: new Date(korTime) },
+							],
+						};
 					} else {
-						return el;
+						return {
+							...el,
+							reply: [
+								{ value: siblingElement.value, date: new Date(korTime) },
+							],
+						};
 					}
-				})
-			);
+				} else {
+					return el;
+				}
+			})
+			setPost(newPost);
 			siblingElement.value = '';
+			localStorage.setItem('post', JSON.stringify(newPost));
 		}
 	};
 
@@ -110,15 +117,14 @@ export default function Community() {
 	};
 
 	useEffect(() => {
+		console.log('Post 바뀜');
 		Post.map((el) => {
 			el.replyView = false;
-			el.onReply = false;
 			el.enableUpdate = false;
 		});
 		localStorage.setItem('post', JSON.stringify(Post));
 		if (Post && Post.length > 0) {
 			len.current = Post.length;
-			console.log('pageNum.current: ', pageNum.current);
 			pageNum.current =
 				len.current % perNum.current === 0
 					? len.current / perNum.current
@@ -128,13 +134,10 @@ export default function Community() {
 	useEffect(() => {
 		// localStorage.clear();
 		Post.map((el) => {
-			el.onReply = false;
 			el.enableUpdate = false;
 		});
 		if (Post && Post.length > 0) {
 			len.current = Post.length;
-
-			console.log('pageNum.current: ', pageNum.current);
 			pageNum.current =
 				len.current % perNum.current === 0
 					? len.current / perNum.current
@@ -143,7 +146,7 @@ export default function Community() {
 	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<div style={{ position: 'relative', zIndex: 5 }}>
+			<div className='InputBoxWrap'>
 				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>
@@ -160,6 +163,7 @@ export default function Community() {
 						onClick={() => {
 							handleThemeOnIdx();
 							setThemeOnIdx('');
+							handleReplyView();
 							setOpen(!Open);
 						}}
 					>
@@ -180,10 +184,10 @@ export default function Community() {
 				</nav>
 				<div className='showBox'>
 					<div className='postList'>
-						{Post &&
+						{Post.length > 0 &&
 							Post.map((el, idx) => {
 								const date = JSON.stringify(el.date);
-								const strDate = changeText(date.split('T')[0].slice(1), '.');
+								const strDate = changeText(date?.split('T')[0].slice(1), '.');
 
 								if (
 									idx >= perNum.current * CurNum &&
@@ -209,8 +213,8 @@ export default function Community() {
 													className={
 														el.replyView ? 'replyViewBtn on' : 'replyViewBtn'
 													}
-													onClick={(e) => {
-														handleReplyView(e, idx);
+													onClick={() => {
+														handleReplyView(idx);
 													}}
 												>
 													<span>View Reply</span>
@@ -219,64 +223,63 @@ export default function Community() {
 												{el.replyView && el.reply && el.reply.length > 0 && (
 													<div className='replyView'>
 														<ul>
-															{el.reply.map((reply, idx) => {
+															{el.reply.map((reply, index) => {
 																if (Object.keys(reply).length > 0) {
 																	const date = JSON.stringify(reply.date);
-																	const replyStrDate = changeText(
-																		date.split('T')[0].slice(1),
-																		'.'
+																	const replyStrDate = changeDate(
+																		date.slice(1,-1)
 																	);
 																	return (
-																		<li key={reply.value + idx}>
+																		<li key={reply.date + idx}>
 																			<span>
 																				<BsArrowReturnRight />
 																				{reply.value}
 																			</span>
-																			<span>{replyStrDate}</span>
+																			<span>
+																				<span>{replyStrDate[0]}</span>
+																				<span>{replyStrDate[1]}</span>
+																				<span onClick={()=>handleReplyDelete(idx, index)}><AiOutlineDelete /></span>
+																			</span>
 																		</li>
 																	);
 																}
 															})}
 														</ul>
+														<label htmlFor='replyInput' className='replyInput'>
+															<input
+																type='text'
+																id='replyInput'
+																placeholder='Leave your reply!'
+																ref={refReply}
+															/>
+															<button
+																type='button'
+																onClick={(e) => handleInputChange(e, idx)}
+															>
+																add reply
+															</button>
+														</label>
 													</div>
 												)}
 												<div className='bottom'>
 													<p>&#64;{el.nickname}</p>
 													<span className={`themeImg ${el.theme}`}>
-														<RiArrowRightDownLine onClick={()=>setThemeOnIdx(null)}/>
+														<RiArrowRightDownLine onClick={()=>{
+															handleThemeOnIdx();
+															setThemeOnIdx('');
+															handleReplyView();
+														}}/>
 													</span>
 													<nav>
-														<button
-															className={el.onReply ? 'onReply on' : 'replyOn'}
-															onClick={() => addReply(idx)}
-														>
-															<AiFillPlusCircle />
-														</button>
-														{/* <button onClick={() => enableUpdate(idx)}>
+														<button onClick={() => enableUpdate(idx)}>
 															<LiaEdit />
-														</button> */}
+														</button>
 														<button onClick={() => deletePost(idx)}>
 															<AiOutlineDelete />
 														</button>
 													</nav>
 												</div>
 											</div>
-											{el.onReply && (
-												<label htmlFor='replyInput' className='replyInput'>
-													<input
-														type='text'
-														id='replyInput'
-														placeholder='Leave your reply!'
-														ref={refReply}
-													/>
-													<button
-														type='button'
-														onClick={(e) => handleInputChange(e, idx)}
-													>
-														add reply
-													</button>
-												</label>
-											)}
 										</article>
 									);
 								} else {

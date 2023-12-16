@@ -35,11 +35,20 @@ export function useCustomText(type) {
 	}
 	if (type === 'combined') {
 		return (txt, spc = ' ') => {
+			if (!txt || !txt.length) return;
 			let resultText = txt
 				.split(/-|_|\+/)
 				.map((data) => toUpperText(data))
 				.join(spc);
 			return resultText;
+		};
+	}
+	if (type === 'dateTime') {
+		return (txt, spc = ' ') => {
+			let [date, time] = txt.split('T');
+			time = time.slice(0,8);
+			
+			return [date, time];
 		};
 	}
 }

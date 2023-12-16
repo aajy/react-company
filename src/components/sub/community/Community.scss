@@ -94,18 +94,19 @@
 			gap: 10px 0px;
 			.commentBox {
 				width: calc(100% / 4);
+
 				position: relative;
-				background-color: var(--bgColor);
 				padding: 20px 30px;
 				.bg {
 					position: absolute;
 					width: 100%;
 					height: 100%;
-					left: 0;top: 0;
-					z-index: 0;
+					left: 0;
+					top: 0;
 					&::before, &::after {
 						content: '';
 						position: absolute;
+						z-index: 0;
 						left: 0;
 						top: 0;
 						width: 100%;
@@ -117,7 +118,6 @@
 					}
 					&::after{
 						opacity: 1;
-						background-color: var(--bgColor);
 					}
 				}
 				&:hover{
@@ -136,7 +136,6 @@
 					transition: 0.2s;
 					> h2 {
 						font-size: 1rem;
-						border-bottom: 1px solid rgba(var(--baseColor-code), 0.9);
 						margin-bottom: 10px;
 						position: relative;
 						z-index: 1;
@@ -162,12 +161,15 @@
 							font-size: 0.8rem;
 							width: 130px;
 							border: 1px solid rgba(var(--baseColor-code), 0.5);
-							background-color: var(--bgColor);
 							border-radius: 20px;
 							padding: 2px 8px;
 							justify-content: space-between;
 							align-items: center;
 							gap: 10px;
+							transition: 0.2s;
+							&.on {
+								background-color: var(--bgColorfff);
+							}
 							> svg {
 								margin-bottom: -3px;
 							}
@@ -203,10 +205,13 @@
 					}
 					.bottom {
 						display: flex;
+						flex-wrap: wrap;
 						align-items: center;
 						justify-content: space-between;
 						gap: 20px;
 						transition: 0.5s;
+						position: relative;
+						z-index: 1;
 						> span {
 							display: block;
 							width: 60px;
@@ -241,6 +246,28 @@
 								// background-color: rgba(255, 192, 203, 0.1);
 							}
 						}
+						> nav {
+							position: relative;
+							width: 100%;
+							z-index: 1;
+							display: none;
+							button {
+								border: none;
+								// border:1px solid rgba(var(--baseColor-code),0.5);
+								padding: 2px 5px;
+								margin-right: 5px;
+								font-size: 1rem;
+								width: 30px;
+								height: 30px;
+								border-radius: 20px;
+								color: var(--bgColor);
+								background-color: var(--baseColor);
+								transition: 0.5s;
+								&.on {
+									background-color: var(--pointColor);
+								}
+							}
+						}
 					}
 				}
 				.replyInput {
@@ -248,27 +275,6 @@
 					margin-bottom: 20px;
 					position: relative;
 					z-index: 2;
-				}
-				> nav {
-					position: relative;
-					z-index: 1;
-					opacity: 0;
-					button {
-						border: none;
-						// border:1px solid rgba(var(--baseColor-code),0.5);
-						padding: 2px 5px;
-						margin-right: 5px;
-						font-size: 1rem;
-						width: 30px;
-						height: 30px;
-						border-radius: 20px;
-						color: var(--bgColor);
-						background-color: var(--baseColor);
-						transition: 0.5s;
-						&.on {
-							background-color: var(--pointColor);
-						}
-					}
 				}
 				&.character1, &.character2, &.character3, &.character4, &.character5 {
 					.bg {
@@ -289,10 +295,10 @@
 									font-size: 4rem;
 								}
 							}
+							> nav {
+								display: block;
+							}
 						}
-					}
-					nav {
-						opacity: 1;
 					}
 				}
 				&.character1 .bg{

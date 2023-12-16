@@ -100,13 +100,18 @@ export default function Community() {
 	const handleIsThemeOn = (idx) => {
 		const newIdx = idx;
 		if (ThemeOnIdx === idx) return;
-		console.log('newIdx: ', newIdx);
 		setThemeOnIdx(newIdx);
-
+		setPost(
+			Post.map((el, idx) => {
+				if (newIdx !== idx) el.replyView = false;
+				return el;
+			})
+		);
 	}
 
 	useEffect(() => {
-		Post.map((el) => {
+		Post.map(el => {
+			el.replyView = false;
 			el.onReply = false;
 			el.enableUpdate = false;
 		});
@@ -120,10 +125,9 @@ export default function Community() {
 					? len.current / perNum.current
 					: parseInt(len.current / perNum.current) + 1;
 		}
-	}, [Post]);
+	}, [Post.length]);
 	useEffect(() => {
-		Post.map((el) => {
-			el.replyView = false;
+		Post.map(el => {
 			el.onReply = false;
 			el.enableUpdate = false;
 		});
@@ -139,6 +143,9 @@ export default function Community() {
 	}, []);
 	return (
 		<Layout title={'Community'} className={'Community'}>
+			<div style={{position:'relative', zIndex:5}}>
+				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
+			</div>
 			<div className='communityWrap'>
 				<div className='top'>
 					<h1>
@@ -154,7 +161,6 @@ export default function Community() {
 						<TfiPlus />
 					</button>
 				</div>
-				<InputBox Open={Open} setOpen={setOpen} setPostCall={setPost} />
 				<nav className='pagination'>
 					{(Post.length > 0) &&
 						Array(pageNum.current)
@@ -190,9 +196,10 @@ export default function Community() {
 												<p className='content'>{el.content}</p>
 
 												<span>{strDate}</span>
-												<span onClick={(e) => {
-													handleReplyView(e, idx)
-												}}>
+												<span 
+													className={el.replyView ? 'on' : ''}
+													onClick={(e) => {handleReplyView(e, idx)}}
+												>
 													<span>View Reply</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
@@ -227,6 +234,20 @@ export default function Community() {
 													>
 														<RiArrowRightDownLine />
 													</span>
+													<nav>
+														<button
+															className={el.onReply ? 'onReply on' : 'replyOn'}
+															onClick={() => addReply(idx)}
+														>
+															<AiFillPlusCircle />
+														</button>
+														{/* <button onClick={() => enableUpdate(idx)}>
+															<LiaEdit />
+														</button> */}
+														<button onClick={() => deletePost(idx)}>
+															<AiOutlineDelete />
+														</button>
+													</nav>
 												</div>
 											</div>
 											{el.onReply && (
@@ -245,20 +266,6 @@ export default function Community() {
 													</button>
 												</label>
 											)}
-											<nav>
-												<button
-													className={el.onReply ? 'onReply on' : 'replyOn'}
-													onClick={() => addReply(idx)}
-												>
-													<AiFillPlusCircle />
-												</button>
-												{/* <button onClick={() => enableUpdate(idx)}>
-													<LiaEdit />
-												</button> */}
-												<button onClick={() => deletePost(idx)}>
-													<AiOutlineDelete />
-												</button>
-											</nav>
 										</article>
 									);
 								} else {

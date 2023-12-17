@@ -34,7 +34,7 @@ export default function Community() {
 	const [CurNum, setCurNum] = useState(0);
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
 	const pageNum = useRef(1); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
-	const perNum = useRef(6); //한 페이지당 보일 포스트 갯수
+	const perNum = useRef(8); //한 페이지당 보일 포스트 갯수
 	
 	const handleLikeCount = (likeIdx) => {
 		const newPost = 	Post.map((el, idx) => {
@@ -353,7 +353,6 @@ export default function Community() {
 													</div>
 												)}
 												<div className='bottom'>
-													<p>&#64;{el.nickname}</p>
 													<span className={`themeImg ${el.theme}`}>
 														<RiArrowRightDownLine onClick={()=>{
 															handleThemeOnIdx();
@@ -362,6 +361,7 @@ export default function Community() {
 															editMode.current = false;
 														}}/>
 													</span>
+													<p>&#64;{el.nickname}</p>
 													<nav>
 														<button
 															onClick={() => enableUpdate(idx)}

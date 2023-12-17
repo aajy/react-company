@@ -222,7 +222,7 @@
 						display: block;
 						font-size: 0.7rem;
 						text-align: right;
-						margin-bottom: 10px;
+						margin-bottom: 30px;
 						position: relative;
 						z-index: 1;
 					}
@@ -329,6 +329,7 @@
 					}
 					.bottom {
 						display: flex;
+						flex-direction: row-reverse;
 						flex-wrap: wrap;
 						align-items: center;
 						justify-content: space-between;
@@ -346,8 +347,8 @@
 							height: 60px;
 							z-index: 2;
 							display: flex;
-							justify-content: end;
-							align-items: end;
+							justify-content: flex-end;
+							align-items: flex-end;
 							> svg {
 								font-size: 2rem;
 								color: var(--baseColor);
@@ -376,7 +377,6 @@
 						}
 						> nav {
 							position: relative;
-							width: 100%;
 							z-index: 1;
 							display: none;
 							button {
@@ -414,9 +414,13 @@
 					}
 					.txt {
 						.bottom {
+							flex-direction: row;
 							.themeImg {
+								// display: none;
+								width: 100%;
 								background: transparent;
 								transform: scale(-1);
+								justify-content: flex-start;
 								> svg {
 									// color: var(--bgColor);
 									font-size: 3rem;
@@ -424,6 +428,9 @@
 							}
 							> nav {
 								display: block;
+								display: flex;
+								// justify-content: flex-end;
+								justify-content: flex-start;
 							}
 						}
 					}

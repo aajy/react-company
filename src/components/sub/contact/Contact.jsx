@@ -3,14 +3,20 @@ import Layout from '../../common/layout/Layout';
 import './Contact.scss';
 import emailjs from '@emailjs/browser';
 import { RiArrowRightDownLine } from 'react-icons/ri';
+import { useSplitText } from '../../../hooks/useText';
 
 export default function Contact() {
 	const form = useRef();
+	const splitText = useSplitText();
+	const splitTxt = useRef(null);
+	const InfoActive = useRef(null);
 
 	//그룹형식의 DOM을 탐색할때 반환되는 두가지형태의 유사배열
 	//parentDOM.children : HTMLCollection (유사배열: forEach, map 모두 반복불가, Live DOM:상태변경이 실시간)
 	//parentDOM.querySelectorAll : NodeList (유사배열: forEach로는 반복 가능. Static DOM:탐색된 시점의 정적 DOM)
-
+	useEffect(() => {
+		splitText(splitTxt.current, "CONFIDENCE",0, 0);
+	}, []);
 	const resetForm = () =>{
 		const elArr = form.current.children;
 
@@ -56,21 +62,21 @@ export default function Contact() {
 	//지점마다 출력할 정보를 개별적인 객체로 묶어서 배열로 그룹화
 	const mapInfo = useRef([
 		{
-			title: '리움 미술관',
+			title: 'Leeum Museum',
 			latlng: new kakao.current.maps.LatLng(37.538336570005896, 126.99911462086432),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker1.png`,
 			imgSize: new kakao.current.maps.Size(64, 64),
 			imgPos: { offset: new kakao.current.maps.Point(64, 64) }
 		},
 		{
-			title: '아모레퍼시픽 미술관',
+			title: ' AMOREPACIFIC Museum',
 			latlng: new kakao.current.maps.LatLng(37.5290340313225, 126.96845839723807),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker2.png`,
 			imgSize: new kakao.current.maps.Size(64, 64),
 			imgPos: { offset: new kakao.current.maps.Point(64, 64) }
 		},
 		{
-			title: '한가람 미술관',
+			title: 'Hangaram Museum',
 			latlng: new kakao.current.maps.LatLng(37.480265966869645, 127.01420032016485),
 			imgSrc: `${process.env.PUBLIC_URL}/img/marker2.png`,
 			imgSize: new kakao.current.maps.Size(64, 64),
@@ -129,31 +135,51 @@ export default function Contact() {
 	return (
 		<Layout title={'Contact'} className={'Contact'}>
 			<div className='top'>
-				<h1>CONFIDENCE</h1>
+				<h1 ref={splitTxt}>CONFIDENCE</h1>
 				<ul>
-					<li>sense</li>
-					<li>adorable</li>
-					<li> faith (in)</li>
-					<li>[assertive]</li>
-					<li>aplomb</li>
+					<li>SENCE</li>
+					<li>ADORABLE</li>
+					<li> FAITH (IN)</li>
+					<li>[ASSERTIVE]</li>
+					<li>APLOMB</li>
 				</ul>
 			</div>
 			<div id='mapSection'>
 				<div className='controlBox'>
 					<nav className='branch'>
+						<h2>our Location [branch_ ]</h2>
+						<span>How to contact </span>
 						{mapInfo.current.map((el, idx) =>
 							//prettier-ignore
-							<button key={idx} onClick={() => setIndex(idx)} className={idx === Index ? 'on' : ''}>{el.title}</button>
+							<>
+								<button key={el.title + idx} onClick={() => setIndex(idx)} className={idx === Index ? 'on' : ''}>{el.title}</button><span>/</span>
+							</>
 						)}
 					</nav>
 
-					<nav className='info'>
-						<button onClick={() => setTraffic(!Traffic)}>{Traffic ? 'Traffic OFF' : 'Traffic ON'}</button>
-						<button onClick={() => setView(!View)}>{View ? 'map' : 'road view'}</button>
-						<button onClick={setCenter}>위치 초기화</button>
-					</nav>
 				</div>
 				<section className='tab'>
+					<div className='info'>
+						<button
+							className={InfoActive.current ==='traffic'?'on':''}
+							onClick={() => {
+								InfoActive.current === 'traffic' ? InfoActive.current = null : InfoActive.current = 'traffic'; setTraffic(!Traffic);}
+							}
+						>
+							<em>{Traffic ? 'Traffic OFF' : 'Traffic ON'}</em>
+						</button>
+						<button
+							className={InfoActive.current ==='road'?'on':''}
+							onClick={() => {
+								InfoActive.current === 'road' ? InfoActive.current = null : InfoActive.current = 'road'; setView(!View);}
+							}
+						>
+							<em>{View ? 'map' : 'road view'}</em>
+						</button>
+						<button onClick={setCenter}>
+							<em>위치 초기화</em>
+						</button>
+					</div>
 					<article className={`mapBox ${View ? '' : 'on'}`} ref={mapFrame}></article>
 					<article className={`viewBox ${View ? 'on' : ''}`} ref={viewFrame}></article>
 				</section>

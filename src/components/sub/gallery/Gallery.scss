@@ -427,17 +427,27 @@
 							> button {
 								display: block;
 								width: 100%;
-								line-height: 26px;
+								line-height: 24px;
 								border: none;
-								background-color: transparent;
+								background-color:var(--bgColor);
 								padding: 0px 10px;
 								cursor: pointer;
+								border-radius: 18px;
 								color: rgba(var(--baseColor-code), 0.9);
+								transition: 0.3s;
+								&:hover {
+									background-color:var(--baseColor);
+									color: rgba(var(--bgColor-code), 0.9);
+									>svg {
+										color: rgba(var(--bgColor-code), 0.6);
+									}
+								}
 								svg {
 									margin-left: 10px;
 									margin-bottom: -2px;
 									transform: scale(130%);
 									color: rgba(var(--baseColor-code), 0.6);
+									transition: 0.3s;
 								}
 							}
 						}
@@ -449,7 +459,7 @@
 									height: 26px;
 									line-height: 26px;
 									font-size: 0.8rem;
-									transition: 0.3s;
+									transition: 0.2s;
 									border: 1px solid rgba(var(--baseColor-code), 0.6);
 									border-radius: 18px;
 									text-align: center;

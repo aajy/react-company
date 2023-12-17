@@ -11,7 +11,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:17.724Z" }
 			],
 			"theme": "theme1",
-			"title": "Title1"
+			"title": "Title1",
+			"likeCount" : 0
 		},
 		{
 			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
@@ -24,7 +25,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:20.724Z" }
 			],
 			"theme": "theme2",
-			"title": "Title2"
+			"title": "Title2",
+			"likeCount" : 0
 		},
 		{
 			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
@@ -37,7 +39,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:23.724Z" }
 			],
 			"theme": "theme3",
-			"title": "Title3"
+			"title": "Title3",
+			"likeCount" : 0
 		},
 		{
 			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
@@ -50,7 +53,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:26.724Z" }
 			],
 			"theme": "theme4",
-			"title": "Title4"
+			"title": "Title4",
+			"likeCount" : 0
 		},
 		{
 			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
@@ -63,7 +67,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:29.724Z" }
 			],
 			"theme": "theme5",
-			"title": "Title5"
+			"title": "Title5",
+			"likeCount" : 0
 		},
 		{
 			"content": "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque, praesentium.",
@@ -76,7 +81,8 @@
 				{ "value": "333", "date": "2023-12-15T10:49:32.724Z" }
 			],
 			"theme": "theme1",
-			"title": "Title6"
+			"title": "Title6",
+			"likeCount" : 0
 		}
 	]
 }

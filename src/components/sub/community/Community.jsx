@@ -9,10 +9,11 @@ import { TfiPlus } from 'react-icons/tfi';
 import { LiaEdit } from "react-icons/lia";
 import {
 	AiOutlineDelete,
-	AiFillPlusCircle,
+	AiOutlineHeart,
 	AiOutlineDown,
 	AiOutlineUp,
 } from 'react-icons/ai';
+import { IoMdHeart } from 'react-icons/io';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 
 export default function Community() {
@@ -32,6 +33,14 @@ export default function Community() {
 	const perNum = useRef(6); //한 페이지당 보일 포스트 갯수
 	const refReply = useRef('');
 	
+	const handleLikeCount = (likeIdx) => {
+		const newPost = 	Post.map((el, idx) => {
+			if (likeIdx === idx) el.likeCount += 1;
+			return el;
+		})
+		setPost(newPost);
+		localStorage.setItem('post', JSON.stringify(newPost));
+	}
 	const handleReplyView = (replyViewIndex = 'none') => {
 		const newPost = 	Post.map((el, idx) => {
 			if (replyViewIndex === idx) el.replyView = !el.replyView;
@@ -148,7 +157,6 @@ export default function Community() {
 	return (
 		<Layout title={'Community'} className={'Community'}>
 			<div className={Open ? 'InputBoxWrap open': 'InputBoxWrap'}>
-				<div className="modal" onClick={()=>{if(Open) setOpen(!Open)}}></div>
 				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>
@@ -207,9 +215,16 @@ export default function Community() {
 										>
 											<div className='bg'></div>
 											<div className='txt'>
-												<h2>{el.title}</h2>
+												<div className='top'>
+													<h2>{el.title}</h2>
+													<div>
+														<p>{el.likeCount}</p>
+														<button onClick={() => {
+															handleLikeCount(idx);
+														}}><IoMdHeart /></button>
+													</div>
+												</div>
 												<p className='content'>{el.content}</p>
-
 												<span>{strDate}</span>
 												<span
 													className={

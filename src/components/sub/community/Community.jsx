@@ -9,7 +9,6 @@ import { TfiPlus } from 'react-icons/tfi';
 import { LiaEdit } from "react-icons/lia";
 import {
 	AiOutlineDelete,
-	AiOutlineHeart,
 	AiOutlineDown,
 	AiOutlineUp,
 } from 'react-icons/ai';
@@ -26,12 +25,16 @@ export default function Community() {
 		if (data && data.length > 0) return JSON.parse(data);
 		else return postData.dummyPosts;
 	};
+	const editMode = useRef(false);
+	const refTit = useRef(null);
+	const refCon = useRef(null);
+	const refEditTit = useRef(null);
+	const refEditCon = useRef(null);
 	const [Post, setPost] = useState(getLocalData());
 	const [CurNum, setCurNum] = useState(0);
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
 	const pageNum = useRef(1); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
 	const perNum = useRef(6); //한 페이지당 보일 포스트 갯수
-	const refReply = useRef('');
 	
 	const handleLikeCount = (likeIdx) => {
 		const newPost = 	Post.map((el, idx) => {
@@ -66,7 +69,6 @@ export default function Community() {
 	const handleInputChange = (e, replyAddIndex) => {
 		const parentElement = e.target.parentElement;
 
-		// 부모 요소의 자식들 중에서 형제 요소 찾기
 		const siblingElement = Array.from(parentElement.children).find(
 			(child) => child !== e.target
 		);
@@ -102,7 +104,45 @@ export default function Community() {
 
 	//수정모드 변경함수
 	const enableUpdate = (editIndex) => {
-		console.log('editIndex: ', editIndex);
+		if (!editMode.current) {
+			setPost(
+				Post.map((el, idx) => {
+					if (editIndex === idx) el.enableUpdate = true;
+					return el;
+				})
+			);
+			editMode.current = true;
+		}else {
+			updateEditPost(editIndex);
+		}
+	};
+	//수정모드 input 초기화 함수
+	const resetEdit = (e,type) => {
+		const parentElement = e.target.parentElement;
+
+		const defaultValue = Array.from(parentElement.children).find((child) => child !== e.target).defaultValue;
+		type === 'title' ? refEditTit.current.value = defaultValue : refEditCon.current.value = defaultValue;
+	};
+
+	//글 수정 함수
+	const updateEditPost = (updateIndex) => {
+		editMode.current = true;
+		if (!refEditTit.current.value.trim() || !refEditCon.current.value.trim()) {
+			return alert('수정할 글의 제목과  본문을 모두 입력하세요.');
+		} else {
+			editMode.current = false;
+			setPost(
+				Post.map((el, idx) => {
+					if (updateIndex === idx) {
+						el.title = refEditTit.current.value;
+						el.content = refEditCon.current.value;
+						el.enableUpdate = false;
+					}
+					return el;
+				})
+			);
+			localStorage.setItem('post', JSON.stringify(Post));
+		}
 	};
 	//글 삭제 함수
 	const deletePost = (delIndex) => {
@@ -110,12 +150,21 @@ export default function Community() {
 		setPost(Post.filter((_, idx) => delIndex !== idx));
 	};
 	const handleThemeOnIdx = (idx = 'none') => {
+		//이중이벤트 방지
+		if (idx !== 'none'){
+			Post[idx].enableUpdate ? editMode.current = true : editMode.current = false;
+		} else {
+			editMode.current = false;
+		}
 		const newIdx = idx;
 		if (ThemeOnIdx === idx) return;
 		setThemeOnIdx(newIdx);
 		setPost(
 			Post.map((el, idx) => {
-				if (newIdx !== idx) el.replyView = false;
+				if (newIdx !== idx) {
+					el.replyView = false;
+					el.enableUpdate = false;
+				}
 				return el;
 			})
 		);
@@ -126,7 +175,6 @@ export default function Community() {
 	};
 
 	useEffect(() => {
-		console.log('Post 바뀜');
 		Post.map((el) => {
 			el.replyView = false;
 			el.enableUpdate = false;
@@ -142,6 +190,7 @@ export default function Community() {
 	}, [Post.length]);
 	useEffect(() => {
 		// localStorage.clear();
+		editMode.current = false;
 		Post.map((el) => {
 			el.enableUpdate = false;
 		});
@@ -175,6 +224,7 @@ export default function Community() {
 							setThemeOnIdx('');
 							handleReplyView();
 							setOpen(!Open);
+							editMode.current = false;
 						}}
 					>
 						<TfiPlus />
@@ -216,15 +266,38 @@ export default function Community() {
 											<div className='bg'></div>
 											<div className='txt'>
 												<div className='top'>
-													<h2>{el.title}</h2>
-													<div>
+													{!el.enableUpdate ? <h2>{el.title}</h2> : 
+													<div className='editMode'>
+														<input
+															type='text'
+															id='titleInput'
+															placeholder='title'
+															defaultValue={el.title}
+															ref={refEditTit}
+														/>
+														<button onClick={(e)=>resetEdit(e,'title')}>&#8634;</button>
+														</div>
+													}
+													{!el.enableUpdate && <div className='likeCount'>
 														<p>{el.likeCount}</p>
 														<button onClick={() => {
 															handleLikeCount(idx);
 														}}><IoMdHeart /></button>
-													</div>
+													</div>}
 												</div>
-												<p className='content'>{el.content}</p>
+												{!el.enableUpdate ? <p className='content'>{el.content}</p> : 
+													<div className='editMode'>
+														<textarea
+															cols='30'
+															rows='3'
+															id='contentInput'
+															placeholder='content'
+															defaultValue={el.content}
+															ref={refEditCon}
+														/>
+														<button onClick={(e)=>resetEdit(e,'content')}>&#8634;</button>
+														</div>
+													}
 												<span>{strDate}</span>
 												<span
 													className={
@@ -268,13 +341,12 @@ export default function Community() {
 																		type='text'
 																		id='replyInput'
 																		placeholder='Leave your reply!'
-																		ref={refReply}
 																	/>
 																	<button
 																		type='button'
 																		onClick={(e) => handleInputChange(e, idx)}
 																	>
-																		add reply
+																		+
 																	</button>
 																</label>
 														</ul>
@@ -287,10 +359,14 @@ export default function Community() {
 															handleThemeOnIdx();
 															setThemeOnIdx('');
 															handleReplyView();
+															editMode.current = false;
 														}}/>
 													</span>
 													<nav>
-														<button onClick={() => enableUpdate(idx)}>
+														<button
+															onClick={() => enableUpdate(idx)}
+															className={el.enableUpdate ? 'on' : ''}
+														>
 															<LiaEdit />
 														</button>
 														<button onClick={() => deletePost(idx)}>

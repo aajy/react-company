@@ -146,7 +146,7 @@
 							font-size: 1rem;
 							margin-bottom: 10px;
 						}
-						>div {
+						.likeCount {
 							display: flex;
 							align-items: flex-start;
 							>p {
@@ -183,6 +183,29 @@
 									}
 								}
 							}
+						}
+					}
+					.editMode {
+						width: 100%;
+						display: flex;
+						align-items: flex-start;
+						> input, textarea {
+							width: 100%;
+							// background-color: transparent;
+							// border:none;
+							// border-bottom:1px solid rgba(var(--baseColor-code), 0.6);
+							padding:5px 10px;
+							margin-bottom: 10px;
+							&:focus{
+								outline: 0;
+							}
+						}
+						>button {
+							width: 22px;
+							height: 22px;
+							background-color: var(--bgColor);
+							border:1px solid rgba(var(--baseColor-code), 0.6);
+							cursor: pointer;
 						}
 					}
 					.content {
@@ -253,12 +276,17 @@
 									border-bottom: none;
 								}
 								> span {
+									flex:2;
 									font-size: 0.9rem;
+									word-break: break-all;
 									> svg {
 										margin-right: 10px;
 									}
 									&:nth-of-type(2) {
+										flex: 1.5;
 										font-size: 0.7rem;
+										display: flex;
+										word-break: keep-all;
 										>span:nth-of-type(2), span:nth-of-type(3){
 											margin-left: 5px;
 											color:rgba(var(--baseColor-code), 0.6);
@@ -268,14 +296,17 @@
 							}
 							.replyInput {
 								display: block;
-								margin-bottom: 20px;
+								display: flex;
+								width: 100%;
+								margin: 10px 0;
 								position: relative;
 								z-index: 2;
+								gap: 2px;
 								> input {
+									width: 100%;
 									border: 1px solid rgba(var(--baseColor-code), 0.5);
 									border-radius: 20px;
 									padding: 2px 8px;
-									margin-right: 5px;
 									&::placeholder {
 										font-size: 0.7rem;
 										color: var(--pointColor);
@@ -288,9 +319,10 @@
 									border: 1px solid rgba(var(--baseColor-code), 0.5);
 									border-radius: 20px;
 									padding: 2px 8px;
-									color: var(--bgColor);
 									background-color: var(--baseColor);
+									text-align: center;
 									cursor: pointer;
+									color: var(--bgColor);
 								}
 							}
 						}

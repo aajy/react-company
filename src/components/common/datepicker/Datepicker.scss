@@ -1,0 +1,89 @@
+.datePickerBox {
+	display: flex;
+	align-items: center;
+	.datePicker {
+		display: flex;
+		flex-wrap: nowrap;
+		.react-datepicker-popper {
+			&[data-placement^='bottom'] {
+				padding-top: 5px;
+			}
+			.react-datepicker {
+				border-radius: 2px;
+        background-color: var(--bgColorfff);
+				border: 1px solid rgba(var(--baseColor-code), 0.6);
+				padding: 10px;
+				.react-datepicker__triangle {
+					&::before,
+					&::after {
+						border: none;
+					}
+				}
+				.react-datepicker__navigation {
+					box-shadow: none;
+					top: 7px;
+					// .react-datepicker__navigation--next,
+					// .react-datepicker__navigation--previous {
+					// 	top: 9px;
+					// }
+					.react-datepicker__navigation-icon::before {
+						border-width: 1px 1px 0 0;
+						border-color: rgba(var(--baseColor-code), 0.3);
+						top: 14px;
+					}
+				}
+				.react-datepicker__month-container {
+					.react-datepicker__header {
+						background-color: var(--bgColorfff);
+						border-bottom: none;
+						padding: 5px 0;
+						.react-datepicker__current-month {
+							font-weight: normal;
+							padding-bottom: 14px;
+						}
+						.react-datepicker__day-names {
+							.react-datepicker__day-name {
+								font-size: 14px;
+							}
+						}
+					}
+					.react-datepicker__month {
+						.react-datepicker__week {
+							.react-datepicker__day {
+								border-radius: 50%;
+								transition: 0.3s;
+								&:hover {
+									background-color: rgba(var(--baseColor-code), 0.2);
+								}
+							}
+							.react-datepicker__day--today {
+								color: var(--pointColor);
+								text-decoration: underline;
+							}
+							.react-datepicker__day--selected {
+								background-color: var(--pointColor);
+							}
+							.react-datepicker__day--keyboard-selected {
+								background-color: rgba(var(--baseColor-code), 0.6);
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	.react-datepicker__input-container {
+		position: relative;
+		.input-datepicker {
+			height: 26px;
+      border: 1px solid rgba(var(--baseColor-code), 0.6);
+      border-radius: 18px;
+			margin: 0px 2px;
+			text-indent: 10px;
+			font-size: 0.9rem;
+      &:focus {
+        outline: 0;
+      }
+		}
+	}
+}

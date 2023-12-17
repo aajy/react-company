@@ -14,6 +14,7 @@ import {
 } from 'react-icons/ai';
 import { IoMdHeart } from 'react-icons/io';
 import { RiArrowRightDownLine } from 'react-icons/ri';
+import Datepicker from '../../common/datepicker/Datepicker';
 
 export default function Community() {
 	const [Open, setOpen] = useState(false);
@@ -229,6 +230,13 @@ export default function Community() {
 					>
 						<TfiPlus />
 					</button>
+				</div>
+				<div className='sortBox'>
+					<div className='sort'>
+						Sort by
+						<RiArrowRightDownLine />
+					</div>
+					<Datepicker />
 				</div>
 				<nav className='pagination'>
 					{Post.length > 0 &&

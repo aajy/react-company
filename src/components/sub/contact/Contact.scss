@@ -1,7 +1,7 @@
 .Contact {
   .top {
     margin-top: -50px;
-    margin-bottom: 140px;
+    margin-bottom: 180px;
     h1 {
       display: flex;
       justify-content: space-between;
@@ -23,6 +23,7 @@
     }
   }
   #mapSection {
+    margin-bottom: 120px;
     .controlBox {
       .branch {
         text-align: center;
@@ -179,6 +180,83 @@
 			}
 		}
 	}
+
+  #mailSection{
+    display: flex;
+    align-items: center;
+    margin-bottom: 4 0px;
+    >aside {
+      flex:1;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      span {
+        font-size: 7rem;
+        font-weight: 100;
+        line-height: 0.9;
+        font-family: var(--pointFont2);
+        &:nth-child(2) {
+          text-align: right;
+          padding-right: 160px;
+        }
+      }
+    }
+    >div {
+      flex:1;
+      padding: 100px 30px 20px 50px;
+      form {
+        display: flex;
+        flex-direction: column;
+        text-align: right;
+        gap: 6px;
+        >label {
+          position: relative;
+          padding-right: 10px;
+          &::after {
+            content: '*';
+            display: block;
+            font-size: 1.4rem;
+            position: absolute;
+            right: 1px;
+            top: -5px;
+            color:var(--pointColor);
+          }
+        }
+        >input[type=text],input[type=email], >textarea {
+          padding:5px;
+          border-radius: 10px;
+          margin-bottom: 14px;
+          text-indent: 5px;
+          background-color: var(--bgColorfff);
+          border: none;
+          // border: 1px solid rgba(var(--baseColor-code), 0.6);
+          &:focus{
+            outline: 0;
+          }
+        }
+        >input[type=text],input[type=email] {
+          height: 30px;
+        }
+        >button {
+          text-align: right;
+          border: none;
+          background-color: transparent;
+          >svg {
+            font-size: 3rem;
+            cursor: pointer;
+            transition: 0.2s;
+            color:var(--pointColor);
+          }
+          &:hover {
+            >svg {
+              color:var(--baseColor);
+              margin-right: -5px;
+            }
+          }
+        }
+      }
+    }
+  }
 }
 .dark {
 	.Contact {

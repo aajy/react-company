@@ -38,7 +38,7 @@ a {
 		background-color: var(--pointColor);
 	}
 	button,
-	input[type='text'] {
+	input[type='text'], input[type=email], input[type=button], textarea{
 		font-family: var(--baseFont);
 		font-weight: 300;
 	}

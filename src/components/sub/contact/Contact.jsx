@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Contact.scss';
 import emailjs from '@emailjs/browser';
-import { RiArrowRightDownLine } from 'react-icons/ri';
+import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useSplitText } from '../../../hooks/useText';
 
 export default function Contact() {
@@ -185,22 +185,20 @@ export default function Contact() {
 				</section>
 			</div>
 			<div id='mailSection'>
-				<div>
-					<h2>
-						LET'S<br />
-						GET IN<br />
-						TOUCH
-					</h2>
-				</div>
+				<aside>
+					<span>LET'S</span>
+					<span>GET IN</span>
+					<span>TOUCH</span>
+				</aside>
 				<div>
 					<form ref={form} onSubmit={sendEmail}>
-						<label>Name</label>
+						<label>FULL  Name</label>
 						<input type='text' name='user_name' />
 						<label>Email</label>
 						<input type='email' name='user_email' />
 						<label>Message</label>
-						<textarea name='message' />
-						<button type='submit'><RiArrowRightDownLine /></button>
+						<textarea name='message' cols='30' rows='5'/>
+						<button type='submit'><RiArrowRightUpLine /></button>
 					</form>
 				</div>
 			</div>

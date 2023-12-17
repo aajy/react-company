@@ -10,14 +10,14 @@ export default function Layout({ title, className, children }) {
 	const refFrame = useRef(null);
 
 	useEffect(() => {
-		splitText(splitTxt.current, title ? title.toUpperCase() : className.toUpperCase(),0.2, 0);
 		setTimeout(() => {
 			refFrame.current.classList.add('on');
 		}, 300);
+		splitText(splitTxt.current, title ? title.toUpperCase() : className.toUpperCase(),0.2, 0);
 	}, []);
 	return (
 		<main className={`Layout ${className}`} ref={refFrame}>
-			<div className='layout_top'>
+			<div className='layout_top' style={{ display : className === 'Contact' ?'none' : 'block' }}>
 				<span
 				style={{ display: className === 'Detail' ? 'block' : 'none' }}
 				onClick={()=>history.goBack()}

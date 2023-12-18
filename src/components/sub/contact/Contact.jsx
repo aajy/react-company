@@ -9,7 +9,6 @@ export default function Contact() {
 	const form = useRef();
 	const splitText = useSplitText();
 	const splitTxt = useRef(null);
-	const InfoActive = useRef(null);
 
 	useEffect(() => {
 		splitText(splitTxt.current, 'CONFIDENCE', 0, 0);
@@ -202,22 +201,16 @@ export default function Contact() {
 				<section className='tab'>
 					<div className='info'>
 						<button
-							className={InfoActive.current === 'traffic' ? 'on' : ''}
+							className={Traffic ? 'on' : ''}
 							onClick={() => {
-								InfoActive.current === 'traffic'
-									? (InfoActive.current = null)
-									: (InfoActive.current = 'traffic');
 								setTraffic(!Traffic);
 							}}
 						>
 							<em>{Traffic ? 'Traffic OFF' : 'Traffic ON'}</em>
 						</button>
 						<button
-							className={InfoActive.current === 'road' ? 'on' : ''}
+							className='on'
 							onClick={() => {
-								InfoActive.current === 'road'
-									? (InfoActive.current = null)
-									: (InfoActive.current = 'road');
 								setView(!View);
 							}}
 						>

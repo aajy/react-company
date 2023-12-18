@@ -56,10 +56,12 @@
 				justify-content: center;
 				cursor: pointer;
 				z-index: 6;
+				transition: 0.5s;
 				> svg {
 					transition: 0.5s;
 				}
 				&.on {
+					background-color: var(--baseColor);
 					> svg {
 						transform: rotate(45deg);
 					}

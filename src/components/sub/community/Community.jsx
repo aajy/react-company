@@ -6,12 +6,8 @@ import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
 import { BsArrowReturnRight } from 'react-icons/bs';
 import { TfiPlus } from 'react-icons/tfi';
-import { LiaEdit } from "react-icons/lia";
-import {
-	AiOutlineDelete,
-	AiOutlineDown,
-	AiOutlineUp,
-} from 'react-icons/ai';
+import { LiaEdit } from 'react-icons/lia';
+import { AiOutlineDelete, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import { IoMdHeart } from 'react-icons/io';
 import { RiArrowRightDownLine } from 'react-icons/ri';
 import Datepicker from '../../common/datepicker/Datepicker';
@@ -36,36 +32,37 @@ export default function Community() {
 	const len = useRef(0); //전체 Post갯수를 담을 참조 객체
 	const pageNum = useRef(1); //전체 페이지 갯수를 추후에 연산해서 담을 참조객체
 	const perNum = useRef(8); //한 페이지당 보일 포스트 갯수
-	
+
 	const handleLikeCount = (likeIdx) => {
-		const newPost = 	Post.map((el, idx) => {
+		const newPost = Post.map((el, idx) => {
 			if (likeIdx === idx) el.likeCount += 1;
 			return el;
-		})
+		});
 		setPost(newPost);
 		localStorage.setItem('post', JSON.stringify(newPost));
-	}
+	};
 	const handleReplyView = (replyViewIndex = 'none') => {
-		const newPost = 	Post.map((el, idx) => {
+		const newPost = Post.map((el, idx) => {
 			if (replyViewIndex === idx) el.replyView = !el.replyView;
 			return el;
-		})
+		});
 		setPost(newPost);
 	};
 	const handleReplyDelete = (commentIdx, replyIdx) => {
 		const newPost = Post.map((el, idx) => {
-			if (commentIdx === idx) return {
-				...el,
-				reply: [
-					...el.reply.slice(0, replyIdx),
-					...el.reply.slice(replyIdx + 1)
-				]
-			}
+			if (commentIdx === idx)
+				return {
+					...el,
+					reply: [
+						...el.reply.slice(0, replyIdx),
+						...el.reply.slice(replyIdx + 1),
+					],
+				};
 			return el;
-		})
+		});
 		setPost(newPost);
 		localStorage.setItem('post', JSON.stringify(newPost));
-	}
+	};
 
 	const handleInputChange = (e, replyAddIndex) => {
 		const parentElement = e.target.parentElement;
@@ -88,15 +85,13 @@ export default function Community() {
 					} else {
 						return {
 							...el,
-							reply: [
-								{ value: siblingElement.value, date: new Date(korTime) },
-							],
+							reply: [{ value: siblingElement.value, date: new Date(korTime) }],
 						};
 					}
 				} else {
 					return el;
 				}
-			})
+			});
 			setPost(newPost);
 			siblingElement.value = '';
 			localStorage.setItem('post', JSON.stringify(newPost));
@@ -113,16 +108,20 @@ export default function Community() {
 				})
 			);
 			editMode.current = true;
-		}else {
+		} else {
 			updateEditPost(editIndex);
 		}
 	};
 	//수정모드 input 초기화 함수
-	const resetEdit = (e,type) => {
+	const resetEdit = (e, type) => {
 		const parentElement = e.target.parentElement;
 
-		const defaultValue = Array.from(parentElement.children).find((child) => child !== e.target).defaultValue;
-		type === 'title' ? refEditTit.current.value = defaultValue : refEditCon.current.value = defaultValue;
+		const defaultValue = Array.from(parentElement.children).find(
+			(child) => child !== e.target
+		).defaultValue;
+		type === 'title'
+			? (refEditTit.current.value = defaultValue)
+			: (refEditCon.current.value = defaultValue);
 	};
 
 	//글 수정 함수
@@ -152,8 +151,10 @@ export default function Community() {
 	};
 	const handleThemeOnIdx = (idx = 'none') => {
 		//이중이벤트 방지
-		if (idx !== 'none'){
-			Post[idx].enableUpdate ? editMode.current = true : editMode.current = false;
+		if (idx !== 'none') {
+			Post[idx].enableUpdate
+				? (editMode.current = true)
+				: (editMode.current = false);
 		} else {
 			editMode.current = false;
 		}
@@ -190,7 +191,6 @@ export default function Community() {
 		}
 	}, [Post.length]);
 	useEffect(() => {
-		// localStorage.clear();
 		editMode.current = false;
 		Post.map((el) => {
 			el.enableUpdate = false;
@@ -206,7 +206,7 @@ export default function Community() {
 
 	return (
 		<Layout title={'Community'} className={'Community'}>
-			<div className={Open ? 'InputBoxWrap open': 'InputBoxWrap'}>
+			<div className={Open ? 'InputBoxWrap open' : 'InputBoxWrap'}>
 				<InputBox Open={Open} setNewPost={updatePost} />
 			</div>
 			<div className='communityWrap'>
@@ -274,26 +274,38 @@ export default function Community() {
 											<div className='bg'></div>
 											<div className='txt'>
 												<div className='top'>
-													{!el.enableUpdate ? <h2>{el.title}</h2> : 
-													<div className='editMode'>
-														<input
-															type='text'
-															id='titleInput'
-															placeholder='title'
-															defaultValue={el.title}
-															ref={refEditTit}
-														/>
-														<button onClick={(e)=>resetEdit(e,'title')}>&#8634;</button>
+													{!el.enableUpdate ? (
+														<h2>{el.title}</h2>
+													) : (
+														<div className='editMode'>
+															<input
+																type='text'
+																id='titleInput'
+																placeholder='title'
+																defaultValue={el.title}
+																ref={refEditTit}
+															/>
+															<button onClick={(e) => resetEdit(e, 'title')}>
+																&#8634;
+															</button>
 														</div>
-													}
-													{!el.enableUpdate && <div className='likeCount'>
-														<p>{el.likeCount}</p>
-														<button onClick={() => {
-															handleLikeCount(idx);
-														}}><IoMdHeart /></button>
-													</div>}
+													)}
+													{!el.enableUpdate && (
+														<div className='likeCount'>
+															<p>{el.likeCount}</p>
+															<button
+																onClick={() => {
+																	handleLikeCount(idx);
+																}}
+															>
+																<IoMdHeart />
+															</button>
+														</div>
+													)}
 												</div>
-												{!el.enableUpdate ? <p className='content'>{el.content}</p> : 
+												{!el.enableUpdate ? (
+													<p className='content'>{el.content}</p>
+												) : (
 													<div className='editMode'>
 														<textarea
 															cols='30'
@@ -303,9 +315,11 @@ export default function Community() {
 															defaultValue={el.content}
 															ref={refEditCon}
 														/>
-														<button onClick={(e)=>resetEdit(e,'content')}>&#8634;</button>
-														</div>
-													}
+														<button onClick={(e) => resetEdit(e, 'content')}>
+															&#8634;
+														</button>
+													</div>
+												)}
 												<span>{strDate}</span>
 												<span
 													className={
@@ -319,55 +333,68 @@ export default function Community() {
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
 												{el.reply && el.reply.length > 0 && (
-													<div className={
-														el.replyView ? 'replyView on' : 'replyView'
-													}>
+													<div
+														className={
+															el.replyView ? 'replyView on' : 'replyView'
+														}
+													>
 														<ul>
-																{el.reply.map((reply, index) => {
-																	if (Object.keys(reply).length > 0) {
-																		const date = JSON.stringify(reply.date);
-																		const replyStrDate = changeDate(
-																			date.slice(1,-1)
-																		);
-																		return (
-																			<li key={reply.date + idx}>
-																				<span>
-																					<BsArrowReturnRight />
-																					{reply.value}
+															{el.reply.map((reply, index) => {
+																if (Object.keys(reply).length > 0) {
+																	const date = JSON.stringify(reply.date);
+																	const replyStrDate = changeDate(
+																		date.slice(1, -1)
+																	);
+																	return (
+																		<li key={reply.date + idx}>
+																			<span>
+																				<BsArrowReturnRight />
+																				{reply.value}
+																			</span>
+																			<span>
+																				<span>{replyStrDate[0]}</span>
+																				<span>{replyStrDate[1]}</span>
+																				<span
+																					onClick={() =>
+																						handleReplyDelete(idx, index)
+																					}
+																				>
+																					<AiOutlineDelete />
 																				</span>
-																				<span>
-																					<span>{replyStrDate[0]}</span>
-																					<span>{replyStrDate[1]}</span>
-																					<span onClick={()=>handleReplyDelete(idx, index)}><AiOutlineDelete /></span>
-																				</span>
-																			</li>
-																		);
-																	}
-																})}
-																<label htmlFor='replyInput' className='replyInput'>
-																	<input
-																		type='text'
-																		id='replyInput'
-																		placeholder='Leave your reply!'
-																	/>
-																	<button
-																		type='button'
-																		onClick={(e) => handleInputChange(e, idx)}
-																	>
-																		+
-																	</button>
-																</label>
+																			</span>
+																		</li>
+																	);
+																}
+															})}
+															<label
+																htmlFor='replyInput'
+																className='replyInput'
+															>
+																<input
+																	type='text'
+																	id='replyInput'
+																	placeholder='Leave your reply!'
+																/>
+																<button
+																	type='button'
+																	onClick={(e) => handleInputChange(e, idx)}
+																>
+																	+
+																</button>
+															</label>
 														</ul>
 													</div>
 												)}
 												<div className='bottom'>
 													<span className={`themeImg ${el.theme}`}>
-														<RiArrowRightDownLine onClick={()=>{
-															handleThemeOnIdx();
-															setThemeOnIdx('');
-															handleReplyView();
-															editMode.current = false;
-														}}/>
+														<RiArrowRightDownLine
+															onClick={() => {
+																handleThemeOnIdx();
+																setThemeOnIdx('');
+																handleReplyView();
+																editMode.current = false;
+															}}
+														/>
 													</span>
 													<p>&#64;{el.nickname}</p>
 													<nav>

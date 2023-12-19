@@ -1,19 +1,21 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Menu.scss';
-import { useEffect} from 'react';
+import { useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
 import { useSelector } from 'react-redux';
 
 export default function Menu({ setDark, isDark, setToggleMenu }) {
-	const MenuData = useSelector(store => store.menuReducer.menuTextArr)
-	const closeMenu = () => {
-		window.innerWidth >= 1000 && setToggleMenu(false);
-	};
+	const MenuData = useSelector((store) => store.menuReducer.menuTextArr);
+
+	const closeMenu = useCallback(() => {
+		window.innerWidth >= 1100 && setToggleMenu(false);
+	}, [setToggleMenu]);
 	useEffect(() => {
+		console.log('use');
 		window.addEventListener('resize', closeMenu);
 		return () => window.removeEventListener('resize', closeMenu);
-	}, []);
+	}, [closeMenu]);
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -58,22 +60,23 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 						</div>
 						<div className='bottom'>
 							<ul>
-								{MenuData && MenuData.map((menu, index) => {
-									return (
-										<li key={menu.num + index}>
-											<span>{menu.num}</span>
-											<NavLink to={menu.link} activeClassName={'on'}>
-												<div>
-													<span>{menu.menu}</span>
-													<p>{menu.description}</p>
-												</div>
-												<span>
-													<RiArrowRightUpLine />
-												</span>
-											</NavLink>
-										</li>
-									);
-								})}
+								{MenuData &&
+									MenuData.map((menu, index) => {
+										return (
+											<li key={menu.num + index}>
+												<span>{menu.num}</span>
+												<NavLink to={menu.link} activeClassName={'on'}>
+													<div>
+														<span>{menu.menu}</span>
+														<p>{menu.description}</p>
+													</div>
+													<span>
+														<RiArrowRightUpLine />
+													</span>
+												</NavLink>
+											</li>
+										);
+									})}
 							</ul>
 							{/* TODO :: menu footer
               <div className='bottomBottom'>

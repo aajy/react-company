@@ -3,14 +3,18 @@ import './Menu.scss';
 import { useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import * as types from '../../../redux/action';
 
-export default function Menu({ setDark, isDark, setToggleMenu }) {
-	const MenuData = useSelector((store) => store.menuReducer.menuTextArr);
+export default function Menu({ setDark, isDark }) {
+	const dispatch = useDispatch();
+	const MenuData = useSelector((store) => store.menuTextReducer.menuTextArr);
 
 	const closeMenu = useCallback(() => {
-		window.innerWidth >= 1100 && setToggleMenu(false);
-	}, [setToggleMenu]);
+		window.innerWidth >= 1100 &&
+			dispatch({ type: types.MENU.start, payload: false });
+		console.log('useCall');
+	}, [dispatch]);
 	useEffect(() => {
 		console.log('use');
 		window.addEventListener('resize', closeMenu);
@@ -27,7 +31,10 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 			}}
 		>
 			<div className='Menu'>
-				<div className='modal' onClick={() => setToggleMenu(false)}></div>
+				<div
+					className='modal'
+					onClick={() => dispatch({ type: types.MENU.start, payload: false })}
+				></div>
 				<motion.div
 					initial={{ x: -100 }}
 					animate={{ x: 0, transition: { duration: 0.2, ease: 'linear' } }}
@@ -43,7 +50,9 @@ export default function Menu({ setDark, isDark, setToggleMenu }) {
 							<h2>abbive</h2>
 							<button
 								className='closeMenu'
-								onClick={() => setToggleMenu(false)}
+								onClick={() =>
+									dispatch({ type: types.MENU.start, payload: false })
+								}
 							></button>
 							<div className='topBottom'>
 								<div>

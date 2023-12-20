@@ -8,46 +8,42 @@ import Gallery from './components/sub/gallery/Gallery';
 import Youtube from './components/sub/youtube/Youtube';
 import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
+import * as types from './redux/action';
 
 import { Route } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
 import { AnimatePresence } from 'framer-motion';
 import Detail from './components/sub/youtube/Detail';
 import Members from './components/sub/members/Members';
+import Welcome from './components/sub/members/Welcome';
 
 export default function App() {
 	const dispatch = useDispatch();
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Dark, setDark] = useState(false);
-	const [ToggleMenu, setToggleMenu] = useState(false);
+	const Dark = useSelector((store) => store.darkReducer.dark);
 
 	const fetchDepartment = async () => {
 		const data = await fetch(`${path.current}/DB/department.json`);
 		const json = await data.json();
-		dispatch({ type: 'SET_MEMBERS', payload: json });
+		console.log('fetchDepartment: ', json.members);
+		return dispatch({ type: types.MEMBERS.success, payload: json.members });
 	};
-	const fetchMenu = () => {
-		fetch(`${path.current}/DB/menuText.json`)
-		.then(data => data.json())
-		.then(json => {
-			dispatch({ type: 'SET_MENU', payload: json.menuTextArr})
-		})
+	const fetchMenuText = async () => {
+		const data = await fetch(`${path.current}/DB/menuText.json`);
+		const json = await data.json();
+		console.log('fetchMenuText: ', json.menuText);
+		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
-	useEffect(()=>{
+	useEffect(() => {
 		fetchDepartment();
-		fetchMenu();
-	},[])
+		fetchMenuText();
+	}, []);
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header
-				isDark={Dark}
-				setDark={() => setDark(!Dark)}
-				ToggleMenu={ToggleMenu}
-				setToggleMenu={setToggleMenu}
-			/>
+			<Header />
 			<Route exact path='/' component={MainWrap} />
 			<Route path='/department' component={Department} />
 			<Route exact path='/youtube' component={Youtube} />
@@ -57,15 +53,10 @@ export default function App() {
 			<Route path='/community' component={Community} />
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
+			<Route path='/welcome/:id' component={Welcome} />
 			<Footer />
 			<AnimatePresence>
-				{ToggleMenu && (
-					<Menu
-						isDark={Dark}
-						setDark={() => setDark(!Dark)}
-						setToggleMenu={setToggleMenu}
-					/>
-				)}
+				<Menu />
 			</AnimatePresence>
 		</div>
 	);

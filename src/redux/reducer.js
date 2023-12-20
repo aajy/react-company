@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import * as types from './action';
 
-const memberReducer = (state = { members: [] }, action) => {
+const memberReducer = (state = { members: {} }, action) => {
 	if (action.type === types.MEMBERS.start) return state;
 	else if (action.type === types.MEMBERS.success)
 		return { ...state, members: action.payload };
@@ -18,11 +18,13 @@ const menuTextReducer = (state = { menuText: [] }, action) => {
 	else return state;
 };
 const menuReducer = (state = { menu: false }, action) => {
-	if (action.type === types.MENU.start) return state;
+	if (action.type === types.MENU.start)
+		return { ...state, menu: action.payload };
 	else return state;
 };
 const darkReducer = (state = { dark: false }, action) => {
-	if (action.type === types.DARK.start) return state;
+	if (action.type === types.DARK.start)
+		return { ...state, dark: action.payload };
 	else return state;
 };
 const reducers = combineReducers({

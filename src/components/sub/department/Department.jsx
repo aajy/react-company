@@ -6,13 +6,17 @@ import { useSelector } from 'react-redux';
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const MemberData = useSelector(store => store.memberReducer.members)
+	const MemberData = useSelector((store) => {
+		console.log(' store.memberReucer', store.memberReducer.members);
+		return store.memberReducer.members;
+	});
+	console.log('MemberData: ', MemberData);
 
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>
 			<article className='department-top'>
 				<ul>
-					{MemberData && MemberData.departmentTop.map((data, idx) => {
+					{MemberData.departmentTop?.map((data, idx) => {
 						if (idx < 3) {
 							if (idx === 2) {
 								return (
@@ -41,7 +45,7 @@ export default function Department() {
 					})}
 				</ul>
 				<ul style={{ flexDirection: 'row-reverse' }}>
-					{MemberData && MemberData.departmentTop.map((data, idx) => {
+					{MemberData.departmentTop?.map((data, idx) => {
 						if (idx > 2) {
 							if (idx === 5) {
 								return (
@@ -72,7 +76,7 @@ export default function Department() {
 				<div>
 					<h3>CLIENTS</h3>
 					<ul>
-						{MemberData && MemberData.departmentClients.map((data, idx) => {
+						{MemberData.departmentClients?.map((data, idx) => {
 							return (
 								<li key={data + idx}>
 									<div>
@@ -89,7 +93,7 @@ export default function Department() {
 			<article className='department-bottom'>
 				<h2>TEAM</h2>
 				<ul>
-					{MemberData && MemberData.departmentMember.map((data, idx) => {
+					{MemberData.departmentMember?.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>
@@ -103,7 +107,7 @@ export default function Department() {
 				</ul>
 				<h3>Supported by</h3>
 				<ul>
-					{MemberData && MemberData.departmentSupport.map((data, idx) => {
+					{MemberData.departmentSupport?.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>

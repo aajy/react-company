@@ -1,0 +1,11 @@
+.Welcome {
+	width: 100%;
+	min-height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	h1 {
+		transform: translateY(-100px);
+		font-family: var(--pointFont);
+	}
+}

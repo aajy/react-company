@@ -2,7 +2,7 @@ import Layout from '../../common/layout/Layout';
 import './Members.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
-// import { useDebounce } from '../../../hooks/useDebounce';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 export default function Members() {
 	const history = useHistory();
@@ -18,7 +18,7 @@ export default function Members() {
 	});
 	const [Val, setVal] = useState(initVal.current);
 	//useDebouce 훅의 인수로 특정 state를 전달해서 debouncing이 적용된 새로운 state값 반환받음
-	// const DebouncedVal = useDebounce(Val);
+	const DebouncedVal = useDebounce(Val);
 	const [Errs, setErrs] = useState({});
 
 	const handleReset = () => {
@@ -72,19 +72,20 @@ export default function Members() {
 	};
 
 	const handleSubmit = (e) => {
+		console.log(Object.keys(check(Val)));
 		e.preventDefault();
 
 		if (Object.keys(check(Val)).length === 0) {
 			alert('회원가입을 축하합니다.');
-			history.push('/welcome/3');
+			history.push('/welcome/1');
 		}
 	};
 
 	//debounding이 적용된 state를 의존성배열에 등록해서
 	//해당 값으로 check함수 호출
-	// useEffect(() => {
-	// 	setErrs(check(DebouncedVal));
-	// }, [DebouncedVal]);
+	useEffect(() => {
+		setErrs(check(DebouncedVal));
+	}, [DebouncedVal]);
 
 	return (
 		<Layout title={'Members'}>

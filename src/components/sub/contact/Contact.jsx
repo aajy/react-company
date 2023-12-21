@@ -17,7 +17,6 @@ export default function Contact() {
 		const elArr = form.current.children;
 
 		Array.from(elArr).forEach((el) => {
-			console.log(el);
 			if (
 				el.name === 'user_name' ||
 				el.name === 'user_email' ||

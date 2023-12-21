@@ -7,10 +7,8 @@ import { useSelector } from 'react-redux';
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const MemberData = useSelector((store) => {
-		console.log(' store.memberReucer', store.memberReducer.members);
 		return store.memberReducer.members;
 	});
-	console.log('MemberData: ', MemberData);
 
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>

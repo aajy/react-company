@@ -121,7 +121,6 @@ export default function Youtube() {
 	};
 	const handleActive = (vid, index, length) => {
 		setIsActive(false);
-		console.log('vid, idx: ', vid, index);
 		let newArr = [...Vids];
 		newArr.forEach((el, idx) => {
 			if (0 <= idx && idx < length) {
@@ -129,7 +128,6 @@ export default function Youtube() {
 			}
 		});
 		newArr[index].active = true;
-		console.log('newArr[index]: ', newArr[index]);
 		setVids(newArr);
 		setActiveVids(newArr[index]);
 		setTimeout(()=>{

@@ -33,7 +33,6 @@ export default function Detail() {
 		try {
 			const data = await fetch(baseURL);
 			const json = await data.json();
-			console.log('json.items[0]: ', json.items[0]);
 			setYoutubeData(json.items[0].snippet);
 			//댓글가져오는 요청
 			const commentURL = `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&part=replies&videoId=${json.items[0].snippet.resourceId.videoId}`;

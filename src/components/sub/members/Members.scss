@@ -1,0 +1,24 @@
+.Members {
+  .membersWrap {
+    width: 100%;
+    .top {
+      width: 100%;
+      ul {
+        width: 100%;
+        display: flex;
+        margin-bottom: 10px;
+        li {
+          border: 1px solid #333;
+          padding:3px 5px;
+          font-size: 3rem;
+          border-radius: 3rem;
+          font-family: var(--baseTitFont);
+        }
+        &:nth-child(2) {
+          margin-bottom: 60px;
+        }
+      }
+    }
+
+  }
+}

@@ -3,6 +3,7 @@ import './Members.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
+import { RiArrowRightLine } from "react-icons/ri";
 
 export default function Members() {
 	const history = useHistory();
@@ -88,13 +89,15 @@ export default function Members() {
 	}, [DebouncedVal]);
 
 	return (
-		<Layout title={'Members'}>
-			<div className='wrap'>
+		<Layout title={'Members'} className={'Members'}>
+			<div className='membersWrap'>
 				<div className="top">
 					<ul>
 						<li>Create.</li>
 						<li>Finance.</li>
-						<li></li>
+						<li><RiArrowRightLine /></li>
+					</ul>
+					<ul>
 						<li>Develop.</li>
 						<li>Together.</li>
 					</ul>

@@ -3,10 +3,11 @@ import './Members.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
-import { RiArrowRightLine } from "react-icons/ri";
+import { RiArrowRightLine,RiArrowDownLine,RiArrowUpLine } from "react-icons/ri";
 
 export default function Members() {
 	const history = useHistory();
+	const [Toggle, setToggle] = useState(false);
 	const initVal = useRef({
 		userid: '',
 		pwd1: '',
@@ -88,25 +89,48 @@ export default function Members() {
 		setErrs(check(DebouncedVal));
 	}, [DebouncedVal]);
 
+	const unmounted = useRef(false); 
+	useEffect(() => {
+		const timeoutId = setTimeout(() => {
+      if (!unmounted.current) {
+        setToggle(true);
+      }
+    }, 500);
+    return () => {
+      clearTimeout(timeoutId);
+      unmounted.current = true;
+    };
+	},[])
 	return (
 		<Layout title={'Members'} className={'Members'}>
 			<div className='membersWrap'>
-				<div className="top">
+				<div className={`top ${Toggle && 'on'}`}>
 					<ul>
 						<li>Create.</li>
 						<li>Finance.</li>
-						<li><RiArrowRightLine /></li>
+						<li onClick={()=> setToggle(!Toggle)}><RiArrowRightLine /></li>
 					</ul>
 					<ul>
 						<li>Develop.</li>
 						<li>Together.</li>
 					</ul>
-					<p>Crowdfunding platform for influencer and entrepreneur</p>
-					<p>Support / Funding interview</p>
-					<p>Global impact</p>
+					<div className='topText'>
+						<span>&#9679;</span>
+						<p>Crowdfunding platform for influencers and entrepreneurs</p>
+						<RiArrowRightLine/>
+					</div>
+					<div className='topText'>
+						<RiArrowDownLine />
+						<p>Support / Funding interview</p>
+					</div>
+					<div className='topText'>
+						<span>&#38;</span>
+						<p>Global impact</p>
+						<RiArrowUpLine />
+					</div>
 				</div>
 				<div className='infoBox'>
-					<h2>Join Members</h2>
+					<h2>Join Us Now</h2>
 				</div>
 
 				<div className='formBox'>

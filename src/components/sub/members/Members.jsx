@@ -90,6 +90,18 @@ export default function Members() {
 	return (
 		<Layout title={'Members'}>
 			<div className='wrap'>
+				<div className="top">
+					<ul>
+						<li>Create.</li>
+						<li>Finance.</li>
+						<li></li>
+						<li>Develop.</li>
+						<li>Together.</li>
+					</ul>
+					<p>Crowdfunding platform for influencer and entrepreneur</p>
+					<p>Support / Funding interview</p>
+					<p>Global impact</p>
+				</div>
 				<div className='infoBox'>
 					<h2>Join Members</h2>
 				</div>

@@ -95,5 +95,20 @@
         }
       }
     }
+    .formBox {
+      form fieldset,form fieldset table {
+          border : none;
+          tbody{
+            tr {
+              
+              .gender {
+                padding:20px;
+
+              }
+            }
+            
+          }
+        }
+      }
+    }
   }
-}

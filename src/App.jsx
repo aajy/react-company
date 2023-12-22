@@ -37,6 +37,13 @@ export default function App() {
 		console.log('fetchMenuText: ', json.menuText);
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
+	const fetchYoutube = async () => {
+		const data = await fetch(`${path.current}/DB/menuText.json`);
+		const json = await data.json();
+		console.log('fetchMenuText: ', json.menuText);
+		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
+	};
+
 	useEffect(() => {
 		fetchDepartment();
 		fetchMenuText();

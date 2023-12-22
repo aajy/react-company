@@ -27,10 +27,19 @@ const darkReducer = (state = { dark: false }, action) => {
 		return { ...state, dark: action.payload };
 	else return state;
 };
+const youtubeReducer = (state = { youtube: [] }, action) => {
+	if (action.type === types.YOUTUBE.start) return state;
+	else if (action.type === types.YOUTUBE.success)
+		return { ...state, youtube: action.payload };
+	else if (action.type === types.YOUTUBE.fail)
+		return { ...state, youtube: action.payload };
+	else return state;
+};
 const reducers = combineReducers({
 	memberReducer,
 	menuTextReducer,
 	menuReducer,
 	darkReducer,
+	youtubeReducer,
 });
 export default reducers;

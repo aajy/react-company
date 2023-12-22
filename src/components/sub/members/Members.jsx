@@ -29,6 +29,9 @@ export default function Members() {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
+		console.log('value: ', value);
+		console.log('name: ', name);
+
 		setVal({ ...Val, [name]: value });
 	};
 
@@ -205,7 +208,7 @@ export default function Members() {
 									<tr className='gender'>
 										<td colSpan='2'>
 											<input
-												className={Val.name === 'female'? 'checked': ''}
+												className={Val.value === 'female'? 'checked': ''}
 												type='radio'
 												defaultValue='female'
 												id='female'
@@ -215,7 +218,7 @@ export default function Members() {
 											<label htmlFor='female'>Female</label>
 
 											<input
-												className={Val.name === 'male'? 'checked': ''}
+												className={Val.value === 'male'? 'checked': ''}
 												type='radio'
 												defaultValue='male'
 												id='male'

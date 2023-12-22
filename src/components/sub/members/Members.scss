@@ -100,10 +100,17 @@
           border : none;
           tbody{
             tr {
-              
+              display: block;
               .gender {
                 padding:20px;
-
+                td {
+                  input {
+                    color: red;
+                    &:checked {
+                      color : red;
+                    }
+                  }
+                }
               }
             }
             

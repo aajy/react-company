@@ -202,9 +202,10 @@ export default function Members() {
 									</tr>
 
 									{/* gender */}
-									<tr>
+									<tr className='gender'>
 										<td colSpan='2'>
 											<input
+												className={Val.name === 'female'? 'checked': ''}
 												type='radio'
 												defaultValue='female'
 												id='female'
@@ -214,6 +215,7 @@ export default function Members() {
 											<label htmlFor='female'>Female</label>
 
 											<input
+												className={Val.name === 'male'? 'checked': ''}
 												type='radio'
 												defaultValue='male'
 												id='male'

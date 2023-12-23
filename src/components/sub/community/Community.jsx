@@ -419,6 +419,14 @@ export default function Community() {
 					</div>
 				</div>
 				<div className='gradationBox'></div>
+				<div className="connectImage">
+					<div className="img"></div>
+					<div className="text">
+						<h3>CONNECT WITH<br/>YOUR<br/>AUDIENCE?</h3>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt nostrum blanditiis, eius similique ducimus consequatur molestiae omnis sequi aspernatur odit.</p>
+						<button>GET IN TOUCH</button>
+					</div>
+				</div>
 				<h2 className='bottomText'>LeT'S TaLK.</h2>
 			</div>
 		</Layout>

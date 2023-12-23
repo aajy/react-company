@@ -190,7 +190,26 @@
 			}
 		}
 	}
-
+	#qnaSection {
+		h2 {
+			font-size: 3rem;
+			font-family: var(--baseTitFont);
+		}
+		.list {
+			ul {
+				li {
+					h3 {
+						width: 100%;
+						display: flex;
+						justify-content: space-between;
+						>svg {
+							font-size: 2rem;
+						}
+					}
+				}
+			}
+		}
+	}
 	#mailSection {
 		display: flex;
 		align-items: center;

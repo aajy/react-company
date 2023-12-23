@@ -10,6 +10,7 @@ export default function Contact() {
 	const form = useRef();
 	const splitText = useSplitText();
 	const splitTxt = useRef(null);
+	const [ActiveList, setActiveList] = useState(null);
 
 	useEffect(() => {
 		splitText(splitTxt.current, 'CONFIDENCE', 0, 0);
@@ -223,26 +224,26 @@ export default function Contact() {
 			<div id="qnaSection">
 				<h2>COMMON<br />QUESTIONS</h2>
 				<div className="list">
-					<ul>
-						<li>
+					<ul className={ActiveList}>
+						<li onClick={() => setActiveList('first')}>
 							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
 							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
 						</li>
-						<li>
+						<li onClick={() => setActiveList('second')}>
 							<h3><span>HOW DO YOU DETERMINE PROJECT PRICING?</span> <RiArrowRightUpLine /></h3>
-							<p>Our project pricing is determined by the </p>
+							<p>Our project pricing is determined by the scope of the project, the level of expertise required, and the timeline for completion.</p>
 						</li>
-						<li>
-							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
-							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						<li onClick={() => setActiveList('third')}>
+							<h3><span>HOW LONG DOES A TYPICAL PROJECT TAKE?</span> <RiArrowRightUpLine /></h3>
+							<p>The length of a project depends on the scope and complexity of the work required. We work closely with our clients to establish a realistic timeline that meets their needs.</p>
 						</li>
-						<li>
-							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
-							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						<li onClick={() => setActiveList('fourth')}>
+							<h3><span>WHAT SETS YOUR AGENCY APART FROM OTHERS?</span> <RiArrowRightUpLine /></h3>
+							<p>Our agency is committed to delivering personalized, tailored solutions that meet our clients' unique needs. We focus on building strong relationships with our clients to ensure their success.</p>
 						</li>
-						<li>
-							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
-							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						<li onClick={() => setActiveList('fifth')}>
+							<h3><span>HOW DO I GET STARTED WITH YOUR AGENCY?</span> <RiArrowRightUpLine /></h3>
+							<p>The first step is to contact us to schedule a consultation. During the consultation, we will discuss your needs and goals, and determine the best way to move forward with your project.</p>
 						</li>
 					</ul>
 				</div>

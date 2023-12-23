@@ -220,6 +220,33 @@ export default function Contact() {
 					></article>
 				</section>
 			</div>
+			<div id="qnaSection">
+				<h2>COMMON<br />QUESTIONS</h2>
+				<div className="list">
+					<ul>
+						<li>
+							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
+							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						</li>
+						<li>
+							<h3><span>HOW DO YOU DETERMINE PROJECT PRICING?</span> <RiArrowRightUpLine /></h3>
+							<p>Our project pricing is determined by the </p>
+						</li>
+						<li>
+							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
+							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						</li>
+						<li>
+							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
+							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						</li>
+						<li>
+							<h3><span>WHAT SERVICES DO YOU OFFER?</span> <RiArrowRightUpLine /></h3>
+							<p>We offer a range of service including branding, e-commerce, campagins, social media, web development, and digital marketing.</p>
+						</li>
+					</ul>
+				</div>
+			</div>
 			<div id='mailSection'>
 				<aside>
 					<span>LET'S</span>

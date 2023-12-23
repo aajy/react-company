@@ -82,7 +82,7 @@ export default function Contact() {
 			imgPos: { offset: new kakao.current.maps.Point(64, 64) },
 		},
 		{
-			title: ' AMOREPACIFIC Museum',
+			title: 'AMOREPACIFIC Museum',
 			latlng: new kakao.current.maps.LatLng(
 				37.5290340313225,
 				126.96845839723807
@@ -116,7 +116,7 @@ export default function Contact() {
 	const roadview = () => {
 		new kakao.current.maps.RoadviewClient().getNearestPanoId(
 			mapInfo.current[Index].latlng,
-			50,
+			100,
 			(panoId) => {
 				new kakao.current.maps.Roadview(viewFrame.current).setPanoId(
 					panoId,
@@ -188,12 +188,12 @@ export default function Contact() {
 				<div className='controlBox'>
 					<nav className='branch'>
 						<h2>our Location [branch_ ]</h2>
-						<span>How to contact </span>
+						<p>How to contact </p>
 						{mapInfo.current.map((el, idx) =>
 							//prettier-ignore
-							<>
-								<button key={el.title + idx} onClick={() => setIndex(idx)} className={idx === Index ? 'on' : ''}>{el.title}</button><span>/</span>
-							</>
+							<span key={`${el.title}`}> 
+								<button onClick={() => setIndex(idx)} className={idx === Index ? 'on' : ''}>{el.title}</button><span>/</span>
+							</span>
 						)}
 					</nav>
 				</div>

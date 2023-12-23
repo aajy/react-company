@@ -254,6 +254,9 @@ export default function Contact() {
 					<span>GET IN</span>
 					<span>TOUCH</span>
 				</aside>
+				<button type='submit'>
+					<RiArrowRightUpLine />
+				</button>
 				<div>
 					<form ref={form} onSubmit={sendEmail}>
 						<label>FULL Name</label>
@@ -262,9 +265,6 @@ export default function Contact() {
 						<input type='email' name='user_email' />
 						<label>Message</label>
 						<textarea name='message' cols='30' rows='5' />
-						<button type='submit'>
-							<RiArrowRightUpLine />
-						</button>
 					</form>
 				</div>
 			</div>

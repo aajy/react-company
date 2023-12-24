@@ -277,9 +277,8 @@ export default function Youtube() {
 
 							if (idx === 0 && data.snippet) {
 								return (
-									<Link to={`/youtube/detail/${data.id}`}>
+									<Link to={`/youtube/detail/${data.id}`} key={data.snippet.title + idx}>
 										<article
-											key={data.snippet.title + idx}
 											className='big'
 										>
 												<div>
@@ -305,9 +304,8 @@ export default function Youtube() {
 							}
 							if (idx === 1 && data.snippet) {
 								return (
-									<Link to={`/youtube/detail/${data.id}`}>
+									<Link to={`/youtube/detail/${data.id}`} key={data.snippet.title + idx}>
 										<article
-											key={data.snippet.title + idx}
 											className='small'
 										>
 												<div className='txt'>
@@ -340,9 +338,8 @@ export default function Youtube() {
 							const [date, time] = publishedAt ? publishedAt.split('T') : ['',''];
 							if (idx === 0 && data.snippet) {
 								return (
-									<Link to={`/youtube/detail/${data.id}`}>
+									<Link to={`/youtube/detail/${data.id}`} key={data.snippet.title + idx}>
 										<article
-											key={data.snippet.title + idx}
 											className='small'
 										>
 												<div className='txt'>
@@ -369,9 +366,8 @@ export default function Youtube() {
 							}
 							if (idx === 1 && data.snippet) {
 								return (
-									<Link to={`/youtube/detail/${data.id}`}>
+									<Link to={`/youtube/detail/${data.id}`} key={data.snippet.title + idx}>
 										<article
-											key={data.snippet.title + idx}
 											className='big'
 										>
 												<div>

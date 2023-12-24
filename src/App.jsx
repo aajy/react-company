@@ -28,13 +28,11 @@ export default function App() {
 	const fetchDepartment = async () => {
 		const data = await fetch(`${path.current}/DB/department.json`);
 		const json = await data.json();
-		console.log('fetchDepartment: ', json.members);
 		return dispatch({ type: types.MEMBERS.success, payload: json.members });
 	};
 	const fetchMenuText = async () => {
 		const data = await fetch(`${path.current}/DB/menuText.json`);
 		const json = await data.json();
-		console.log('fetchMenuText: ', json.menuText);
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
 	const fetchYoutube = async () => {

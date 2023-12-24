@@ -38,10 +38,7 @@ export default function App() {
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
 	const fetchYoutube = async () => {
-		const data = await fetch(`${path.current}/DB/menuText.json`);
-		const json = await data.json();
-		console.log('fetchMenuText: ', json.menuText);
-		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
+		//TODO :: 검색 후 받은 데이터로 재검색해야 할 때
 	};
 
 	useEffect(() => {

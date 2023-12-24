@@ -65,12 +65,9 @@ export default function Community() {
 	};
 
 	const handleInputChange = (e, replyAddIndex) => {
-		const parentElement = e.target.parentElement;
+		e.preventDefault();
 
-		const siblingElement = Array.from(parentElement.children).find(
-			(child) => child !== e.target
-		);
-		if (siblingElement.value) {
+		if (e.target[0].value) {
 			const korTime = new Date().getTime() + 1000 * 60 * 60 * 9;
 			const newPost = Post.map((el, idx) => {
 				if (replyAddIndex === idx && el) {
@@ -79,13 +76,13 @@ export default function Community() {
 							...el,
 							reply: [
 								...el.reply,
-								{ value: siblingElement.value, date: new Date(korTime) },
+								{ value: e.target[0].value, date: new Date(korTime) },
 							],
 						};
 					} else {
 						return {
 							...el,
-							reply: [{ value: siblingElement.value, date: new Date(korTime) }],
+							reply: [{ value: e.target[0].value, date: new Date(korTime) }],
 						};
 					}
 				} else {
@@ -93,7 +90,7 @@ export default function Community() {
 				}
 			});
 			setPost(newPost);
-			siblingElement.value = '';
+			e.target[0].value = '';
 			localStorage.setItem('post', JSON.stringify(newPost));
 		}
 	};
@@ -366,25 +363,24 @@ export default function Community() {
 																	);
 																}
 															})}
-															<label
-																htmlFor='replyInput'
-																className='replyInput'
-															>
-																<input
-																	type='text'
-																	id='replyInput'
-																	placeholder='Leave your reply!'
-																/>
-																<button
-																	type='button'
-																	onClick={(e) => handleInputChange(e, idx)}
-																>
-																	+
-																</button>
-															</label>
 														</ul>
 													</div>
 												)}
+												{el.replyView && 
+												<form onSubmit={(e) => handleInputChange(e, idx)}>
+													<label
+														htmlFor='replyInput'
+														className='replyInput'
+													>
+														<input
+															type='text'
+															id='replyInput'
+															placeholder='Leave your reply!'
+														/>
+														<button>+</button>
+													</label>
+												</form>
+												}
 												<div className='bottom'>
 													<span className={`themeImg ${el.theme}`}>
 														<RiArrowRightDownLine

@@ -319,37 +319,37 @@
 									}
 								}
 							}
-							.replyInput {
-								display: block;
-								display: flex;
-								width: 100%;
-								margin: 10px 0;
-								position: relative;
-								z-index: 2;
-								gap: 2px;
-								> input {
-									width: 100%;
-									border: 1px solid rgba(var(--baseColor-code), 0.5);
-									border-radius: 20px;
-									padding: 2px 8px;
-									&::placeholder {
-										font-size: 0.7rem;
-										color: var(--pointColor);
-									}
-									&:focus {
-										outline: 0;
-									}
-								}
-								> button {
-									border: 1px solid rgba(var(--baseColor-code), 0.5);
-									border-radius: 20px;
-									padding: 2px 8px;
-									background-color: var(--baseColor);
-									text-align: center;
-									cursor: pointer;
-									color: var(--bgColor);
-								}
+						}
+					}
+					.replyInput {
+						display: block;
+						display: flex;
+						width: 100%;
+						margin: 10px 0;
+						position: relative;
+						z-index: 2;
+						gap: 2px;
+						> input {
+							width: 100%;
+							border: 1px solid rgba(var(--baseColor-code), 0.5);
+							border-radius: 20px;
+							padding: 2px 8px;
+							&::placeholder {
+								font-size: 0.7rem;
+								color: var(--pointColor);
 							}
+							&:focus {
+								outline: 0;
+							}
+						}
+						> button {
+							border: 1px solid rgba(var(--baseColor-code), 0.5);
+							border-radius: 20px;
+							padding: 2px 8px;
+							background-color: var(--baseColor);
+							text-align: center;
+							cursor: pointer;
+							color: var(--bgColor);
 						}
 					}
 					.bottom {

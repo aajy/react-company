@@ -321,6 +321,11 @@
 							}
 						}
 					}
+					.noReplyView {
+						padding:6px 10px;
+						font-size: 0.8rem;
+						color:rgba(var(--baseColor-code), 0.7);
+					}
 					.replyInput {
 						display: block;
 						display: flex;

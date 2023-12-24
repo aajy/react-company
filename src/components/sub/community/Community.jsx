@@ -4,7 +4,7 @@ import './Community.scss';
 import InputBox from './InputBox';
 import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
-import { BsArrowReturnRight } from 'react-icons/bs';
+import { BsArrowReturnRight, BsArrowDown } from 'react-icons/bs';
 import { TfiPlus } from 'react-icons/tfi';
 import { LiaEdit } from 'react-icons/lia';
 import { AiOutlineDelete, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
@@ -329,8 +329,8 @@ export default function Community() {
 													<span>View Reply</span>
 													{el.replyView ? <AiOutlineUp /> : <AiOutlineDown />}
 												</span>
-												{el.reply && el.reply.length > 0 && (
-													<div
+												{(el.reply && el.reply.length > 0) 
+												? (<div
 														className={
 															el.replyView ? 'replyView on' : 'replyView'
 														}
@@ -365,7 +365,8 @@ export default function Community() {
 															})}
 														</ul>
 													</div>
-												)}
+												) 
+												: el.replyView && <div className='noReplyView'>. . .</div>}
 												{el.replyView && 
 												<form onSubmit={(e) => handleInputChange(e, idx)}>
 													<label

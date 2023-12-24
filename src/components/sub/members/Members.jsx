@@ -22,12 +22,14 @@ export default function Members() {
 	//useDebouce 훅의 인수로 특정 state를 전달해서 debouncing이 적용된 새로운 state값 반환받음
 	const DebouncedVal = useDebounce(Val);
 	const [Errs, setErrs] = useState({});
+	const [ActiveTr, setActiveTr] = useState(null);
 
 	const handleReset = () => {
 		setVal(initVal.current);
 	};
 
 	const handleChange = (e) => {
+		setActiveTr(e.target.name);
 		const { name, value } = e.target;
 		console.log('value: ', value);
 		console.log('name: ', name);
@@ -143,13 +145,15 @@ export default function Members() {
 							<table>
 								<tbody>
 									{/* userid, email */}
-									<tr>
+									<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
+										<h3>userid</h3>
 										<td>
 											<input
 												type='text'
 												name='userid'
 												placeholder='User ID'
 												value={Val.userid}
+												onFocus={()=>setActiveTr('userid')}
 												onChange={handleChange}
 											/>
 											{Errs.userid && <p>{Errs.userid}</p>}
@@ -160,6 +164,7 @@ export default function Members() {
 												name='email'
 												placeholder='Email'
 												value={Val.email}
+												onFocus={()=>setActiveTr('email')}
 												onChange={handleChange}
 											/>
 											{Errs.email && <p>{Errs.email}</p>}
@@ -167,12 +172,13 @@ export default function Members() {
 									</tr>
 
 									{/* pwd1, pwd2 */}
-									<tr>
+									<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
 										<td>
 											<input
 												type='password'
 												name='pwd1'
 												placeholder='Password'
+												onFocus={()=>setActiveTr('pwd1')}
 												value={Val.pwd1}
 												onChange={handleChange}
 											/>
@@ -183,6 +189,7 @@ export default function Members() {
 												type='password'
 												name='pwd2'
 												placeholder='Re-Password'
+												onFocus={()=>setActiveTr('pwd1')}
 												value={Val.pwd2}
 												onChange={handleChange}
 											/>
@@ -191,9 +198,9 @@ export default function Members() {
 									</tr>
 
 									{/* edu */}
-									<tr>
+									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
 										<td colSpan='2'>
-											<select name='edu' onChange={handleChange}>
+											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')}>
 												<option value=''>Education</option>
 												<option value='elementary-school'>초등학교 졸업</option>
 												<option value='middle-school'>중학교 졸업</option>
@@ -205,7 +212,7 @@ export default function Members() {
 									</tr>
 
 									{/* gender */}
-									<tr className='gender'>
+									<tr  className={ActiveTr === 'gender' ? 'on gender' : "gender"}>
 										<td colSpan='2'>
 											<input
 												className={Val.value === 'female'? 'checked': ''}
@@ -213,6 +220,7 @@ export default function Members() {
 												defaultValue='female'
 												id='female'
 												name='gender'
+												onFocus={()=>setActiveTr('gender')}
 												onChange={handleChange}
 											/>
 											<label htmlFor='female'>Female</label>
@@ -223,6 +231,7 @@ export default function Members() {
 												defaultValue='male'
 												id='male'
 												name='gender'
+												onFocus={()=>setActiveTr('gender')}
 												onChange={handleChange}
 											/>
 											<label htmlFor='male'>Male</label>
@@ -231,13 +240,14 @@ export default function Members() {
 									</tr>
 
 									{/* interests */}
-									<tr>
+									<tr className={ActiveTr === 'interest' ? 'on' : ''}>
 										<td colSpan='2'>
 											<input
 												type='checkbox'
 												name='interest'
 												id='sports'
 												defaultValue='sports'
+												onFocus={()=>setActiveTr('interest')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='sports'>Sports</label>
@@ -247,6 +257,7 @@ export default function Members() {
 												name='interest'
 												id='reading'
 												defaultValue='reading'
+												onFocus={()=>setActiveTr('interest')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='reading'>Reading</label>
@@ -256,6 +267,7 @@ export default function Members() {
 												name='interest'
 												id='music'
 												defaultValue='music'
+												onFocus={()=>setActiveTr('interest')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='music'>Music</label>
@@ -265,6 +277,7 @@ export default function Members() {
 												name='interest'
 												id='game'
 												defaultValue='game'
+												onFocus={()=>setActiveTr('interest')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='game'>Game</label>
@@ -273,13 +286,14 @@ export default function Members() {
 									</tr>
 
 									{/* comments  */}
-									<tr>
+									<tr className={ActiveTr === 'comments' ? 'on' : ''}>
 										<td colSpan='2'>
 											<textarea
 												name='comments'
 												cols='30'
 												rows='5'
 												placeholder='Leave a comment'
+												onFocus={()=>setActiveTr('comments')}
 												value={Val.comments}
 												onChange={handleChange}
 											></textarea>
@@ -293,6 +307,7 @@ export default function Members() {
 											<input
 												type='reset'
 												value='Cancel'
+												onFocus={()=>setActiveTr('')}
 												onClick={handleReset}
 											/>
 											<input type='submit' value='Submit' />

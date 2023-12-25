@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { RiArrowRightLine,RiArrowDownLine,RiArrowUpLine } from "react-icons/ri";
+import { BiSolidCheckCircle } from "react-icons/bi";
 
 export default function Members() {
 	const history = useHistory();
@@ -110,7 +111,7 @@ export default function Members() {
 		<Layout title={'Members'} className={'Members'}>
 			<div className='membersWrap'>
 				<div className={`top ${Toggle && 'on'}`}>
-					<ul>
+					{/* <ul>
 						<li>Create.</li>
 						<li>Finance.</li>
 						<li onClick={()=> setToggle(!Toggle)}><RiArrowRightLine /></li>
@@ -118,7 +119,7 @@ export default function Members() {
 					<ul>
 						<li>Develop.</li>
 						<li>Together.</li>
-					</ul>
+					</ul> */}
 					<div className='topText'>
 						<span>&#9679;</span>
 						<p>Crowdfunding platform for influencers and entrepreneurs</p>
@@ -144,63 +145,70 @@ export default function Members() {
 							<legend className='h'>회원가입 폼</legend>
 							<table>
 								<tbody>
-									{/* userid, email */}
-									<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
-										<h3>userid</h3>
-										<td>
-											<input
-												type='text'
-												name='userid'
-												placeholder='User ID'
-												value={Val.userid}
-												onFocus={()=>setActiveTr('userid')}
-												onChange={handleChange}
-											/>
-											{Errs.userid && <p>{Errs.userid}</p>}
-										</td>
-										<td>
-											<input
-												type='text'
-												name='email'
-												placeholder='Email'
-												value={Val.email}
-												onFocus={()=>setActiveTr('email')}
-												onChange={handleChange}
-											/>
-											{Errs.email && <p>{Errs.email}</p>}
-										</td>
-									</tr>
-
-									{/* pwd1, pwd2 */}
-									<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
-										<td>
-											<input
-												type='password'
-												name='pwd1'
-												placeholder='Password'
-												onFocus={()=>setActiveTr('pwd1')}
-												value={Val.pwd1}
-												onChange={handleChange}
-											/>
-											{Errs.pwd1 && <p>{Errs.pwd1}</p>}
-										</td>
-										<td>
-											<input
-												type='password'
-												name='pwd2'
-												placeholder='Re-Password'
-												onFocus={()=>setActiveTr('pwd1')}
-												value={Val.pwd2}
-												onChange={handleChange}
-											/>
-											{Errs.pwd2 && <p>{Errs.pwd2}</p>}
-										</td>
-									</tr>
+									<div>
+										{/* userid, email */}
+										<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
+											<h3>USER ID{(Val.userid && !Errs.userid && Val.email && !Errs.email) && <span><BiSolidCheckCircle /></span>}</h3>
+											<td>
+												<input
+													type='text'
+													name='userid'
+													placeholder='User ID'
+													value={Val.userid}
+													onFocus={()=>setActiveTr('userid')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleChange}
+												/>
+												{Errs.userid && <p>{Errs.userid}</p>}
+											</td>
+											<td>
+												<input
+													type='text'
+													name='email'
+													placeholder='Email'
+													value={Val.email}
+													onFocus={()=>setActiveTr('email')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleChange}
+												/>
+												{Errs.email && <p>{Errs.email}</p>}
+											</td>
+										</tr>
+										
+										{/* pwd1, pwd2 */}
+										<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
+										<h3>PASSWORD</h3>
+											<td>
+												<input
+													type='password'
+													name='pwd1'
+													placeholder='Password'
+													onFocus={()=>setActiveTr('pwd1')}
+													onBlur={()=>setActiveTr('')}
+													value={Val.pwd1}
+													onChange={handleChange}
+												/>
+												{Errs.pwd1 && <p>{Errs.pwd1}</p>}
+											</td>
+											<td>
+												<input
+													type='password'
+													name='pwd2'
+													placeholder='Re-Password'
+													onFocus={()=>setActiveTr('pwd1')}
+													onBlur={()=>setActiveTr('')}
+													value={Val.pwd2}
+													onChange={handleChange}
+												/>
+												{Errs.pwd2 && <p>{Errs.pwd2}</p>}
+											</td>
+										</tr>
+									</div>
 
 									{/* edu */}
 									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
 										<td colSpan='2'>
-											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')}>
+											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')} onBlur={()=>setActiveTr('')}>
 												<option value=''>Education</option>
 												<option value='elementary-school'>초등학교 졸업</option>
 												<option value='middle-school'>중학교 졸업</option>
@@ -221,6 +229,7 @@ export default function Members() {
 												id='female'
 												name='gender'
 												onFocus={()=>setActiveTr('gender')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleChange}
 											/>
 											<label htmlFor='female'>Female</label>
@@ -232,6 +241,7 @@ export default function Members() {
 												id='male'
 												name='gender'
 												onFocus={()=>setActiveTr('gender')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleChange}
 											/>
 											<label htmlFor='male'>Male</label>
@@ -248,6 +258,7 @@ export default function Members() {
 												id='sports'
 												defaultValue='sports'
 												onFocus={()=>setActiveTr('interest')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='sports'>Sports</label>
@@ -258,6 +269,7 @@ export default function Members() {
 												id='reading'
 												defaultValue='reading'
 												onFocus={()=>setActiveTr('interest')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='reading'>Reading</label>
@@ -268,6 +280,7 @@ export default function Members() {
 												id='music'
 												defaultValue='music'
 												onFocus={()=>setActiveTr('interest')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='music'>Music</label>
@@ -278,6 +291,7 @@ export default function Members() {
 												id='game'
 												defaultValue='game'
 												onFocus={()=>setActiveTr('interest')}
+												onBlur={()=>setActiveTr('')}
 												onChange={handleCheck}
 											/>
 											<label htmlFor='game'>Game</label>
@@ -294,6 +308,7 @@ export default function Members() {
 												rows='5'
 												placeholder='Leave a comment'
 												onFocus={()=>setActiveTr('comments')}
+												onBlur={()=>setActiveTr('')}
 												value={Val.comments}
 												onChange={handleChange}
 											></textarea>

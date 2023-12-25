@@ -99,6 +99,7 @@
       form fieldset,form fieldset table {
           width: 100%;
           border : none;
+          margin-bottom: 100px;
           tbody{
             transition: 0.5s;
             tr {
@@ -182,6 +183,28 @@
                   border-radius: 5px;
                   margin-bottom: 10px;
                 }
+                >p {
+                  color : var(--pointColor);
+                }
+              }
+              &:last-of-type {
+                background-color: transparent;
+                padding:0px;
+                margin-top: 60px;
+                td {
+                  width: 100%;
+                  flex-direction: row;
+                  justify-content: space-between;
+                  > input {
+                    width: 40%;
+                    padding:14px 20px;
+                    cursor: pointer;
+                    &:nth-child(2) {
+                      background-color: var(--pointColor);
+                      color:#fff;
+                    }
+                  }
+                }
               }
             }
             .gender, .interest {
@@ -200,7 +223,7 @@
                   margin-bottom: 10px;
                   &.on {
                     background-color: var(--pointColor);
-                    color: var(--bgColor);
+                    color:#fff;
                     border: 1px solid rgba(var(--baseColor-code), 0);
                   }
                 }

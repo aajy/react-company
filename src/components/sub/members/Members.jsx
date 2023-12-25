@@ -32,9 +32,6 @@ export default function Members() {
 	const handleChange = (e) => {
 		setActiveTr(e.target.name);
 		const { name, value } = e.target;
-		console.log('value: ', value);
-		console.log('name: ', name);
-
 		setVal({ ...Val, [name]: value });
 	};
 
@@ -137,9 +134,9 @@ export default function Members() {
 						<RiArrowUpLine />
 					</div>
 				</div>
-				<div className='infoBox'>
+				{/* <div >
 					<h2>Join Us Now</h2>
-				</div>
+				</div> */}
 
 				<div className='formBox'>
 					<form onSubmit={handleSubmit}>
@@ -147,69 +144,67 @@ export default function Members() {
 							<legend className='h'>회원가입 폼</legend>
 							<table>
 								<tbody>
-									<div>
 										{/* userid, email */}
-										<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
-											<h3>USER ID
-												<span className={(Val.userid && !Errs.userid && Val.email && !Errs.email) ? 'on' : ''}><BiSolidCheckCircle /></span>
-											</h3>
-											<td>
-												<input
-													type='text'
-													name='userid'
-													placeholder='User ID'
-													value={Val.userid}
-													onFocus={()=>setActiveTr('userid')}
-													onBlur={()=>setActiveTr('')}
-													onChange={handleChange}
-												/>
-												{Errs.userid && <p>{Errs.userid}</p>}
-											</td>
-											<td>
-												<input
-													type='text'
-													name='email'
-													placeholder='Email'
-													value={Val.email}
-													onFocus={()=>setActiveTr('email')}
-													onBlur={()=>setActiveTr('')}
-													onChange={handleChange}
-												/>
-												{Errs.email && <p>{Errs.email}</p>}
-											</td>
-										</tr>
-										
-										{/* pwd1, pwd2 */}
-										<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
-											<h3>PASSWORD
-												<span className={(Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2) ? 'on' : ''}><BiSolidCheckCircle /></span>
-											</h3>
-											<td>
-												<input
-													type='password'
-													name='pwd1'
-													placeholder='Password'
-													onFocus={()=>setActiveTr('pwd1')}
-													onBlur={()=>setActiveTr('')}
-													value={Val.pwd1}
-													onChange={handleChange}
-												/>
-												{Errs.pwd1 && <p>{Errs.pwd1}</p>}
-											</td>
-											<td>
-												<input
-													type='password'
-													name='pwd2'
-													placeholder='Re-Password'
-													onFocus={()=>setActiveTr('pwd1')}
-													onBlur={()=>setActiveTr('')}
-													value={Val.pwd2}
-													onChange={handleChange}
-												/>
-												{Errs.pwd2 && <p>{Errs.pwd2}</p>}
-											</td>
-										</tr>
-									</div>
+									<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
+										<h3>USER ID
+											<span className={(Val.userid && !Errs.userid && Val.email && !Errs.email) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
+										<td>
+											<input
+												type='text'
+												name='userid'
+												placeholder='User ID'
+												value={Val.userid}
+												onFocus={()=>setActiveTr('userid')}
+												onBlur={()=>setActiveTr('')}
+												onChange={handleChange}
+											/>
+											{Errs.userid && <p>{Errs.userid}</p>}
+										</td>
+										<td>
+											<input
+												type='text'
+												name='email'
+												placeholder='Email'
+												value={Val.email}
+												onFocus={()=>setActiveTr('email')}
+												onBlur={()=>setActiveTr('')}
+												onChange={handleChange}
+											/>
+											{Errs.email && <p>{Errs.email}</p>}
+										</td>
+									</tr>
+									
+									{/* pwd1, pwd2 */}
+									<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
+										<h3>PASSWORD
+											<span className={(Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
+										<td>
+											<input
+												type='password'
+												name='pwd1'
+												placeholder='Password'
+												onFocus={()=>setActiveTr('pwd1')}
+												onBlur={()=>setActiveTr('')}
+												value={Val.pwd1}
+												onChange={handleChange}
+											/>
+											{Errs.pwd1 && <p>{Errs.pwd1}</p>}
+										</td>
+										<td>
+											<input
+												type='password'
+												name='pwd2'
+												placeholder='Re-Password'
+												onFocus={()=>setActiveTr('pwd1')}
+												onBlur={()=>setActiveTr('')}
+												value={Val.pwd2}
+												onChange={handleChange}
+											/>
+											{Errs.pwd2 && <p>{Errs.pwd2}</p>}
+										</td>
+									</tr>
 
 									{/* edu */}
 									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
@@ -316,7 +311,7 @@ export default function Members() {
 
 									{/* comments  */}
 									<tr className={ActiveTr === 'comments' ? 'on' : ''}>
-										<h3>Gender
+										<h3>Comments
 											<span className={(Val.comments && !Errs.comments) ? 'on' : ''}><BiSolidCheckCircle /></span>
 										</h3>
 										<td colSpan='2'>
@@ -339,11 +334,11 @@ export default function Members() {
 										<td colSpan='2'>
 											<input
 												type='reset'
-												value='Cancel'
+												value='CANCEL'
 												onFocus={()=>setActiveTr('')}
 												onClick={handleReset}
 											/>
-											<input type='submit' value='Submit' />
+											<input type='submit' value='SUBMIT' />
 										</td>
 									</tr>
 								</tbody>

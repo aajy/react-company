@@ -9,8 +9,9 @@ import { TfiPlus } from 'react-icons/tfi';
 import { LiaEdit } from 'react-icons/lia';
 import { AiOutlineDelete, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import { IoMdHeart } from 'react-icons/io';
-import { RiArrowRightDownLine } from 'react-icons/ri';
+import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
 import Datepicker from '../../common/datepicker/Datepicker';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Community() {
 	const [Open, setOpen] = useState(false);
@@ -416,16 +417,18 @@ export default function Community() {
 					</div>
 				</div>
 				<div className='gradationBox'></div>
-				<div className="connectImage">
+				<h2 className='bottomText'>LeT'S TaLK.</h2>
+			</div>
+			<div className="connectImage">
 					<div className="img"></div>
 					<div className="text">
 						<h3>CONNECT WITH<br/>YOUR<br/>AUDIENCE?</h3>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt nostrum blanditiis, eius similique ducimus consequatur molestiae omnis sequi aspernatur odit.</p>
-						<button>GET IN TOUCH</button>
+						<Link to="/members">
+							<button>GET IN TOUCH<RiArrowRightUpLine /></button>
+						</Link>
 					</div>
 				</div>
-				<h2 className='bottomText'>LeT'S TaLK.</h2>
-			</div>
 		</Layout>
 	);
 }

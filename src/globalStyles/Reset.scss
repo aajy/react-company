@@ -52,5 +52,8 @@ tr {
 	textarea {
 		font-family: var(--baseFont);
 		font-weight: 300;
+		&:focus {
+			outline: none;
+		}
 	}
 }

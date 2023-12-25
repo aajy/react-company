@@ -39,10 +39,12 @@ export default function Members() {
 	};
 
 	const handleCheck = (e) => {
+		setActiveTr(e.target.name);
 		const { name } = e.target;
-		const inputs = e.target.parentElement.querySelectorAll('input');
+		const inputs = e.target.parentElement.parentElement.querySelectorAll('input');
 		const checkArr = [];
 		inputs.forEach((input) => input.checked && checkArr.push(input.value));
+		console.log('checkArr: ', checkArr);
 		setVal({ ...Val, [name]: checkArr });
 	};
 
@@ -148,7 +150,9 @@ export default function Members() {
 									<div>
 										{/* userid, email */}
 										<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
-											<h3>USER ID{(Val.userid && !Errs.userid && Val.email && !Errs.email) && <span><BiSolidCheckCircle /></span>}</h3>
+											<h3>USER ID
+												<span className={(Val.userid && !Errs.userid && Val.email && !Errs.email) ? 'on' : ''}><BiSolidCheckCircle /></span>
+											</h3>
 											<td>
 												<input
 													type='text'
@@ -177,7 +181,9 @@ export default function Members() {
 										
 										{/* pwd1, pwd2 */}
 										<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
-										<h3>PASSWORD</h3>
+											<h3>PASSWORD
+												<span className={(Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2) ? 'on' : ''}><BiSolidCheckCircle /></span>
+											</h3>
 											<td>
 												<input
 													type='password'
@@ -207,6 +213,9 @@ export default function Members() {
 
 									{/* edu */}
 									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
+										<h3>Education
+											<span className={(Val.edu && !Errs.edu) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
 										<td colSpan='2'>
 											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')} onBlur={()=>setActiveTr('')}>
 												<option value=''>Education</option>
@@ -221,49 +230,55 @@ export default function Members() {
 
 									{/* gender */}
 									<tr  className={ActiveTr === 'gender' ? 'on gender' : "gender"}>
-										<td colSpan='2'>
-											<input
-												className={Val.value === 'female'? 'checked': ''}
-												type='radio'
-												defaultValue='female'
-												id='female'
-												name='gender'
-												onFocus={()=>setActiveTr('gender')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleChange}
-											/>
-											<label htmlFor='female'>Female</label>
-
-											<input
-												className={Val.value === 'male'? 'checked': ''}
-												type='radio'
-												defaultValue='male'
-												id='male'
-												name='gender'
-												onFocus={()=>setActiveTr('gender')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleChange}
-											/>
-											<label htmlFor='male'>Male</label>
+										<h3>Gender
+											<span className={(Val.gender && !Errs.gender) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
+										<td colSpan='2' >
+											<label htmlFor='female' className={Val.gender === 'female'? 'on': ''}>
+												<input
+													type='radio'
+													defaultValue='female'
+													id='female'
+													name='gender'
+													onFocus={()=>setActiveTr('gender')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleChange}
+												/> Female
+											</label>
+											<label htmlFor='male' className={Val.gender === 'male'? 'on': ''}>
+												<input
+													type='radio'
+													defaultValue='male'
+													id='male'
+													name='gender'
+													onFocus={()=>setActiveTr('gender')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleChange}
+												/> Male
+											</label>
 											{Errs.gender && <p>{Errs.gender}</p>}
 										</td>
 									</tr>
 
 									{/* interests */}
-									<tr className={ActiveTr === 'interest' ? 'on' : ''}>
+									<tr className={ActiveTr === 'interest' ? 'on interest' : 'interest'}>
+										<h3>Interest
+											<span className={(Val.interest && !Errs.interest) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
 										<td colSpan='2'>
-											<input
-												type='checkbox'
-												name='interest'
-												id='sports'
-												defaultValue='sports'
-												onFocus={()=>setActiveTr('interest')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleCheck}
-											/>
-											<label htmlFor='sports'>Sports</label>
-
-											<input
+											<label htmlFor='sports' className={Val.interest.includes('sports')? 'on': ''}>
+												<input
+													type='checkbox'
+													name='interest'
+													id='sports'
+													defaultValue='sports'
+													onFocus={()=>setActiveTr('interest')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleCheck}
+												/> Sports
+											</label>
+											<label htmlFor='reading' className={Val.interest.includes('reading')? 'on': ''}>
+												<input
 												type='checkbox'
 												name='interest'
 												id='reading'
@@ -271,36 +286,39 @@ export default function Members() {
 												onFocus={()=>setActiveTr('interest')}
 												onBlur={()=>setActiveTr('')}
 												onChange={handleCheck}
-											/>
-											<label htmlFor='reading'>Reading</label>
-
-											<input
-												type='checkbox'
-												name='interest'
-												id='music'
-												defaultValue='music'
-												onFocus={()=>setActiveTr('interest')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleCheck}
-											/>
-											<label htmlFor='music'>Music</label>
-
-											<input
-												type='checkbox'
-												name='interest'
-												id='game'
-												defaultValue='game'
-												onFocus={()=>setActiveTr('interest')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleCheck}
-											/>
-											<label htmlFor='game'>Game</label>
+												/>Reading
+											</label>
+											<label htmlFor='music' className={Val.interest.includes('music')? 'on': ''}>
+												<input
+													type='checkbox'
+													name='interest'
+													id='music'
+													defaultValue='music'
+													onFocus={()=>setActiveTr('interest')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleCheck}
+												/>	Music
+											</label>
+											<label htmlFor='game' className={Val.interest.includes('game')? 'on': ''}>
+												<input
+													type='checkbox'
+													name='interest'
+													id='game'
+													defaultValue='game'
+													onFocus={()=>setActiveTr('interest')}
+													onBlur={()=>setActiveTr('')}
+													onChange={handleCheck}
+												/>Game
+											</label>
 											{Errs.interest && <p>{Errs.interest}</p>}
 										</td>
 									</tr>
 
 									{/* comments  */}
 									<tr className={ActiveTr === 'comments' ? 'on' : ''}>
+										<h3>Gender
+											<span className={(Val.comments && !Errs.comments) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										</h3>
 										<td colSpan='2'>
 											<textarea
 												name='comments'

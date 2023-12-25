@@ -120,10 +120,18 @@
                 font-weight: 300;
                 margin-bottom: 16px;
                 transition: 0.3s;
-                svg {
-                  color:var(--pointColor);
-                  margin-left: 5px;
-                  margin-bottom: -2px;
+                >span {
+                  svg {
+                    color:rgba(var(--baseColor-code), 0.1);
+                    margin-left: 5px;
+                    margin-bottom: -2px;
+                    transition: 0.3s;
+                  }
+                  &.on {
+                    svg {
+                      color:var(--pointColor);
+                    }
+                  }
                 }
               }
               td {
@@ -152,24 +160,76 @@
                     color:rgba(var(--baseColor-code), 0.6);
                   }
                 }
-              }
-
-              .gender {
-                padding:20px;
-                td {
-                  input {
-                    color: red;
-                    &:checked {
-                      color : red;
+                select {
+                  display: block;
+                  border:1px solid rgba(var(--baseColor-code), 0.3);
+                  padding:10px 14px;
+                  border-radius: 2px;
+                  outline: 0;
+                  color :rgba(var(--baseColor-code), 0.7);
+                  margin-bottom: 10px;
+                  cursor: pointer;
+                  option {
+                    border-radius: none;
+                    &:hover {
+                      background: rgb(58, 58, 58)
                     }
                   }
-                  label[for="gender"] {
-                    color : red;
-                  }
+                }
+                textarea {
+                  border:1px solid rgba(var(--baseColor-code), 0.3);
+                  padding:5px 10px;
+                  border-radius: 5px;
+                  margin-bottom: 10px;
                 }
               }
             }
-            
+            .gender, .interest {
+              padding:20px;
+              >td {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-around;
+                label {
+                  border: 1px solid rgba(var(--baseColor-code), 0.3);
+                  padding: 16px 0px;
+                  border-radius: 2px;
+                  transition: 0.3s;
+                  text-align: center;
+                  cursor: pointer;
+                  margin-bottom: 10px;
+                  &.on {
+                    background-color: var(--pointColor);
+                    color: var(--bgColor);
+                    border: 1px solid rgba(var(--baseColor-code), 0);
+                  }
+                }
+                input {
+                  -moz-appearance: none;
+                  -webkit-appearance: none;
+                  appearance: none;
+                  background-color: transparent;
+                  display: none;
+                }
+                >p {
+                  width: 100%;
+                }
+              }
+            }
+            .gender {
+              >td {
+                >label {
+                  width: 49%;
+                }
+              }
+            }
+            .interest {
+              >td {
+                >label {
+                  width: 24%;
+                }
+              }
+            }
           }
         }
       }

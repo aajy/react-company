@@ -1,21 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
 import { RiArrowRightUpLine, RiArrowLeftUpLine } from 'react-icons/ri';
+import { useDepartmentQuery } from '../../../hooks/useDepartmentQuery';
 // import { useSelector } from 'react-redux';
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
-	// const MemberData = useSelector((store) => {
-	// 	return store.memberReducer.members;
-	// });
-	const MemberData = [];
+	const { data: MemberData, isSuccess } = useDepartmentQuery();
 
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>
 			<article className='department-top'>
 				<ul>
-					{MemberData.departmentTop?.map((data, idx) => {
+					{isSuccess && MemberData.departmentTop?.map((data, idx) => {
 						if (idx < 3) {
 							if (idx === 2) {
 								return (
@@ -44,7 +42,7 @@ export default function Department() {
 					})}
 				</ul>
 				<ul style={{ flexDirection: 'row-reverse' }}>
-					{MemberData.departmentTop?.map((data, idx) => {
+					{isSuccess && MemberData.departmentTop?.map((data, idx) => {
 						if (idx > 2) {
 							if (idx === 5) {
 								return (
@@ -75,7 +73,7 @@ export default function Department() {
 				<div>
 					<h3>CLIENTS</h3>
 					<ul>
-						{MemberData.departmentClients?.map((data, idx) => {
+						{isSuccess && MemberData.departmentClients?.map((data, idx) => {
 							return (
 								<li key={data + idx}>
 									<div>
@@ -92,7 +90,7 @@ export default function Department() {
 			<article className='department-bottom'>
 				<h2>TEAM</h2>
 				<ul>
-					{MemberData.departmentMember?.map((data, idx) => {
+					{isSuccess && MemberData.departmentMember?.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>
@@ -106,7 +104,7 @@ export default function Department() {
 				</ul>
 				<h3>Supported by</h3>
 				<ul>
-					{MemberData.departmentSupport?.map((data, idx) => {
+					{isSuccess && MemberData.departmentSupport?.map((data, idx) => {
 						return (
 							<li key={data.name + idx}>
 								<div>

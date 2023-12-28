@@ -2,14 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import store from './redux/store';
-import { Provider } from 'react-redux';
+import { GlobalProvider } from './hooks/useGlobalData';
 
 ReactDOM.render(
 	<BrowserRouter>
-		<Provider store={store}>
+		<GlobalProvider>
 			<App />
-		</Provider >
+		</GlobalProvider>
 	</BrowserRouter>,
 	document.getElementById('root')
 );

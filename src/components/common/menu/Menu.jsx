@@ -3,24 +3,25 @@ import './Menu.scss';
 import { useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-import { useDispatch, useSelector } from 'react-redux';
-import * as types from '../../../redux/action';
+// import { useDispatch, useSelector } from 'react-redux';
+// import * as types from '../../../redux/action';
 
 export default function Menu() {
-	const dispatch = useDispatch();
-	const MenuData = useSelector((store) => store.menuTextReducer.menuText);
-	const Toggle = useSelector((store) => store.menuReducer.menu);
-	const Dark = useSelector((store) => store.darkReducer.dark);
+	// const dispatch = useDispatch();
+	// const MenuData = useSelector((store) => store.menuTextReducer.menuText);
+	const MenuData = [];
+	// const Toggle = useSelector((store) => store.menuReducer.menu);
+	// const Dark = useSelector((store) => store.darkReducer.dark);
 
-	const closeMenu = useCallback(() => {
-		window.innerWidth >= 1100 &&
-			dispatch({ type: types.MENU.start, payload: false });
-	}, [dispatch]);
+	// const closeMenu = useCallback(() => {
+	// 	window.innerWidth >= 1100 &&
+	// 		dispatch({ type: types.MENU.start, payload: false });
+	// }, [dispatch]);
 
-	useEffect(() => {
-		window.addEventListener('resize', closeMenu);
-		return () => window.removeEventListener('resize', closeMenu);
-	}, [closeMenu]);
+	// useEffect(() => {
+	// 	window.addEventListener('resize', closeMenu);
+	// 	return () => window.removeEventListener('resize', closeMenu);
+	// }, [closeMenu]);
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -31,11 +32,12 @@ export default function Menu() {
 				transitionProperty: 'opacity',
 			}}
 		>
-			{Toggle && (
+			{/* {Toggle && ( */}
+			{false && (
 				<div className='Menu'>
 					<div
 						className='modal'
-						onClick={() => dispatch({ type: types.MENU.start, payload: false })}
+						// onClick={() => dispatch({ type: types.MENU.start, payload: false })}
 					></div>
 					<motion.div
 						initial={{ x: -100 }}
@@ -52,9 +54,9 @@ export default function Menu() {
 								<h2>abbive</h2>
 								<button
 									className='closeMenu'
-									onClick={() =>
-										dispatch({ type: types.MENU.start, payload: false })
-									}
+									// onClick={() =>
+									// 	dispatch({ type: types.MENU.start, payload: false })
+									// }
 								></button>
 								<div className='topBottom'>
 									<div>
@@ -62,12 +64,12 @@ export default function Menu() {
 										<RiArrowRightDownLine />
 									</div>
 									<div
-										className={`themeBox ${Dark && 'dark'}`}
-										onClick={() =>
-											dispatch({ type: types.DARK.start, payload: !Dark })
-										}
+									// className={`themeBox ${Dark && 'dark'}`}
+									// onClick={() =>
+									// 	dispatch({ type: types.DARK.start, payload: !Dark })
+									// }
 									>
-										<div className='ball'>{Dark ? 'DARK' : 'LIGHT'}</div>
+										{/* <div className='ball'>{Dark ? 'DARK' : 'LIGHT'}</div> */}
 									</div>
 								</div>
 							</div>

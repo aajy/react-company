@@ -9,10 +9,11 @@ import {
 } from 'react-icons/fa';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useRef } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export default function Footer() {
-	const MenuData = useSelector((store) => store.menuTextReducer.menuText);
+	// const MenuData = useSelector((store) => store.menuTextReducer.menuText);
+	const MenuData = [];
 	const emailAddress = useRef(null);
 	const handleEmail = (e) => {
 		e.preventDefault();

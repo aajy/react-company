@@ -2,13 +2,13 @@ import { useEffect, useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { LuSearch, LuChevronDown, LuChevronUp } from 'react-icons/lu';
-import { useDispatch, useSelector } from 'react-redux';
-import * as types from '../../../redux/action';
+// import { useDispatch, useSelector } from 'react-redux';
+// import * as types from '../../../redux/action';
 
 export default function Header() {
-	const dispatch = useDispatch();
-	const Toggle = useSelector((store) => store.menuReducer.menu);
-	const Dark = useSelector((store) => store.darkReducer.dark);
+	// const dispatch = useDispatch();
+	// const Toggle = useSelector((store) => store.menuReducer.menu);
+	// const Dark = useSelector((store) => store.darkReducer.dark);
 
 	const [Global, setGlobal] = useState('');
 	const [IsGlobalDropBoxOpen, setIsGlobalDropBoxOpen] = useState(false);
@@ -67,17 +67,17 @@ export default function Header() {
 					</li>
 				</ul>
 				<div
-					className={`themeBox ${Dark && 'dark'}`}
-					onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
+				// className={`themeBox ${Dark && 'dark'}`}
+				// onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
 				>
 					<div className='ball'></div>
 				</div>
 				<button
 					className='menuToggle'
-					onClick={() => {
-						console.log(Toggle);
-						dispatch({ type: types.MENU.start, payload: !Toggle });
-					}}
+					// onClick={() => {
+					// 	console.log(Toggle);
+					// 	dispatch({ type: types.MENU.start, payload: !Toggle });
+					// }}
 				>
 					menu
 				</button>
@@ -96,8 +96,8 @@ export default function Header() {
 						</button>
 					</span>
 					<div
-						className={`themeBox ${Dark && 'dark'}`}
-						onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
+					// className={`themeBox ${Dark && 'dark'}`}
+					// onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
 					>
 						<div className='ball'></div>
 					</div>

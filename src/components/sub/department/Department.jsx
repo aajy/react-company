@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 import Layout from '../../common/layout/Layout';
 import './Department.scss';
 import { RiArrowRightUpLine, RiArrowLeftUpLine } from 'react-icons/ri';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 export default function Department() {
 	const path = useRef(process.env.PUBLIC_URL);
-	const MemberData = useSelector((store) => {
-		return store.memberReducer.members;
-	});
+	// const MemberData = useSelector((store) => {
+	// 	return store.memberReducer.members;
+	// });
+	const MemberData = [];
 
 	return (
 		<Layout title={'Department-introduction'} className={'Department'}>

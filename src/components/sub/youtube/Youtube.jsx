@@ -8,56 +8,32 @@ import { RiArrowRightUpLine } from 'react-icons/ri';
 import { GrPowerReset } from 'react-icons/gr';
 import { useCustomText } from '../../../hooks/useText';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { useYoutubeChannelDataQuery, useYoutubeChannelIdQuery, useYoutubeQuery } from '../../../hooks/useYoutubeQuery';
 
 export default function Youtube() {
 	const shortenText = useCustomText('shorten');
 	const path = useRef(process.env.PUBLIC_URL);
-	const [Vids, setVids] = useState([]);
-	const [ChannelData, setChannelData] = useState({});
 	const [ChannelTitle, setChannelTitle] = useState('');
+	const [Vids, setVids] = useState({});
 	const [ActiveVids, setActiveVids] = useState({});
 	const [IsActive, setIsActive] = useState(true);
 	const OriginVids = useRef(null);
 	const refSearchKeyword = useRef(null);
 	const [SearchResult, setSearchResult] = useState(true);
-
-	const fetchYoutube = async () => {
-		const api_key = process.env.REACT_APP_YOUTUBE_API;
-		const pid = process.env.REACT_APP_YOUTUBE_LIST;
-		const num = 9;
-		let channelId = '';
-
-		const vidIdForChannelId = 'uIZHsUT43l4';
-		const channelIdURL = `https://www.googleapis.com/youtube/v3/videos?key=${api_key}&part=snippet&id=${vidIdForChannelId}`;
-
-		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
-
-		//channelId
-		try {
-			const data = await fetch(channelIdURL);
-			const json = await data.json();
-			channelId = json.items[0].snippet.channelId;
-			setChannelTitle(json.items[0].snippet.channelTitle);
-
-			//channel Data
-			const channelDataURL = `https://www.googleapis.com/youtube/v3/channels?key=${api_key}&part=statistics&id=${channelId}&fields=items/statistics`;
-
-			try {
-				const data = await fetch(channelDataURL);
-				const json = await data.json();
-				setChannelData(json.items[0].statistics);
-			} catch (err) {
-				console.log(err);
-			}
-		} catch (err) {
-			console.log(err);
+	const vidIdForChannelId = 'uIZHsUT43l4';
+	const channelId = useRef('');
+	const { data: channelIdData, isSuccess:isChannelIdData } = useYoutubeChannelIdQuery(vidIdForChannelId);
+	useEffect(()=>{
+		if(isChannelIdData) {
+			channelId.current = channelIdData.channelId;
+			setChannelTitle(channelIdData.channelTitle);
 		}
-
-		//playlist
-		try {
-			const data = await fetch(baseURL);
-			const json = await data.json();
-			const originalArr = json.items;
+	},[isChannelIdData])
+	const { data: ChannelData, isSuccess:isChannelData } = useYoutubeChannelDataQuery(channelId.current);
+	const { data: YoutubeData, isSuccess:isYoutube } = useYoutubeQuery();
+	useEffect(()=>{
+		if(isYoutube) {
+			const originalArr = YoutubeData;
 			const newArray = originalArr.map((item, index) => {
 				if (index === 0) {
 					return { ...item, active: true };
@@ -66,11 +42,10 @@ export default function Youtube() {
 			});
 			setVids(newArray);
 			OriginVids.current = newArray;
-			setActiveVids(json.items[0]);
-		} catch (err) {
-			console.log(err);
+			setActiveVids(YoutubeData[0]);
 		}
-	};
+	},[isYoutube])
+
 	const searchYoutube = async (e) => {
 		e.preventDefault();
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
@@ -129,13 +104,10 @@ export default function Youtube() {
 			setIsActive(true);
 		}, 100);
 	};
-	useEffect(() => {
-		fetchYoutube();
-	}, []);
 	return (
 		<>
 			<Layout title={'Youtube'} className={'Youtube'}>
-				{ChannelData && Object.values(ChannelData).length && (
+				{isChannelData && ChannelData && Object.values(ChannelData).length && (
 					<section className='top'>
 						<article className='channel'>
 							<div className='title'>

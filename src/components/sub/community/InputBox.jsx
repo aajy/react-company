@@ -5,7 +5,7 @@ import { GrPowerReset } from 'react-icons/gr';
 import { TbCircleCheckFilled } from 'react-icons/tb';
 import { BiCommentCheck } from 'react-icons/bi';
 
-export default function InputBox({ Open, setNewPost }) {
+export default function InputBox({ Open, setNewPost, cookie=false }) {
 	const refTit = useRef(null);
 	const refCon = useRef(null);
 	const refNickname = useRef(null);
@@ -52,7 +52,7 @@ export default function InputBox({ Open, setNewPost }) {
 						initial={{ opacity:0 }}
 						animate={{ opacity:1 }}
 						exit={{ opacity:0 }}
-						className='modal'
+						className={`modal ${cookie ? 'cookie' : ''}`}
 					>
 						<motion.aside
 							initial={{ y: 0 }}

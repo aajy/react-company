@@ -2,7 +2,7 @@ import { useRef, useState } from 'react';
 import './CookieModal.scss';
 import { useCookie } from '../../../hooks/useCookie';
 
-export default function CookieModal({ wid, ht, children }) {
+export default function CookieModal({ wid='100%', ht='100vh', children }) {
 	const { isCookie, setCookie } = useCookie();
 	const CheckEl = useRef(null);
 	const [Close, setClose] = useState(isCookie('today=done'));
@@ -22,8 +22,6 @@ export default function CookieModal({ wid, ht, children }) {
 					style={{
 						width: wid,
 						height: ht,
-						marginLeft: -wid / 2,
-						marginTop: -ht / 2,
 					}}
 				>
 					<div className='content'>{children}</div>
@@ -31,12 +29,12 @@ export default function CookieModal({ wid, ht, children }) {
 					<div className='controls'>
 						<nav>
 							<label>
-								<input type='checkbox' ref={CheckEl} />
-								오늘하루 팝업 보지 않기
+								<input type='checkbox' ref={CheckEl} id='checkbox'/>
+								오늘 하루 팝업 보지 않기
 							</label>
 						</nav>
 
-						<span onClick={() => handleClose()}>close</span>
+						<span className='closeModal' onClick={() => handleClose()}></span>
 					</div>
 				</aside>
 			)}

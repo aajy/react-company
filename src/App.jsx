@@ -50,7 +50,7 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			{/* <div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}> */}
-			<div>
+			<div className='wrap'>
 				<Header />
 				<Route exact path='/' component={MainWrap} />
 				<Route path='/department' component={Department} />
@@ -67,7 +67,8 @@ export default function App() {
 					<Menu />
 				</AnimatePresence>
 				<CookieModal>
-					<InputBox Open={true} />
+					<h1>Cookie</h1>
+					{/* <InputBox Open={true} cookie={true}/> */}
 				</CookieModal>
 			</div>
 			<ReactQueryDevtools />

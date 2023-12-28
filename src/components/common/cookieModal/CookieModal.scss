@@ -1,0 +1,24 @@
+.cookieModal {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100vh;
+	z-index: 5;
+	border: 1px solid red;
+	.content {
+		width: 100%;
+	}
+	.controls {
+		position: absolute;
+		left: 50%;
+		transform: translateX(-50%);
+		bottom: 30px;
+		z-index: 5;
+		display: flex;
+		nav label,
+		> span {
+			cursor: pointer;
+		}
+	}
+}

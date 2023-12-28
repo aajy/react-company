@@ -21,6 +21,7 @@ import Detail from './components/sub/youtube/Detail';
 import Members from './components/sub/members/Members';
 import Welcome from './components/sub/members/Welcome';
 import CookieModal from './components/common/cookieModal/CookieModal';
+import InputBox from './components/sub/community/InputBox';
 
 export default function App() {
 	const queryClient = new QueryClient();
@@ -65,7 +66,9 @@ export default function App() {
 				<AnimatePresence>
 					<Menu />
 				</AnimatePresence>
-				<CookieModal />
+				<CookieModal>
+					<InputBox Open={true} />
+				</CookieModal>
 			</div>
 			<ReactQueryDevtools />
 		</QueryClientProvider>

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 //channelId
-const fetchYoutubeChannelId = async ({ queryKey: [_,vidId] }) => {
+const fetchYoutubeChannelId = async ({ queryKey: [_, vidId] }) => {
 	const api_key = process.env.REACT_APP_YOUTUBE_API;
 	const baseURL = `https://www.googleapis.com/youtube/v3/videos?key=${api_key}&part=snippet&id=${vidId}`;
 	try {
@@ -13,19 +13,19 @@ const fetchYoutubeChannelId = async ({ queryKey: [_,vidId] }) => {
 	}
 };
 
-export const useYoutubeChannelIdQuery = vidId => {
+export const useYoutubeChannelIdQuery = (vidId) => {
 	return useQuery(['fetchYoutubeChannelId', vidId], fetchYoutubeChannelId, {
 		refetchOnMount: false,
 		refetchOnWindowFocus: false,
 		cacheTime: 1000 * 60 * 60 * 24,
 		staleTime: 1000 * 60 * 60 * 24,
-		retry: 3
+		retry: 3,
 	});
 };
 //channelId
-const fetchYoutubeChannelData = async ({ queryKey: [_,channelId] }) => {
+const fetchYoutubeChannelData = async ({ queryKey: [_, channelId] }) => {
 	const api_key = process.env.REACT_APP_YOUTUBE_API;
-  const baseURL = `https://www.googleapis.com/youtube/v3/channels?key=${api_key}&part=statistics&id=${channelId}&fields=items/statistics`;
+	const baseURL = `https://www.googleapis.com/youtube/v3/channels?key=${api_key}&part=statistics&id=${channelId}&fields=items/statistics`;
 	try {
 		const response = await fetch(baseURL);
 		const data = await response.json();
@@ -35,22 +35,31 @@ const fetchYoutubeChannelData = async ({ queryKey: [_,channelId] }) => {
 	}
 };
 
-export const useYoutubeChannelDataQuery = channelId => {
-	return useQuery(['fetchYoutubeChannelData', channelId], fetchYoutubeChannelData, {
-		refetchOnMount: false,
-		refetchOnWindowFocus: false,
-		cacheTime: 1000 * 60 * 60 * 24,
-		staleTime: 1000 * 60 * 60 * 24,
-		retry: 3
-	});
+export const useYoutubeChannelDataQuery = (channelId) => {
+	return useQuery(
+		['fetchYoutubeChannelData', channelId],
+		fetchYoutubeChannelData,
+		{
+			refetchOnMount: false,
+			refetchOnWindowFocus: false,
+			cacheTime: 1000 * 60 * 60 * 24,
+			staleTime: 1000 * 60 * 60 * 24,
+			retry: 3,
+		}
+	);
 };
 
 //playlist
-const fetchYoutube = async () => {
+const fetchYoutube = async ({ queryKey: [_, keyword] }) => {
 	const api_key = process.env.REACT_APP_YOUTUBE_API;
 	const pid = process.env.REACT_APP_YOUTUBE_LIST;
 	const num = 10;
-	const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+	let baseURL = '';
+	if (keyword) {
+		baseURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${keyword}&type=video&maxResults=${num}`;
+	} else {
+		baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+	}
 	try {
 		const response = await fetch(baseURL);
 		const data = await response.json();
@@ -60,13 +69,13 @@ const fetchYoutube = async () => {
 	}
 };
 
-export const useYoutubeQuery = () => {
-	return useQuery(['fetchYoutube'], fetchYoutube, {
+export const useYoutubeQuery = (keyword) => {
+	return useQuery(['fetchYoutube', keyword], fetchYoutube, {
 		refetchOnMount: false,
 		refetchOnWindowFocus: false,
 		cacheTime: 1000 * 60 * 60 * 24,
 		staleTime: 1000 * 60 * 60 * 24,
-		retry: 3
+		retry: 3,
 	});
 };
 
@@ -80,12 +89,12 @@ const fetchYoutubeById = async ({ queryKey }) => {
 	return json.items[0].snippet;
 };
 
-export const useYoutubeQueryById = id => {
+export const useYoutubeQueryById = (id) => {
 	return useQuery(['fetchYoutubeById', id], fetchYoutubeById, {
 		refetchOnMount: false,
 		refetchOnWindowFocus: false,
 		cacheTime: 1000 * 60 * 60 * 24,
 		staleTime: 1000 * 60 * 60 * 24,
-		retry: 3
+		retry: 3,
 	});
 };

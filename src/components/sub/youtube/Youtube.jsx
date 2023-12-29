@@ -8,7 +8,11 @@ import { RiArrowRightUpLine } from 'react-icons/ri';
 import { GrPowerReset } from 'react-icons/gr';
 import { useCustomText } from '../../../hooks/useText';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
-import { useYoutubeChannelDataQuery, useYoutubeChannelIdQuery, useYoutubeQuery } from '../../../hooks/useYoutubeQuery';
+import {
+	useYoutubeChannelDataQuery,
+	useYoutubeChannelIdQuery,
+	useYoutubeQuery,
+} from '../../../hooks/useYoutubeQuery';
 
 export default function Youtube() {
 	const shortenText = useCustomText('shorten');
@@ -20,51 +24,56 @@ export default function Youtube() {
 	const OriginVids = useRef(null);
 	const refSearchKeyword = useRef(null);
 	const [SearchResult, setSearchResult] = useState(true);
+	const [Opt, setOpt] = useState(null);
 	const vidIdForChannelId = 'uIZHsUT43l4';
 	const channelId = useRef('');
-	const { data: channelIdData, isSuccess:isChannelIdData } = useYoutubeChannelIdQuery(vidIdForChannelId);
-	useEffect(()=>{
-		if(isChannelIdData) {
-			channelId.current = channelIdData.channelId;
-			setChannelTitle(channelIdData.channelTitle);
-		}
-	},[isChannelIdData])
-	const { data: ChannelData, isSuccess:isChannelData } = useYoutubeChannelDataQuery(channelId.current);
-	const { data: YoutubeData, isSuccess:isYoutube } = useYoutubeQuery();
-	useEffect(()=>{
-		if(isYoutube) {
-			const originalArr = YoutubeData;
-			const newArray = originalArr.map((item, index) => {
-				if (index === 0) {
-					return { ...item, active: true };
-				}
-				return item;
-			});
-			setVids(newArray);
-			OriginVids.current = newArray;
-			setActiveVids(YoutubeData[0]);
-		}
-	},[isYoutube])
 
-	const searchYoutube = async (e) => {
-		e.preventDefault();
-		const api_key = process.env.REACT_APP_YOUTUBE_API;
-		const num = 4;
-		const searchURL = `https://www.googleapis.com/youtube/v3/search?key=${api_key}&part=snippet&q=${refSearchKeyword.current.value}&type=video&maxResults=${num}`;
-		if (refSearchKeyword.current.value.trim().length) {
-			try {
-				const data = await fetch(searchURL);
-				const json = await data.json();
-				if (json.items.length > 0) {
+	const { data: ChannelIdData, isSuccess: isChannelIdData } =
+		useYoutubeChannelIdQuery(vidIdForChannelId);
+
+	useEffect(() => {
+		if (isChannelIdData) {
+			channelId.current = ChannelIdData.channelId;
+			setChannelTitle(ChannelIdData.channelTitle);
+		}
+	}, [isChannelIdData]);
+
+	const { data: ChannelData, isSuccess: isChannelData } =
+		useYoutubeChannelDataQuery(channelId.current);
+
+	const { data: YoutubeData, isSuccess: isYoutube } = useYoutubeQuery(Opt);
+
+	useEffect(() => {
+		if (isYoutube) {
+			if (Opt && Opt.length) {
+				if (YoutubeData.length > 0) {
 					setSearchResult(true);
-					setVids((prevVids) => [...prevVids.slice(0, 3), ...json.items]);
+					setVids((prevVids) => [...prevVids.slice(0, 3), ...YoutubeData]);
 				} else {
 					setSearchResult(false);
 					setVids((prevVids) => [...prevVids.slice(0, 3)]);
 				}
-			} catch (err) {
-				console.log(err);
+			} else {
+				const originalArr = YoutubeData;
+				const newArray = originalArr.map((item, index) => {
+					if (index === 0) {
+						return { ...item, active: true };
+					}
+					return item;
+				});
+				setVids(newArray);
+				OriginVids.current = newArray;
+				setActiveVids(YoutubeData[0]);
 			}
+		}
+	}, [isYoutube]);
+
+	const searchYoutube = (e) => {
+		e.preventDefault();
+		if (refSearchKeyword.current.value.trim().length) {
+			setOpt(refSearchKeyword.current.value.trim());
+		} else {
+			alert('검색어를 입력해주세요.');
 		}
 	};
 	const resetSearch = () => {

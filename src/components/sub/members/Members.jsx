@@ -146,9 +146,9 @@ export default function Members() {
 								<tbody>
 										{/* userid, email */}
 									<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
-										<h3>USER ID
+										<th>USER ID
 											<span className={(Val.userid && !Errs.userid && Val.email && !Errs.email) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td>
 											<input
 												type='text'
@@ -177,9 +177,9 @@ export default function Members() {
 									
 									{/* pwd1, pwd2 */}
 									<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
-										<h3>PASSWORD
+										<th>PASSWORD
 											<span className={(Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td>
 											<input
 												type='password'
@@ -208,9 +208,9 @@ export default function Members() {
 
 									{/* edu */}
 									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
-										<h3>Education
+										<th>Education
 											<span className={(Val.edu && !Errs.edu) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td colSpan='2'>
 											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')} onBlur={()=>setActiveTr('')}>
 												<option value=''>Education</option>
@@ -225,9 +225,9 @@ export default function Members() {
 
 									{/* gender */}
 									<tr  className={ActiveTr === 'gender' ? 'on gender' : "gender"}>
-										<h3>Gender
+										<th>Gender
 											<span className={(Val.gender && !Errs.gender) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td colSpan='2' >
 											<label htmlFor='female' className={Val.gender === 'female'? 'on': ''}>
 												<input
@@ -257,9 +257,9 @@ export default function Members() {
 
 									{/* interests */}
 									<tr className={ActiveTr === 'interest' ? 'on interest' : 'interest'}>
-										<h3>Interest
+										<th>Interest
 											<span className={(Val.interest && !Errs.interest) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td colSpan='2'>
 											<label htmlFor='sports' className={Val.interest.includes('sports')? 'on': ''}>
 												<input
@@ -311,9 +311,9 @@ export default function Members() {
 
 									{/* comments  */}
 									<tr className={ActiveTr === 'comments' ? 'on' : ''}>
-										<h3>Comments
+										<th>Comments
 											<span className={(Val.comments && !Errs.comments) ? 'on' : ''}><BiSolidCheckCircle /></span>
-										</h3>
+										</th>
 										<td colSpan='2'>
 											<textarea
 												name='comments'

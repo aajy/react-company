@@ -41,12 +41,10 @@ export default function Members() {
 		const inputs = e.target.parentElement.parentElement.querySelectorAll('input');
 		const checkArr = [];
 		inputs.forEach((input) => input.checked && checkArr.push(input.value));
-		console.log('checkArr: ', checkArr);
 		setVal({ ...Val, [name]: checkArr });
 	};
 
 	const check = (value) => {
-		console.log('check');
 		const errs = {};
 		const num = /[0-9]/;
 		const txt = /[a-zA-Z]/;
@@ -79,7 +77,6 @@ export default function Members() {
 	};
 
 	const handleSubmit = (e) => {
-		console.log(Object.keys(check(Val)));
 		e.preventDefault();
 
 		if (Object.keys(check(Val)).length === 0) {

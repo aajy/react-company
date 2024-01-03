@@ -26,20 +26,20 @@ export default function Youtube() {
 	const [SearchResult, setSearchResult] = useState(true);
 	const [Opt, setOpt] = useState(null);
 	const vidIdForChannelId = 'uIZHsUT43l4';
-	const channelId = useRef('');
+	const [ChannelId, setChannelId] = useState();
 
 	const { data: ChannelIdData, isSuccess: isChannelIdData } =
 		useYoutubeChannelIdQuery(vidIdForChannelId);
 
 	useEffect(() => {
 		if (isChannelIdData) {
-			channelId.current = ChannelIdData.channelId;
+			setChannelId(ChannelIdData.channelId);
 			setChannelTitle(ChannelIdData.channelTitle);
 		}
 	}, [isChannelIdData]);
 
 	const { data: ChannelData, isSuccess: isChannelData } =
-		useYoutubeChannelDataQuery(channelId.current);
+		useYoutubeChannelDataQuery(ChannelId);
 
 	const { data: YoutubeData, isSuccess: isYoutube } = useYoutubeQuery(Opt);
 

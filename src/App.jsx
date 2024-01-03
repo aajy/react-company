@@ -50,7 +50,7 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			{/* <div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}> */}
-			<div className='wrap'>
+			<div className={`wrap'  ${useMedia()}`}>
 				<Header />
 				<Route exact path='/' component={MainWrap} />
 				<Route path='/department' component={Department} />

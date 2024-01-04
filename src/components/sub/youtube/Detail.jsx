@@ -40,7 +40,7 @@ export default function Detail() {
 			try {
 				const data = await fetch(commentURL);
 				const json = await data.json();
-				if (json.items[0].replies?.comments.length > 0) {
+				if (json.items[0] && json.items[0]?.replies.comments.length > 0) {
 					setCommentData(json.items[0].replies.comments);
 				} else {
 					setCommentData(dummyData);

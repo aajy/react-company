@@ -22,7 +22,7 @@ export const useYoutubeChannelIdQuery = (vidId) => {
 		retry: 3,
 	});
 };
-//channelId
+//channelData
 const fetchYoutubeChannelData = async ({ queryKey: [_, channelId] }) => {
 	const api_key = process.env.REACT_APP_YOUTUBE_API;
 	const baseURL = `https://www.googleapis.com/youtube/v3/channels?key=${api_key}&part=statistics&id=${channelId}&fields=items/statistics`;

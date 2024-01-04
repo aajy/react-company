@@ -11,20 +11,26 @@ export default function Visual() {
 	const { isSuccess, data } = useYoutubeQuery();
 	console.log('data: ', data);
 
-	//loop값이 true시 초기 Index값을 0,1을 주면 안됨
-	//onSwipe 이벤트 발생시 자동적으로 realIndex값이 기존 Index값에 1을 뺀값으로 적용되므로
-	//useEffect에 의해서 prevIndex값이 0혹은 마지막 순번으로 변경되므로 기존 realIndex값과 중첩되서 버그발생
-	const [PrevIndex, setPrevIndex] = useState(1);
-	const [Index, setIndex] = useState(2);
-	const [NextIndex, setNextIndex] = useState(3);
+	const [PrevIndex, setPrevIndex] = useState(0);
+	const [Index, setIndex] = useState(0);
+	const [NextIndex, setNextIndex] = useState(0);
 
+	function splitTitle(title) {
+    const Arr = title.split(' ');
+		return Arr.slice(0, 6).join(' ');
+}
 	const swiperOpt = useRef({
 		modules: [Autoplay],
+		// direction: "vertical",
 		loop: true,
+		speed: 800,
 		slidesPerView: 1,
-		spaceBetween: 50,
+		spaceBetween: 100,
 		centeredSlides: true,
-		onSwiper: (swiper) => (swipeRef.current = swiper),
+		loopedSlides: num.current, //loop모드일때 실제동작될 슬라이드 갯수 지정하면 초기순번 어그러지는 문제 해결 가능
+		onSwiper: swiper => {
+			swipeRef.current = swiper;
+		},
 		onSlideChange: (swiper) => {
 			setIndex(swiper.realIndex);
 			swiper.realIndex === 0
@@ -34,20 +40,12 @@ export default function Visual() {
 				? setNextIndex(0)
 				: setNextIndex(swiper.realIndex + 1);
 		},
-		autoplay: { delay: 2000, disableOnInteraction: true },
+		autoplay: { delay: 8000, disableOnInteraction: true },
 		breakpoints: {
 			1000: { slidesPerView: 2 },
 			1400: { slidesPerView: 3 },
 		},
 	});
-
-	const trimTitle = (title) => {
-		let resultTit = '';
-		if (title.includes('(')) resultTit = title.split('(')[0];
-		else if (title.includes('[')) resultTit = title.split('[')[0];
-		else resultTit = title;
-		return resultTit;
-	};
 
 	return (
 		<figure className='Visual'>
@@ -58,12 +56,42 @@ export default function Visual() {
 							if (idx >= 7) return null;
 
 							return (
-								<li key={el.id} className={idx === Index ? 'on' : ''}>
-									<h3>{trimTitle(el.snippet.title)}</h3>
+								<li key={el.id}
+								className={idx === Index ? 'on' : ''}
+								onClick={()=>swipeRef.current.slideTo(idx)}
+								>
+									<h3>{splitTitle(el.snippet.title)}</h3>
 								</li>
 							);
 						})}
 				</ul>
+				<div className='counter'>
+				<strong>0{Index + 1}</strong>/<span>0{num.current}</span>
+			</div>
+				<nav className='preview'>
+				{isSuccess && (
+					<>
+						<p
+							className='prevBox'
+							onClick={() => swipeRef.current.slidePrev(400)}
+						>
+							<img
+								src={data[PrevIndex].snippet.thumbnails.default.url}
+								alt={data[PrevIndex].snippet.title}
+							/>
+						</p>
+						<p
+							className='nextBox'
+							onClick={() => swipeRef.current.slideNext(400)}
+						>
+							<img
+								src={data[NextIndex].snippet.thumbnails.default.url}
+								alt={data[NextIndex].snippet.title}
+							/>
+						</p>
+					</>
+				)}
+			</nav>
 			</div>
 
 			<Swiper {...swiperOpt.current}>
@@ -91,7 +119,7 @@ export default function Visual() {
 					})}
 			</Swiper>
 
-			<nav className='preview'>
+			{/* <nav className='preview'>
 				{isSuccess && (
 					<>
 						<p
@@ -114,7 +142,7 @@ export default function Visual() {
 						</p>
 					</>
 				)}
-			</nav>
+			</nav> */}
 		</figure>
 	);
 }

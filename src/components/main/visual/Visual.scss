@@ -5,27 +5,145 @@
 	position: relative;
 	padding: 10vh;
 	.txtBox {
-		width: 40%;
-		height: 100%;
-		padding-left: 15vw;
+		width: 50%;
+		height: 50%;
 		position: absolute;
-		top: 0;
+		top: 10%;
 		left: 0;
+		// transform: translateY(-50%);
 		z-index: 2;
 		ul {
 			width: 100%;
 			height: 100%;
 			position: relative;
-
+			padding:30px 40px;
 			li {
-				width: 100%;
-				height: 100%;
-				position: absolute;
-				top: 0;
-				left: 0;
-				opacity: 0;
+				// width: 100%;
+				// height: 100%;
+				// position: absolute;
+				// top: 0;
+				// left: 0;
+				font-size: 1rem;
+				opacity: 0.3;
+				transition: 0.5s;
+				cursor: pointer;
 				&.on {
 					opacity: 1;
+				}
+				&:hover{
+					opacity: 0.9;
+				}
+			}
+		}
+		.counter {
+			position: absolute;
+			bottom: 100px;
+			left: 40px;
+			color: var(--baseColor);
+			font-size: 1.5rem;
+			font-family: var(--pointFont);
+			strong {
+				font-size: 2.5rem;
+			}
+		}
+		.preview {
+			position: absolute;
+			width: 100%;
+			left: 40px;
+			bottom: 0;
+			z-index: 1;
+			display: flex;
+			gap: 10px;
+			p {
+				width: 120px;
+				height: 60px;
+				overflow: hidden;
+				// position: absolute;
+				bottom: 5vh;
+				cursor: pointer;
+				img {
+					width: 100%;
+					height: 100%;
+					object-fit: cover;
+				}
+			}
+			p.prevBox {
+				left: 50px;
+			}
+			p.nextBox {
+				right: 50px;
+			}
+		}
+	}
+	.swiper {
+		display: inline-block;
+		width: 50%;
+		height: 100%;
+		padding: 10vw 0px;
+		position: absolute;
+		top: 0;
+		right: 40px;
+		.swiper-wrapper {
+			height: inherit;
+			position: relative;
+			z-index: 2;
+			// left: 50%;
+			// transform: translateX(-50%);
+
+			.swiper-slide {
+				width: 100%;
+				height: inherit;
+
+				.pic {
+					width: 500px;
+					height: 500px;
+					position: relative;
+					opacity: 0.4;
+					// transform: scaleY(0);
+					position: relative;
+					transition: opacity 0.5s, transform 0.5s;
+
+					> p {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						top: 0;
+						left: 0;
+						overflow: hidden;
+
+						&:nth-of-type(1) {
+							filter: blur(20px) saturate(1.2);
+							transform: translate(30px, 30px);
+							opacity: 0.7;
+						}
+
+						img {
+							width: 100%;
+							height: 100%;
+							object-fit: cover;
+							object-position: left top;
+							transform: scale(1.5);
+						}
+					}
+				}
+			}
+
+			//prev-style
+			.swiper-slide-prev {
+				.pic {
+					opacity: 0;
+				}
+			}
+			//active-style
+			.swiper-slide-active {
+				.pic {
+					opacity: 1;
+				}
+			}
+			//active-style
+			.swiper-slide-next {
+				.pic {
+					opacity: 0;
 				}
 			}
 		}

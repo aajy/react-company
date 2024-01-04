@@ -2,13 +2,11 @@ import { useEffect, useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { LuSearch, LuChevronDown, LuChevronUp } from 'react-icons/lu';
-// import { useDispatch, useSelector } from 'react-redux';
-// import * as types from '../../../redux/action';
+import { useGlobalData } from '../../../hooks/useGlobalData';
 
 export default function Header() {
-	// const dispatch = useDispatch();
-	// const Toggle = useSelector((store) => store.menuReducer.menu);
-	// const Dark = useSelector((store) => store.darkReducer.dark);
+	const { Mode, setMode } = useGlobalData();
+	const { setMenuOpen } = useGlobalData();
 
 	const [Global, setGlobal] = useState('');
 	const [IsGlobalDropBoxOpen, setIsGlobalDropBoxOpen] = useState(false);
@@ -67,17 +65,16 @@ export default function Header() {
 					</li>
 				</ul>
 				<div
-				// className={`themeBox ${Dark && 'dark'}`}
-				// onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
+					className={`themeBox ${Mode === 'LIGHT' ? 'LIGHT' : 'DARK'}`}
+					onClick={() => setMode(Mode === 'LIGHT' ? 'DARK' : 'LIGHT')}
 				>
-					<div className='ball'></div>
+					<div className='ball'>{Mode === 'LIGHT' ? 'LIGHT' : 'DARK'}</div>
 				</div>
 				<button
 					className='menuToggle'
-					// onClick={() => {
-					// 	console.log(Toggle);
-					// 	dispatch({ type: types.MENU.start, payload: !Toggle });
-					// }}
+					onClick={() => {
+						setMenuOpen(true);
+					}}
 				>
 					menu
 				</button>

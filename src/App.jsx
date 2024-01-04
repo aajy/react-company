@@ -12,8 +12,6 @@ import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 
 import { Route } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-// import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
 import { AnimatePresence } from 'framer-motion';
@@ -21,36 +19,16 @@ import Detail from './components/sub/youtube/Detail';
 import Members from './components/sub/members/Members';
 import Welcome from './components/sub/members/Welcome';
 import CookieModal from './components/common/cookieModal/CookieModal';
-import InputBox from './components/sub/community/InputBox';
+import { useGlobalData } from './hooks/useGlobalData';
 
 export default function App() {
+	const { Mode } = useGlobalData();
 	const queryClient = new QueryClient();
-	// const dispatch = useDispatch();
-	// const path = useRef(process.env.PUBLIC_URL);
-	// const Dark = useSelector((store) => store.darkReducer.dark);
-
-	// const fetchDepartment = async () => {
-	// 	const data = await fetch(`${path.current}/DB/department.json`);
-	// 	const json = await data.json();
-	// 	return dispatch({ type: types.MEMBERS.success, payload: json.members });
-	// };
-	// const fetchMenuText = async () => {
-	// 	const data = await fetch(`${path.current}/DB/menuText.json`);
-	// 	const json = await data.json();
-	// 	return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
-	// };
-	const fetchYoutube = async () => {
-		//TODO :: 검색 후 받은 데이터로 재검색해야 할 때
-	};
-
-	useEffect(() => {
-		// fetchDepartment();
-		// fetchMenuText();
-	}, []);
 	return (
 		<QueryClientProvider client={queryClient}>
-			{/* <div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}> */}
-			<div className={`wrap'  ${useMedia()}`}>
+			<div
+				className={`wrap ${Mode === 'LIGHT' ? 'LIGHT' : 'DARK'} ${useMedia()}`}
+			>
 				<Header />
 				<Route exact path='/' component={MainWrap} />
 				<Route path='/department' component={Department} />
@@ -68,7 +46,6 @@ export default function App() {
 				</AnimatePresence>
 				<CookieModal>
 					<h1>Cookie</h1>
-					{/* <InputBox Open={true} cookie={true}/> */}
 				</CookieModal>
 			</div>
 			<ReactQueryDevtools />

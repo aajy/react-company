@@ -1,27 +1,24 @@
 import { NavLink } from 'react-router-dom/cjs/react-router-dom.min';
 import './Menu.scss';
-import { useCallback, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-// import { useDispatch, useSelector } from 'react-redux';
-// import * as types from '../../../redux/action';
+import { useGlobalData } from '../../../hooks/useGlobalData';
+import { useCallback, useEffect } from 'react';
+import { useMenuQuery } from '../../../hooks/useMenuQuery';
 
 export default function Menu() {
-	// const dispatch = useDispatch();
-	// const MenuData = useSelector((store) => store.menuTextReducer.menuText);
-	const MenuData = [];
-	// const Toggle = useSelector((store) => store.menuReducer.menu);
-	// const Dark = useSelector((store) => store.darkReducer.dark);
+	const { Mode, setMode } = useGlobalData();
+	const { MenuOpen, setMenuOpen } = useGlobalData();
+	const { data: MenuData, isSuccess } = useMenuQuery();
 
-	// const closeMenu = useCallback(() => {
-	// 	window.innerWidth >= 1100 &&
-	// 		dispatch({ type: types.MENU.start, payload: false });
-	// }, [dispatch]);
+	const closeMenu = useCallback(() => {
+		window.innerWidth >= 1100 && setMenuOpen(false);
+	}, [setMenuOpen]);
 
-	// useEffect(() => {
-	// 	window.addEventListener('resize', closeMenu);
-	// 	return () => window.removeEventListener('resize', closeMenu);
-	// }, [closeMenu]);
+	useEffect(() => {
+		window.addEventListener('resize', closeMenu);
+		return () => window.removeEventListener('resize', closeMenu);
+	}, [closeMenu]);
 	return (
 		<motion.div
 			initial={{ opacity: 0 }}
@@ -32,13 +29,9 @@ export default function Menu() {
 				transitionProperty: 'opacity',
 			}}
 		>
-			{/* {Toggle && ( */}
-			{false && (
+			{MenuOpen && (
 				<div className='Menu'>
-					<div
-						className='modal'
-						// onClick={() => dispatch({ type: types.MENU.start, payload: false })}
-					></div>
+					<div className='modal' onClick={() => setMenuOpen(false)}></div>
 					<motion.div
 						initial={{ x: -100 }}
 						animate={{ x: 0, transition: { duration: 0.2, ease: 'linear' } }}
@@ -54,9 +47,7 @@ export default function Menu() {
 								<h2>abbive</h2>
 								<button
 									className='closeMenu'
-									// onClick={() =>
-									// 	dispatch({ type: types.MENU.start, payload: false })
-									// }
+									onClick={() => setMenuOpen(false)}
 								></button>
 								<div className='topBottom'>
 									<div>
@@ -64,33 +55,36 @@ export default function Menu() {
 										<RiArrowRightDownLine />
 									</div>
 									<div
-									// className={`themeBox ${Dark && 'dark'}`}
-									// onClick={() =>
-									// 	dispatch({ type: types.DARK.start, payload: !Dark })
-									// }
+										className={`themeBox ${
+											Mode === 'LIGHT' ? 'LIGHT' : 'DARK'
+										}`}
+										onClick={() => setMode(Mode === 'LIGHT' ? 'DARK' : 'LIGHT')}
 									>
-										{/* <div className='ball'>{Dark ? 'DARK' : 'LIGHT'}</div> */}
+										<div className='ball'>
+											{Mode === 'LIGHT' ? 'LIGHT' : 'DARK'}
+										</div>
 									</div>
 								</div>
 							</div>
 							<div className='bottom'>
 								<ul>
-									{MenuData?.map((menu, index) => {
-										return (
-											<li key={menu.num + index}>
-												<span>{menu.num}</span>
-												<NavLink to={menu.link} activeClassName={'on'}>
-													<div>
-														<span>{menu.menu}</span>
-														<p>{menu.description}</p>
-													</div>
-													<span>
-														<RiArrowRightUpLine />
-													</span>
-												</NavLink>
-											</li>
-										);
-									})}
+									{isSuccess &&
+										MenuData?.map((menu, index) => {
+											return (
+												<li key={menu.num + index}>
+													<span>{menu.num}</span>
+													<NavLink to={menu.link} activeClassName={'on'}>
+														<div>
+															<span>{menu.menu}</span>
+															<p>{menu.description}</p>
+														</div>
+														<span>
+															<RiArrowRightUpLine />
+														</span>
+													</NavLink>
+												</li>
+											);
+										})}
 								</ul>
 								{/* TODO :: menu footer
               <div className='bottomBottom'>

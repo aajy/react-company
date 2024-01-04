@@ -9,11 +9,9 @@ import {
 } from 'react-icons/fa';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useRef } from 'react';
-// import { useSelector } from 'react-redux';
-
+import { useMenuQuery } from '../../../hooks/useMenuQuery';
 export default function Footer() {
-	// const MenuData = useSelector((store) => store.menuTextReducer.menuText);
-	const MenuData = [];
+	const { data: MenuData, isSuccess } = useMenuQuery();
 	const emailAddress = useRef(null);
 	const handleEmail = (e) => {
 		e.preventDefault();
@@ -25,13 +23,14 @@ export default function Footer() {
 				<div>
 					<h3>Website map</h3>
 					<ul className='menu'>
-						{MenuData?.map((menu, index) => {
-							return (
-								<li key={menu.num + index}>
-									<NavLink to={menu.link}>{menu.menu}</NavLink>
-								</li>
-							);
-						})}
+						{isSuccess &&
+							MenuData?.map((menu, index) => {
+								return (
+									<li key={menu.num + index}>
+										<NavLink to={menu.link}>{menu.menu}</NavLink>
+									</li>
+								);
+							})}
 					</ul>
 				</div>
 				<div>

@@ -16,6 +16,15 @@
 			color: var(--logoColor);
 			font-family: var(--pointFont);
 			font-weight: bold;
+			font-size: 2rem;
+		}
+		h2 {
+			position: fixed;
+			z-index: 10;
+			color: var(--logoColor);
+			font-family: var(--pointFont);
+			font-weight: bold;
+			font-size: 2rem;
 		}
 		ul.menu {
 			display: flex;
@@ -94,6 +103,7 @@
 					border: none;
 					text-indent: 10px;
 					outline: 0;
+					background-color: var(--bgColor);
 					&::placeholder {
 						color: rgba(var(--baseColor-code), 0.4);
 						font-size: 0.7rem;

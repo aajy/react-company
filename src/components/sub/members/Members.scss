@@ -308,6 +308,9 @@
                       font-size: 0.7rem;
                     }
                   }
+                  &:last-of-type {
+                    margin-top: 0px;
+                  }
                 }
               }
             }

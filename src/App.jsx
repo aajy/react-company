@@ -46,6 +46,7 @@ export default function App() {
 				</AnimatePresence>
 				<CookieModal>
 					<h1>Cookie</h1>
+					<p>This website uses cookies to ensure you get the best experience on our website.</p>
 				</CookieModal>
 			</div>
 			<ReactQueryDevtools />

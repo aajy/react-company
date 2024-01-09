@@ -17,9 +17,11 @@ export default function CookieModal({ wid='100%', ht='100vh', children }) {
 		setClose(true);
 	};
 	useEffect(() => {
-		setTimeout(() => {
-			cookie.current.classList.add('on');
-		}, 300);
+		if (cookie.current) {
+			setTimeout(() => {
+				cookie.current.classList.add('on');
+			}, 300);
+		}
 	}, []);
 	return (
 		<>

@@ -1,12 +1,13 @@
 .Visual {
-	width: 100%;
+	width: 90%;
 	height: calc(100vh - 124px);
 	// background-color: #f5a99b;
 	position: relative;
+	left: 5%;
 	padding: 10vh;
 	.txtBox {
 		width: 50%;
-		height: 50%;
+		height: 90%;
 		position: absolute;
 		top: 10%;
 		left: 0;
@@ -16,7 +17,7 @@
 			width: 100%;
 			height: 100%;
 			position: relative;
-			padding:30px 40px;
+			padding: 30px 40px;
 			li {
 				// width: 100%;
 				// height: 100%;
@@ -30,14 +31,14 @@
 				&.on {
 					opacity: 1;
 				}
-				&:hover{
+				&:hover {
 					opacity: 0.9;
 				}
 			}
 		}
 		.counter {
 			position: absolute;
-			bottom: 100px;
+			bottom: 3vh;
 			left: 40px;
 			color: var(--baseColor);
 			font-size: 1.5rem;
@@ -50,7 +51,7 @@
 			position: absolute;
 			width: 100%;
 			left: 40px;
-			bottom: 0;
+			bottom: 10vh;
 			z-index: 1;
 			display: flex;
 			gap: 10px;

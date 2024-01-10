@@ -19,6 +19,7 @@ import { AnimatePresence } from 'framer-motion';
 import Detail from './components/sub/youtube/Detail';
 import Members from './components/sub/members/Members';
 import Welcome from './components/sub/members/Welcome';
+import CookieModal from './components/common/cookieModal/CookieModal';
 
 export default function App() {
 	const dispatch = useDispatch();
@@ -60,6 +61,10 @@ export default function App() {
 			<AnimatePresence>
 				<Menu />
 			</AnimatePresence>
+			<CookieModal>
+				<h1>Cookie</h1>
+				<p>This website uses cookies to ensure you get the best experience on our website.</p>
+			</CookieModal>
 		</div>
 	);
 }

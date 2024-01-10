@@ -32,9 +32,6 @@ export default function Header() {
 				<h1>
 					<Link to='/'>abbvie</Link>
 				</h1>
-				<h2>
-					<Link to='/'>abbvie</Link>
-				</h2>
 				<ul className='menu'>
 					<li>
 						<NavLink to='/department' activeClassName={'on'}>

@@ -14,6 +14,7 @@ import Datepicker from '../../common/datepicker/Datepicker';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 export default function Community() {
+	const path = useRef(process.env.PUBLIC_URL);
 	const [Open, setOpen] = useState(false);
 	const [ThemeOnIdx, setThemeOnIdx] = useState(null);
 	const changeText = useCustomText('combined');
@@ -420,7 +421,9 @@ export default function Community() {
 				<h2 className='bottomText'>LeT'S TaLK.</h2>
 			</div>
 			<div className="connectImage">
-					<div className="img"></div>
+					<div className="img">
+					<img src={`${path.current}/img/communityImg.jpg`} alt='' />
+					</div>
 					<div className="text">
 						<h3>CONNECT WITH<br/>YOUR<br/>AUDIENCE?</h3>
 						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt nostrum blanditiis, eius similique ducimus consequatur molestiae omnis sequi aspernatur odit.</p>

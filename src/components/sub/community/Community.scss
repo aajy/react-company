@@ -90,10 +90,6 @@
 		}
 		.bottomText {
 			width: 100%;
-			position: absolute;
-			left: 50%;
-			bottom: 2%;
-			transform: translateX(-50%);
 			font-size: 10vw;
 			font-family: var(--pointFont);
 			font-weight: normal;
@@ -513,25 +509,31 @@
 		display: flex;
 		gap: 20px;
 		.img {
-			border: 1px solid black;
 			width:70%;
 			height:360px;
+			overflow: hidden;
+			>img {
+				width: 100%;
+				object-fit: contain;
+			}
 		}
 		.text {
 			width: 30%;
 			background-color: var(--baseColor);
 			color:var(--bgColor);
 			padding:26px 34px;
+			display: flex;
+			flex-direction: column;
+			justify-content: space-between;
+			gap: 10px;
 			h3 {
 				font-size: 2rem;
 				font-weight: 300;
 				line-height: 1.2;
-				margin-bottom: 16px;
 			}
 			p{
 				font-size: 1rem;
 				font-weight: 200;
-				margin-bottom: 24px;
 				line-height: 1.1;
 			}
 			a {
@@ -543,6 +545,7 @@
 					border-radius: 20px;
 					cursor: pointer;
 					transition: 0.3s;
+					border: none;
 					>svg {
 						margin-bottom: -3px;
 					}
@@ -555,4 +558,423 @@
 		}
 	}
 }
-
+//1100, 
+.tablet, .mobile {
+	.Community {
+		width: 90%;
+		.communityWrap {
+			min-height: 100vh;
+			padding: 20px 30px;
+			margin-bottom: 40px;
+		}
+		.showBox {
+			display: flex;
+			flex-direction: column;
+			min-height: 60vh;
+			height: 60vh;
+			overflow-y: scroll;
+			padding-bottom: 300px;
+			.postList {
+				display: flex;
+				flex-direction: row;
+				flex-wrap: wrap;
+				justify-content: flex-start;
+				gap: 10px 0px;
+				.commentBox {
+					width: calc(100% / 3);
+					position: relative;
+					padding: 60px 30px;
+					cursor: pointer;
+					.bg {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+						left: 0;
+						top: 0;
+						&::before,
+						&::after {
+							content: '';
+							position: absolute;
+							z-index: 0;
+							left: 0;
+							top: 0;
+							width: 100%;
+							height: 100%;
+							transition: 0.4s ease-out;
+						}
+						&::before {
+							opacity: 0;
+						}
+						&::after {
+							opacity: 1;
+						}
+					}
+					> .txt {
+						transition: 0.3s;
+						position: relative;
+						z-index: 1;
+						> .top {
+							display: flex;
+							justify-content: space-between;
+							h2 {
+								font-size: 1rem;
+								margin-bottom: 10px;
+							}
+							.likeCount {
+								display: flex;
+								align-items: flex-start;
+								> p {
+									width: 24px;
+									height: 24px;
+									border-radius: 16px 0 0 16px;
+									font-size: 0.8rem;
+									font-weight: 400;
+									line-height: 22px;
+									text-align: center;
+									border: 1px solid rgba(var(--baseColor-code), 0.6);
+									background-color: var(--bgColorfff);
+								}
+								> button {
+									width: 24px;
+									height: 24px;
+									display: flex;
+									align-items: center;
+									justify-content: center;
+									background-color: var(--bgColorfff);
+									border: 1px solid rgba(var(--baseColor-code), 0.6);
+									border-radius: 0 16px 16px 0;
+									border-left: none;
+									> svg {
+										font-size: 1rem;
+										transition: 0.2s;
+										color: var(--pointColor);
+										cursor: pointer;
+										margin-bottom: -3px;
+									}
+									&:active {
+										> svg {
+											color: var(--baseColor);
+										}
+									}
+								}
+							}
+						}
+						.editMode {
+							width: 100%;
+							display: flex;
+							align-items: flex-start;
+							> input,
+							textarea {
+								width: 100%;
+								// background-color: transparent;
+								// border:none;
+								// border-bottom:1px solid rgba(var(--baseColor-code), 0.6);
+								padding: 5px 10px;
+								margin-bottom: 10px;
+								&:focus {
+									outline: 0;
+								}
+							}
+							> button {
+								width: 22px;
+								height: 22px;
+								background-color: var(--bgColor);
+								border: 1px solid rgba(var(--baseColor-code), 0.6);
+								cursor: pointer;
+							}
+						}
+						.content {
+							display: block;
+							padding: 15px 20px;
+							// background-color: rgba(var(--bgColor-code), 1);
+							border-radius: 5px;
+							font-size: 0.8rem;
+							margin-bottom: 20px;
+							position: relative;
+							z-index: 1;
+						}
+						> span {
+							display: block;
+							font-size: 0.7rem;
+							text-align: right;
+							margin-bottom: 30px;
+							position: relative;
+							z-index: 1;
+						}
+						.replyViewBtn {
+							display: flex;
+							font-size: 0.8rem;
+							width: 130px;
+							border: 1px solid rgba(var(--baseColor-code), 0.5);
+							border-radius: 20px;
+							padding: 2px 8px;
+							justify-content: space-between;
+							align-items: center;
+							gap: 10px;
+							transition: 0.2s;
+							margin-bottom: 0px;
+							position: relative;
+							z-index: 1;
+							&.on {
+								background-color: var(--bgColorfff);
+							}
+							> svg {
+								margin-bottom: -3px;
+							}
+						}
+						.replyView {
+							position: relative;
+							z-index: 1;
+							transition: 0.5s;
+							&.on {
+								ul {
+									transform: translateX(0px);
+									opacity: 1;
+									height: auto;
+									transition: all 0.1s ease-in 0.3s;
+								}
+							}
+							ul {
+								padding: 3px;
+								border-radius: 2px;
+								transform: translateX(5px);
+								opacity: 0;
+								height: 0;
+								li {
+									width: 100%;
+									border-bottom: 1px solid rgba(var(--baseColor-code), 0.2);
+									margin: 2px;
+									display: flex;
+									justify-content: space-between;
+									align-items: center;
+									padding: 3px 5px;
+									&:last-child {
+										border-bottom: none;
+									}
+									> span {
+										flex: 2;
+										font-size: 0.9rem;
+										word-break: break-all;
+										> svg {
+											margin-right: 10px;
+										}
+										&:nth-of-type(2) {
+											flex: 1.5;
+											font-size: 0.7rem;
+											display: flex;
+											word-break: keep-all;
+											> span:nth-of-type(2),
+											span:nth-of-type(3) {
+												margin-left: 5px;
+												color: rgba(var(--baseColor-code), 0.6);
+											}
+										}
+									}
+								}
+							}
+						}
+						.noReplyView {
+							padding:6px 10px;
+							font-size: 0.8rem;
+							color:rgba(var(--baseColor-code), 0.7);
+						}
+						.replyInput {
+							display: block;
+							display: flex;
+							width: 100%;
+							margin: 10px 0;
+							position: relative;
+							z-index: 2;
+							gap: 2px;
+							> input {
+								width: 100%;
+								border: 1px solid rgba(var(--baseColor-code), 0.5);
+								border-radius: 20px;
+								padding: 2px 8px;
+								&::placeholder {
+									font-size: 0.7rem;
+									color: var(--pointColor);
+								}
+								&:focus {
+									outline: 0;
+								}
+							}
+							> button {
+								border: 1px solid rgba(var(--baseColor-code), 0.5);
+								border-radius: 20px;
+								padding: 2px 8px;
+								background-color: var(--baseColor);
+								text-align: center;
+								cursor: pointer;
+								color: var(--bgColor);
+							}
+						}
+						.bottom {
+							display: flex;
+							flex-direction: row-reverse;
+							flex-wrap: wrap;
+							align-items: center;
+							justify-content: space-between;
+							gap: 20px;
+							transition: 0.5s;
+							position: relative;
+							z-index: 1;
+							> p {
+								font-size: 0.9rem;
+								color: var(--pointColor);
+							}
+							> .themeImg {
+								display: block;
+								width: 60px;
+								height: 60px;
+								z-index: 2;
+								display: flex;
+								justify-content: flex-end;
+								align-items: flex-end;
+								> svg {
+									font-size: 2rem;
+									color: var(--baseColor);
+									transition: 0.2s;
+								}
+							}
+							> nav {
+								position: relative;
+								z-index: 1;
+								display: none;
+								button {
+									border: none;
+									// border:1px solid rgba(var(--baseColor-code),0.5);
+									padding: 2px 5px;
+									margin-right: 5px;
+									font-size: 1rem;
+									width: 30px;
+									height: 30px;
+									border-radius: 20px;
+									color: var(--bgColor);
+									background-color: var(--baseColor);
+									transition: 0.5s;
+									cursor: pointer;
+									&.on {
+										background-color: var(--pointColor);
+									}
+								}
+							}
+						}
+					}
+					&.theme1,
+					&.theme2,
+					&.theme3,
+					&.theme4,
+					&.theme5 {
+						.bg {
+							&::before {
+								opacity: 1;
+							}
+							&::after {
+								opacity: 0;
+							}
+						}
+					}
+					&.theme1 .bg {
+						&::before {
+							background-image: radial-gradient(#ff32b1, #faf082);
+						}
+					}
+					&.theme2 .bg {
+						&::before {
+							background-image: radial-gradient(#3292ff, #fabc82);
+						}
+					}
+					&.theme3 .bg {
+						&::before {
+							background-image: radial-gradient(#65ff32, #82d4fa);
+						}
+					}
+					&.theme4 .bg {
+						&::before {
+							background-image: radial-gradient(#ff9232, #dbb4ed);
+						}
+					}
+					&.theme5 .bg {
+						&::before {
+							background-image: radial-gradient(#32ff87 10%, #ff4ad5);
+						}
+					}
+				}
+			}
+		}
+		.connectImage {
+			.img {
+				height:280px;
+				overflow: hidden;
+			}
+			.text {
+				height: 280px;
+				padding:26px 24px;
+				h3 {
+					font-size: 1.4rem;
+					line-height: 1;
+				}
+				p{
+					font-size: 0.8rem;
+				}
+			}
+		}
+	}
+}
+///640부터.
+.mobile {
+	.Community {
+		width: 90%;
+		.communityWrap {
+			> .top {
+				flex-direction: column;
+				align-items: flex-end;
+				margin-bottom: 20px;
+				h1 {
+					font-size: 2.3rem;
+					line-height: 1;
+					margin-bottom: 20px;
+					> span {
+						font-size: 1.5rem;
+					}
+					> em {
+						width: 100%;
+						margin-bottom: 16px;
+					}
+				}
+			}
+		}
+		.pagination {
+			margin: 40px auto;
+		}
+		.showBox {
+			padding-bottom: 0px;
+			margin-bottom: 20px;
+			.postList {
+				.commentBox {
+					width: 100%;
+				}
+			}
+		}
+		.gradationBox {
+			display: none;
+		}
+		.connectImage {
+			.img {
+				display: none;
+			}
+			.text {
+				width: 100%;
+				height: 200px;
+				text-align: right;
+				h3 {
+					font-size: 1.6rem;
+				}
+				p{
+					display: none;
+				}
+			}
+		}
+	}
+}

@@ -56,6 +56,11 @@
 				}
 			}
 		}
+		.themeBox {
+			border: 1px solid rgba(var(--baseColor-code), 0.5);
+			border-radius: 20px;
+			padding: 2px 10px;
+		}
 		.menuToggle {
 			display: none;
 		}

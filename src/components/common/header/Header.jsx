@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './Header.scss';
 import { Link, NavLink } from 'react-router-dom';
 import { LuSearch, LuChevronDown, LuChevronUp } from 'react-icons/lu';
+import { IoSunnySharp, IoMoonSharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import * as types from '../../../redux/action';
 
@@ -70,7 +71,17 @@ export default function Header() {
 					className={`themeBox ${Dark && 'dark'}`}
 					onClick={() => dispatch({ type: types.DARK.start, payload: !Dark })}
 				>
-					<div className='ball'></div>
+					<div className='ball'>
+						{Dark ? (
+							<span>
+								<IoSunnySharp />
+							</span>
+						) : (
+							<span>
+								<IoMoonSharp />
+							</span>
+						)}
+					</div>
 				</div>
 				<button
 					className='menuToggle'

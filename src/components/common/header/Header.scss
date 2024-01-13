@@ -56,9 +56,17 @@
 			}
 		}
 		.themeBox {
-			border: 1px solid rgba(var(--baseColor-code), 0.5);
 			border-radius: 20px;
 			padding: 2px 10px;
+			cursor: pointer;
+			transition: 0.5s;
+			color: var(--bgColor);
+			background-color: var(--baseColor);
+			&.dark {
+				border: 1px solid rgba(var(--baseColor-code), 0.5);
+				color: var(--bgColor);
+				background-color: var(--baseColor);
+			}
 		}
 		.menuToggle {
 			display: none;

@@ -74,11 +74,11 @@ export default function Header() {
 					<div className='ball'>
 						{Dark ? (
 							<span>
-								<IoSunnySharp />
+								<IoMoonSharp />
 							</span>
 						) : (
 							<span>
-								<IoMoonSharp />
+								<IoSunnySharp />
 							</span>
 						)}
 					</div>

@@ -25,9 +25,9 @@ export function useCustomText(type) {
 		};
 	}
 	if (type === 'shorten') {
-		return (txt, len) => {
+		return (txt, len, string ='...') => {
 			if (txt.length > len) {
-				return txt.slice(0, len) + '...';
+				return txt.slice(0, len) + string;
 			} else {
 				return txt;
 			}

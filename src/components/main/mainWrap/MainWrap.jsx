@@ -9,8 +9,8 @@ export default function MainWrap() {
 	return <div className='MainWrap'>
 		<Visual />
 		<Info/>
-		<Pics />
 		<Banner />
+		<Pics />
 		<Btns />
 	</div>;
 }

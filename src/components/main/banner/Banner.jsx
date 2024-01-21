@@ -5,10 +5,10 @@ import { RiArrowRightUpLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useCustomText } from '../../../hooks/useText';
 import { useScroll } from '../../../hooks/useScroll';
+import { useSelector } from 'react-redux';
 
 export default function Banner(){
   const refBox = useRef(null);
-  const [Vids, setVids] = useState([]);
   const shortenText = useCustomText('shorten');
   const titEl = useRef(null);
 	const titEl2 = useRef(null);
@@ -27,35 +27,15 @@ export default function Banner(){
 	};
 
 	const { refEl } = useScroll(handleCustomScroll);
-  const fetchYoutube = async () => {
-		const api_key = process.env.REACT_APP_YOUTUBE_API;
-		const pid = process.env.REACT_APP_YOUTUBE_LIST;
-		const num = 5;
-
-		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
-
-		//playlist
-		try {
-			const data = await fetch(baseURL);
-			const json = await data.json();
-			const items = json.items;
-			const newArray = items.map(item => {
-        return { ...item, active: false };
-			});
-			setVids(newArray);
-		} catch (err) {
-			console.log(err);
-		}
-	};
+  const Vids = useSelector((store) => {
+		return store.youtubeReducer.youtube.slice(0,5);
+	});
   const handleActive = e => {
     const boxs = refBox.current.querySelectorAll('.vidBox');
 		boxs.forEach((box) => box.classList.remove('active'));
 		e && e.target.classList.add('active');
     e.target.classList.add('active')
   }
-  useEffect(() => {
-		fetchYoutube();
-	}, []);
   return(
     <div className='Banner' ref={refEl}>
       <section className="top">

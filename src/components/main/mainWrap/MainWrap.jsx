@@ -1,5 +1,4 @@
 import Banner from '../banner/Banner';
-import Btns from '../btns/Btns';
 import Info from '../info/Info';
 import Pics from '../pics/Pics';
 import Visual from '../visual/Visual';
@@ -11,6 +10,5 @@ export default function MainWrap() {
 		<Info/>
 		<Banner />
 		<Pics />
-		<Btns />
 	</div>;
 }

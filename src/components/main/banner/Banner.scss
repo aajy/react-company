@@ -145,13 +145,13 @@
 				.img{
 					display: block;
 					width: 100%;
-					height: 160px;
+					height:280px;
 					margin-bottom: 10px;
 					border-radius: 10px;
 					overflow: hidden;
 					>img {
 						width: 100%;
-						transform: scale(1.5);
+						transform: scale(1.7);
 						object-fit: cover;
 					}
 				}
@@ -190,6 +190,22 @@
 				}
 				h3{
 					display: none;
+				}
+			}
+		}
+	}
+}
+.tablet,.mobile {
+	.Banner {
+		article {
+			.vidBox.active{
+				>div {
+					.img{
+						height:200px;
+						>img {
+							transform: scale(2);
+						}
+					}
 				}
 			}
 		}
@@ -247,7 +263,7 @@
 					.img{
 						display: block;
 						width: 100%;
-						height: 160px;
+						height: 300px;
 						margin-bottom: 10px;
 						border-radius: 10px;
 						overflow: hidden;

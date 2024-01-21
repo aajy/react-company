@@ -36,13 +36,31 @@ export default function App() {
 		const json = await data.json();
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
-	// const fetchYoutube = async () => {
-	// 	//TODO :: 검색 후 받은 데이터로 재검색해야 할 때
-	// };
+	const fetchYoutube = async () => {
+		const api_key = process.env.REACT_APP_YOUTUBE_API;
+		const pid = process.env.REACT_APP_YOUTUBE_LIST;
+		const num = 8;
+
+		const baseURL = `https://www.googleapis.com/youtube/v3/playlistItems?key=${api_key}&part=snippet&playlistId=${pid}&maxResults=${num}`;
+
+		//playlist
+		try {
+			const data = await fetch(baseURL);
+			const json = await data.json();
+			const items = json.items;
+			const newArray = items.map(item => {
+        return { ...item, active: false };
+			});
+			return dispatch({ type: types.YOUTUBE.success, payload: newArray });
+		} catch (err) {
+			console.log(err);
+		}
+	};
 
 	useEffect(() => {
 		fetchDepartment();
 		fetchMenuText();
+		fetchYoutube();
 	}, []);
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>

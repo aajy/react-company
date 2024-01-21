@@ -99,8 +99,9 @@
 	}
 	.contact {
 		display: flex;
+		position: relative;
 		left: 0;
-		bottom: 100px;
+		bottom: 7vw;
 		p {
 			font-size: 6rem;
 			font-family: var(--baseTitFont);
@@ -162,6 +163,7 @@
 			}
 		}
 		.contact {
+			bottom: 3vw;
 			p {
 				font-size: 3rem;
 			}

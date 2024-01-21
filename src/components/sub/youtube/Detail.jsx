@@ -1,14 +1,13 @@
 import { useParams } from 'react-router-dom';
 import Layout from '../../common/layout/Layout';
 import './Detail.scss';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IoMdHeart } from 'react-icons/io';
 import { LiaComment } from 'react-icons/lia';
 import { useCustomText } from '../../../hooks/useText';
 import { TfiPlus, TfiMinus } from 'react-icons/tfi';
 
 export default function Detail() {
-	const path = useRef(process.env.PUBLIC_URL);
 	const { id } = useParams();
 	const [YoutubeData, setYoutubeData] = useState(null);
 	const [CommentData, setCommentData] = useState([]);

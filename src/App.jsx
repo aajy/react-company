@@ -11,7 +11,7 @@ import './globalStyles/Reset.scss';
 import * as types from './redux/action';
 
 import { Route } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
@@ -36,9 +36,9 @@ export default function App() {
 		const json = await data.json();
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
 	};
-	const fetchYoutube = async () => {
-		//TODO :: 검색 후 받은 데이터로 재검색해야 할 때
-	};
+	// const fetchYoutube = async () => {
+	// 	//TODO :: 검색 후 받은 데이터로 재검색해야 할 때
+	// };
 
 	useEffect(() => {
 		fetchDepartment();

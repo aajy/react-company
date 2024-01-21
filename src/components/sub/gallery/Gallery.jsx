@@ -8,7 +8,6 @@ import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
 import { IoCheckmarkSharp } from 'react-icons/io5';
 
 export default function Gallery() {
-	const path = useRef(process.env.PUBLIC_URL);
 	const myID = useRef('198783018@N02');
 	const isUser = useRef(myID.current);
 	const refNav = useRef(null);

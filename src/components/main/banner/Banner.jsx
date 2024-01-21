@@ -61,7 +61,7 @@ export default function Banner(){
                 <div className="img"><img src={data.snippet.thumbnails.standard.url} alt="" /></div>
                 <div className='nav'>
                   <span><RiArrowRightUpLine /></span>
-                  <Link to="/youtube">Detail More</Link>
+                  <Link to={`/youtube/detail/${data.id}`}>Detail More</Link>
                 </div>
                 <p>{shortenText(data.snippet.description, 300)}</p>
                 <h3>{shortenText(data.snippet.title,13,'').replace(/[^-a-z,A-Z]/g,'')}</h3>

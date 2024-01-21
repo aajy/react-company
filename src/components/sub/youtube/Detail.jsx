@@ -70,12 +70,11 @@ export default function Detail() {
 						<iframe
 							title={YoutubeData.title}
 							src={`https://www.youtube.com/embed/${YoutubeData.resourceId.videoId}`}
-							frameborder='0'
-							allowfullscreen='allowfullscreen'
+							allow="fullscreen"
 						></iframe>
 					</div>
 					<h3>{YoutubeData.title}</h3>
-					<p>
+					<div className='desc'>
 						{YoutubeData.description.length > 300 ? (
 							<p>
 								{Ismore ? (
@@ -105,7 +104,7 @@ export default function Detail() {
 								perferendis quidem illum nesciunt architecto.`}
 							</span>
 						)}
-					</p>
+					</div>
 					<span>
 						<LiaComment />
 						댓글 {CommenLength} 개

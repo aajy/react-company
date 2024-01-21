@@ -66,6 +66,10 @@
 			width: calc(100% / 6);
 			padding:10px;
 			transition: 0.3s;
+			>span {
+				font-size: 0.8rem;
+				color :rgba(var(--baseColor-code), 0.7);
+			}
 			>h3 {
 				display: none;
 			}
@@ -84,6 +88,7 @@
 				h3 {
 					&:nth-of-type(1) {
 						font-size: 7rem;
+						margin-left: -30px;
 					}
 				}
 				.nav {

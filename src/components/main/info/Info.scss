@@ -1,9 +1,11 @@
 .Info {
   width: 100%;
 	height: 100vh;
-	padding: 100px 0;
+	padding: 100px 0 0;
 	background-color: rgba(var(--bgColor-code),1);
 	color: var(--baseColor);
+  overflow: hidden;
+  transition: 0.5s;
   h2 {
     font-size: 3rem;
     font-family: var(--baseTitFont);
@@ -18,9 +20,12 @@
       padding: 20px 0 20px 5vw;
       display: flex;
       flex-direction: column;
+      line-height: 1.1;
+      transition: 0.5s;
       span {
         font-size: 1.8rem;
         font-weight: bold;
+        margin-bottom: 10px;
       }
       em {
         font-size: 0.8rem;
@@ -30,7 +35,7 @@
   }
   .img {
     width: 100%;
-    height: 50%;
+    height: calc(100vh - 412px);
     position: relative;
     >img{
       width: 100%;
@@ -39,7 +44,7 @@
     }
     .icons {
       position: absolute;
-      bottom: 20px;
+      bottom: 3vh;
       left: 5vw;
       display: flex;
       span {
@@ -72,7 +77,6 @@
           justify-content: space-between;
           padding: 10px 30px;
           margin-bottom: 30px;
-          cursor: pointer;
             &:hover{
               ul {
                 li {
@@ -88,10 +92,12 @@
             justify-content: space-between;
             h3 {
               font-size: 1.8rem;
-            }
-            p {
-              font-size: 0.8rem;
-              line-height: 1.2;
+              p {
+                font-size: 0.8rem;
+                line-height: 1.2;
+                font-weight: normal;
+                margin-top: 5px;
+              }
             }
           }
           >ul {
@@ -125,10 +131,11 @@
           }
           .profile {
             width: 20vw;
-            height: 160px;
+            height: 30vh;
             border-radius: 10px;
             overflow: hidden;
-            margin-bottom: 7px;
+            margin-bottom: 10px;
+            transition: 0.5s;
             >img {
               width: 100%;
               height: 100%;
@@ -151,6 +158,96 @@
               display: flex;
               justify-content: center;
               align-items: center;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.laptop{
+  .Info {
+    .img {
+      .members {
+        > div {
+          &.member {
+            .profile {
+              width: 30vw;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.tablet, .mobile {
+  .Info {
+    padding: 60px 0 0;
+    >h2 {
+      font-size: 2.6rem;
+      margin-bottom: 60px;
+    }
+    >ul {
+      li {
+        padding: 20px 0 20px 3vw;
+      }
+    }
+    .img {
+      height: calc(100vh - 300px);
+      .icons {
+        bottom: 4vh;
+      }
+      .members {
+        position: absolute;
+        top: 5vw;
+        right: 5vw;
+        > div {
+          &.member {
+            .profile {
+              width: 50vw;
+              height: 40vh;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.mobile {
+  .Info {
+    padding: 30px 0 0;
+    >h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+    >ul {
+      flex-wrap: wrap;
+      li {
+        width: calc(100% / 3);
+        padding: 10px 0 20px 3vw;
+        span {
+          font-size: 1.4rem;
+        }
+        em {
+          font-size: 0.6rem;
+          font-style: normal;
+        }
+      }
+    }
+    .img {
+      height: calc(100vh - 280px);
+      .icons {
+        display: none;
+      }
+      .members {
+        position: absolute;
+        top: 5vw;
+        right: 5vw;
+        > div {
+          &.member {
+            .profile {
+              width: 100%;
+              height: 30vh;
             }
           }
         }

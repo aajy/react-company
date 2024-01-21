@@ -34,8 +34,7 @@ export default function Info(){
         {MemberData.departmentMember && MemberData.departmentSupport && <div className="members">
           <div className='client'>
             <div>
-              <h3>34k</h3>
-              <p>Client <br/> Since 2018 </p>
+              <h3>34k<p>Client <br/> Since 2018 </p></h3>
             </div>
             <ul>
               <li><img src={`${path.current}/img/${MemberData.departmentMember[0].pic}`} alt=""/></li>
@@ -50,7 +49,7 @@ export default function Info(){
               <img src={`${path.current}/img/${MemberData.departmentSupport[0].pic}`} alt="" />
             </div>
             <div className='nav'>
-              <Link>Detail more</Link>
+              <Link to='/department'>Detail more</Link>
               <span className="mode"><PiUserFocus /></span>
             </div>
             {/* 클릭 시 사람 랜덤으로 바뀜 */}

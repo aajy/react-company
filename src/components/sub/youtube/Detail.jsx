@@ -12,7 +12,9 @@ export default function Detail() {
 	const { id } = useParams();
 	const [YoutubeData, setYoutubeData] = useState(null);
 	const [CommentData, setCommentData] = useState([]);
+	const [CommenLength, setCommenLength] = useState(0);
 	const [Ismore, setIsmore] = useState(false);
+	const [IsCommentDisable, setIsCommentDisable] = useState(false);
 
 	const shortenText = useCustomText('shorten');
 	const dummyData = [
@@ -35,13 +37,19 @@ export default function Detail() {
 			const json = await data.json();
 			setYoutubeData(json.items[0].snippet);
 			//댓글가져오는 요청
-			const commentURL = `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&part=replies&videoId=${json.items[0].snippet.resourceId.videoId}`;
+			const commentURL = `https://www.googleapis.com/youtube/v3/commentThreads?key=${api_key}&part=snippet&videoId=${json.items[0].snippet.resourceId.videoId}`;
 
 			try {
 				const data = await fetch(commentURL);
 				const json = await data.json();
-				if (json.items[0] && json.items[0]?.replies.comments.length > 0) {
-					setCommentData(json.items[0].replies.comments);
+				if (data.status !== 200) {
+					setIsCommentDisable(true);
+				} else {
+					setIsCommentDisable(false);
+				}
+				if (json.items && json.items.length > 0) {
+					setCommenLength(json.items.length)
+					setCommentData(json.items);
 				} else {
 					setCommentData(dummyData);
 				}
@@ -57,7 +65,7 @@ export default function Detail() {
 	}, []);
 	return (
 		<Layout title={'Detail'} className={'Detail'}>
-			{YoutubeData && CommentData && (
+			{YoutubeData && (
 				<article>
 					<div className='videoBox'>
 						<iframe
@@ -101,28 +109,29 @@ export default function Detail() {
 					</p>
 					<span>
 						<LiaComment />
-						댓글 {CommentData.length} 개
+						댓글 {CommenLength} 개
 					</span>
-						{CommentData.map((comment, idx) => {
+					{IsCommentDisable && <p>Comments have been disabled</p>}
+						{!IsCommentDisable && CommentData.length > 0 && CommentData.map((comment, idx) => {
 							return (
 								<div className='comment' key={comment.id + idx}>
 									<div className='profile'>
 										<div>
 											<img
-												src={comment.snippet.authorProfileImageUrl}
+												src={comment.snippet.topLevelComment.snippet.authorProfileImageUrl}
 												alt='profileUrl'
 											/>
 											<div>
 												<p>
-													<span>{comment.snippet.authorDisplayName}</span>
-													<span>{comment.snippet.publishedAt}</span>
+													<span>{comment.snippet.topLevelComment.snippet.authorDisplayName}</span>
+													<span>{comment.snippet.topLevelComment.snippet.publishedAt}</span>
 												</p>
-												<p>{comment.snippet.textDisplay}</p>
+												<p>{comment.snippet.topLevelComment.snippet.textDisplay}</p>
 											</div>
 										</div>
 										<p>
 											<IoMdHeart />
-											{comment.snippet.likeCount}
+											{comment.snippet.topLevelComment.snippet.likeCount}
 										</p>
 									</div>
 								</div>

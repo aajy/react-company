@@ -37,6 +37,25 @@ export default function Visual() {
 
 	return (
 		<figure className='Visual'>
+			<Swiper {...swiperOpt.current}>
+				{Vids.length &&
+						Vids.map((el, idx) => {
+						if (idx >= num.current) return null;
+						return (
+							<SwiperSlide key={el.id}>
+								<div className='pic'>
+									<p>
+										<img src={el.snippet.thumbnails.standard.url} alt={el.snippet.title} />
+									</p>
+									<p>
+										<img src={el.snippet.thumbnails.standard.url} alt={el.snippet.title} />
+									</p>
+								</div>
+							</SwiperSlide>
+						);
+					})}
+			</Swiper>
+			
 			<div className='txtBox'>
 				<ul>
 					{Vids.length &&
@@ -59,26 +78,7 @@ export default function Visual() {
 							);
 						})}
 				</ul>
-			</div>
-
-			<Swiper {...swiperOpt.current}>
-				{Vids.length &&
-						Vids.map((el, idx) => {
-						if (idx >= num.current) return null;
-						return (
-							<SwiperSlide key={el.id}>
-								<div className='pic'>
-									<p>
-										<img src={el.snippet.thumbnails.standard.url} alt={el.snippet.title} />
-									</p>
-									<p>
-										<img src={el.snippet.thumbnails.standard.url} alt={el.snippet.title} />
-									</p>
-								</div>
-							</SwiperSlide>
-						);
-					})}
-			</Swiper>
+			</div>			
 
 			<nav className='preview'>
 				{Vids.length && (

@@ -7,7 +7,6 @@
 	padding: 10vh;
 	.txtBox {
 		width: 80%;
-		height: 90%;
 		margin:0 auto;
 		position: relative;
 		z-index: 2;
@@ -138,11 +137,11 @@
 	}
 	.barFrame {
 		width: 70%;
-		height: 2px;
+		height: 3px;
 		position: absolute;
 		bottom: 50px;
 		left: 15%;
-		background: #888;
+		background: #ccc;
 
 		.bar {
 			width: 0%;
@@ -157,11 +156,10 @@
 	.swiper {
 		display: inline-block;
 		width: 100%;
-		height: 100%;
-		padding: 10vw 0px;
-		position: absolute;
-		top: 0;
-		left: 0;
+		height: 70%;
+		padding: 0px;
+		margin-bottom: 50px;
+		position: relative;
 		z-index: 3;
 		.swiper-wrapper {
 			height: inherit;
@@ -173,8 +171,8 @@
 				height: inherit;
 
 				.pic {
-					width: 600px;
-					height: 500px;
+					width: 500px;
+					height: 400px;
 					position: relative;
 					transform-style: preserve-3d;
 					transform: perspective(1400px) rotateX(-10deg) rotateY(30deg) scale3d(0.5, 0.7, 1); 
@@ -229,13 +227,8 @@
 }
 .laptop, .tablet, .mobile {
 	.Visual{
-		height: 80vh;
-		padding:0;
 		.txtBox {
-			width: 100%;
-			height: 90%;
 			ul {
-				width: 100%;
 				li {
 					h3 {
 						font-size: 2rem;
@@ -255,48 +248,21 @@
 				}
 			}
 		}
-	}
-}
-.tablet, .mobile {
-	.Visual{
-		height: 80vh;
-		padding:0;
-		.txtBox {
-			width: 100%;
-			height: 90%;
-			ul {
-				width: 100%;
-				li {
-					h3 {
-						font-size: 2rem;
-					}
-				}
-				>a {
-					top: 80px;
-				}
-			}
-		}
-		.swiper {
-			left: 0%;
-			.swiper-wrapper {
-				.swiper-slide {
-					.pic {
-						width: 800px;
-					}
-				}
-			}
+		.barFrame {
+			width: 70%;
+			height: 3px;
+			position: absolute;
+			bottom: 80px;
 		}
 	}
 }
 .mobile {
 	.Visual {
-		height: 60vh;
-		padding:0;
+		height: 55vh;
+		padding: 40px 10px;
 		.txtBox {
-			width: 100%;
-			height: 100%;
 			ul {
-				width: 100%;
+				height: 140px;
 				li {
 					h3 {
 						font-size: 1rem;
@@ -308,7 +274,7 @@
 			}
 		}
 		.swiper {
-			left: 0%;
+			margin-bottom: 0;
 			.swiper-wrapper {
 				height: inherit;
 				position: relative;
@@ -318,6 +284,9 @@
 					.pic {
 						width: 100%;
 						height: 260px;
+						p:nth-child(1) {
+							display: none;
+						}
 					}
 				}
 			}

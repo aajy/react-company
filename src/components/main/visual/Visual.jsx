@@ -71,7 +71,7 @@ export default function Visual() {
                     <h3>{shortenText(el.snippet.title,20,'')}</h3>
                   </li>
                   <Link 
-                    to={`/detail/${el.id}`}
+                    to={`/youtube/detail/${el.id}`}
                     className={idx === Index ? 'on' : ''}
                   >View Detail</Link>
                 </React.Fragment>

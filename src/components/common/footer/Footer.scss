@@ -1,11 +1,16 @@
 .Footer {
 	width: 100vw;
 	margin: 0 auto;
-	padding: 40px 15vw;
+	
 	display: flex;
 	justify-content: space-between;
 	background-color: var(--baseColor);
 	color: rgba(var(--bgColor-code), 0.9);
+	&.main {
+		padding: 40px 3vw;
+	}
+	&.sub {
+	}
 	> div {
 		display: flex;
 		flex-direction: column;

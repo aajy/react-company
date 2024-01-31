@@ -10,7 +10,7 @@ import './globalStyles/Variables.scss';
 import './globalStyles/Reset.scss';
 import * as types from './redux/action';
 
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from './hooks/useMedia';
@@ -64,18 +64,21 @@ export default function App() {
 	}, []);
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
-			<Header />
-			<Route exact path='/' component={MainWrap} />
+			<Switch>
+				<Route exact path='/' component={MainWrap} />
+				<Route path='/' render={()=> <Header type={'sub'}/>} />
+			</Switch>
 			<Route path='/department' component={Department} />
 			<Route exact path='/youtube' component={Youtube} />
 			<Route path='/youtube/detail/:id' component={Detail} />
 			<Route path='/gallery' component={Gallery} />
-			{/*TODO:: 게시글 검색 페이지 생성 <Route path='/community/search/:paramsKeyword' component={Contact} /> */}
 			<Route path='/community' component={Community} />
 			<Route path='/members' component={Members} />
 			<Route path='/contact' component={Contact} />
 			<Route path='/welcome/:id' component={Welcome} />
-			<Footer />
+			<Switch>
+				<Route path='/' render={()=> <Footer type={'sub'}/>} />
+			</Switch>
 			<AnimatePresence>
 				<Menu />
 			</AnimatePresence>

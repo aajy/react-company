@@ -4,6 +4,11 @@
 	background-color: var(--bgColor);
 	font-family: var(--baseTitFont);
 	transition: 1s;
+	&.main {
+		width: 90vw;
+	}
+	&.sub {
+	}
 	.top {
 		display: flex;
 		justify-content: space-between;

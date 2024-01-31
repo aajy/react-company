@@ -11,7 +11,7 @@ import { RiArrowRightUpLine } from 'react-icons/ri';
 import { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-export default function Footer() {
+export default function Footer({type}) {
 	const MenuData = useSelector((store) => store.menuTextReducer.menuText);
 	const emailAddress = useRef(null);
 	const handleEmail = (e) => {
@@ -19,7 +19,7 @@ export default function Footer() {
 		console.log('Newsletter 신청하는 이메일 주소', emailAddress.current.value);
 	};
 	return (
-		<footer className='Footer'>
+		<footer className={`Footer ${type==='main'?'main':'sub'}`}>
 			<div className='left'>
 				<div>
 					<h3>Website map</h3>

@@ -7,7 +7,7 @@ import { PiPercentLight } from 'react-icons/pi';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { GrPowerReset } from "react-icons/gr";
 import { useCustomText } from '../../../hooks/useText';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 export default function Youtube() {
 	const shortenText = useCustomText('shorten');

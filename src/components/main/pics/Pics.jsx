@@ -1,6 +1,6 @@
 import './Pics.scss';
 import { useCallback, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { TbMap2 } from "react-icons/tb";
 
@@ -58,7 +58,7 @@ export default function Pics() {
     return () =>{			
 			window.removeEventListener('scroll', handleScroll);
 		} 
-  }, []);
+  }, [handleScroll]);
 	return (
 		<div className='Pics myScroll' ref={thisEl}>
       <div className="top">

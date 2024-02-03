@@ -11,7 +11,7 @@ import './globalStyles/Reset.scss';
 import * as types from './redux/action';
 
 import { Route, Switch } from 'react-router-dom';
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMedia } from './hooks/useMedia';
 import Menu from './components/common/menu/Menu';
@@ -26,17 +26,17 @@ export default function App() {
 	const path = useRef(process.env.PUBLIC_URL);
 	const Dark = useSelector((store) => store.darkReducer.dark);
 
-	const fetchDepartment = async () => {
+	const fetchDepartment = useCallback(async () => {
 		const data = await fetch(`${path.current}/DB/department.json`);
 		const json = await data.json();
 		return dispatch({ type: types.MEMBERS.success, payload: json.members });
-	};
-	const fetchMenuText = async () => {
+	},[dispatch]);
+	const fetchMenuText = useCallback(async () => {
 		const data = await fetch(`${path.current}/DB/menuText.json`);
 		const json = await data.json();
 		return dispatch({ type: types.MENUTEXT.success, payload: json.menuText });
-	};
-	const fetchYoutube = async () => {
+	}, [dispatch]);
+	const fetchYoutube = useCallback(async () => {
 		const api_key = process.env.REACT_APP_YOUTUBE_API;
 		const pid = process.env.REACT_APP_YOUTUBE_LIST;
 		const num = 8;
@@ -55,13 +55,13 @@ export default function App() {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [dispatch]);
 
 	useEffect(() => {
 		fetchDepartment();
 		fetchMenuText();
 		fetchYoutube();
-	}, []);
+	}, [fetchDepartment, fetchMenuText, fetchYoutube]);
 	return (
 		<div className={`wrap ${Dark ? 'dark' : ''} ${useMedia()}`}>
 			<Switch>

@@ -4,14 +4,13 @@ import './Community.scss';
 import InputBox from './InputBox';
 import postData from './dummyPosts.json';
 import { useCustomText } from '../../../hooks/useText';
-import { BsArrowReturnRight, BsArrowDown } from 'react-icons/bs';
+import { BsArrowReturnRight } from 'react-icons/bs';
 import { TfiPlus } from 'react-icons/tfi';
 import { LiaEdit } from 'react-icons/lia';
 import { AiOutlineDelete, AiOutlineDown, AiOutlineUp } from 'react-icons/ai';
 import { IoMdHeart } from 'react-icons/io';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-import Datepicker from '../../common/datepicker/Datepicker';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 export default function Community() {
 	const path = useRef(process.env.PUBLIC_URL);
@@ -25,8 +24,6 @@ export default function Community() {
 		else return postData.dummyPosts;
 	};
 	const editMode = useRef(false);
-	const refTit = useRef(null);
-	const refCon = useRef(null);
 	const refEditTit = useRef(null);
 	const refEditCon = useRef(null);
 	const [Post, setPost] = useState(getLocalData());
@@ -177,10 +174,12 @@ export default function Community() {
 
 	useEffect(() => {
 		Post.map((el) => {
-			el.replyView = false;
-			el.enableUpdate = false;
+			return {
+				...el,
+				replyView: false,
+				enableUpdate: false
+			};
 		});
-		localStorage.setItem('post', JSON.stringify(Post));
 		if (Post && Post.length > 0) {
 			len.current = Post.length;
 			pageNum.current =
@@ -188,11 +187,14 @@ export default function Community() {
 					? len.current / perNum.current
 					: parseInt(len.current / perNum.current) + 1;
 		}
-	}, [Post.length]);
+	}, [Post, Post.length]);
 	useEffect(() => {
 		editMode.current = false;
 		Post.map((el) => {
-			el.enableUpdate = false;
+			return {
+				...el,
+				enableUpdate: false
+			};
 		});
 		if (Post && Post.length > 0) {
 			len.current = Post.length;

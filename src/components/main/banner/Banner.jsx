@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import './Banner.scss';
 import { LuMonitorPlay } from "react-icons/lu";
 import { RiArrowRightUpLine } from 'react-icons/ri';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import { useCustomText } from '../../../hooks/useText';
 import { useSelector } from 'react-redux';
 
@@ -10,7 +10,7 @@ export default function Banner(){
   const Vids = useSelector((store) => {
 		return store.youtubeReducer.youtube.slice(0,5);
 	});
-  
+
   const thisEl = useRef(null);
   const refBox = useRef(null);
   const shortenText = useCustomText('shorten');

@@ -1,20 +1,29 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import './Banner.scss';
 import { LuMonitorPlay } from "react-icons/lu";
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { useCustomText } from '../../../hooks/useText';
-import { useScroll } from '../../../hooks/useScroll';
 import { useSelector } from 'react-redux';
 
 export default function Banner(){
+  const Vids = useSelector((store) => {
+		return store.youtubeReducer.youtube.slice(0,5);
+	});
+  
+  const thisEl = useRef(null);
   const refBox = useRef(null);
   const shortenText = useCustomText('shorten');
   const titEl = useRef(null);
 	const titEl2 = useRef(null);
 
-	const handleCustomScroll = scroll => {
-		if (scroll < 0) {
+	const handleScroll = () => {
+    const scroll = window.scrollY;
+    const baseLine = window.innerHeight / 2;
+		const currentPos = thisEl.current?.offsetTop - baseLine;
+		const modifiedScroll = scroll - currentPos;
+
+		if (modifiedScroll < 0) {
 			titEl.current.style.transform = `scale(3) translateX(${scroll}px)`;
 			titEl.current.style.opacity = 0;
 			titEl2.current.style.transform = `translateX(${scroll * 0.5}px)`;
@@ -26,18 +35,20 @@ export default function Banner(){
 		}
 	};
 
-	const { refEl } = useScroll(handleCustomScroll);
-  const Vids = useSelector((store) => {
-		return store.youtubeReducer.youtube.slice(0,5);
-	});
   const handleActive = e => {
     const boxs = refBox.current.querySelectorAll('.vidBox');
 		boxs.forEach((box) => box.classList.remove('active'));
 		e && e.target.classList.add('active');
     e.target.classList.add('active')
   }
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () =>{			
+			window.removeEventListener('scroll', handleScroll);
+		} 
+  }, []);
   return(
-    <div className='Banner' ref={refEl}>
+    <div className='Banner' ref={thisEl}>
       <section className="top">
         <div className='center'>
           <h2 ref={titEl}>Featured Cases</h2>

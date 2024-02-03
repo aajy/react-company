@@ -1,52 +1,66 @@
 import './Pics.scss';
-import { useRef } from 'react';
-import { useScroll } from '../../../hooks/useScroll';
+import { useCallback, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import { RiArrowRightUpLine } from 'react-icons/ri';
 import { TbMap2 } from "react-icons/tb";
 
 export default function Pics() {
+	const thisEl = useRef(null);
 	const pathEl = useRef(null);
 	const pathEl2 = useRef(null);
 	const pathEl3 = useRef(null);
 
-	const handleCustomScroll = scroll => {
+	const handleScroll = useCallback(() => {
 		const pathLen = 1680;
 		const pathLen2 = 1945;
 		const pathLen3 = 1610;
-    
-		pathEl.current.style.strokeDashoffset = pathLen;
-		pathEl2.current.style.strokeDashoffset = pathLen;
-		pathEl3.current.style.strokeDashoffset = pathLen;
 
-		//섹션기준점에 도달하기 전까지는 기존 값 고수
+		const baseLine = window.innerHeight / 2;
+		const currentPos = thisEl.current?.offsetTop - baseLine;
+		const scroll = window.scrollY;
+		const modifiedScroll = scroll - currentPos;
+		
+		if (pathEl.current && pathEl2.current && pathEl3.current) {
+			pathEl.current.style.strokeDashoffset = pathLen;
+			pathEl2.current.style.strokeDashoffset = pathLen2;
+			pathEl3.current.style.strokeDashoffset = pathLen3;
+		}
 		if (scroll < 0) {
 			pathEl.current.style.strokeDashoffset = pathLen;
-			pathEl2.current.style.strokeDashoffset = pathLen;
-			pathEl3.current.style.strokeDashoffset = pathLen;
+			pathEl2.current.style.strokeDashoffset = pathLen2;
+			pathEl3.current.style.strokeDashoffset = pathLen3;
 		}
-		//섹션에 도달하는 순간부터 스크롤값 연동
-		if (scroll >= 0) {
-			let resultScroll = 0;
+
+    if (modifiedScroll >= 0) {
+      let resultScroll = 0;
 			pathLen - scroll * 4 < 0 ? (resultScroll = 0) : (resultScroll = pathLen - scroll * 4);
 			pathLen2 - scroll * 4 < 0 ? (resultScroll = 0) : (resultScroll = pathLen2 - scroll * 4);
 			pathLen3 - scroll * 4 < 0 ? (resultScroll = 0) : (resultScroll = pathLen3 - scroll * 4);
 			pathEl.current.style.strokeDashoffset = resultScroll;
 			pathEl2.current.style.strokeDashoffset = resultScroll;
 			pathEl3.current.style.strokeDashoffset = resultScroll;
-
-		}
-		//섹션을 벗어나는 순간부터는 0값을 고수
-		if (scroll >= scroll + refEl.current.offsetHeight) {
+    } else {
+      if (pathEl.current && pathEl2.current && pathEl3.current) {
+				pathEl.current.style.strokeDashoffset = pathLen;
+				pathEl2.current.style.strokeDashoffset = pathLen2;
+				pathEl3.current.style.strokeDashoffset = pathLen3;
+			}
+    }
+		if (scroll >= scroll + thisEl.current?.offsetTop) {
 			pathEl.current.style.strokeDashoffset = 0;
 			pathEl2.current.style.strokeDashoffset = 0;
 			pathEl3.current.style.strokeDashoffset = 0;
 		}
-	};
-	const { refEl } = useScroll(handleCustomScroll);
+  }, [thisEl]);
 
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () =>{			
+			window.removeEventListener('scroll', handleScroll);
+		} 
+  }, []);
 	return (
-		<div className='Pics myScroll' ref={refEl}>
+		<div className='Pics myScroll' ref={thisEl}>
       <div className="top">
         <h2>What Next Tech<br/>Can Do for You<span><TbMap2/></span></h2>
         <div className='text'>
@@ -85,8 +99,8 @@ export default function Pics() {
         </div>
 			</div>
       <div className="contact">
-      <p>LET'S GET IN TOUCH</p>
-      <span><RiArrowRightUpLine/></span>
+				<Link to="/contact">LET'S GET IN TOUCH</Link>
+				<span><RiArrowRightUpLine/></span>
       </div>
 		</div>
 	);

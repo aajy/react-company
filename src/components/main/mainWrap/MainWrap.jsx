@@ -1,4 +1,3 @@
-import Footer from '../../common/footer/Footer';
 import Header from '../../common/header/Header';
 import Banner from '../banner/Banner';
 import Info from '../info/Info';
@@ -13,6 +12,5 @@ export default function MainWrap() {
 		<Info/>
 		<Banner />
 		<Pics />
-		<Footer type={'main'}/>
 	</div>;
 }

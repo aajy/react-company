@@ -1,7 +1,8 @@
 .Pics {
-	width: 100%;
+	width: 100vw;
 	height: 80vh;
-	padding: 100px 30px;
+	margin: 0 auto;
+	padding: 40px 5vw;
 	background-color: var(--baseColor);
 	color: rgba(var(--bgColor-code), 0.9);
 	position: relative;
@@ -102,7 +103,7 @@
 		position: relative;
 		left: 0;
 		bottom: 7vw;
-		p {
+		>a {
 			font-size: 6rem;
 			font-family: var(--baseTitFont);
 		}
@@ -121,7 +122,7 @@
 .laptop, .tablet, .mobile {
 	.Pics {
 		.contact {
-			p {
+			>a {
 				font-size: 4.6rem;
 			}
 			span {
@@ -135,7 +136,7 @@
 	.Pics {
 		padding: 60px 30px;
 		.top {
-			margin-bottom: 14vw;
+			margin-bottom: 50px;
 			h2 {
 				font-size: 2.4rem;
 				span {
@@ -147,7 +148,7 @@
 			}
 		}
 		.svgBox {
-			margin-bottom: 8vw;
+			margin-bottom: 0;
 			flex-wrap: wrap;
 			.svg{
 				width: 100%;
@@ -158,13 +159,13 @@
 				}
 			}
 			h3 {
-				font-size: 1.4rem;
-				margin-bottom: 16px;
+				font-size: 1.2rem;
+				margin-bottom: 12px;
 			}
 		}
 		.contact {
-			bottom: 3vw;
-			p {
+			bottom: 0;
+			>a {
 				font-size: 3rem;
 			}
 			span {
@@ -204,7 +205,7 @@
 			}
 		}
 		.contact {
-			p {
+			>a {
 				font-size: 2rem;
 			}
 			span {

@@ -77,6 +77,7 @@ export default function App() {
 			<Route path='/contact' component={Contact} />
 			<Route path='/welcome/:id' component={Welcome} />
 			<Switch>
+				<Route exact path='/' render={()=> <Footer type={'main'}/>} />
 				<Route path='/' render={()=> <Footer type={'sub'}/>} />
 			</Switch>
 			<AnimatePresence>

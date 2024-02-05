@@ -240,7 +240,11 @@ export default function Gallery() {
 																		secret: pic.secret,
 																	},
 															  ])
-															: console.log('remove');
+															: setCheckedList(
+																	CheckedList.filter(
+																		(item) => item.id !== pic.id
+																	)
+															  );
 													}}
 												/>
 												<span className='checkbox-button'>
@@ -326,7 +330,7 @@ export default function Gallery() {
 													src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
 													alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
 												/>
-												{/* <span>x</span> */}
+												{/* <span className='remove'></span> */}
 											</div>
 										</article>
 									);

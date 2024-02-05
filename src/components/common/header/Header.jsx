@@ -6,7 +6,7 @@ import { IoSunnySharp, IoMoonSharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
 import * as types from '../../../redux/action';
 
-export default function Header({type}) {
+export default function Header({ type }) {
 	const dispatch = useDispatch();
 	const Toggle = useSelector((store) => store.menuReducer.menu);
 	const Dark = useSelector((store) => store.darkReducer.dark);
@@ -30,7 +30,7 @@ export default function Header({type}) {
 		setIsGlobalDropBoxOpen(false);
 	};
 	return (
-		<header className={`Header ${type==='main'?'main':'sub'}`}>
+		<header className={`Header ${type === 'main' ? 'main' : 'sub'}`}>
 			<div className='top'>
 				<h1>
 					<Link to='/'>abbvie</Link>
@@ -86,7 +86,6 @@ export default function Header({type}) {
 				<button
 					className='menuToggle'
 					onClick={() => {
-						console.log(Toggle);
 						dispatch({ type: types.MENU.start, payload: !Toggle });
 					}}
 				>

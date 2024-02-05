@@ -4,7 +4,6 @@ export function useCookie() {
 		let duedate = now.getTime() + 1000 * time;
 		now.setTime(duedate);
 		document.cookie = `${name}=${value}; path=/; expires=${now.toUTCString()}`;
-		console.log(document.cookie);
 	};
 
 	const isCookie = (cookieKey) => {

@@ -5,7 +5,7 @@ import './Gallery.scss';
 import Modal from '../../common/modal/Modal';
 import { AiOutlineClose } from 'react-icons/ai';
 import { RiArrowRightDownLine, RiArrowRightUpLine } from 'react-icons/ri';
-import { IoCheckmarkSharp } from 'react-icons/io5';
+import { IoCheckmarkSharp, IoClose } from 'react-icons/io5';
 
 export default function Gallery() {
 	const myID = useRef('198783018@N02');
@@ -98,6 +98,9 @@ export default function Gallery() {
 		if (refSearchKeyword.current) {
 			refSearchKeyword.current.value = '';
 		}
+	};
+	const isPicChecked = (id) => {
+		return CheckedList.some((obj) => obj.id === id);
 	};
 	const fetchFlickr = async (opt) => {
 		const num = 12;
@@ -229,6 +232,7 @@ export default function Gallery() {
 											<label className='checkBox'>
 												<input
 													type='checkbox'
+													checked={isPicChecked(pic.id)}
 													onChange={(e) => {
 														e.target.checked
 															? setCheckedList((prevList) => [
@@ -315,11 +319,6 @@ export default function Gallery() {
 								<div className='ball'>{IsMask ? 'ON' : 'OFF'}</div>
 							</div>
 						</div>
-						{/* TODO:: 
-						input check 토글기능
-						 checkedlist 에 x 버튼 
-						 스크랩 바구니 열고 닫기
-						 */}
 						{CheckedList.length > 0 && (
 							<div className='checkedList'>
 								{CheckedList.map((pic, idx) => {
@@ -330,7 +329,19 @@ export default function Gallery() {
 													src={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_m.jpg`}
 													alt={`https://live.staticflickr.com/${pic.server}/${pic.id}_${pic.secret}_b.jpg`}
 												/>
-												{/* <span className='remove'></span> */}
+												<label className='checkBox'>
+													<input
+														type='checkbox'
+														onClick={() => {
+															setCheckedList((prevList) =>
+																prevList.filter((item) => item.id !== pic.id)
+															);
+														}}
+													/>
+													<span className='checkbox-button'>
+														<IoClose />
+													</span>
+												</label>
 											</div>
 										</article>
 									);

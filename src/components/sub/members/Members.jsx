@@ -3,8 +3,12 @@ import './Members.scss';
 import { useState, useEffect, useRef } from 'react';
 import { useHistory } from 'react-router-dom';
 import { useDebounce } from '../../../hooks/useDebounce';
-import { RiArrowRightLine,RiArrowDownLine,RiArrowUpLine } from "react-icons/ri";
-import { BiSolidCheckCircle } from "react-icons/bi";
+import {
+	RiArrowRightLine,
+	RiArrowDownLine,
+	RiArrowUpLine,
+} from 'react-icons/ri';
+import { BiSolidCheckCircle } from 'react-icons/bi';
 
 export default function Members() {
 	const history = useHistory();
@@ -38,7 +42,8 @@ export default function Members() {
 	const handleCheck = (e) => {
 		setActiveTr(e.target.name);
 		const { name } = e.target;
-		const inputs = e.target.parentElement.parentElement.querySelectorAll('input');
+		const inputs =
+			e.target.parentElement.parentElement.querySelectorAll('input');
 		const checkArr = [];
 		inputs.forEach((input) => input.checked && checkArr.push(input.value));
 		setVal({ ...Val, [name]: checkArr });
@@ -81,7 +86,7 @@ export default function Members() {
 
 		if (Object.keys(check(Val)).length === 0) {
 			alert('회원가입을 축하합니다.');
-			history.push('/welcome/1');
+			history.push(`/welcome/${Val.userid}`);
 		}
 	};
 
@@ -91,18 +96,18 @@ export default function Members() {
 		setErrs(check(DebouncedVal));
 	}, [DebouncedVal]);
 
-	const unmounted = useRef(false); 
+	const unmounted = useRef(false);
 	useEffect(() => {
 		const timeoutId = setTimeout(() => {
-      if (!unmounted.current) {
-        setToggle(true);
-      }
-    }, 500);
-    return () => {
-      clearTimeout(timeoutId);
-      unmounted.current = true;
-    };
-	},[])
+			if (!unmounted.current) {
+				setToggle(true);
+			}
+		}, 500);
+		return () => {
+			clearTimeout(timeoutId);
+			unmounted.current = true;
+		};
+	}, []);
 	return (
 		<Layout title={'Members'} className={'Members'}>
 			<div className='membersWrap'>
@@ -119,7 +124,7 @@ export default function Members() {
 					<div className='topText'>
 						<span>&#9679;</span>
 						<p>Crowdfunding platform for influencers and entrepreneurs</p>
-						<RiArrowRightLine/>
+						<RiArrowRightLine />
 					</div>
 					<div className='topText'>
 						<RiArrowDownLine />
@@ -141,10 +146,23 @@ export default function Members() {
 							<legend className='h'>회원가입 폼</legend>
 							<table>
 								<tbody>
-										{/* userid, email */}
-									<tr className={(ActiveTr === 'userid' ||ActiveTr === 'email') ? 'on' : ''}>
-										<th>USER ID
-											<span className={(Val.userid && !Errs.userid && Val.email && !Errs.email) ? 'on' : ''}><BiSolidCheckCircle /></span>
+									{/* userid, email */}
+									<tr
+										className={
+											ActiveTr === 'userid' || ActiveTr === 'email' ? 'on' : ''
+										}
+									>
+										<th>
+											USER ID
+											<span
+												className={
+													Val.userid && !Errs.userid && Val.email && !Errs.email
+														? 'on'
+														: ''
+												}
+											>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
 										<td>
 											<input
@@ -152,8 +170,8 @@ export default function Members() {
 												name='userid'
 												placeholder='User ID'
 												value={Val.userid}
-												onFocus={()=>setActiveTr('userid')}
-												onBlur={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('userid')}
+												onBlur={() => setActiveTr('')}
 												onChange={handleChange}
 											/>
 											{Errs.userid && <p>{Errs.userid}</p>}
@@ -164,26 +182,39 @@ export default function Members() {
 												name='email'
 												placeholder='Email'
 												value={Val.email}
-												onFocus={()=>setActiveTr('email')}
-												onBlur={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('email')}
+												onBlur={() => setActiveTr('')}
 												onChange={handleChange}
 											/>
 											{Errs.email && <p>{Errs.email}</p>}
 										</td>
 									</tr>
-									
+
 									{/* pwd1, pwd2 */}
-									<tr className={(ActiveTr === 'pwd1' ||ActiveTr === 'pwd2') ? 'on' : ''}>
-										<th>PASSWORD
-											<span className={(Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2) ? 'on' : ''}><BiSolidCheckCircle /></span>
+									<tr
+										className={
+											ActiveTr === 'pwd1' || ActiveTr === 'pwd2' ? 'on' : ''
+										}
+									>
+										<th>
+											PASSWORD
+											<span
+												className={
+													Val.pwd1 && !Errs.pwd1 && Val.pwd2 && !Errs.pwd2
+														? 'on'
+														: ''
+												}
+											>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
 										<td>
 											<input
 												type='password'
 												name='pwd1'
 												placeholder='Password'
-												onFocus={()=>setActiveTr('pwd1')}
-												onBlur={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('pwd1')}
+												onBlur={() => setActiveTr('')}
 												value={Val.pwd1}
 												onChange={handleChange}
 											/>
@@ -194,8 +225,8 @@ export default function Members() {
 												type='password'
 												name='pwd2'
 												placeholder='Re-Password'
-												onFocus={()=>setActiveTr('pwd1')}
-												onBlur={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('pwd1')}
+												onBlur={() => setActiveTr('')}
 												value={Val.pwd2}
 												onChange={handleChange}
 											/>
@@ -205,11 +236,19 @@ export default function Members() {
 
 									{/* edu */}
 									<tr className={ActiveTr === 'edu' ? 'on' : ''}>
-										<th>Education
-											<span className={(Val.edu && !Errs.edu) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										<th>
+											Education
+											<span className={Val.edu && !Errs.edu ? 'on' : ''}>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
 										<td colSpan='2'>
-											<select name='edu' onChange={handleChange} onFocus={()=>setActiveTr('edu')} onBlur={()=>setActiveTr('')}>
+											<select
+												name='edu'
+												onChange={handleChange}
+												onFocus={() => setActiveTr('edu')}
+												onBlur={() => setActiveTr('')}
+											>
 												<option value=''>Education</option>
 												<option value='elementary-school'>초등학교 졸업</option>
 												<option value='middle-school'>중학교 졸업</option>
@@ -221,86 +260,124 @@ export default function Members() {
 									</tr>
 
 									{/* gender */}
-									<tr  className={ActiveTr === 'gender' ? 'on gender' : "gender"}>
-										<th>Gender
-											<span className={(Val.gender && !Errs.gender) ? 'on' : ''}><BiSolidCheckCircle /></span>
+									<tr
+										className={ActiveTr === 'gender' ? 'on gender' : 'gender'}
+									>
+										<th>
+											Gender
+											<span className={Val.gender && !Errs.gender ? 'on' : ''}>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
-										<td colSpan='2' >
-											<label htmlFor='female' className={Val.gender === 'female'? 'on': ''}>
+										<td colSpan='2'>
+											<label
+												htmlFor='female'
+												className={Val.gender === 'female' ? 'on' : ''}
+											>
 												<input
 													type='radio'
 													defaultValue='female'
 													id='female'
 													name='gender'
-													onFocus={()=>setActiveTr('gender')}
-													onBlur={()=>setActiveTr('')}
+													onFocus={() => setActiveTr('gender')}
+													onBlur={() => setActiveTr('')}
 													onChange={handleChange}
-												/> Female
+												/>{' '}
+												Female
 											</label>
-											<label htmlFor='male' className={Val.gender === 'male'? 'on': ''}>
+											<label
+												htmlFor='male'
+												className={Val.gender === 'male' ? 'on' : ''}
+											>
 												<input
 													type='radio'
 													defaultValue='male'
 													id='male'
 													name='gender'
-													onFocus={()=>setActiveTr('gender')}
-													onBlur={()=>setActiveTr('')}
+													onFocus={() => setActiveTr('gender')}
+													onBlur={() => setActiveTr('')}
 													onChange={handleChange}
-												/> Male
+												/>{' '}
+												Male
 											</label>
 											{Errs.gender && <p>{Errs.gender}</p>}
 										</td>
 									</tr>
 
 									{/* interests */}
-									<tr className={ActiveTr === 'interest' ? 'on interest' : 'interest'}>
-										<th>Interest
-											<span className={(Val.interest && !Errs.interest) ? 'on' : ''}><BiSolidCheckCircle /></span>
+									<tr
+										className={
+											ActiveTr === 'interest' ? 'on interest' : 'interest'
+										}
+									>
+										<th>
+											Interest
+											<span
+												className={Val.interest && !Errs.interest ? 'on' : ''}
+											>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
 										<td colSpan='2'>
-											<label htmlFor='sports' className={Val.interest.includes('sports')? 'on': ''}>
+											<label
+												htmlFor='sports'
+												className={Val.interest.includes('sports') ? 'on' : ''}
+											>
 												<input
 													type='checkbox'
 													name='interest'
 													id='sports'
 													defaultValue='sports'
-													onFocus={()=>setActiveTr('interest')}
-													onBlur={()=>setActiveTr('')}
+													onFocus={() => setActiveTr('interest')}
+													onBlur={() => setActiveTr('')}
 													onChange={handleCheck}
-												/> Sports
+												/>{' '}
+												Sports
 											</label>
-											<label htmlFor='reading' className={Val.interest.includes('reading')? 'on': ''}>
+											<label
+												htmlFor='reading'
+												className={Val.interest.includes('reading') ? 'on' : ''}
+											>
 												<input
-												type='checkbox'
-												name='interest'
-												id='reading'
-												defaultValue='reading'
-												onFocus={()=>setActiveTr('interest')}
-												onBlur={()=>setActiveTr('')}
-												onChange={handleCheck}
-												/>Reading
+													type='checkbox'
+													name='interest'
+													id='reading'
+													defaultValue='reading'
+													onFocus={() => setActiveTr('interest')}
+													onBlur={() => setActiveTr('')}
+													onChange={handleCheck}
+												/>
+												Reading
 											</label>
-											<label htmlFor='music' className={Val.interest.includes('music')? 'on': ''}>
+											<label
+												htmlFor='music'
+												className={Val.interest.includes('music') ? 'on' : ''}
+											>
 												<input
 													type='checkbox'
 													name='interest'
 													id='music'
 													defaultValue='music'
-													onFocus={()=>setActiveTr('interest')}
-													onBlur={()=>setActiveTr('')}
+													onFocus={() => setActiveTr('interest')}
+													onBlur={() => setActiveTr('')}
 													onChange={handleCheck}
-												/>	Music
+												/>{' '}
+												Music
 											</label>
-											<label htmlFor='game' className={Val.interest.includes('game')? 'on': ''}>
+											<label
+												htmlFor='game'
+												className={Val.interest.includes('game') ? 'on' : ''}
+											>
 												<input
 													type='checkbox'
 													name='interest'
 													id='game'
 													defaultValue='game'
-													onFocus={()=>setActiveTr('interest')}
-													onBlur={()=>setActiveTr('')}
+													onFocus={() => setActiveTr('interest')}
+													onBlur={() => setActiveTr('')}
 													onChange={handleCheck}
-												/>Game
+												/>
+												Game
 											</label>
 											{Errs.interest && <p>{Errs.interest}</p>}
 										</td>
@@ -308,8 +385,13 @@ export default function Members() {
 
 									{/* comments  */}
 									<tr className={ActiveTr === 'comments' ? 'on' : ''}>
-										<th>Comments
-											<span className={(Val.comments && !Errs.comments) ? 'on' : ''}><BiSolidCheckCircle /></span>
+										<th>
+											Comments
+											<span
+												className={Val.comments && !Errs.comments ? 'on' : ''}
+											>
+												<BiSolidCheckCircle />
+											</span>
 										</th>
 										<td colSpan='2'>
 											<textarea
@@ -317,8 +399,8 @@ export default function Members() {
 												cols='30'
 												rows='5'
 												placeholder='Leave a comment'
-												onFocus={()=>setActiveTr('comments')}
-												onBlur={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('comments')}
+												onBlur={() => setActiveTr('')}
 												value={Val.comments}
 												onChange={handleChange}
 											></textarea>
@@ -326,13 +408,12 @@ export default function Members() {
 										</td>
 									</tr>
 
-									{/* button set */}
 									<tr>
 										<td colSpan='2'>
 											<input
 												type='reset'
 												value='CANCEL'
-												onFocus={()=>setActiveTr('')}
+												onFocus={() => setActiveTr('')}
 												onClick={handleReset}
 											/>
 											<input type='submit' value='SUBMIT' />
@@ -347,16 +428,3 @@ export default function Members() {
 		</Layout>
 	);
 }
-
-/*
-	throttle vs debounce
-	throttle : 물리적으로 핸들러함수 호출자체를 일정횟수로 줄임
-	debounce : 특정 이벤트가 단시간에 반복으로 계속 발생하고 있으면 핸들러함수 호출 자체를 계속 뒤로 밀면서 호출 막음
-
-	리액트에서의 폼 인증 구현 로직 순서
-	1. 폼요소에 입력하는 값을 이벤트 핸들러 함수를 통해 실시간으로 state에 저장
-	2. state값이 변경될때마다 check 함수를 통해 항목별로 인증 실패시 에러 객체로 묶어서 반환
-	3. 폼에 submitHandler 함수를 연결
-	4. 전송이벤트가 발생시 submitHandler함수 안쪽에서 check함수를 호출해서 err객체가 있으면 인증 실패
-	5. check함수가 내보내는 err객체가 없으면 인증 성공처리
-*/

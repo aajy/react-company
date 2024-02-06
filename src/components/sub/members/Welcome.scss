@@ -4,8 +4,14 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	background-color: #f1e9de;
+	position: relative;
 	h1 {
-		transform: translateY(-100px);
-		font-family: var(--pointFont);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		font-family: var(--baseTitFont);
+		font-weight: bold;
 	}
 }
